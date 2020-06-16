@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    
+    <title>玩转Linux | 无心而为</title>
+    
+    <link rel="alternative" href="/atom.xml" title="无心而为" type="application/atom+xml">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    <link rel="stylesheet" href="/libs/fancybox/jquery.fancybox.css" charset="utf-8">
+    
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="site">
+    <header class="site-header">
+        <h1 class="site-title"><a href="/">无心而为</a></h1>
+        <nav class="site-nav">
+            <ul class="nav">
+                
+                <li><a href="/archives">Archives</a></li>
+                
+                
+                <li><a href="/atom.xml" title="RSS Feed">rss</a></li>
+                
+                <li><a class="toggle-search" href="#search">search</a></li>
+            </ul>
+        </nav>
+        <div class="site-search" id="search">
+            <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://ymlog.cn"></form>
+        </div>
+        
+            <div class="site-header-background" style="background-image:url(http://reumia.github.io/hexo-theme-zzoman2015/images/background-zzoman2015.jpg)"></div>
+        
+    </header>
+    <div class="site-body">
+        <div class="global-width">
+    <article class="article" data-layout="post" data-slug="玩转Linux">
+        <div class="article-content">
+            
+            
+            <header class="article-header">
+                <div class="article-meta">
+                    <a href="/2019/07/18/%E7%8E%A9%E8%BD%ACLinux/" class="article-date">
+  <time datetime="2019-07-18T04:53:27.000Z">2019-07-18</time>
+</a>
+                    
+  <div class="article-category categories">
+    <a class="category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+                    
+                </div>
+                
+    <h1 class="article-title" itemprop="name">
+      <a href="/2019/07/18/%E7%8E%A9%E8%BD%ACLinux/">玩转Linux</a>
+    </h1>
+
+            </header>
+            
+            <div class="article-body">
+                <h1 id="网络测速"><a href="#网络测速" class="headerlink" title="网络测速"></a>网络测速</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/sivel/speedtest-cli.git</span><br><span class="line">cd speed* &amp;&amp; python speedtest.py</span><br><span class="line"><span class="comment">#后接`--share`,可以生成分享链接</span></span><br><span class="line"><span class="comment">#测试服务器性能</span></span><br><span class="line">wget -qO- git.io/superbench.sh | bash</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="中文man手册"><a href="#中文man手册" class="headerlink" title="中文man手册"></a>中文man手册</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">wget  https://src.fedoraproject.org/repo/pkgs/man-pages-zh-CN/manpages-zh-1.5.1.tar.gz/13275fd039de8788b15151c896150bc4/manpages-zh-1.5.1.tar.gz</span><br><span class="line">tar xf manpages-zh-1.5.1.tar.gz</span><br><span class="line"><span class="built_in">cd</span> manpages-zh*</span><br><span class="line">./configure --<span class="built_in">disable</span>-zhtw  --prefix=/usr/<span class="built_in">local</span>/zhman</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"alias cman='man -M /usr/local/zhman/share/man/zh_CN' "</span> &gt;&gt;.bash_profile</span><br><span class="line"><span class="built_in">source</span> .bash_profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"USE CMAN TO GET HELP"</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h1 id="xshell快捷键"><a href="#xshell快捷键" class="headerlink" title="xshell快捷键"></a>xshell快捷键</h1><pre><code>+--------------------------------------+
+|    alt+r       透明模式            
+|    alt+s       简单版模式            
+|    ctrl+alt+f  文件传输                
+|    ctrl+shift+alt+[/]：增大或减小字体   
++--------需要自定义---------------------+        
+|    ctrl + q：水平排列
+|    ctrl + w：垂直排列
+|    ctrl + e：合并所有
++--------------------------------------+</code></pre><h1 id="命令行改密码"><a href="#命令行改密码" class="headerlink" title="命令行改密码"></a>命令行改密码</h1><pre><code>echo &quot;password&quot; | passwd --stdin username</code></pre><h1 id="script-记录面板"><a href="#script-记录面板" class="headerlink" title="script 记录面板"></a>script 记录面板</h1><pre><code>script -a log.txt
+do...
+exit
+将程序执行结果和命令放入文件,需要exit退出</code></pre><h1 id="宝塔面板"><a href="#宝塔面板" class="headerlink" title="宝塔面板"></a>宝塔面板</h1><pre><code>CentOS7一键安装：
+yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh
+一键卸载：
+wget http://download.bt.cn/install/bt-uninstall.sh &amp;&amp; sh bt-uninstall.sh</code></pre><h1 id="虚拟机配置两张网卡"><a href="#虚拟机配置两张网卡" class="headerlink" title="虚拟机配置两张网卡"></a>虚拟机配置两张网卡</h1><pre><code>首先在虚拟机设置中，选择添加，再添加一个网络适配器，之后进入虚拟机
+执行ip a
+如果发现没有网卡，则在/etc/sysconfig/network-scripts/ 目录下，复制你已有的网卡，如果是DHCP模式，则不需要修改IP
+cp ifcfg-ens32 ifcfg-ens35
+删除ifcfg-ens35中的UUID
+#UUID只能是唯一编号
+systemctl restart network</code></pre><h1 id="新建CentOS7"><a href="#新建CentOS7" class="headerlink" title="新建CentOS7"></a>新建CentOS7</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">yum -y install wget</span><br><span class="line">wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo</span><br><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">'s\SELINUX=enforcing\SELINUX=disabled\'</span> /etc/selinux/config</span><br><span class="line">yum -y install mlocate vim zip unzip tree bash-completion htop lrzsz</span><br><span class="line">updatedb</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"set ts=2"</span> &gt;&gt; /etc/vimrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"set nu"</span> &gt;&gt; /etc/vimrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'alias install="yum -y install"'</span> &gt;&gt; ~/.bashrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">'alias vi32="vi /etc/sysconfig/network-scripts/ifcfg-ens32"'</span> &gt;&gt; ~/.bashrc</span><br><span class="line">-------------------------------------------------------</span><br><span class="line">string=<span class="variable">$1</span></span><br><span class="line">array=(<span class="variable">$&#123;string//./ &#125;</span>)</span><br><span class="line">result=<span class="variable">$&#123;array[0]&#125;</span><span class="string">"."</span><span class="variable">$&#123;array[1]&#125;</span><span class="string">"."</span><span class="variable">$&#123;array[2]&#125;</span><span class="string">".2"</span></span><br><span class="line">-------------------------------------------------------</span><br><span class="line"><span class="comment">#修改dhcp为静态ip，注意默认网关和ip地址格式</span></span><br><span class="line">sed -i <span class="string">"s/dhcp/static/g"</span> /etc/sysconfig/network-scripts/ifcfg-ens32</span><br><span class="line">cat &gt;&gt; /etc/sysconfig/network-scripts/ifcfg-ens32 &lt;&lt;EOF</span><br><span class="line">IPADDR=<span class="variable">$1</span></span><br><span class="line">NETMASK=255.255.255.0</span><br><span class="line">GATEWAY=<span class="variable">$result</span></span><br><span class="line">DNS1=114.114.114.114</span><br><span class="line">DNS2=114.114.115.115</span><br><span class="line">EOF</span><br><span class="line">systemctl restart network</span><br></pre></td></tr></table></figure>
+
+
+<p>使用方法：</p>
+<pre><code>bash new.sh 192.168.255.10</code></pre><h1 id="中源码安装Python3"><a href="#中源码安装Python3" class="headerlink" title="中源码安装Python3"></a>中源码安装Python3</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="built_in">cd</span> /usr/src</span><br><span class="line">mkdir python3</span><br><span class="line"><span class="built_in">cd</span> python3/</span><br><span class="line">yum -y install wget</span><br><span class="line">yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gcc make</span><br><span class="line">yum -y install libffi-devel </span><br><span class="line">wget https://www.python.org/ftp/python/3.7.3/Python-3.7.3.tgz</span><br><span class="line">tar -zxvf Python-3.7.3.tgz </span><br><span class="line">rm Python-3.7.3.tgz -rf</span><br><span class="line"><span class="built_in">cd</span> Python-3.7.3</span><br><span class="line">./configure </span><br><span class="line">make &amp;&amp; make install</span><br><span class="line">python3</span><br></pre></td></tr></table></figure>
+
+<h1 id="桥接的静态IP配置"><a href="#桥接的静态IP配置" class="headerlink" title="桥接的静态IP配置"></a>桥接的静态IP配置</h1><p>修改vim /etc/sysconfig/network-scripts/ifcfg-ens32<br>需要把默认网关调成192.168.1.1,而不是192.168.1.2</p>
+<pre><code>+---------------------+
+|BOOTPROTO=&quot;static&quot;   |
+|IPADDR=192.168.75.57 |
+|NETMASK=255.255.255.0|
+|GATEWAY=192.168.75.1 | 
+|DNS1=114.114.114.114 |
+|DNS2=114.114.115.115 |
++---------------------+</code></pre><p>修改后，重新启动网络：</p>
+<pre><code>systemctl restart network</code></pre><h1 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#加速，可不下</span></span><br><span class="line">wget  https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh &amp;&amp; bash tcp.sh</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装</span></span><br><span class="line">wget https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; bash ssr.sh</span><br><span class="line"></span><br><span class="line"><span class="comment">#加速+安装 kcp协议</span></span><br><span class="line">wget --no-check-certificate -O kcptun_for_ss_ssr.sh https://git.io/fN2EO</span><br></pre></td></tr></table></figure>
+
+
+
+<p>centos8</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">alternatives --<span class="built_in">set</span> python /usr/bin/python3</span><br><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</span><br><span class="line">sysctl -w net.ipv4.tcp_congestion_control=bbr</span><br><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Kali连接ssh"><a href="#Kali连接ssh" class="headerlink" title="Kali连接ssh"></a>Kali连接ssh</h1><p>一、修改配置文件</p>
+<pre><code>vi /etc/ssh/sshd_config
+将#PasswordAuthentication no的注释去掉，并且将NO修改为YES //kali中默认是yes</code></pre><p><img src="https://i.loli.net/2019/09/01/52SKcLNejBylA8J.png" alt="Kali连接SSH.png"></p>
+<p>二、启动SSH服务<br>命令为：</p>
+<pre><code>/etc/init.d/ssh start
+查看SSH服务状态是否正常运行，命令为：
+/etc/init.d/ssh status</code></pre><p>三、设置系统自动启动SSH服务</p>
+<pre><code>update-rc.d ssh enable  //系统自动启动SSH服务
+update-rc.d ssh disabled // 关闭系统自动启动SSH服务</code></pre><h1 id="SCP远程复制命令"><a href="#SCP远程复制命令" class="headerlink" title="SCP远程复制命令"></a>SCP远程复制命令</h1><pre><code>[root@nginx ~]# scp 192.168.255.137:/root/1.txt /root/</code></pre><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-C</td>
+<td>允许压缩。（将-C标志传递给ssh，从而打开压缩功能）</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>保留原文件的修改时间，访问时间和访问权限。</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归复制整个目录。</td>
+</tr>
+</tbody></table>
+<h1 id="linux下find执行操作须加空格和"><a href="#linux下find执行操作须加空格和" class="headerlink" title="linux下find执行操作须加空格和;"></a>linux下find执行操作须加空格和;</h1><pre><code>[root@node1 ~]# find / -mtime +3 -type f -name &quot;postgresqlbak&quot; -exec rm { } \;</code></pre><h1 id="终端光标漂移键"><a href="#终端光标漂移键" class="headerlink" title="终端光标漂移键"></a>终端光标漂移键</h1><pre><code>CTRL + U -剪切光标前的内容
+
+CTRL + K -剪切光标至行末的内容
+
+CTRL + Y -粘贴
+
+CTRL + E -移动光标到行末
+
+CTRL + A -移动光标到行首</code></pre>
+            </div>
+        </div>
+    </article>
+
+    
+    
+<nav class="article-nav">
+  
+    <a href="/2019/07/27/Python%E5%AE%9E%E7%8E%B0ARP%E6%AC%BA%E9%AA%97%E5%B1%8F%E8%94%BD%E5%B1%80%E5%9F%9F%E7%BD%91/" id="article-nav-newer" class="article-nav-link-wrap prev">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Python实现ARP欺骗屏蔽局域网
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/05/03/Matplotlib%E5%9B%BE%E6%A0%87%E7%BB%98%E5%88%B6%E6%91%98%E8%A6%81/" id="article-nav-older" class="article-nav-link-wrap next">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Matplotlib图标绘制摘要</div>
+    </a>
+  
+</nav>
+
+    
+
+    
+</div>
+    </div>
+    <footer class="site-footer">
+        <div class="global-width">
+            <ul class="site-widget">
+                
+                <li class="widget widget-tag">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-category">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-recent_posts">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2020/12/30/%E6%84%BF%E6%9C%89%E6%B6%93%E6%B6%93%E8%AF%97%E6%84%8F%E6%B8%85%E6%96%B0%E5%85%A5%E8%84%BE%EF%BC%8C%E4%BB%A5%E9%A3%A8%E5%BF%99%E7%A2%8C%E7%9A%84%E6%97%A5%E5%B8%B8/">愿有涓涓诗意清新入脾，以飨忙碌的日常</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Jetbrains%E5%BF%AB%E6%8D%B7%E9%94%AE/">Jetbrains快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Chrome%E5%BF%AB%E6%8D%B7%E9%94%AE/">Chrome快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/VsCode%E5%BF%AB%E6%8D%B7%E9%94%AE/">VSCode快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/KVM%E5%AE%9E%E4%BE%8B/">KVM实例总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+                </li>
+                
+            </ul>
+        </div>
+        <div class="site-info">
+            <address>
+                &copy; 2014 <a href="http://ymlog.cn">无心而为</a> All Right Reserved. <br/>
+                Powered by <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>. Theme by <a href="http://zzoman.com" target="_blank" rel="noopener">ZZOMAN</a>
+            </address>
+        </div>
+    </footer>
+    
+    <script src="/libs/jquery-1.11.3.min.js" type="text/javascript"></script>
+    
+    <script src="/libs/fancybox/jquery.fancybox.js" type="text/javascript"></script>
+    
+    <script src="/js/site_init.js" type="text/javascript"></script>
+    
+</body>
+</html>

@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    
+    <title>Linux Virtual Server | 无心而为</title>
+    
+    <link rel="alternative" href="/atom.xml" title="无心而为" type="application/atom+xml">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    <link rel="stylesheet" href="/libs/fancybox/jquery.fancybox.css" charset="utf-8">
+    
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="site">
+    <header class="site-header">
+        <h1 class="site-title"><a href="/">无心而为</a></h1>
+        <nav class="site-nav">
+            <ul class="nav">
+                
+                <li><a href="/archives">Archives</a></li>
+                
+                
+                <li><a href="/atom.xml" title="RSS Feed">rss</a></li>
+                
+                <li><a class="toggle-search" href="#search">search</a></li>
+            </ul>
+        </nav>
+        <div class="site-search" id="search">
+            <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://ymlog.cn"></form>
+        </div>
+        
+            <div class="site-header-background" style="background-image:url(http://reumia.github.io/hexo-theme-zzoman2015/images/background-zzoman2015.jpg)"></div>
+        
+    </header>
+    <div class="site-body">
+        <div class="global-width">
+    <article class="article" data-layout="post" data-slug="LVS">
+        <div class="article-content">
+            
+            
+            <header class="article-header">
+                <div class="article-meta">
+                    <a href="/2020/02/19/LVS/" class="article-date">
+  <time datetime="2020-02-19T13:33:30.000Z">2020-02-19</time>
+</a>
+                    
+  <div class="article-category categories">
+    <a class="category-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+  </div>
+
+                    
+                </div>
+                
+    <h1 class="article-title" itemprop="name">
+      <a href="/2020/02/19/LVS/">Linux Virtual Server</a>
+    </h1>
+
+            </header>
+            
+            <div class="article-body">
+                <h1 id="LVS简介"><a href="#LVS简介" class="headerlink" title="LVS简介"></a>LVS简介</h1><p>在已有的负载均衡技术中，IP负载均衡是效率最高的。它将一组服务器构建成一个高性能、高可用的虚拟服务器。如图，LVS一共有以下两部分组成：</p>
+<p><img src="https://i.loli.net/2020/03/22/4AzfxepYXlTDRGV.jpg" alt="LVS_1.jpg"></p>
+<blockquote>
+<ol>
+<li>Load Balance Machine，提供调度的机器，负责接收用户请求后转发给后端Server集群</li>
+<li>Real Server ，真实的服务器集群，负责提供各种服务</li>
+</ol>
+</blockquote>
+<p>其中，LB机器上运行LVS，LVS有用户空间和内核空间两部分组成：</p>
+<blockquote>
+<ol>
+<li>IPVS（IP Virtual Server）：工作在内核空间中，是真正生效实现调度的代码。</li>
+<li>ipvsadm：工作在用户空间，负责为ipvs内核框架编写规则，定义谁是集群，谁是后端真实服务器。</li>
+</ol>
+</blockquote>
+<p>LB集群原理：当用户的请求过来时，会直接分发到Director Server上，然后它把用户请求根据设置好的调度算法，智能均衡的分配到后端真正的服务器上（Real Server）</p>
+<p>LVS一共有三种模式，分别是：</p>
+<ol>
+<li>Virtual Server via Network Address Translation（VS/NAT）</li>
+<li>Virtual Server via IP Tunneling（VS/TUN）</li>
+<li>Virtual Server via Direct Routing（VS/DR）</li>
+</ol>
+<p>LVS一共有8中调度算法</p>
+<ol>
+<li>轮询（Round Robin）调度器通过”轮叫”调度算法将外部请求按顺序轮流分配到集群中的真实服务器上，它均等地对待每一台服务器，而不管服务器上实际的连接数和系统负载。</li>
+<li>加权轮询（Weighted Round Robin）调度器通过”加权轮叫”调度算法根据真实服务器的不同处理能力来调度访问请求。这样可以保证处理能力强的服务器处理更多的访问流量。调度器可以自动问询真实服务器的负载情况，并动态地调整其权值。</li>
+<li>最少链接（Least Connections）调度器通过”最少连接”调度算法动态地将网络请求调度到已建立的链接数最少的服务器上。如果集群系统的真实服务器具有相近的系统性能，采用”最小连接”调度算法可以较好地均衡负载。</li>
+<li>加权最少链接（Weighted Least Connections）在集群系统中的服务器性能差异较大的情况下，调度器采用”加权最少链接”调度算法优化负载均衡性能，具有较高权值的服务器将承受较大比例的活动连接负载。调度器可以自动问询真实服务器的负载情况，并动态地调整其权值。</li>
+<li>基于局部性的最少链接（Locality-Based Least Connections）”基于局部性的最少链接” 调度算法是针对目标IP地址的负载均衡，目前主要用于Cache集群系统。该算法根据请求的目标IP地址找出该目标IP地址最近使用的服务器，若该服务器 是可用的且没有超载，将请求发送到该服务器；若服务器不存在，或者该服务器超载且有服务器处于一半的工作负载，则用”最少链接”的原则选出一个可用的服务 器，将请求发送到该服务器。</li>
+<li>带复制的基于局部性最少链接（Locality-Based Least Connections with Replication）”带复制的基于局部性最少链接”调度算法也是针对目标IP地址的负载均衡，目前主要用于Cache集群系统。它与LBLC算法的不同之处是它要维护从一个 目标IP地址到一组服务器的映射，而LBLC算法维护从一个目标IP地址到一台服务器的映射。该算法根据请求的目标IP地址找出该目标IP地址对应的服务 器组，按”最小连接”原则从服务器组中选出一台服务器，若服务器没有超载，将请求发送到该服务器，若服务器超载；则按”最小连接”原则从这个集群中选出一 台服务器，将该服务器加入到服务器组中，将请求发送到该服务器。同时，当该服务器组有一段时间没有被修改，将最忙的服务器从服务器组中删除，以降低复制的 程度。</li>
+<li>目标地址散列（Destination Hashing）”目标地址散列”调度算法根据请求的目标IP地址，作为散列键（Hash Key）从静态分配的散列表找出对应的服务器，若该服务器是可用的且未超载，将请求发送到该服务器，否则返回空。</li>
+<li>源地址散列（Source Hashing）”源地址散列”调度算法根据请求的源IP地址，作为散列键（Hash Key）从静态分配的散列表找出对应的服务器，若该服务器是可用的且未超载，将请求发送到该服务器，否则返回空。</li>
+<li>最短的期望的延迟？</li>
+<li>最少队列调度？</li>
+</ol>
+<h2 id="相关术语"><a href="#相关术语" class="headerlink" title="相关术语"></a>相关术语</h2><ol>
+<li>DS：Director Server。指的是前端负载均衡器节点。</li>
+<li>RS：Real Server。后端真实的工作服务器。</li>
+<li>VIP：向外部直接面向用户请求，作为用户请求的目标的IP地址。</li>
+<li>DIP：Director Server IP，主要用于和内部主机通讯的IP地址。</li>
+<li>RIP：Real Server IP，后端服务器的IP地址。</li>
+<li>CIP：Client IP，访问客户端的IP地址。</li>
+</ol>
+<h2 id="VS-NAT工作模型"><a href="#VS-NAT工作模型" class="headerlink" title="VS/NAT工作模型"></a>VS/NAT工作模型</h2><p><img src="https://i.loli.net/2020/03/22/yMxz4afX2OuWYgc.png" alt="LVS_2.png"></p>
+<p>流程：</p>
+<ol>
+<li>当用户访问服务器提供服务时，发往VIP地址的请求包到达LB机器</li>
+<li>LB机器检查数据包的目标IP和目标Port，去匹配LVS中的规则，然后根据负载均衡算法从集群中选择RS响应请求，并将连接添加到记录已连接的Hash表中</li>
+<li>将数据包的目的地址和端口重写–&gt; 选中的RS的IP:Port，然后转发RS。</li>
+<li>RS返回数据报时，SrcIP：RIP.Rport DstIP DIP.Dport。</li>
+<li>LB机器将数据报中的源IP地址和源Port重写为DS的源地址和源Port</li>
+<li>连接终止或超时后，连接记录就会在已连接的Hash表中删除</li>
+</ol>
+<p>特性：</p>
+<ol>
+<li>RS应该使用私有IP地址，RS的网关是DIP地址</li>
+<li>DIP要和RIP属于同一个网段</li>
+<li>请求和响应报文都需要经过DS（性能瓶颈）</li>
+<li>支持端口映射</li>
+<li>RS可以使用任意操作系统</li>
+</ol>
+<h2 id="VS-DR工作模型"><a href="#VS-DR工作模型" class="headerlink" title="VS/DR工作模型"></a>VS/DR工作模型</h2><p><img src="https://i.loli.net/2020/03/22/3eHvpJs9Utkyib6.png" alt="LVS_3.png"></p>
+<p>流程：</p>
+<ol>
+<li>当用户访问服务器提供服务时，发往VIP地址的请求包到达LB机器。</li>
+<li>LB机器根据负载均衡算法，选出合适的RS，将目的Mac修改为RS的Mac，其余不变，并将连接记录添加到Hash表。</li>
+<li>RS处理完报文后，将响应报文直接发送给客户端</li>
+<li>连接终止或超时后，连接记录就会在已连接的Hash表中删除</li>
+</ol>
+<p>数据报流动：</p>
+<p><img src="https://i.loli.net/2020/03/22/unXjMckrdQICYTf.png" alt="LVS_4 DR数据流动.png"></p>
+<p>非ARP接口：</p>
+<blockquote>
+<p>因为DR需要所有设备在同一个局域网内，而arp广播，会发送LAN的所有机器（LB机器和RS机器），我们现在只需要LB机器去响应VIP请求，要求只能是DR进行响应VIP的arp请求，而RS不能够响应。我们需要设置arp参数（RS)，限制其不能响应VIP的arp请求。</p>
+<p>arp_ignore：arp响应</p>
+<p>arp_announce：arp通告</p>
+</blockquote>
+<p>特性：</p>
+<ol>
+<li>保证前端路由将目标地址为VIP报文通通发给DS</li>
+<li>RS可以使用私有IP地址，也可以使用公网IP地址，如果使用公网地址，此时通过Internet对RIP进行直接访问</li>
+<li>RS和DS必须在同一个物理网络当中</li>
+<li>请求报文经过DS到RS，但是响应报文不经过DS（消除nat模式下的性能瓶颈）</li>
+<li>不支持地址转化，也不支持端口映射</li>
+<li>RS的网关决不能指向DS（因为我们允许RS通过DS）</li>
+<li>RS上的lo接口配置VIP地址</li>
+</ol>
+<h2 id="VS-TUN工作模型"><a href="#VS-TUN工作模型" class="headerlink" title="VS/TUN工作模型"></a>VS/TUN工作模型</h2><p><img src="https://i.loli.net/2020/03/22/CgUyVIajr4KkXtd.png" alt="LVS_5_Tun.png"></p>
+<p>流程：</p>
+<ol>
+<li>当用户访问服务器提供服务时，发往VIP地址的请求包到达LB机器。</li>
+<li>调度器根据各个服务器的负载情况，动态地选择一台服务器， 将请求报文封装在另一个IP报文中，再将封装后的IP报文转发给选出的服务器</li>
+<li>服务器收到报文后，先将报文解封获得原来目标地址为VIP的报文，服务器发 现VIP地址被配置在本地的IP隧道设备上，所以就处理这个请求，然后根据路由表将响应报文直接返回给客户。</li>
+</ol>
+<p>数据报流动：</p>
+<p><img src="https://i.loli.net/2020/03/22/bhvVoSX3da8KH4P.png" alt="LVS_6.png"><br>特点：</p>
+<ol>
+<li>TUN的建立需要时动态的，类似DMVPN</li>
+<li>因为又添加了IP报头，所以IP隧道会消耗一定的资源</li>
+<li>不需要DS返回响应，和DR类似</li>
+<li>Tun可以做加密，IPSec等</li>
+</ol>
+<h2 id="三种模型的比较"><a href="#三种模型的比较" class="headerlink" title="三种模型的比较"></a>三种模型的比较</h2><p><strong>1. Virtual Server via NAT</strong>：VS/NAT 的优点是服务器可以运行任何支持TCP/IP的操作系统，它只需要一个IP地址配置在调度器上，服务器组可以用私有的IP地址。缺点是它的伸缩能力有限，因为在VS/NAT中请求和响应报文都需要通过负载调度器。可以有三种方法解决这个问题：混合方法、VS/TUN和 VS/DR。在DNS混合集群系统中，有若干个VS/NAT负载调度器，每个负载调度器带自己的服务器集群，同时这些负载调度器又通过RR-DNS组成简 单的域名。但VS/TUN和VS/DR是提高系统吞吐量的更好方法。对于那些将IP地址或者端口号在报文数据中传送的网络服务，需要编写相应的应用模块来转换报文数据中的IP地址或者端口号。这会带来实现的工作量，同时应用模块检查报文的开销会降低系统的吞吐率。</p>
+<p><strong>2. Virtual Server via IP Tunneling：</strong>在VS/TUN 的集群系统中，负载调度器只将请求调度到不同的后端服务器，后端服务器将应答的数据直接返回给用户。这样，负载调度器就可以处理大量的请求，它甚至可以调 度百台以上的服务器（同等规模的服务器），而它不会成为系统的瓶颈。VS/TUN技术对服务器有要求，即所有的服务器必须支持“IP Tunneling”或者“IP Encapsulation”协议。目前，VS/TUN的后端服务器主要运行Linux操作系统，我们没对其他操作系统进行测试。因为“IP Tunneling”正成为各个操作系统的标准协议，所以VS/TUN应该会适用运行其他操作系统的后端服务器。</p>
+<p><strong>3. Virtual Server via Direct Routing</strong>：跟VS/TUN方法一样，VS/DR调度器只处理客户到服务器端的连接，响应数据可以直接从独立的网络路由返回给客户。这可以极大地提高LVS集群系统的伸缩性。跟VS/TUN相比，这种方法没有IP隧道的开销，但是要求负载调度器与实际服务器都有一块网卡连在同一物理网段上，服务器网络设备（或者设备别名）不作ARP响应，或者能将报文重定向（Redirect）到本地的Socket端口上。</p>
+<h1 id="LVS实验"><a href="#LVS实验" class="headerlink" title="LVS实验"></a>LVS实验</h1><h2 id="1、LVS-NAT"><a href="#1、LVS-NAT" class="headerlink" title="1、LVS/NAT"></a>1、LVS/NAT</h2><p>实验配置：</p>
+<p>DS / LB机器</p>
+<table>
+<thead>
+<tr>
+<th>地址类型</th>
+<th>IP地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VIP</td>
+<td>192.168.1.105</td>
+</tr>
+<tr>
+<td>DIP</td>
+<td>192.168.70.10</td>
+</tr>
+</tbody></table>
+<p>RS / WEB服务器</p>
+<table>
+<thead>
+<tr>
+<th>站点</th>
+<th>IP地址</th>
+<th>默认网关</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RS1</td>
+<td>RIP：172.10.10.20/16</td>
+<td>GATEWAY： 172.10.10.2</td>
+</tr>
+<tr>
+<td>RS2</td>
+<td>RIP：172.10.10.30/16</td>
+<td>GATEWAY：172.10.10.2</td>
+</tr>
+</tbody></table>
+<p>DS / LB机器的网卡，添加了一块桥接的网卡，之后访问就直接访问那块桥接网卡的IP地址。这样真实的IP地址就不会暴露在公网了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 172.10.10.1  netmask 255.255.0.0  broadcast 172.10.255.255</span><br><span class="line"></span><br><span class="line">eth1: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        inet 192.168.1.2  netmask 255.255.255.0  broadcast 192.168.1.255</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>RS站点部署</strong></p>
+<ol>
+<li>使用httpd服务，这里介绍以下httpd服务，主配置文件：<code>/etc/httpd/conf/httpd.conf</code>，默认站点目录：<code>/var/www/html</code>。</li>
+<li>需要把RS机器的默认网关修改为DS机器的IP地址</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#node02 node03</span></span><br><span class="line">yum -y install httpd</span><br><span class="line">systemctl restart httpd</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"THIS IS NODE02"</span> &gt; /var/www/html/index.html</span><br><span class="line">sed  -i <span class="string">'/GATEWAY/d'</span> /etc/sysconfig/network-scripts/ifcfg-ens32</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"GATEWAY=192.168.70.10"</span> &gt;&gt;  /etc/sysconfig/network-scripts/ifcfg-ens32</span><br><span class="line">systemctl restart network</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>DS站点部署</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 安装ipvsadm，lvs的管理工具</span></span><br><span class="line">yum -y install ipvsadm</span><br><span class="line"><span class="comment"># 打开转发配置NAT，0是关闭</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"1"</span> &gt;   /proc/sys/net/ipv4/ip_forward</span><br><span class="line"><span class="comment"># 清除Ptables NAT表的规则</span></span><br><span class="line">iptables -t nat -F</span><br><span class="line"><span class="comment"># 添加iptables规则，让去往ens35的流量转发给192.168.70.10  公网--&gt;私网</span></span><br><span class="line">iptables -t nat -A POSTROUTING -s 192.168.70.10/24 -o ens35 -j MASQUERADE</span><br><span class="line"></span><br><span class="line"><span class="comment">#清除ipvsadm的所有规则</span></span><br><span class="line">ipvsadm --clear</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置wrr加权轮询策略并添加主机</span></span><br><span class="line">ipvsadm -A -t 192.168.1.105:80 -s wrr</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加主机，将到达192.168.1.105的流量转到192.168.70.20</span></span><br><span class="line">ipvsadm -a -t 192.168.1.105:80 -r 192.168.70.20:80 -m -w 2</span><br><span class="line"><span class="comment">#添加主机，将到达192.168.1.105的流量转到192.168.70.30</span></span><br><span class="line">ipvsadm -a -t 192.168.1.105:80 -r 192.168.70.30:80 -m -w 1</span><br><span class="line"></span><br><span class="line"><span class="comment">#	ipvsadm常用选项</span></span><br><span class="line"><span class="comment">#	-A : 添加Virtual Server Address（VIP+Port）</span></span><br><span class="line"><span class="comment">#	-s : 定义负载均衡策略</span></span><br><span class="line"><span class="comment">#	-e : 修改匹配规则</span></span><br><span class="line"><span class="comment">#	-r : 指定RS的地址和端口</span></span><br><span class="line"><span class="comment">#	-m : 指定为NAT</span></span><br><span class="line"><span class="comment">#	-w : 指定权重</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#查看策略信息</span></span><br><span class="line">ipvsadm -ln</span><br></pre></td></tr></table></figure>
+
+
+
+<p>之前在docker上做了一遍，到添加虚拟服务地址VSA的时候报错了，大概是LVS是要通过LINUX内核来实现，docker下完成不了对内核的改动，所以用不了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@00564133da53 /]<span class="comment"># sudo ipvsadm -A  -t 192.168.1.2:80 -s wrr</span></span><br><span class="line">Can<span class="string">'t initialize ipvs: Protocol not available</span></span><br><span class="line"><span class="string">Are you sure that IP Virtual Server is built in the kernel or as module?</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="2、LVS-DR"><a href="#2、LVS-DR" class="headerlink" title="2、LVS/DR"></a>2、LVS/DR</h2><p>环境准备：</p>
+<p>DS / LB机器</p>
+<table>
+<thead>
+<tr>
+<th>地址类型</th>
+<th>IP地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VIP</td>
+<td>192.168.70.100</td>
+</tr>
+<tr>
+<td>DIP</td>
+<td>192.168.70.10</td>
+</tr>
+</tbody></table>
+<p>RS / WEB服务器</p>
+<table>
+<thead>
+<tr>
+<th>站点</th>
+<th>IP地址</th>
+<th>VIP地址</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RS1</td>
+<td>RIP：192.168.70.20</td>
+<td>192.168.70.100 lo</td>
+</tr>
+<tr>
+<td>RS2</td>
+<td>RIP：192.168.70.30</td>
+<td>192.168.70.100 lo</td>
+</tr>
+</tbody></table>
+<p>RS部署</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#不能让Gateway指向node1</span></span><br><span class="line"></span><br><span class="line">sed -i <span class="string">'/GATEWAY/d'</span> /etc/sysconfig/network-scripts/ifcfg-ens32</span><br><span class="line">sed -i <span class="string">'/^$/d'</span> /etc/sysconfig/network-scripts/ifcfg-ens32</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"GATEWAY=192.168.70.2"</span> &gt;&gt; /etc/sysconfig/network-scripts/ifcfg-ens32</span><br><span class="line">systemctl restart network</span><br><span class="line">systemctl restart httpd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">yum -y install net-tools</span><br><span class="line">vip=192.168.70.100</span><br><span class="line">ifconfig lo:0 <span class="variable">$vip</span> broadcast <span class="variable">$vip</span> netmask 255.255.255.255 up</span><br><span class="line">route add -host <span class="variable">$vip</span> lo:0</span><br><span class="line"><span class="comment">#1是关闭</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"1"</span> &gt; /proc/sys/net/ipv4/conf/lo/arp_ignore</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"2"</span> &gt; /proc/sys/net/ipv4/conf/lo/arp_announce</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"1"</span> &gt; /proc/sys/net/ipv4/conf/all/arp_ignore</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"2"</span> &gt; /proc/sys/net/ipv4/conf/all/arp_announce</span><br><span class="line"><span class="comment">#在所有RS上部署</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>RS脚本：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">yum -y install httpd net-tools</span><br><span class="line">systemctl restart httpd</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"THIS IS NODE03"</span> &gt; /var/www/html/index.html</span><br><span class="line">vip=192.168.70.100</span><br><span class="line">ifconfig lo:0 <span class="variable">$vip</span> broadcast <span class="variable">$vip</span> netmask 255.255.255.255 up</span><br><span class="line">route add -host <span class="variable">$vip</span> lo:0</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"1"</span> &gt; /proc/sys/net/ipv4/conf/lo/arp_ignore</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"2"</span> &gt; /proc/sys/net/ipv4/conf/lo/arp_announce</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"1"</span> &gt; /proc/sys/net/ipv4/conf/all/arp_ignore</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"2"</span> &gt; /proc/sys/net/ipv4/conf/all/arp_announce</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>DS部署</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ifconfig ens32:0 192.168.70.100 broadcast 192.168.70.255 netmask 255.255.255.0 up</span><br><span class="line"><span class="comment">#本地重定向,去往192.168.70.100的流量从本地ens32:0走</span></span><br><span class="line">route add -host 192.168.70.100 dev ens32:0	</span><br><span class="line"></span><br><span class="line">ipvsadm -A -t 192.168.70.100:80 -s wrr</span><br><span class="line">ipvsadm -a -t 192.168.70.100:80 -r 192.168.70.20:80 -m -w 1</span><br><span class="line">ipvsadm -a -t 192.168.70.100:80 -r 192.168.70.30:80 -m -w 2</span><br><span class="line">ipvsadm -ln</span><br></pre></td></tr></table></figure>
+
+<p>DS脚本</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">yum -y install net-tools ipvsadm </span><br><span class="line"><span class="built_in">echo</span> <span class="string">"0"</span> &gt;  /proc/sys/net/ipv4/ip_forward</span><br><span class="line"></span><br><span class="line"><span class="comment">#ifconfig ens32:0 192.168.70.100 broadcast 192.168.70.255 netmask 255.255.255.0 up</span></span><br><span class="line"><span class="comment">#route add -host 192.168.70.100 dev ens32:0	</span></span><br><span class="line">ipvsadm -A -t 192.168.70.100:80 -s wrr</span><br><span class="line">ipvsadm -a -t 192.168.70.100:80 -r 192.168.70.20:80 -g -w 9</span><br><span class="line">ipvsadm -a -t 192.168.70.100:80 -r 192.168.70.30:80 -g -w 1</span><br><span class="line">ipvsadm -ln</span><br><span class="line">ipvsadm -C</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;1..10&#125;;<span class="keyword">do</span> curl 192.168.70.100:80; <span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        </div>
+    </article>
+
+    
+    
+<nav class="article-nav">
+  
+    <a href="/2020/02/23/OSPF%E5%8D%8F%E8%AE%AE/" id="article-nav-newer" class="article-nav-link-wrap prev">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          OSPF协议
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/02/19/Keepalived%E9%AB%98%E5%8F%AF%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap next">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Keepalived高可用</div>
+    </a>
+  
+</nav>
+
+    
+
+    
+</div>
+    </div>
+    <footer class="site-footer">
+        <div class="global-width">
+            <ul class="site-widget">
+                
+                <li class="widget widget-tag">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-category">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-recent_posts">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2020/12/30/%E6%84%BF%E6%9C%89%E6%B6%93%E6%B6%93%E8%AF%97%E6%84%8F%E6%B8%85%E6%96%B0%E5%85%A5%E8%84%BE%EF%BC%8C%E4%BB%A5%E9%A3%A8%E5%BF%99%E7%A2%8C%E7%9A%84%E6%97%A5%E5%B8%B8/">愿有涓涓诗意清新入脾，以飨忙碌的日常</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Jetbrains%E5%BF%AB%E6%8D%B7%E9%94%AE/">Jetbrains快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Chrome%E5%BF%AB%E6%8D%B7%E9%94%AE/">Chrome快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/VsCode%E5%BF%AB%E6%8D%B7%E9%94%AE/">VSCode快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/KVM%E5%AE%9E%E4%BE%8B/">KVM实例总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+                </li>
+                
+            </ul>
+        </div>
+        <div class="site-info">
+            <address>
+                &copy; 2014 <a href="http://ymlog.cn">无心而为</a> All Right Reserved. <br/>
+                Powered by <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>. Theme by <a href="http://zzoman.com" target="_blank" rel="noopener">ZZOMAN</a>
+            </address>
+        </div>
+    </footer>
+    
+    <script src="/libs/jquery-1.11.3.min.js" type="text/javascript"></script>
+    
+    <script src="/libs/fancybox/jquery.fancybox.js" type="text/javascript"></script>
+    
+    <script src="/js/site_init.js" type="text/javascript"></script>
+    
+</body>
+</html>

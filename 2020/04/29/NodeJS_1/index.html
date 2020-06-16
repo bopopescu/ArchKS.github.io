@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    
+    <title>NodeJS（一） 静态路由 | 无心而为</title>
+    
+    <link rel="alternative" href="/atom.xml" title="无心而为" type="application/atom+xml">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    <link rel="stylesheet" href="/libs/fancybox/jquery.fancybox.css" charset="utf-8">
+    
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="site">
+    <header class="site-header">
+        <h1 class="site-title"><a href="/">无心而为</a></h1>
+        <nav class="site-nav">
+            <ul class="nav">
+                
+                <li><a href="/archives">Archives</a></li>
+                
+                
+                <li><a href="/atom.xml" title="RSS Feed">rss</a></li>
+                
+                <li><a class="toggle-search" href="#search">search</a></li>
+            </ul>
+        </nav>
+        <div class="site-search" id="search">
+            <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://ymlog.cn"></form>
+        </div>
+        
+            <div class="site-header-background" style="background-image:url(http://reumia.github.io/hexo-theme-zzoman2015/images/background-zzoman2015.jpg)"></div>
+        
+    </header>
+    <div class="site-body">
+        <div class="global-width">
+    <article class="article" data-layout="post" data-slug="NodeJS_1">
+        <div class="article-content">
+            
+            
+            <header class="article-header">
+                <div class="article-meta">
+                    <a href="/2020/04/29/NodeJS_1/" class="article-date">
+  <time datetime="2020-04-29T11:57:22.000Z">2020-04-29</time>
+</a>
+                    
+  <div class="article-category categories">
+    <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+  </div>
+
+                    
+                </div>
+                
+    <h1 class="article-title" itemprop="name">
+      <a href="/2020/04/29/NodeJS_1/">NodeJS（一） 静态路由</a>
+    </h1>
+
+            </header>
+            
+            <div class="article-body">
+                <h1 id="Nodejs简介"><a href="#Nodejs简介" class="headerlink" title="Nodejs简介"></a>Nodejs简介</h1><p>​    V8引擎本身是用于Chrome浏览器的JS解释部分，但是Ryan Dahl将其搬到了服务器上，用于做服务器。</p>
+<p>​    浏览器和服务器类似，浏览器是发送HTTP请求，接受HTTP响应，服务器也是接受HTTP请求，发送HTTP响应。都已HTML的方式实现。</p>
+<p>​    Nodejs是一个让Javascript运行在服务器端的开发平台，它让Javascript的触角伸到了服务器端，可以和PHP、JSP、Python、Ruby平起平坐。</p>
+<p>不同之处：</p>
+<ol>
+<li>Nodejs不是一种独立的语言，与PHP、JSP、Python的“既是语言，也是平台不同，Nodejs的使用Javascript进行编程，运行在Javascript引擎上（V8）</li>
+<li>与PHP、JSP相比，Nodejs跳过了Apache、Nginx、IIS等HTTP服务器，自己不用建设在任何服务器软件之上。</li>
+</ol>
+<p>Nodejs特点</p>
+<ol>
+<li>单线程</li>
+<li>非阻塞IO</li>
+<li>事件驱动</li>
+</ol>
+<p>1、单线程</p>
+<p>在java、php等服务器端语言中，会为每个客户连接创建一个新的线程，每个线程耗费大约2MB的内存，理论上，一个8G内存的服务器可以同时连接的最大用户数为4000个。</p>
+<p>Nodejs不为每个客户连接创建一个新的线程，而仅仅使用一个线程。当有用户连接了，就触发一个内部时间，通过非阻塞I/O、事件驱动机制，让Node.js程序宏观上也是并行的。使用Nodejs，一个8G的服务器可以同时处理超过4万用户的连接</p>
+<p>另外，单线程带来的好处，还有操作系统完全不再有创建线程，销毁线程带来的时间开销。</p>
+<p>但是，一个用户造成的线程崩溃，其他服务也就崩溃了。</p>
+<p><img src="https://i.loli.net/2020/04/29/GgYacbvhxfnMFPp.png" alt="image-20200427100929280.png"></p>
+<p>2、非阻塞I/O（non-blocking IO）</p>
+<p>例如，当在访问数据库取得数据的时候，需要一段时间。在传统的单线程处理机制中，在执行了访问数据库代码之后，整个线程都将暂停下来，等待数据库返回结果，才能执行后面的代码。也就是说，I/O阻塞了代码的执行，极大的降低了程序的执行效率。</p>
+<p>由于Nodejs采用了非阻塞I/O机制，因此在执行访问数据库代码之后，将立即转而执行后面的代码，把数据库返回结果的处理代码放在回调函数中，从而提高了程序执行效率。</p>
+<p>当某个I/O执行完毕时，将以事件的形式同之I/O操作的线程，线程执行这个事件的回调函数，为了处理异步I/O，线程必须有事件循环，不断的检查有没有未处理的事件。</p>
+<p>阻塞模式下，一个线程只能处理一项任务，想要提高吞吐量必须通过多线程，而非阻塞模式下，一个线程永远在执行计算操作，这个线程的CPU核心利用率永远是100%。</p>
+<p>3、事件驱动（event-driven）</p>
+<p>在Node中，客户端请求建立连接，提交数据等行为，会触发相应的事件，在Node中，一个时刻只能执行一个事件回调函数，但是在执行一个事件回调函数的中途，可以转而处理其他事件（比如又有新用户连接），然后返回据徐执行原事件的回调函数，这种处理机制，称为”时间环“</p>
+<p>Nodejs底层时C++，底层代码中，近半数都是用于事件队列、回调函数队列的构建。</p>
+<h1 id="Nodejs适合做什么？"><a href="#Nodejs适合做什么？" class="headerlink" title="Nodejs适合做什么？"></a>Nodejs适合做什么？</h1><p>​    善于I/O，不善于计算。因为Nodejs最擅长的就是任务调度，如果你的业务有很多CPU计算，实际上也相当于计算阻塞了这个单线程。</p>
+<p>​    当应用程序需要处理大量并发I/O，而向客户端发出响应之前，应用程序内部不需要进行复杂处理的时候，Nodejs非常合适。Nodejs也非常合适与web socket配合，开发长连接（长连接实际上是通过大量请求模拟长连接）的实时交互应用程序。</p>
+<p>比如</p>
+<ul>
+<li>用户表单收集</li>
+<li>考试系统</li>
+<li>聊天室</li>
+<li>图文直播</li>
+<li>提供JSON的API</li>
+</ul>
+<p>Nodejs本身就是极客追求性能极致的产物，缺少了服务器的健壮考量。所以Node不可能应用在极高可靠性的业务中。</p>
+<h1 id="Hello-Node"><a href="#Hello-Node" class="headerlink" title="Hello Node"></a>Hello Node</h1><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//require表示导包</span></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="comment">//创建服务器，参数是一个回调函数，表示如果有什么请求进来，要做什么</span></span><br><span class="line"><span class="keyword">var</span> server = http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req,res</span>) </span>&#123; </span><br><span class="line">    <span class="comment">// req表示请求，request；res表示响应，response</span></span><br><span class="line">    <span class="comment">// 设置HTTP头部，状态码200，文件类型html，字符集utf8</span></span><br><span class="line">    res.writeHead(<span class="number">200</span>,&#123;<span class="string">"Content-type"</span>:<span class="string">"text/html;charset=UTF-8"</span>&#125;);</span><br><span class="line">    res.end(<span class="string">"Hello NodeJS"</span>);</span><br><span class="line"></span><br><span class="line"> &#125;)</span><br><span class="line"><span class="comment">//运行服务器，监听3000端口，任何地址都可以访问</span></span><br><span class="line"> server.listen(<span class="number">3000</span>,<span class="string">"0.0.0.0"</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://i.loli.net/2020/04/29/iVcvReodCyXm7t6.png" alt="image-20200427105856751.png"></p>
+<p>NodeJS是服务器语句，写的js语句都将运行在服务器上，返回给客户的，都是已经处理好的纯HTML。如果想修改程序，必须中断当前程序，然后重新启动node，不支持热部署。</p>
+<h1 id="Nodejs路由"><a href="#Nodejs路由" class="headerlink" title="Nodejs路由"></a>Nodejs路由</h1><p>Node.JS没有根目录，因为它没有web容器的概念。</p>
+<p>先写一个静态的H5页面：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="css">        <span class="selector-class">.app</span>&#123;</span></span><br><span class="line">            background-color: red;</span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Nodejs读取文件<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"app"</span>&gt;</span>这是一个测试文件<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>效果大概是这样：</p>
+<img src="https://i.loli.net/2020/04/29/U5NCRwMdscT1KVn.png" alt="image-20200427210543157" style="zoom:33%;" />
+
+<ol>
+<li>使用req.url判断输入的路径</li>
+<li>使用fs.readFile()读取网页页面</li>
+<li>使用res.end()返回数据</li>
+</ol>
+<p>然后写staticRender.js文件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> server = http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req,res</span>) </span>&#123; </span><br><span class="line">    <span class="keyword">if</span>(req.url == <span class="string">"/red"</span>)&#123;</span><br><span class="line">        <span class="comment">// 输入路由和源文件没有关系</span></span><br><span class="line">        fs.readFile(<span class="string">"./red.html"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</span><br><span class="line">            res.writeHead(<span class="number">200</span>,&#123;<span class="string">"Content-type"</span>:<span class="string">"text/html;charset=UTF-8"</span>&#125;);</span><br><span class="line">            res.end(data);</span><br><span class="line">    </span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(req.url == <span class="string">"/blue"</span>)&#123;</span><br><span class="line">        fs.readFile(<span class="string">"./blue.html"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</span><br><span class="line">            res.writeHead(<span class="number">200</span>,&#123;<span class="string">"Content-type"</span>:<span class="string">"text/html;charset=UTF-8"</span>&#125;);</span><br><span class="line">            res.end(data);</span><br><span class="line">    </span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        res.writeHead(<span class="number">404</span>,&#123;<span class="string">"Content-type"</span>:<span class="string">"text/html;charset=UTF-8"</span>&#125;);</span><br><span class="line">        res.end(<span class="string">"没有这个页面"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> &#125;);</span><br><span class="line"> server.listen(<span class="number">3000</span>,<span class="string">"0.0.0.0"</span>);</span><br></pre></td></tr></table></figure>
+
+<img src="https://i.loli.net/2020/04/29/U5NCRwMdscT1KVn.png" alt="image-20200427210543157" style="zoom:33%;" />
+
+<img src="https://i.loli.net/2020/04/29/CjBTplzuqLcP5x8.png" alt="image-20200428123714399" style="zoom:33%;" />
+
+
+
+<p>NodeJS任何静态页面都需要路由，比如在HTML中插入一个image或者css样式，也需要设置一条路由。Nodejs擅长做顶层路由设计。</p>
+<h1 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h1><p>Nodejs中，讲很多的功能划分为了一个个module。</p>
+<h2 id="HTTP模块"><a href="#HTTP模块" class="headerlink" title="HTTP模块"></a>HTTP模块</h2><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//引用模块</span></span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">var</span> server = http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req,res</span>) </span>&#123; </span><br><span class="line">    <span class="comment">//req参数表示请求，res表示响应</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"服务器接收到了请求"</span>+req.url);</span><br><span class="line">    <span class="comment">//告诉浏览器连接终止</span></span><br><span class="line">    res.end(); <span class="comment">//end中必须是字符串或者缓冲区</span></span><br><span class="line"> &#125;);</span><br><span class="line"> server.listen(<span class="number">3000</span>,<span class="string">"0.0.0.0"</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>向请求发送响应头，此方法只能在消息上调用一次，并且必须在调用 response.end() 之前调用。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">res.writeHead(<span class="number">200</span>,&#123;<span class="string">"Content-type"</span>:<span class="string">"text/html;charset=UTF-8"</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>req的属性，最关键的就是req.url属性，表示用户请求的URL地址，所有路由设计，都是通过req.url来实现的，我们比较关心的不是拿到URL，而是识别这个URL。</p>
+<p>识别URL用到两个模块，一个是url模块，另一个是querystring模块。</p>
+<h2 id="url"><a href="#url" class="headerlink" title="url"></a>url</h2><p>用于解析url，这样就可以不用正则表达式了</p>
+<p><a href="http://nodejs.cn/api/url.html#url_url_strings_and_url_objects" target="_blank" rel="noopener">http://nodejs.cn/api/url.html#url_url_strings_and_url_objects</a></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">"url"</span>);</span><br><span class="line"><span class="comment">//url.parse()可以将一个完整的URL地址分为很多部分</span></span><br><span class="line">myURL=url.parse(<span class="string">'https://user:pass@sub.host.com:8080/p/a/t/h?query=string#hash'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(myURL.host);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// url.host 获取及设置 URL 的主机部分。</span></span><br><span class="line">    <span class="comment">// url.hostname 获取及设置 URL 的主机名部分。 url.host 和 url.hostname 之间的区别是 url.hostname 不包含端口。</span></span><br><span class="line">    <span class="comment">// url.password 获取及设置 URL 的密码部分。</span></span><br><span class="line">    <span class="comment">// url.pathname 获取及设置 URL 的路径部分。</span></span><br><span class="line">    <span class="comment">// url.port 获取及设置 URL 的端口部分。</span></span><br><span class="line">    <span class="comment">// url.protocol 获取及设置 URL 的协议部分。</span></span><br><span class="line">    <span class="comment">// url.username 获取及设置 URL 的用户名部分。</span></span><br><span class="line">    <span class="comment">// url.query 获取及设置URL的查询部分 &amp;name=jack&amp;age=18</span></span><br><span class="line">    <span class="comment">// url.parse(req.url,true).query = &gt; </span></span><br><span class="line">    <span class="comment">// [Object: null prototype] &#123; name: 'jack', age: '18' &#125;</span></span><br><span class="line">    <span class="comment">// [Object: null prototype] &#123; name: 'jack', age: '18' &#125;</span></span><br><span class="line"></span><br><span class="line">url.parse(<span class="string">'url'</span>,<span class="literal">true</span>); <span class="comment">//如果第二个参数是true，那么就可以把所有的查询变为对象 ， 就可以直接打点得到这个参数。</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>表单提交案例：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>表单提交<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"http://127.0.0.1:3000"</span> <span class="attr">method</span>=<span class="string">"GET"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"name"</span>/&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">name</span>=<span class="string">"age"</span>/&gt;</span> <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"sex"</span> <span class="attr">value</span>=<span class="string">"男"</span>/&gt;</span>男</span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">name</span>=<span class="string">"sex"</span> <span class="attr">value</span>=<span class="string">"女"</span>/&gt;</span>女<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>提交到浏览器的结果为：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">http://127.0.0.1:3000/?name=杜振铨&amp;age=21&amp;sex=男</span><br></pre></td></tr></table></figure>
+
+<p>然后在Nodejs服务端用url解析出来</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">"url"</span>);</span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req,res</span>) </span>&#123;</span><br><span class="line">    myURL=url.parse(req.url,<span class="literal">true</span>);</span><br><span class="line">    <span class="keyword">var</span> info = <span class="string">"服务器收到了 - 姓名："</span>+myURL.query.name + <span class="string">"性别："</span>+myURL.query.sex + <span class="string">"年龄："</span>+myURL.query.age;</span><br><span class="line">    <span class="comment">// 这里要用UTF8不然中文乱码</span></span><br><span class="line">    res.writeHead(<span class="number">200</span>,&#123;<span class="string">"Content-type"</span>:<span class="string">"text/html;charset=UTF8"</span>&#125;);</span><br><span class="line">    res.end(info);</span><br><span class="line"> &#125;).listen(<span class="number">3000</span>,<span class="string">"0.0.0.0"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>最后在网页上呈现这样的效果：</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">服务器收到了 - 姓名：杜振铨 性别：男 年龄：21</span><br></pre></td></tr></table></figure>
+
+
+
+<p>简单的路由演示：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">var</span> server = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// http://127.0.0.1:3000/teacher/122456</span></span><br><span class="line">    <span class="comment">//提取出url,为/teacher/123456</span></span><br><span class="line">    <span class="keyword">var</span> myurl = req.url;</span><br><span class="line">    <span class="built_in">console</span>.log(myurl);</span><br><span class="line"></span><br><span class="line">    res.writeHead(<span class="number">200</span>,&#123;<span class="string">"Content-type"</span>:<span class="string">"text/html;charset=UTF8"</span>&#125;);</span><br><span class="line">    <span class="comment">//比较前9位 [0,9)</span></span><br><span class="line">    <span class="keyword">if</span>(myurl.substr(<span class="number">0</span>,<span class="number">9</span>) == <span class="string">"/teacher/"</span>)&#123;</span><br><span class="line">        <span class="comment">//取出从第九位开始往后的,这里就是123456</span></span><br><span class="line">        tearcherid = myurl.substr(<span class="number">9</span>);</span><br><span class="line">        <span class="comment">//看取出来的id是否满足6位数字,不满足则返回不存在,学生栏也一样</span></span><br><span class="line">        <span class="keyword">if</span>(<span class="regexp">/^\d&#123;6&#125;$/</span>.test(tearcherid))&#123;</span><br><span class="line">            res.end(<span class="string">"您要查询的老师信息为 id:"</span>+tearcherid);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            res.end(<span class="string">"您访问的老师不存在!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">     <span class="keyword">else</span> <span class="keyword">if</span>(myurl.substr(<span class="number">0</span>,<span class="number">9</span>) == <span class="string">"/student/"</span>)&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">var</span> studentid = myurl.substr(<span class="number">9</span>);</span><br><span class="line">        <span class="keyword">if</span>(<span class="regexp">/^\d&#123;10&#125;$/</span>.test(studentid))&#123;</span><br><span class="line">            res.end(<span class="string">"您要查询的学生信息为 id:"</span>+studentid);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            res.end(<span class="string">"您访问的学生不存在!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        res.end(<span class="string">"您访问的人员不存在!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">server.listen(<span class="number">3000</span>,<span class="string">"0.0.0.0"</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="fs"><a href="#fs" class="headerlink" title="fs"></a>fs</h2><ol>
+<li>readFile读取文件</li>
+<li>mkdir 新建文件夹</li>
+<li>rmdir 移除文件夹</li>
+<li>fs.Stats 查看文件属性<ol>
+<li>stats.isBlockDevice()</li>
+<li>stats.isCharacterDevice()</li>
+<li>stats.isDirectory()</li>
+<li>stats.isFIFO()</li>
+<li>stats.isFile()</li>
+<li>stats.isSocket()</li>
+<li>….</li>
+</ol>
+</li>
+<li></li>
+</ol>
+<p>读取文件</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 三个参数,第一个是完整的路径,当前目录写./</span></span><br><span class="line">   <span class="comment">// 第二个参数是字符集,也可以不设置</span></span><br><span class="line">   <span class="comment">// 第三个参数是回调函数,表示文件读取成功后,做的事</span></span><br><span class="line">   fs.readFile(<span class="string">"./demo.txt"</span>,&#123;<span class="string">"charset"</span>:<span class="string">"utf-8"</span>&#125;,<span class="function"><span class="keyword">function</span> (<span class="params">err,data</span>) </span>&#123; </span><br><span class="line">       <span class="comment">// 抛异常</span></span><br><span class="line">       <span class="keyword">if</span>(err)&#123;</span><br><span class="line">           <span class="keyword">throw</span> err;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="built_in">console</span>.log(userid+<span class="string">"文件读取完毕!"</span>);</span><br><span class="line">       res.end(data);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>利用读取文件，验证事件环，即NodeJS的单进程异步非阻塞事件驱动模型。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">var</span> server = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> userid = <span class="built_in">parseInt</span>(<span class="built_in">Math</span>.random() * <span class="number">10000</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(userid);</span><br><span class="line">    res.writeHead(<span class="number">200</span>,&#123;<span class="string">"Content-type"</span>:<span class="string">"text/html;charset=UTF8"</span>&#125;);</span><br><span class="line">    fs.readFile(<span class="string">"./demo.txt"</span>,&#123;<span class="string">"charset"</span>:<span class="string">"utf-8"</span>&#125;,<span class="function"><span class="keyword">function</span> (<span class="params">err,data</span>) </span>&#123; </span><br><span class="line">        <span class="built_in">console</span>.log(userid+<span class="string">"文件读取完毕!"</span>);</span><br><span class="line">        res.end(data);</span><br><span class="line">     &#125;);</span><br><span class="line">&#125;);</span><br><span class="line">server.listen(<span class="number">3000</span>,<span class="string">"0.0.0.0"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>通过访问 <a href="http://127.0.0.1:3000" target="_blank" rel="noopener">http://127.0.0.1:3000</a></p>
+<p>我们可以看到如下</p>
+<p>5435<br>5435文件读取完毕!</p>
+<p>现在我们模拟1000并发</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> threading <span class="keyword">import</span> Thread</span><br><span class="line">url = <span class="string">"http://127.0.0.1:3000"</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">req</span><span class="params">()</span>:</span></span><br><span class="line">    response = requests.get(url)</span><br><span class="line">    print(response.status_code)</span><br><span class="line">l = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10000</span>):</span><br><span class="line">    t = Thread(target=req,)</span><br><span class="line">    t.start()</span><br><span class="line">    l.append(t)</span><br><span class="line">[ i.join() <span class="keyword">for</span> i <span class="keyword">in</span> l]</span><br><span class="line">print(<span class="string">"完成!"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后就可以看到</p>
+<p>6182<br>9997<br>6182文件读取完毕!<br>9997文件读取完毕!<br>3450<br>3450文件读取完毕!</p>
+<p>可以发现，NodeJS在处理当前用户的时候，还会切换到另外的事件调度。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">   <span class="comment">//recursive 多级目录需要递归创建 </span></span><br><span class="line">fs.mkdir(<span class="string">"./ablum/niki"</span>,&#123; <span class="attr">recursive</span>: <span class="literal">true</span> &#125;,(err) =&gt;&#123;</span><br><span class="line">        <span class="keyword">if</span>(err) <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="fs处理异步问题"><a href="#fs处理异步问题" class="headerlink" title="fs处理异步问题"></a>fs处理异步问题</h2><ol>
+<li>由于异步性，下面的语句会在回调函数之前执行</li>
+<li>所以console.log()已经把文件夹输出了，但事实上for循环并没有开始遍历</li>
+<li>三层回调涉及到的方法<ol>
+<li>http.createServer()创建一个服务器</li>
+<li>fs.readdir() 读取目录下文件和文件夹</li>
+<li>fs.stat() 读取文件或者文件夹的状态</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">var</span> server = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(req.url == <span class="string">"/favicon.ico"</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    res.writeHead(<span class="number">200</span>,&#123;<span class="string">"Content-type"</span>:<span class="string">"text/html;charset=UTF8"</span>&#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义一个变量，用来存放目录</span></span><br><span class="line">    <span class="keyword">var</span> dirs = []</span><br><span class="line">    <span class="comment">// 读取./ablum下的所有文件,包括文件和文件夹</span></span><br><span class="line">    fs.readdir(<span class="string">"./ablum"</span>,<span class="function"><span class="keyword">function</span> (<span class="params">err,files</span>) </span>&#123; </span><br><span class="line">        <span class="built_in">console</span>.log(files.length);</span><br><span class="line">        <span class="comment">// 便利这些文件和文件夹,找到其中是文件夹的,将其放入dirs</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;files.length;i++)&#123;</span><br><span class="line">            <span class="keyword">var</span> path = <span class="string">"./ablum/"</span>+files[i];</span><br><span class="line">            fs.stat( path,<span class="function"><span class="keyword">function</span>(<span class="params">err,stats</span>)</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(stats.isDirectory())&#123;</span><br><span class="line">                    dirs.push(path);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 由于异步,上面的函数执行完了会立刻执行下面的函数,也就是说,上面还没开始遍历,下面已经执行了.所以这里的dirs是[]空的</span></span><br><span class="line">        <span class="built_in">console</span>.log(dirs);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    res.end(<span class="string">"Success"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">server.listen(<span class="number">3000</span>,<span class="string">"0.0.0.0"</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>解决办法：迭代器——循环强制同步</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">var</span> server = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(req.url == <span class="string">"/favicon.ico"</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    res.writeHead(<span class="number">200</span>,&#123;<span class="string">"Content-type"</span>:<span class="string">"text/html;charset=UTF8"</span>&#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义一个变量，用来存放目录</span></span><br><span class="line">    <span class="keyword">var</span> dirs = []</span><br><span class="line">    <span class="comment">// 读取./ablum下的所有文件,包括文件和文件夹</span></span><br><span class="line">    fs.readdir(<span class="string">"./ablum"</span>,<span class="function"><span class="keyword">function</span> (<span class="params">err,files</span>) </span>&#123; </span><br><span class="line">        <span class="comment">//定义一个递归函数</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">iterator</span>(<span class="params">i</span>)</span>&#123;</span><br><span class="line">            <span class="comment">// 一旦下标到达数组长度,则返回</span></span><br><span class="line">            <span class="keyword">if</span>(i == files.length)&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(dirs);</span><br><span class="line">                <span class="keyword">return</span> ;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">var</span> path = <span class="string">"./ablum/"</span>+files[i];</span><br><span class="line">            <span class="comment">// 判断是否为文件夹,如果是,则加入dirs</span></span><br><span class="line">            fs.stat(path,<span class="function"><span class="keyword">function</span> (<span class="params">err,stats</span>) </span>&#123; </span><br><span class="line">                <span class="keyword">if</span>(stats.isDirectory())&#123;</span><br><span class="line">                    dirs.push(path);</span><br><span class="line">                &#125;</span><br><span class="line">                iterator(i+<span class="number">1</span>);</span><br><span class="line">             &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 强制当前下标迭代完再迭代下一个下标</span></span><br><span class="line">        iterator(<span class="number">0</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    res.end(<span class="string">"Success"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">server.listen(<span class="number">3000</span>,<span class="string">"0.0.0.0"</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="静态目录"><a href="#静态目录" class="headerlink" title="静态目录"></a>静态目录</h1><ol>
+<li>通过路径访问文件</li>
+<li>浏览器的Content-type能读取文件正确的格式以便渲染</li>
+<li>事先在同级目录下准备static文件，用于存放html、css、jpg等静态资源</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>);</span><br><span class="line"><span class="keyword">var</span> url = <span class="built_in">require</span>(<span class="string">"url"</span>);</span><br><span class="line"><span class="keyword">var</span> fs = <span class="built_in">require</span>(<span class="string">"fs"</span>);</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">"path"</span>);</span><br><span class="line"></span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">req,res</span>)</span>&#123;</span><br><span class="line">	<span class="comment">//得到用户的路径</span></span><br><span class="line">	<span class="keyword">var</span> pathname = url.parse(req.url).pathname;</span><br><span class="line">	<span class="comment">//默认首页</span></span><br><span class="line">	<span class="keyword">if</span>(pathname == <span class="string">"/"</span>)&#123;</span><br><span class="line">		pathname = <span class="string">"index.html"</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//拓展名</span></span><br><span class="line">	<span class="keyword">var</span> extname = path.extname(pathname);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//真的读取这个文件</span></span><br><span class="line">	fs.readFile(<span class="string">"./static/"</span> + pathname,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span>(err)&#123;</span><br><span class="line">			<span class="comment">//如果此文件不存在，就应该用404返回</span></span><br><span class="line">			fs.readFile(<span class="string">"./static/404.html"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">err,data</span>)</span>&#123;</span><br><span class="line">				res.writeHead(<span class="number">404</span>,&#123;<span class="string">"Content-type"</span>:<span class="string">"text/html;charset=UTF8"</span>&#125;);</span><br><span class="line">				res.end(data);</span><br><span class="line">			&#125;);</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;;</span><br><span class="line">		<span class="comment">//MIME类型，就是</span></span><br><span class="line">		<span class="comment">//网页文件：  text/html</span></span><br><span class="line">		<span class="comment">//jpg文件 :   image/jpg</span></span><br><span class="line">		<span class="keyword">var</span> mime = getMime(extname);</span><br><span class="line">		res.writeHead(<span class="number">200</span>,&#123;<span class="string">"Content-type"</span>:mime&#125;);</span><br><span class="line">		res.end(data);</span><br><span class="line">	&#125;);</span><br><span class="line"></span><br><span class="line">&#125;).listen(<span class="number">3000</span>,<span class="string">"127.0.0.1"</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMime</span>(<span class="params">extname</span>)</span>&#123;</span><br><span class="line">	<span class="keyword">switch</span>(extname)&#123;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">".html"</span> :</span><br><span class="line">			<span class="keyword">return</span> <span class="string">"text/html"</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">".jpg"</span> : </span><br><span class="line">			<span class="keyword">return</span> <span class="string">"image/jpg"</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> <span class="string">".css"</span>:</span><br><span class="line">			<span class="keyword">return</span> <span class="string">"text/css"</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        </div>
+    </article>
+
+    
+    
+<nav class="article-nav">
+  
+    <a href="/2020/05/03/WebSocket/" id="article-nav-newer" class="article-nav-link-wrap prev">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          WebSocket
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/26/VueJS/" id="article-nav-older" class="article-nav-link-wrap next">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">VueJS 浅知</div>
+    </a>
+  
+</nav>
+
+    
+
+    
+</div>
+    </div>
+    <footer class="site-footer">
+        <div class="global-width">
+            <ul class="site-widget">
+                
+                <li class="widget widget-tag">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-category">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-recent_posts">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2020/12/30/%E6%84%BF%E6%9C%89%E6%B6%93%E6%B6%93%E8%AF%97%E6%84%8F%E6%B8%85%E6%96%B0%E5%85%A5%E8%84%BE%EF%BC%8C%E4%BB%A5%E9%A3%A8%E5%BF%99%E7%A2%8C%E7%9A%84%E6%97%A5%E5%B8%B8/">愿有涓涓诗意清新入脾，以飨忙碌的日常</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Jetbrains%E5%BF%AB%E6%8D%B7%E9%94%AE/">Jetbrains快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Chrome%E5%BF%AB%E6%8D%B7%E9%94%AE/">Chrome快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/VsCode%E5%BF%AB%E6%8D%B7%E9%94%AE/">VSCode快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/KVM%E5%AE%9E%E4%BE%8B/">KVM实例总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+                </li>
+                
+            </ul>
+        </div>
+        <div class="site-info">
+            <address>
+                &copy; 2014 <a href="http://ymlog.cn">无心而为</a> All Right Reserved. <br/>
+                Powered by <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>. Theme by <a href="http://zzoman.com" target="_blank" rel="noopener">ZZOMAN</a>
+            </address>
+        </div>
+    </footer>
+    
+    <script src="/libs/jquery-1.11.3.min.js" type="text/javascript"></script>
+    
+    <script src="/libs/fancybox/jquery.fancybox.js" type="text/javascript"></script>
+    
+    <script src="/js/site_init.js" type="text/javascript"></script>
+    
+</body>
+</html>

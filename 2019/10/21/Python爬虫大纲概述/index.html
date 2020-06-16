@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    
+    <title>Python爬虫大纲概述 | 无心而为</title>
+    
+    <link rel="alternative" href="/atom.xml" title="无心而为" type="application/atom+xml">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    <link rel="stylesheet" href="/libs/fancybox/jquery.fancybox.css" charset="utf-8">
+    
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="site">
+    <header class="site-header">
+        <h1 class="site-title"><a href="/">无心而为</a></h1>
+        <nav class="site-nav">
+            <ul class="nav">
+                
+                <li><a href="/archives">Archives</a></li>
+                
+                
+                <li><a href="/atom.xml" title="RSS Feed">rss</a></li>
+                
+                <li><a class="toggle-search" href="#search">search</a></li>
+            </ul>
+        </nav>
+        <div class="site-search" id="search">
+            <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://ymlog.cn"></form>
+        </div>
+        
+            <div class="site-header-background" style="background-image:url(http://reumia.github.io/hexo-theme-zzoman2015/images/background-zzoman2015.jpg)"></div>
+        
+    </header>
+    <div class="site-body">
+        <div class="global-width">
+    <article class="article" data-layout="post" data-slug="Python爬虫大纲概述">
+        <div class="article-content">
+            
+            
+            <header class="article-header">
+                <div class="article-meta">
+                    <a href="/2019/10/21/Python%E7%88%AC%E8%99%AB%E5%A4%A7%E7%BA%B2%E6%A6%82%E8%BF%B0/" class="article-date">
+  <time datetime="2019-10-21T04:37:03.000Z">2019-10-21</time>
+</a>
+                    
+  <div class="article-category categories">
+    <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+  </div>
+
+                    
+                </div>
+                
+    <h1 class="article-title" itemprop="name">
+      <a href="/2019/10/21/Python%E7%88%AC%E8%99%AB%E5%A4%A7%E7%BA%B2%E6%A6%82%E8%BF%B0/">Python爬虫大纲概述</a>
+    </h1>
+
+            </header>
+            
+            <div class="article-body">
+                <h1 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h1><p>爬虫的本质是：程序模拟浏览器，对服务器发起访问(requests请求过程)，服务器返回响应(response响应过程)。所以，一个简单的爬虫只有三步：</p>
+<ul>
+<li>构造URL</li>
+<li>对服务器发送请求</li>
+<li>输出服务器返回内容</li>
+</ul>
+<p><img src="https://i.loli.net/2019/10/21/H5xcmP18p32n4Ml.png" alt="爬虫"></p>
+<p>这里用一个实例，运行后可以看到输出了百度网页的源码(这里就不演示了)：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests <span class="comment"># requests是python爬虫最常用的请求库</span></span><br><span class="line"></span><br><span class="line">url = <span class="string">'http://www.baidu.com'</span> <span class="comment">#1、指名要访问的网站</span></span><br><span class="line"></span><br><span class="line">response = requests.get(url) <span class="comment">#2、使用requests的get方法请求网站信息</span></span><br><span class="line"></span><br><span class="line">print(response.text) <span class="comment">#3、输出响应内容</span></span><br></pre></td></tr></table></figure>
+
+<p>所以，爬虫也都围绕这三步进行。<br>1、构造URL，就是要爬的链接<br>2、发起请求<br>3、解析响应内容</p>
+<h1 id="构造URL"><a href="#构造URL" class="headerlink" title="构造URL"></a>构造URL</h1><p>可能有人会问，指定URL这么简单，为什么也要写，这里笔者给出一个实例说明：<br>这是东方财富网的腾讯股票页面，如果我想要爬取这个页面的评价，那么我就需要知道评论的URL。<br><br></p>
+<p><img src="https://i.loli.net/2019/10/21/SGNEoJWLYUOI4ce.png" alt="东方财富网腾讯股"></p>
+<br>
+这个页面有94条评论地址，一共有196个这样的页，也就是我需要知道至少18,424‬个URL我才能把腾讯股票所有的评率全部爬下来，这显然是不现实的。那么我们是如何知道要爬页面的URL的呢？答案是：通过网站的内部逻辑构造URL。
+<br>
+
+<p><img src="https://i.loli.net/2019/10/21/Z71H6caJ3X5mRkI.png" alt="评论数"></p>
+<br>
+通过Chrome开发者选项可以调出如下页面，指定一条评论链接，我们可以看到红圈画出来的内容:`/news,usaapl,880272132.html`
+<br>
+
+
+<p><img src="https://i.loli.net/2019/10/21/wA7Ssiqh6FQRpzr.png" alt="网站结构"></p>
+<br>
+然后我们再点进去，看看这个站点的真正链接是什么。
+<br>
+
+
+<p><img src="https://i.loli.net/2019/10/21/2yRfnFKUPDvz4kV.png" alt="站点链接"></p>
+<p>可以看到，这个站点的真正链接是:</p>
+<blockquote>
+<p><a href="http://guba.eastmoney.com/news,usaapl,880272132.html" target="_blank" rel="noopener">http://guba.eastmoney.com/news,usaapl,880272132.html</a></p>
+</blockquote>
+<p>而我们之前找到了<code>/news,usaapl,880272132.html</code>，这个站点的真正链接，就是在这段之前拼接：<code>http://guba.eastmoney.com</code>。</p>
+<p>所以，我们只需要把一开始的网站爬下来，然后筛选出类似<code>/news,usaapl,880272132.html</code>这样的内容，然后再把它和<code>http://guba.eastmoney.com</code>拼接，就可以得到当前页面上所有评论的具体地址，这就是地址构造，也就是构造URL。</p>
+<h1 id="发起请求"><a href="#发起请求" class="headerlink" title="发起请求"></a>发起请求</h1><p>一个爬虫是否能成功将网页爬下来，完全取决于请求。现在网络上绝大部分的网站都有了反爬机制，能够拦截爬虫。</p>
+<p>这里解释一下为什么要有反爬。爬虫抓取网页就相当于用户访问网页，在这期间，浏览器对服务器发起了一次访问。如果爬虫大量的抓取网页，比如在一分钟之内抓取了一万次网页，那么就相当于访问了服务器一万次，这样就会大量的占据服务器的资源，甚至大型分布式爬虫会使服务器崩溃。然而，人类是不可能做到10000次/min的访问量的(其实相当于一分钟内刷新一个网页10000次)。所以，越来越多的网站设计了反爬，将低访问量的人和高访问量的爬虫区别开来，让人能够正常访问，而爬虫则拒之门外。目前主要通过以下方式实现反爬：</p>
+<ul>
+<li>识别用户的User-Agent</li>
+<li>使用Ajax请求</li>
+<li>使用JavaScript渲染内容</li>
+<li>对IP进行访问控制</li>
+<li>对URL进行加密处理</li>
+<li>构造复杂的请求头(往往是请求头需要额外添加网站的其他参数，这些参数分布在网站的隐蔽角落，而且几乎毫无逻辑)</li>
+</ul>
+<h2 id="添加请求头"><a href="#添加请求头" class="headerlink" title="添加请求头"></a>添加请求头</h2><p>这里笔者给出一个豆瓣电影榜的例子，首先用户需要先在浏览器中找到自己浏览器的请求头，具体操作如下：</p>
+<ul>
+<li>打开浏览器</li>
+<li>进入开发者模式，谷歌浏览器是按F12</li>
+<li>Ctrl+R刷新页面</li>
+<li>选择Network的选项</li>
+<li>点击右边的任意一个</li>
+<li>左边选择Headers，下拉可以看到User-Agent</li>
+<li>将其复制到代码中即可，代码如下：</li>
+</ul>
+<p><img src="https://i.loli.net/2019/10/21/Hov87YuORg5tV2y.png" alt="User-Agent"></p>
+<br>
+
+
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">'https://movie.douban.com/chart'</span></span><br><span class="line"><span class="comment"># 添加请求头</span></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'</span></span><br><span class="line">&#125;</span><br><span class="line">response = requests.get(url,headers=headers) <span class="comment"># 这里要把请求头送入到请求方法中</span></span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
+<br>
+
+
+<p><img src="https://i.loli.net/2019/10/21/cjQvBVMePmbh8TF.png" alt="豆瓣图书榜源码"></p>
+<br>
+绝大多数网站，不加请求头，往往加载不了全部网页内容。
+<br>
+
+<h2 id="添加data"><a href="#添加data" class="headerlink" title="添加data"></a>添加data</h2><p>data和User-Agent的作用类似，都是用来伪装成用户的。服务器会根据有没有data和user-agent来判断是否是爬虫还是用户。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">url=<span class="string">'http://httpbin.org/get'</span></span><br><span class="line"></span><br><span class="line">data=&#123;</span><br><span class="line"><span class="string">'name'</span>:<span class="string">'germet'</span>,</span><br><span class="line"><span class="string">'age'</span>:<span class="number">22</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">response=requests.get(url,data=data)<span class="comment">#或者是params</span></span><br><span class="line">print(response.text)</span><br></pre></td></tr></table></figure>
+
+<h2 id="克制Ajax和JavaScript"><a href="#克制Ajax和JavaScript" class="headerlink" title="克制Ajax和JavaScript"></a>克制Ajax和JavaScript</h2><p>使用selenium首先要安装selenium库，<code>pip install selenium -i https://pypi.tuna.tsinghua.edu.cn/simple</code>。<br>其次，如果是用selenium打开Chrome，还需要安装ChromeDriver驱动。淘宝源ChromeDriver驱动链接，注意版本要和当前Chrome的版本一致。</p>
+<blockquote>
+<p><a href="http://npm.taobao.org/mirrors/chromedriver/" target="_blank" rel="noopener">http://npm.taobao.org/mirrors/chromedriver/</a></p>
+</blockquote>
+<p>目前Chrome支持的浏览器有<code>Safari、FireFox、Chrome</code>等，且都需要安装浏览器驱动。</p>
+<p>selenium会自动打开浏览器，然后渲染出网页，再关闭浏览器，这样可以克制一切JavaScript渲染，如果想针对Ajax请求，可以用Selenium模拟点击效果，这里只介绍基础的用法。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> selenium <span class="keyword">import</span> webdriver</span><br><span class="line"></span><br><span class="line">url = <span class="string">'https://movie.douban.com/chart'</span></span><br><span class="line"></span><br><span class="line">option = webdriver.ChromeOptions() <span class="comment"># 添加Chrome打开的选项</span></span><br><span class="line"><span class="comment">#option.add_argument('--headless')  # 执行时不打开了浏览器，通常在没有面板的Linux服务器中会用到</span></span><br><span class="line">driver = webdriver.Chrome(options=option)</span><br><span class="line"></span><br><span class="line">driver.get(url) </span><br><span class="line">driver.close() <span class="comment">#关闭浏览器</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="代理IP"><a href="#代理IP" class="headerlink" title="代理IP"></a>代理IP</h2><p>一个IP地址对服务器过于频繁的访问，会导致服务器屏蔽你的IP地址。爬虫通常使用代理IP池来处理自己IP被封的情况。</p>
+<p>可以使用Github上已经写好的代理池</p>
+<blockquote>
+<p><a href="https://github.com/jhao104/proxy_pool" target="_blank" rel="noopener">https://github.com/jhao104/proxy_pool</a></p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">url = <span class="string">'https://movie.douban.com/chart'</span></span><br><span class="line"></span><br><span class="line">proxy=&#123;</span><br><span class="line">    <span class="string">'http'</span>:<span class="string">'http://127.0.0.1:9743'</span>,</span><br><span class="line">    <span class="string">'https'</span>:<span class="string">'https://127.0.0.1:9743'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">response=requests.get(url,proxies=proxy)</span><br><span class="line">print(response.status_code)</span><br></pre></td></tr></table></figure>
+
+<h2 id="超时设置"><a href="#超时设置" class="headerlink" title="超时设置"></a>超时设置</h2><p>通常用于访问一些地方较远的网站，或者访问的网站当前过于繁忙，可以设置超时。一旦请求时间超过一定的值，服务器还没有返回响应，那么就直接退出。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> requests.exceptions <span class="keyword">import</span> ReadTimeout</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    response = requests.get(url,timeout=<span class="number">0.2</span>)</span><br><span class="line"><span class="keyword">except</span> ReadTimeout:</span><br><span class="line">    print(<span class="string">'Timeout'</span>)</span><br><span class="line"></span><br><span class="line">print(response.status_code)</span><br></pre></td></tr></table></figure>
+
+<h2 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h2><p>requests还可以用来下载各种文件，比如图片、音乐、视频等。这里用一个例子演示一下：</p>
+<p>下载《雨幕》这首歌：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line">url=<span class="string">'https://sharefs.yun.kugou.com/201910211352/d2b8f1ce854a7f4d01937583ee35b46e/G172/M00/0D/14/jJQEAF2hoIGATyZ4ADq0vjCqr7Q097.mp3'</span></span><br><span class="line"></span><br><span class="line">response = requests.get(url) <span class="comment"># 这里要把请求头送入到请求方法中</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#保存到文件</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'雨幕.mp3'</span>,<span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    f.write(response.content)</span><br></pre></td></tr></table></figure>
+
+<h1 id="解析网页"><a href="#解析网页" class="headerlink" title="解析网页"></a>解析网页</h1><p>解析网页一般用到的库有<code>BeautifulSoup,PyQuery,re</code>，BeautifulSoup又称之为bs4，要区别于之前的bs3。bs4和PyQuery类似，都是通过网页的节点(&lt;div&gt; …&lt;/div&gt; 这样的东西称之为结点)来定位内容的。</p>
+<p>而re是直接匹配内容，更加灵活。下面是re匹配表，虽然多，但通常我们只需要用到 <code>. * ?</code>这三个符号。</p>
+<p>re正则表达式，正则就是用一些具有特殊含义的符号组合到一起（称为正则表达式）来描述字符或者字符串的方法。或者说：正则就是用来描述一类事物的规则。（在Python中）它内嵌在Python中，并通过 re 模块实现。正则表达式模式被编译成一系列的字节码，然后由用 C 编写的匹配引擎执行。</p>
+<table>
+<thead>
+<tr>
+<th align="left">元字符</th>
+<th align="left">匹配内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">\w</td>
+<td align="left">匹配字母（包含中文）或数字或下划线</td>
+</tr>
+<tr>
+<td align="left">\W</td>
+<td align="left">匹配非字母（包含中文）或数字或下划线</td>
+</tr>
+<tr>
+<td align="left">\s</td>
+<td align="left">匹配任意的空白符</td>
+</tr>
+<tr>
+<td align="left">\S</td>
+<td align="left">匹配任意非空白符</td>
+</tr>
+<tr>
+<td align="left">\d</td>
+<td align="left">匹配数字</td>
+</tr>
+<tr>
+<td align="left">\D</td>
+<td align="left">匹配非数字</td>
+</tr>
+<tr>
+<td align="left">\A</td>
+<td align="left">从字符串开头匹配</td>
+</tr>
+<tr>
+<td align="left">\z</td>
+<td align="left">匹配字符串的结束，如果是换行，只匹配到换行前的结果</td>
+</tr>
+<tr>
+<td align="left">\n</td>
+<td align="left">匹配一个换行符</td>
+</tr>
+<tr>
+<td align="left">\t</td>
+<td align="left">匹配一个制表符</td>
+</tr>
+<tr>
+<td align="left">^</td>
+<td align="left">匹配字符串的开始</td>
+</tr>
+<tr>
+<td align="left">$</td>
+<td align="left">匹配字符串的结尾</td>
+</tr>
+<tr>
+<td align="left">.</td>
+<td align="left">匹配任意字符，除了换行符，当re.DOTALL标记被指定时，则可以匹配包括换行符的任意字符。</td>
+</tr>
+<tr>
+<td align="left">[…]</td>
+<td align="left">匹配字符组中的字符</td>
+</tr>
+<tr>
+<td align="left">[^…]</td>
+<td align="left">匹配除了字符组中的字符的所有字符</td>
+</tr>
+<tr>
+<td align="left">*</td>
+<td align="left">匹配0个或者多个左边的字符。</td>
+</tr>
+<tr>
+<td align="left">+</td>
+<td align="left">匹配一个或者多个左边的字符。</td>
+</tr>
+<tr>
+<td align="left">？</td>
+<td align="left">匹配0个或者1个左边的字符，非贪婪方式。</td>
+</tr>
+<tr>
+<td align="left">{n}</td>
+<td align="left">精准匹配n个前面的表达式。</td>
+</tr>
+<tr>
+<td align="left">{n,m}</td>
+<td align="left">匹配n到m次由前面的正则表达式定义的片段，贪婪方式</td>
+</tr>
+<tr>
+<td align="left">()</td>
+<td align="left">匹配括号内的表达式，也表示一个组</td>
+</tr>
+<tr>
+<td align="left">[:alnum:]</td>
+<td align="left">字母和数字</td>
+</tr>
+<tr>
+<td align="left">[:alpha:]</td>
+<td align="left">字母</td>
+</tr>
+<tr>
+<td align="left">[:ascii:]</td>
+<td align="left">ascii字符</td>
+</tr>
+<tr>
+<td align="left">[:blank:]</td>
+<td align="left">空白字符</td>
+</tr>
+<tr>
+<td align="left">[:cntrl:]</td>
+<td align="left">控制字符包括换行符、换页符、退格符</td>
+</tr>
+<tr>
+<td align="left">[:digit:]</td>
+<td align="left">数字</td>
+</tr>
+<tr>
+<td align="left">[:graph:]</td>
+<td align="left">非控制、非空格字符</td>
+</tr>
+<tr>
+<td align="left">[:lower:]</td>
+<td align="left">小写字母</td>
+</tr>
+<tr>
+<td align="left">[:print:]</td>
+<td align="left">可打印字符</td>
+</tr>
+<tr>
+<td align="left">[:punct:]</td>
+<td align="left">标点符号字符</td>
+</tr>
+<tr>
+<td align="left">[:space:]</td>
+<td align="left">空白字符</td>
+</tr>
+<tr>
+<td align="left">[:upper:]</td>
+<td align="left">大写字母</td>
+</tr>
+<tr>
+<td align="left">[:xdigit:]</td>
+<td align="left">十六进制数字</td>
+</tr>
+<tr>
+<td align="left">^$</td>
+<td align="left">匹配空行</td>
+</tr>
+<tr>
+<td align="left">&lt;</td>
+<td align="left">词首</td>
+</tr>
+<tr>
+<td align="left">&gt;</td>
+<td align="left">词尾</td>
+</tr>
+<tr>
+<td align="left">&lt;pattern&gt;</td>
+<td align="left">整个单词</td>
+</tr>
+</tbody></table>
+<hr>
+<p>重点</p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>？</td>
+<td>匹配0个或者1个左边的字符，非贪婪方式。</td>
+</tr>
+<tr>
+<td>.</td>
+<td>匹配任意字符，除了换行符。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配*号前的字符0次或多次。</td>
+</tr>
+</tbody></table>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">.*? 的含义就是 非贪婪匹配前面任意字符</span><br></pre></td></tr></table></figure>
+
+<p>通常采用的组合</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#re.complie写re表达式</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">如果不使用re.S参数，则只在每一行内进行匹配，如果一行没有，就换下一行重新开始。</span></span><br><span class="line"><span class="string">而使用re.S参数以后，正则表达式会将这个字符串作为一个整体，在整体中进行匹配。</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">parent = re.compile(<span class="string">'&lt;div.*?页数:.*?&lt;/span&gt;(.*?)&lt;br/&gt;'</span>, re.S)</span><br><span class="line"></span><br><span class="line"><span class="comment">#re.findall查找html的内容并和parent匹配，返回一个列表。</span></span><br><span class="line">result = re.findall(page_parent, html)</span><br></pre></td></tr></table></figure>
+
+<h1 id="项目实战"><a href="#项目实战" class="headerlink" title="项目实战"></a>项目实战</h1><p>爬取豆瓣电影榜。这个会用到我们之前在<code>发起请求 -- 添加请求头</code>中写的内容，这里主要关注re解析的过程。</p>
+<p>首选选中一个item，观察它在源码的什么位置，然后折叠源码。</p>
+<p><img src="https://i.loli.net/2019/10/21/bw659mYLhFJRyxr.png" alt="一个item"></p>
+<br>
+折叠源码后，可以看到选中的这些都十分相似，判断一下可知，他们就是每一部电影的html源码。这样就得到了电影榜单的一般格式。
+
+<p><img src="https://i.loli.net/2019/10/21/ZNOmvfTBdMAj3a5.png" alt="item列表"></p>
+<br>
+依次选取关键字，用来生成re表达式。我们选中了`table width,class="item" class="nbg" title`这些关键字。
+
+<p><img src="https://i.loli.net/2019/10/21/BzO7qV8NYpbWUg4.png" alt="image.png"></p>
+<p>所以，re表达式是：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#用括号选出你需要的内容</span></span><br><span class="line">pattern = re.compile(<span class="string">'table.*?class="item".*?nbg.*?title="(.*?)"'</span>,re.S)</span><br></pre></td></tr></table></figure>
+
+<p>选中的有些内容其实并不必要，我们就将它去除掉了。具体代码如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">url = <span class="string">'https://movie.douban.com/chart'</span></span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">    <span class="string">'User-Agent'</span>: <span class="string">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Safari/537.36'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#请求request</span></span><br><span class="line">response = requests.get(url,headers=headers)</span><br><span class="line">html = response.text</span><br><span class="line"></span><br><span class="line"><span class="comment">#解析</span></span><br><span class="line">pattern = re.compile(<span class="string">'table.*?class="item".*?nbg.*?title="(.*?)"'</span>,re.S)</span><br><span class="line">result = re.findall(pattern,html)</span><br><span class="line"></span><br><span class="line"><span class="comment">#打印</span></span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+
+<p>结果：</p>
+<p><img src="https://i.loli.net/2019/10/21/ErF297sh5xbgpqk.png" alt="爬虫效果"></p>
+<p>如果想要输出更美观，还可以添加一些字段处理等：<br><br></p>
+<p><img src="https://i.loli.net/2019/10/21/9FnVA4Yy61NdpZM.png" alt="美化效果"></p>
+
+            </div>
+        </div>
+    </article>
+
+    
+    
+<nav class="article-nav">
+  
+    <a href="/2019/12/25/Linux%E7%B3%BB%E7%BB%9F%E5%AD%98%E5%82%A8/" id="article-nav-newer" class="article-nav-link-wrap prev">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Linux系统存储
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/20/Hexo%E5%8D%9A%E5%AE%A2%E6%9E%B6%E6%9E%84%E8%BF%81%E7%A7%BB%E5%8E%86%E5%8F%B2/" id="article-nav-older" class="article-nav-link-wrap next">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hexo博客架构迁移历史</div>
+    </a>
+  
+</nav>
+
+    
+
+    
+</div>
+    </div>
+    <footer class="site-footer">
+        <div class="global-width">
+            <ul class="site-widget">
+                
+                <li class="widget widget-tag">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-category">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-recent_posts">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2020/12/30/%E6%84%BF%E6%9C%89%E6%B6%93%E6%B6%93%E8%AF%97%E6%84%8F%E6%B8%85%E6%96%B0%E5%85%A5%E8%84%BE%EF%BC%8C%E4%BB%A5%E9%A3%A8%E5%BF%99%E7%A2%8C%E7%9A%84%E6%97%A5%E5%B8%B8/">愿有涓涓诗意清新入脾，以飨忙碌的日常</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Jetbrains%E5%BF%AB%E6%8D%B7%E9%94%AE/">Jetbrains快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Chrome%E5%BF%AB%E6%8D%B7%E9%94%AE/">Chrome快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/VsCode%E5%BF%AB%E6%8D%B7%E9%94%AE/">VSCode快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/KVM%E5%AE%9E%E4%BE%8B/">KVM实例总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+                </li>
+                
+            </ul>
+        </div>
+        <div class="site-info">
+            <address>
+                &copy; 2014 <a href="http://ymlog.cn">无心而为</a> All Right Reserved. <br/>
+                Powered by <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>. Theme by <a href="http://zzoman.com" target="_blank" rel="noopener">ZZOMAN</a>
+            </address>
+        </div>
+    </footer>
+    
+    <script src="/libs/jquery-1.11.3.min.js" type="text/javascript"></script>
+    
+    <script src="/libs/fancybox/jquery.fancybox.js" type="text/javascript"></script>
+    
+    <script src="/js/site_init.js" type="text/javascript"></script>
+    
+</body>
+</html>

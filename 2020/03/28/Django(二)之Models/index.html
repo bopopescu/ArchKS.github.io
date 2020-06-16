@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    
+    <title>Django——Models | 无心而为</title>
+    
+    <link rel="alternative" href="/atom.xml" title="无心而为" type="application/atom+xml">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    <link rel="stylesheet" href="/libs/fancybox/jquery.fancybox.css" charset="utf-8">
+    
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="site">
+    <header class="site-header">
+        <h1 class="site-title"><a href="/">无心而为</a></h1>
+        <nav class="site-nav">
+            <ul class="nav">
+                
+                <li><a href="/archives">Archives</a></li>
+                
+                
+                <li><a href="/atom.xml" title="RSS Feed">rss</a></li>
+                
+                <li><a class="toggle-search" href="#search">search</a></li>
+            </ul>
+        </nav>
+        <div class="site-search" id="search">
+            <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://ymlog.cn"></form>
+        </div>
+        
+            <div class="site-header-background" style="background-image:url(http://reumia.github.io/hexo-theme-zzoman2015/images/background-zzoman2015.jpg)"></div>
+        
+    </header>
+    <div class="site-body">
+        <div class="global-width">
+    <article class="article" data-layout="post" data-slug="Django(二)之Models">
+        <div class="article-content">
+            
+            
+            <header class="article-header">
+                <div class="article-meta">
+                    <a href="/2020/03/28/Django(%E4%BA%8C)%E4%B9%8BModels/" class="article-date">
+  <time datetime="2020-03-28T06:42:14.000Z">2020-03-28</time>
+</a>
+                    
+  <div class="article-category categories">
+    <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+  </div>
+
+                    
+                </div>
+                
+    <h1 class="article-title" itemprop="name">
+      <a href="/2020/03/28/Django(%E4%BA%8C)%E4%B9%8BModels/">Django——Models</a>
+    </h1>
+
+            </header>
+            
+            <div class="article-body">
+                <p><img src="https://i.loli.net/2020/03/28/KCgP1Rbf6qei5Lp.png" alt="django(二) - Models.png"></p>
+<h1 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h1><p>0、首先创建一个Django项目：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">django-admin startproject DoModel</span><br><span class="line">cd DoModel</span><br><span class="line">django-admin startapp App</span><br><span class="line"></span><br><span class="line">项目框架：</span><br><span class="line">-------------------------------</span><br><span class="line">G:\Django\django1.11\DoModel&gt;tree /F</span><br><span class="line">Folder PATH listing for volume tmp</span><br><span class="line">Volume serial number is 1030-3F09</span><br><span class="line">G:.</span><br><span class="line">│   manage.py</span><br><span class="line">│</span><br><span class="line">├───App	# 我们主要写代码的地方</span><br><span class="line">│   │   admin.py</span><br><span class="line">│   │   apps.py</span><br><span class="line">│   │   models.py # 和数据库交互的地方</span><br><span class="line">│   │   tests.py</span><br><span class="line">│   │   views.py # 写业务逻辑的地方</span><br><span class="line">│   │   __init__.py</span><br><span class="line">│   │</span><br><span class="line">│   └───migrations</span><br><span class="line">│           __init__.py</span><br><span class="line">│</span><br><span class="line">└───DoModel</span><br><span class="line">        settings.py</span><br><span class="line">        urls.py</span><br><span class="line">        wsgi.py</span><br><span class="line">        __init__.py</span><br></pre></td></tr></table></figure>
+
+
+
+<p>1、在<code>DoModel/DoModel/settings.py</code>中加入应用</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">MIDDLEWARE = [</span><br><span class="line"> <span class="string">'django.middleware.security.SecurityMiddleware'</span>,</span><br><span class="line"> <span class="string">'django.contrib.sessions.middleware.SessionMiddleware'</span>,</span><br><span class="line"> <span class="string">'django.middleware.common.CommonMiddleware'</span>,</span><br><span class="line"> <span class="string">'django.middleware.csrf.CsrfViewMiddleware'</span>,</span><br><span class="line"> <span class="string">'django.contrib.auth.middleware.AuthenticationMiddleware'</span>,</span><br><span class="line"> <span class="string">'django.contrib.messages.middleware.MessageMiddleware'</span>,</span><br><span class="line"> <span class="string">'django.middleware.clickjacking.XFrameOptionsMiddleware'</span>,</span><br><span class="line"> <span class="string">'App'</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2、更改<code>DoModel/DoModel/settings.py</code>中的数据库为MySQL，下面会详细讲解如何更换数据库</p>
+<p>3、在DoModel/urls.py中注册App的路由</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls),</span><br><span class="line">    url(<span class="string">r'^app/'</span>,include(<span class="string">"App.urls"</span>))</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="更换数据库详解"><a href="#更换数据库详解" class="headerlink" title="更换数据库详解"></a>更换数据库详解</h1><p>在DoModel/setting.py*中修改DATABASES设置</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">DATABASES = &#123;</span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,</span><br><span class="line">        <span class="string">'NAME'</span>: <span class="string">'model3'</span>,</span><br><span class="line">        <span class="string">'USER'</span>: <span class="string">'niki'</span>,</span><br><span class="line">        <span class="string">'PASSWORD'</span>: <span class="string">'123456'</span>,</span><br><span class="line">        <span class="string">'HOST'</span>: <span class="string">'121.36.70.55'</span>,</span><br><span class="line">        <span class="string">'PORT'</span>: <span class="string">'3306'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>1、在MySQL上创建数据库model3, <code>create database model3;</code></p>
+<p>2、添加数据库</p>
+<img src="https://i.loli.net/2020/03/28/kFOEglnX6qjv752.png" alt="django(2) - 1" style="zoom:33%;" />
+
+
+<p>3、下载驱动</p>
+<img src="https://i.loli.net/2020/03/28/ZNeuG9t8Xd6WSCJ.png" alt="django(2) - 1.1" style="zoom:33%;" />
+
+<p>4、 安装数据库驱动</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python -m pip install --upgrade pip -i https://pypi.tuna.tsinghua.edu.cn/simple </span><br><span class="line">pip install pymysql -i https://pypi.tuna.tsinghua.edu.cn/simple</span><br></pre></td></tr></table></figure>
+
+
+
+<p>5、伪装驱动</p>
+<p>因为Django是不认pymysql的，所以需要伪装成MySQL_db</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># HelloDjango/__init__.py</span></span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line">pymysql.install_as_MySQLdb()</span><br></pre></td></tr></table></figure>
+
+
+
+<p>6、执行迁移</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python manage.py makemigrations</span><br><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure>
+
+<p>可以看到Student表迁移成功：</p>
+<img src="https://i.loli.net/2020/03/28/bPALwCZhTeOV8j3.png" alt="django(2) - 1.2" style="zoom:33%;" />
+
+
+
+
+<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><ul>
+<li>开发环境 Windows10</li>
+<li>Python==3.5.2</li>
+<li>django=1.11.7</li>
+</ul>
+<h2 id="MTV-MVC"><a href="#MTV-MVC" class="headerlink" title="MTV/MVC"></a>MTV/MVC</h2><p>MVC：（Model 、View、Controller）</p>
+<ul>
+<li><p>Model：用于封装与应用程序的业务逻辑相关的数据及对数据的处理方法，是web应用程序中用于处理应用程序的数据逻辑部分，Model通常只提供功能性的接口，通过这些接口可以获取Model的所有功能</p>
+</li>
+<li><p>View：负责数据的呈现，View对用户直接输出</p>
+</li>
+<li><p>Controller：负责从用户端收集用户输入，主要处理用户的交互</p>
+</li>
+</ul>
+<p>MTV是从MVC演化而来，本质上和MVC一样，只是名字改了：</p>
+<p>MTV：（Model、Template、View）</p>
+<ul>
+<li><p>Model：负责业务对象和数据库对象</p>
+</li>
+<li><p>View：负责业务逻辑，并在适当的时候调用Module 和 Template</p>
+</li>
+<li><p>Template：负责把页面展示给用户</p>
+</li>
+</ul>
+<p>在Django中，还有url，主要用来将一个个URL页面请求分发给不同的view进行处理，View再调用相应的Model和Template。</p>
+<p><img src="https://i.loli.net/2020/03/28/F9TZ12SaP6jlCYM.png" alt="django(二) - 3.png"></p>
+<h2 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h2><p>ORM（Object Relation Mapping） 对象关系映射，就是把数据库也看作是一个对象，将数据库的属性映射到对象的属性和方法，目的是为了将业务逻辑和SQL语句进行解耦合：</p>
+<ul>
+<li>数据库的表（table） –&gt; 类（class）</li>
+<li>记录（record，行数据）–&gt; 对象（object）</li>
+<li>字段（field）–&gt; 对象的属性（attribute）</li>
+</ul>
+<p>ORM 使用对象，封装了数据库操作，因此可以不碰 SQL 语言。开发者只使用面向对象编程，与数据对象直接交互，不用关心底层数据库。</p>
+<p>下面一段代码就是创建了两张表，Grade表的字段是g_grade、Student表的字段是s_name、s_password和s_grade。</p>
+<p>可以看到，数据库的表对应了面向对象的类，且必须继承自models.Model这个类；字段则是对应了面向对象的属性。</p>
+<p><em>/DoModel/App/models.py</em></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Grade</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    g_grade = models.CharField(max_length=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    s_name = models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">    s_password = models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">    s_grade = models.ForeignKey(Grade)</span><br></pre></td></tr></table></figure>
+
+<p>连接数据库</p>
+<p><img src="https://i.loli.net/2020/03/28/mQ3aNuTwKHdA5IJ.png" alt="django(二）- 3.5.png"></p>
+<p>映射到库中：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">python manage.py makemigrations # 生成迁移文件</span><br><span class="line">python manage.py migrate   # 执行迁移</span><br></pre></td></tr></table></figure>
+
+
+
+<p>刷新数据库就可以看到App_Student和App_Grade两张表了。查看表的定义：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- auto-generated definition</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> App_student</span><br><span class="line">(</span><br><span class="line">  	<span class="keyword">id</span>         <span class="built_in">int</span> auto_increment</span><br><span class="line">    primary <span class="keyword">key</span>,</span><br><span class="line">  	s_name     <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">  	s_password <span class="built_in">varchar</span>(<span class="number">32</span>) <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">  	s_grade_id <span class="built_in">int</span>         <span class="keyword">not</span> <span class="literal">null</span>,</span><br><span class="line">  	<span class="keyword">constraint</span> App_student_s_grade_id_797e4cc7_fk_App_grade_id</span><br><span class="line">    <span class="keyword">foreign</span> <span class="keyword">key</span> (s_grade_id) <span class="keyword">references</span> App_grade (<span class="keyword">id</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="comment">-- auto-generated definition</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> App_grade</span><br><span class="line">(</span><br><span class="line">    <span class="keyword">id</span>      <span class="built_in">int</span> auto_increment</span><br><span class="line">    primary <span class="keyword">key</span>,</span><br><span class="line">  	g_grade <span class="built_in">varchar</span>(<span class="number">16</span>) <span class="keyword">not</span> <span class="literal">null</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="定义字段"><a href="#定义字段" class="headerlink" title="定义字段"></a>定义字段</h2><p>字段名不允许使用下划线，因为查询条件需要用到下划线</p>
+<h3 id="字段类型"><a href="#字段类型" class="headerlink" title="字段类型"></a>字段类型</h3><table>
+<thead>
+<tr>
+<th>字段类型</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AutoField</td>
+<td>一个根据实际ID自动增长的IntegerField，通常不指定如果不指定，一个主键字段将自动添加到模型中</td>
+</tr>
+<tr>
+<td>CharField</td>
+<td>字符串，默认的表单样式是 TextInput</td>
+</tr>
+<tr>
+<td>TextField</td>
+<td>大文本字段，一般超过4000使用，默认的表单控件是Textarea</td>
+</tr>
+<tr>
+<td>IntegerField</td>
+<td>整数</td>
+</tr>
+<tr>
+<td>DecimalField</td>
+<td>使用python的Decimal实例表示的十进制浮点数</td>
+</tr>
+<tr>
+<td>FloatField</td>
+<td>用Python的float实例来表示的浮点数</td>
+</tr>
+<tr>
+<td>BooleanField</td>
+<td>true/false 字段，此字段的默认表单控制是CheckboxInput，MySQL不支持Bool值，所以ORM会把布尔值转换为tinyint(1)类型</td>
+</tr>
+<tr>
+<td>NullBooleanField</td>
+<td>支持null、true、false三种值</td>
+</tr>
+<tr>
+<td>DateField(auto_now=False, auto_now_add=False)</td>
+<td>使用Python的datetime.date实例表示的日期</td>
+</tr>
+<tr>
+<td>TimeField</td>
+<td>使用Python的datetime.time实例表示的时间，参数同DateField</td>
+</tr>
+<tr>
+<td>DateTimeField</td>
+<td>使用Python的datetime.datetime实例表示的日期和时间，参数同DateField，示例：.o_time = modes.DataTimeField(auto_now_add=True)</td>
+</tr>
+<tr>
+<td>FileField</td>
+<td>一个上传文件的字段</td>
+</tr>
+<tr>
+<td>ImageField</td>
+<td>继承了FileField的所有属性和方法，但对上传的对象进行校验，确保它是个有效的image</td>
+</tr>
+</tbody></table>
+<pre><code>DateField参数说明
+    DateField.auto_now每次保存对象时，自动设置该字段为当前时间，用于&quot;最后一次修改&quot;的时间戳，它总是使用当前日期，默认为false
+    DateField.auto_now_add
+    1、当对象第一次被创建时自动设置当前时间，用于创建的时间戳，它总是使用当前日期，默认为false
+    2、说明
+      该字段默认对应的表单控件是一个TextInput. 在管理员站点添加了一个JavaScript写的日历控件，和一个“Today&quot;的快捷按钮，包含了一个额外的invalid_date错误消息键
+    3、注意
+      auto_now_add, auto_now, and default 这些设置是相互排斥的，他们之间的任何组合将会发生错误的结果</code></pre><h3 id="字段约束"><a href="#字段约束" class="headerlink" title="字段约束"></a>字段约束</h3><table>
+<thead>
+<tr>
+<th>字段约束</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>null</td>
+<td>如果为True，Django 将空值以NULL 存储到数据库中，默认值是 False</td>
+</tr>
+<tr>
+<td>blank</td>
+<td>如果为True，则该字段允许为空白，默认值是 False，null是数据库范畴的概念，blank是表单验证证范畴的</td>
+</tr>
+<tr>
+<td>db_column</td>
+<td>字段的名称，如果未指定，则使用属性的名称</td>
+</tr>
+<tr>
+<td>db_index</td>
+<td>若值为 True, 则在表中会为此字段创建索引</td>
+</tr>
+<tr>
+<td>default</td>
+<td>默认值</td>
+</tr>
+<tr>
+<td>primary_key</td>
+<td>若为 True, 则该字段会成为模型的主键字段</td>
+</tr>
+<tr>
+<td>unique</td>
+<td>如果为 True, 这个字段在表中必须有唯一值</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    <span class="comment"># max_length: 最大长度</span></span><br><span class="line">    <span class="comment"># unqiue: 唯一性</span></span><br><span class="line">    <span class="comment"># db_column: 自定义字段名，如果不定义，就直接使用s_name</span></span><br><span class="line">    s_name = models.CharField(max_length=<span class="number">16</span>,unique=<span class="literal">True</span>,db_column=<span class="string">'name'</span>)</span><br><span class="line">    s_age = models.IntegerField(default=<span class="number">18</span>,db_column=<span class="string">'age'</span>)</span><br><span class="line">    <span class="comment"># False表示男，True表示女</span></span><br><span class="line">    s_sex = models.BooleanField(default=<span class="literal">False</span>,db_column=<span class="string">'sex'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 自定义表名</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></span><br><span class="line">        db_table = <span class="string">'People'</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h2><p>显性属性（开发者手动声明的属性），隐性属性（没有声明，父类中也不存在，动态产生出来的；如果开发者主动声明这些属性，隐性属性自己就不再产生了）</p>
+<h1 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h1><h2 id="增"><a href="#增" class="headerlink" title="增"></a>增</h2><p>事前准备：</p>
+<p>1、在总的urls中注册App的urls</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^admin/'</span>, admin.site.urls),</span><br><span class="line">    url(<span class="string">r'^app/'</span>,include(<span class="string">"App.urls"</span>))</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2、创建并且编写App的urls.py</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.conf.urls <span class="keyword">import</span> url</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> App <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    url(<span class="string">r'^addStudent/'</span>, views.addStudent),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3、创建views中的函数，用于添加学生数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># Create your views here.</span><br><span class="line">def addStudent(request):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    return HttpResponse(&quot;学生数据添加成功&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>4、手动创建几个Grade字段</p>
+<p><img src="https://i.loli.net/2020/03/28/RH1NuUcz2hsofJa.png" alt="django(二)-4"></p>
+<p>创建数据的几种方式</p>
+<p>1、直接实例化对象设置属性</p>
+<p>2、创建对象传入属性</p>
+<p>3、使用Model.objects.create()</p>
+<p>4、自己封装类方法创建</p>
+<p>5、使用Manager()中封装方法创建</p>
+<p>6、直接调用类方法添加数据</p>
+<h3 id="1、直接实例化对象设置属性"><a href="#1、直接实例化对象设置属性" class="headerlink" title="1、直接实例化对象设置属性"></a>1、直接实例化对象设置属性</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    student = Student()</span><br><span class="line">    student.s_name = <span class="string">"Jack"</span></span><br><span class="line">    grade  = Grade.objects.get(pk=<span class="number">1</span>)</span><br><span class="line">    print(<span class="string">"What is The Grade Type:"</span>,type(grade))  <span class="comment"># &lt;class 'App.models.Grade'&gt;</span></span><br><span class="line">    student.s_grade = grade <span class="comment"># 因为Student和Grade进行了外键关联，这里需要传入的是一个Grade的示例，不然会报错</span></span><br><span class="line">    student.s_password = <span class="string">"123456789"</span></span><br><span class="line">    student.save()</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"学生数据添加成功1"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>之后在Student表中就会多出一行数据了</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">MariaDB [model3]&gt; select * <span class="keyword">from</span> App_student;</span><br><span class="line">+----+--------+------------+------------+</span><br><span class="line">| id | s_name | s_password | s_grade_id |</span><br><span class="line">+----+--------+------------+------------+</span><br><span class="line">|  <span class="number">1</span> | Jack   | <span class="number">123456789</span>  |          <span class="number">1</span> |</span><br><span class="line">+----+--------+------------+------------+</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2、创建对象传入属性"><a href="#2、创建对象传入属性" class="headerlink" title="2、创建对象传入属性"></a>2、创建对象传入属性</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    grade = Grade.objects.get(pk=<span class="number">3</span>)</span><br><span class="line">    student = Student(s_name=<span class="string">'Rose'</span>,s_password=<span class="string">'abcdefg'</span>,s_grade=grade)</span><br><span class="line">    student.save()</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"学生数据添加成功2"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3、使用Model-objects-create"><a href="#3、使用Model-objects-create" class="headerlink" title="3、使用Model.objects.create()"></a>3、使用Model.objects.create()</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    grade = Grade.objects.get(pk=<span class="number">2</span>)</span><br><span class="line">    student = Student.objects.create(s_name=<span class="string">'Niki'</span>,s_password=<span class="string">'987654321'</span>,s_grade=grade)</span><br><span class="line">    student.save()</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"学生数据添加成功3"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4、自己封装类方法创建"><a href="#4、自己封装类方法创建" class="headerlink" title="4、自己封装类方法创建"></a>4、自己封装类方法创建</h3><p>封装自己的类方法，可以添加默认值</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    s_name = models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">    s_password = models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">    s_grade = models.ForeignKey(Grade)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @classmethod</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">create</span><span class="params">(cls,s_name,s_grade,s_password=<span class="string">'PASWD'</span>)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> cls(s_name=s_name,s_password=s_password,s_grade=s_grade)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>调用自己封装的类方法</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    grade = Grade.objects.get(pk=<span class="number">2</span>)</span><br><span class="line">    student = Student.objects.create(s_name=<span class="string">'Bool'</span>,s_password=<span class="string">'poiuytq'</span>,s_grade=grade)</span><br><span class="line">    student.save()</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"学生数据添加成功4"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="5、使用Manager-中封装方法创建"><a href="#5、使用Manager-中封装方法创建" class="headerlink" title="5、使用Manager()中封装方法创建"></a>5、使用Manager()中封装方法创建</h3><p>在Models中定义Manager()</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    s_name = models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">    s_password = models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">    s_grade = models.ForeignKey(Grade)</span><br><span class="line">	<span class="comment"># 多出来这1行，之后调用的时候可以写Student.s_m ，而不是Student.object </span></span><br><span class="line">    s_m = models.Manager()</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在views中调用Manager()</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">addStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    grade = Grade.objects.get(pk=<span class="number">2</span>)</span><br><span class="line">    student = Student.s_m.create(s_name=<span class="string">'ZJ'</span>,s_password=<span class="string">'ILKEY'</span>,s_grade=grade)</span><br><span class="line">    student.save()</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"学生数据添加成功5"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="6、直接调用类方法添加数据"><a href="#6、直接调用类方法添加数据" class="headerlink" title="6、直接调用类方法添加数据"></a>6、直接调用类方法添加数据</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">person = Person.create(<span class="string">'Neo'</span>,<span class="number">18</span>)</span><br><span class="line">person.save()</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><p>删除是基于查询的，把查询到的结果进行删除，这里删除的是主键为2的，因为刚刚jack插入了两次，重复了，所以删了。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">delStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    student = Student.objects.get(pk=<span class="number">2</span>)</span><br><span class="line">    student.delete()</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"删除成功！"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><p>修改是基于查询的，修改后保存。</p>
+<p>此时的数据库表：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">MariaDB [model3]&gt; select * <span class="keyword">from</span> App_student;</span><br><span class="line">+----+--------+------------+------------+</span><br><span class="line">| id | s_name | s_password | s_grade_id |</span><br><span class="line">+----+--------+------------+------------+</span><br><span class="line">|  <span class="number">1</span> | Jack   | <span class="number">123456789</span>  |          <span class="number">1</span> |</span><br><span class="line">|  <span class="number">3</span> | Niki   | <span class="number">987654321</span>  |          <span class="number">1</span> |</span><br><span class="line">|  <span class="number">4</span> | Rose   | abcdefg    |          <span class="number">3</span> |</span><br><span class="line">|  <span class="number">5</span> | Bool   | poiuytq    |          <span class="number">2</span> |</span><br><span class="line">|  <span class="number">6</span> | ZJ     | ILKEY      |          <span class="number">2</span> |</span><br><span class="line">+----+--------+------------+------------+</span><br><span class="line"><span class="number">5</span> rows <span class="keyword">in</span> set (<span class="number">0.00</span> sec)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>我们把Bool用户的ZJ用户的Password修改为：oiuytre</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">modStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    student = Student.objects.get(s_name=<span class="string">'ZJ'</span>)</span><br><span class="line">    student.s_password = <span class="string">"oiuytre"</span></span><br><span class="line">    student.save()</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"修改成功！"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><p>查询句柄objects，objects是Manager()的实例，操作都封装在了objects里面，如<code>Person.objects.all()</code>，如果不想使用object对象，可以重写Manager()方法，详情见<strong>增</strong>的第5点。    </p>
+<p>object ——&gt; Manager ——&gt; BaseManager ——&gt; get_queryset</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Manager</span><span class="params">(BaseManager.from_queryset<span class="params">(QuerySet)</span>)</span>:</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>BaseManager是个类，类下面有get_queryset方法：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_queryset</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Returns a new QuerySet object.  Subclasses can override this method to</span></span><br><span class="line"><span class="string">    easily customize the behavior of the Manager.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">return</span> self._queryset_class(model=self.model, using=self._db, hints=self._hints)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Student.objects.all()方法是调用的get_queryset方法：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">all</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="comment"># We can't proxy this method through the `QuerySet` like we do for the</span></span><br><span class="line">    <span class="comment"># rest of the `QuerySet` methods. This is because `QuerySet.all()`</span></span><br><span class="line">    <span class="comment"># works by creating a "copy" of the current queryset and in making said</span></span><br><span class="line">    <span class="comment"># copy, all the cached `prefetch_related` lookups are lost. See the</span></span><br><span class="line">    <span class="comment"># implementation of `RelatedManager.get_queryset()` for a better</span></span><br><span class="line">    <span class="comment"># understanding of how this comes into play.</span></span><br><span class="line">    <span class="keyword">return</span> self.get_queryset()</span><br></pre></td></tr></table></figure>
+
+
+
+<p>查询方法最后都会归结到get_queryset方法，所以只要对这个方法做封装，就可以实现定制化查询，比如逻辑删除后的查询。</p>
+<h3 id="获取查询结果集"><a href="#获取查询结果集" class="headerlink" title="获取查询结果集"></a>获取查询结果集</h3><p>all、filter、exclude、order_by、values、切片</p>
+<p>链式调用：person.objects.filter().filter()…..exclude()…</p>
+<h4 id="all"><a href="#all" class="headerlink" title="all"></a>all</h4><p>返回所有数据</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    students = Student.objects.all()</span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    print("数据:",students,"类型:",type(students))</span></span><br><span class="line"><span class="string">    数据: &lt;QuerySet [&lt;Student: Student object&gt;, 。。。。&gt;</span></span><br><span class="line"><span class="string">    类型: &lt;class 'django.db.models.query.QuerySet'&gt;</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> student <span class="keyword">in</span> students:</span><br><span class="line">        print(<span class="string">"姓名：&#123;0&#125; 密码：&#123;1&#125; "</span>.format(student.s_name,student.s_password))</span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    姓名：Jack 密码：123456789</span></span><br><span class="line"><span class="string">    姓名：Niki 密码：987654321</span></span><br><span class="line"><span class="string">    姓名：Rose 密码：abcdefg</span></span><br><span class="line"><span class="string">    姓名：Bool 密码：poiuytq</span></span><br><span class="line"><span class="string">    姓名：ZJ 密码：oiuytre</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="filter"><a href="#filter" class="headerlink" title="filter"></a>filter</h4><p>过滤操作，将符合条件的对象过滤出来，exclude和filter相反，exclude是过滤出不符合条件的数据</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    students = Student.objects.filter(pk__gt=<span class="number">3</span>) <span class="comment"># 主键 &gt;3</span></span><br><span class="line">    <span class="keyword">for</span> student <span class="keyword">in</span> students:</span><br><span class="line">        print(<span class="string">"姓名：&#123;0&#125; 密码：&#123;1&#125; "</span>.format(student.s_name,student.s_password))</span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    姓名：Rose 密码：abcdefg</span></span><br><span class="line"><span class="string">    姓名：Bool 密码：poiuytq</span></span><br><span class="line"><span class="string">    姓名：ZJ 密码：oiuytre</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="order-by"><a href="#order-by" class="headerlink" title="order_by"></a>order_by</h4><p>依照指定的字段名进行排序输出</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    students = Student.objects.order_by(<span class="string">'-s_name'</span>) <span class="comment"># 负号表示反序</span></span><br><span class="line">    <span class="keyword">for</span> student <span class="keyword">in</span> students:</span><br><span class="line">        print(<span class="string">"姓名：&#123;0&#125; 密码：&#123;1&#125; "</span>.format(student.s_name,student.s_password))</span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    姓名：ZJ 密码：oiuytre</span></span><br><span class="line"><span class="string">    姓名：Rose 密码：abcdefg</span></span><br><span class="line"><span class="string">    姓名：Niki 密码：987654321</span></span><br><span class="line"><span class="string">    姓名：Jack 密码：123456789</span></span><br><span class="line"><span class="string">    姓名：Bool 密码：poiuytq</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="values"><a href="#values" class="headerlink" title="values"></a>values</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    students_all = Student.objects.values()  <span class="comment"># 以字典的形式返回</span></span><br><span class="line">    <span class="keyword">for</span> students <span class="keyword">in</span> students_all: <span class="comment"># 把每个用户字典集中取出来</span></span><br><span class="line">        print(<span class="string">"-------------------------------------"</span>)</span><br><span class="line">        <span class="keyword">for</span> student <span class="keyword">in</span> students.items(): <span class="comment"># 把用户的每个元素从字典中取出来</span></span><br><span class="line">            print(student)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="slice"><a href="#slice" class="headerlink" title="slice"></a>slice</h4><ul>
+<li><p>和Python中的切片不太一样</p>
+</li>
+<li><p>QuerySet[5:15] 获取第5到15条数据，相当于SQL中的Limit和Offset</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    students = Student.objects.all()[<span class="number">0</span>:<span class="number">2</span>]</span><br><span class="line">    <span class="keyword">for</span> student <span class="keyword">in</span> students:</span><br><span class="line">        print(<span class="string">"姓名：&#123;0&#125; 密码：&#123;1&#125; "</span>.format(student.s_name,student.s_password))</span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    姓名：Jack 密码：123456789</span></span><br><span class="line"><span class="string">    姓名：Niki 密码：987654321</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="获取查询条件的单个对象"><a href="#获取查询条件的单个对象" class="headerlink" title="获取查询条件的单个对象"></a>获取查询条件的单个对象</h3><p>first、last、get、exist</p>
+<h4 id="first"><a href="#first" class="headerlink" title="first"></a>first</h4><p>返回查询集中的第一个对象</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    student = Student.objects.last()  <span class="comment"># 返回查询的最后个对象</span></span><br><span class="line">    print(student.s_name)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="last"><a href="#last" class="headerlink" title="last"></a>last</h4><p>返回查询集中的最后一个对象</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    student = Student.objects.last()  <span class="comment"># 返回查询的第一个对象</span></span><br><span class="line">    print(student.s_name)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="get"><a href="#get" class="headerlink" title="get"></a>get</h4><p>返回一个满足条件的对象，如果没有找到符合条件的对象， 会引发DoesNotExist异常，如果找到多个，会引发模型MultiObjectsReturned异常，可以使用<code>try ... except 模型类.异常...</code>的方式捕获异常。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        student = Student.objects.get(pk=<span class="number">11</span>)</span><br><span class="line">        print(student.s_name)</span><br><span class="line">    <span class="keyword">except</span> Student.DoesNotExist:</span><br><span class="line">        print(<span class="string">"用户不存在"</span>)</span><br><span class="line">    <span class="keyword">except</span> Student.MultipleObjectsReturned:</span><br><span class="line">        print(<span class="string">"存在多个用户"</span>)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="exist"><a href="#exist" class="headerlink" title="exist"></a>exist</h4><p>判断查询结果是否存在</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    result = Student.objects.filter(s_name=<span class="string">'ZJ'</span>).exists()</span><br><span class="line">    print(result)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="查询条件"><a href="#查询条件" class="headerlink" title="查询条件"></a>查询条件</h3><p>表达式：属性__操作符=临界值</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">- gt  大于</span><br><span class="line">- lt  小于</span><br><span class="line">- gte 大于等于</span><br><span class="line">- lte 小于等于</span><br><span class="line">- <span class="keyword">in</span> 在某一集合中</span><br><span class="line">- contains  	类似于模糊查询like</span><br><span class="line">- startswith  	以xx开始，本质也是like</span><br><span class="line">- endswith 		以xx结束，也是like</span><br><span class="line">- exact  精确等于,相当于 == </span><br><span class="line"></span><br><span class="line">- 前面同时添加i , ignore 忽略</span><br><span class="line">  - iexact  忽略大小写的匹配</span><br><span class="line">  - icontains</span><br><span class="line">  - istartswith</span><br><span class="line">  - iendswith</span><br><span class="line">- isnull 、isnotnull</span><br><span class="line"></span><br><span class="line">- django中查询条件有时区问题</span><br><span class="line">  - 关闭django中自定义的时区</span><br><span class="line">  - 在数据库中创建对应的时区表</span><br></pre></td></tr></table></figure>
+
+
+
+<p>示例：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    students = Student.objects.filter(pk__gt = <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">for</span> student <span class="keyword">in</span> students:</span><br><span class="line">        print(student.s_name)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="FQ对象"><a href="#FQ对象" class="headerlink" title="FQ对象"></a>FQ对象</h3><p>F对象和Q对象</p>
+<p>F对象</p>
+<ul>
+<li>可以获取我们属性的值</li>
+<li>可以实现一个模型不同属性的运算操作</li>
+<li>还可以支持算术运算</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 可以使用模型的A属性与B属性进行比较</span></span><br><span class="line"></span><br><span class="line">grades = Grade.objects.filter(ggirlnum__gt=F(<span class="string">'gboynum'</span>) )</span><br><span class="line"></span><br><span class="line"><span class="comment"># F对象支持算数运算</span></span><br><span class="line"></span><br><span class="line">grades = Grade.objects.filter(ggirlnum__gt=F(<span class="string">'gboynum'</span>) +<span class="number">10</span> )</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>Q对象</p>
+<p>过滤器的方法中的关键参数，常用于组合条件</p>
+<p>对查询条件进行封装， 封装之后支持逻辑运算</p>
+<ul>
+<li>与 &amp; and</li>
+<li>或  |  or</li>
+<li>非  ~  not</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    <span class="comment"># 查询主键值在[2,4]之间的用户</span></span><br><span class="line">    students = Student.objects.filter(Q(pk__gte = <span class="number">2</span>) &amp; Q(pk__lte =<span class="number">4</span>))</span><br><span class="line">    <span class="keyword">for</span> student <span class="keyword">in</span> students:</span><br><span class="line">        print(student.s_name)</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><p>使用aggregate()函数返回聚合函数的值</p>
+<p>Avg：平均值</p>
+<p>Count：数量</p>
+<p>Max：最大</p>
+<p>Min：最小</p>
+<p>Sum：求和</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    result = Student.objects.aggregate(Count(<span class="string">'s_name'</span>))</span><br><span class="line">    print(result)</span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    &#123;'s_name__count': 5&#125;</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="逻辑删除"><a href="#逻辑删除" class="headerlink" title="逻辑删除"></a>逻辑删除</h3><p>对于重要数据都做逻辑删除，不做物理删除，实现方法是定义isDelete属性，类型为BooleanField，默认值为False。</p>
+<p>修改数据库表单</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    s_name = models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">    s_password = models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">    s_grade = models.ForeignKey(Grade)</span><br><span class="line">    is_delete = models.BooleanField(default=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>进行文件迁移</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">python manage.py makemigrations</span><br><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure>
+
+
+
+<p>先查询所有项</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 查询函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    students = Student.objects.filter(is_delete=<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">for</span> student <span class="keyword">in</span> students:</span><br><span class="line">        print(<span class="string">"姓名：&#123;0&#125; 密码：&#123;1&#125; "</span>.format(student.s_name, student.s_password))</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>结果</p>
+<blockquote>
+<p>姓名：Jack 密码：123456789<br>姓名：Niki 密码：987654321<br>姓名：Rose 密码：abcdefg<br>姓名：Bool 密码：poiuytq<br>姓名：ZJ 密码：oiuytre</p>
+</blockquote>
+<p>删除其中某项</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 实际上是把is_delete字段修改为True，并不是真的删除</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">modStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    student = Student.objects.get(s_name=<span class="string">'ZJ'</span>)</span><br><span class="line">    student.is_delete = <span class="literal">True</span></span><br><span class="line">    student.save()</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"修改成功！"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>再次查询结果：</p>
+<blockquote>
+<p>姓名：Jack 密码：123456789<br>姓名：Niki 密码：987654321<br>姓名：Rose 密码：abcdefg<br>姓名：Bool 密码：poiuytq</p>
+</blockquote>
+<p>这样做可以实现对重要数据不是真的删除，但是有一个缺点，我们每次查询的时候，都需要加上<code>is_delete=False</code>这样一个选项，能不能有什么改进的措施呢？</p>
+<p>可以通过自定义Manager实现统一封装，重写get_queryset方法，这样就不需要在查询的时候写<code>filter(is_delete=False)</code></p>
+<p>1、修改models.py</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Grade</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    g_grade = models.CharField(max_length=<span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentManager</span><span class="params">(models.Manager)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_queryset</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> super(StudentManager,self).get_queryset().filter(is_delete=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    s_name = models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">    s_password = models.CharField(max_length=<span class="number">32</span>)</span><br><span class="line">    s_grade = models.ForeignKey(Grade)</span><br><span class="line">    is_delete = models.BooleanField(default=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line">    objects = StudentManager() <span class="comment"># 对Manager的实例Objects的get_qeuryset方法在进行一层封装</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>2、这样查询语句中的is_delete字段就可以去掉了</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    students = Student.objects.filter()</span><br><span class="line">    <span class="keyword">for</span> student <span class="keyword">in</span> students:</span><br><span class="line">        print(<span class="string">"姓名：&#123;0&#125; 密码：&#123;1&#125; "</span>.format(student.s_name, student.s_password))</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="多表查询"><a href="#多表查询" class="headerlink" title="多表查询"></a>多表查询</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">·分类</span><br><span class="line">	·ForeignKey：一对多，将字段定义在多的端中</span><br><span class="line">	·ManyToManyField：多对多，将字段定义在两端中</span><br><span class="line">	·OneToOneField：一对一，将字段定义在任意一端中</span><br><span class="line"></span><br><span class="line">·用一访问多</span><br><span class="line">	·格式</span><br><span class="line">		·对象.模型类小写_set</span><br><span class="line">	·示例</span><br><span class="line">		grade.students_set</span><br><span class="line"></span><br><span class="line">·用一访问一</span><br><span class="line">	·格式</span><br><span class="line">		·对象.模型类小写</span><br><span class="line">	·示例</span><br><span class="line">		·grade.students</span><br><span class="line"></span><br><span class="line">·访问id</span><br><span class="line">	·格式</span><br><span class="line">		·对象.属性_id</span><br><span class="line">	·示例</span><br><span class="line">		·student.s_grade_id</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>1、通过学生的姓名查询学生所在的班级，使用外键作为连接：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    student = Student.objects.get(s_name=<span class="string">'Rose'</span>)</span><br><span class="line">    print(student.s_grade.g_grade) <span class="comment"># Science</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2、直接查询</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">queStudent</span><span class="params">(request)</span>:</span></span><br><span class="line">    grade = Grade.objects.get(student__s_name=<span class="string">'Rose'</span>)</span><br><span class="line">    print(grade.g_grade) <span class="comment"># Science</span></span><br><span class="line">    <span class="keyword">return</span> HttpResponse(<span class="string">"查询成功"</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="缓存集"><a href="#缓存集" class="headerlink" title="缓存集"></a>缓存集</h2><ul>
+<li>filter、exclude、all 都不会真正的去查询数据库</li>
+<li>只有我们在迭代结果集，或者获取单个对象属性的时候，它才会去查询数据库</li>
+<li>懒查询：为了优化我们结构和查询</li>
+</ul>
+
+            </div>
+        </div>
+    </article>
+
+    
+    
+<nav class="article-nav">
+  
+    <a href="/2020/04/01/Redis/" id="article-nav-newer" class="article-nav-link-wrap prev">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Redis
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/02/Mysql%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/" id="article-nav-older" class="article-nav-link-wrap next">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Mysql常用语句</div>
+    </a>
+  
+</nav>
+
+    
+
+    
+</div>
+    </div>
+    <footer class="site-footer">
+        <div class="global-width">
+            <ul class="site-widget">
+                
+                <li class="widget widget-tag">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-category">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-recent_posts">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2020/12/30/%E6%84%BF%E6%9C%89%E6%B6%93%E6%B6%93%E8%AF%97%E6%84%8F%E6%B8%85%E6%96%B0%E5%85%A5%E8%84%BE%EF%BC%8C%E4%BB%A5%E9%A3%A8%E5%BF%99%E7%A2%8C%E7%9A%84%E6%97%A5%E5%B8%B8/">愿有涓涓诗意清新入脾，以飨忙碌的日常</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Jetbrains%E5%BF%AB%E6%8D%B7%E9%94%AE/">Jetbrains快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Chrome%E5%BF%AB%E6%8D%B7%E9%94%AE/">Chrome快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/VsCode%E5%BF%AB%E6%8D%B7%E9%94%AE/">VSCode快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/KVM%E5%AE%9E%E4%BE%8B/">KVM实例总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+                </li>
+                
+            </ul>
+        </div>
+        <div class="site-info">
+            <address>
+                &copy; 2014 <a href="http://ymlog.cn">无心而为</a> All Right Reserved. <br/>
+                Powered by <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>. Theme by <a href="http://zzoman.com" target="_blank" rel="noopener">ZZOMAN</a>
+            </address>
+        </div>
+    </footer>
+    
+    <script src="/libs/jquery-1.11.3.min.js" type="text/javascript"></script>
+    
+    <script src="/libs/fancybox/jquery.fancybox.js" type="text/javascript"></script>
+    
+    <script src="/js/site_init.js" type="text/javascript"></script>
+    
+</body>
+</html>

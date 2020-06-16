@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    
+    <title>WebSocket | 无心而为</title>
+    
+    <link rel="alternative" href="/atom.xml" title="无心而为" type="application/atom+xml">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    <link rel="stylesheet" href="/libs/fancybox/jquery.fancybox.css" charset="utf-8">
+    
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="site">
+    <header class="site-header">
+        <h1 class="site-title"><a href="/">无心而为</a></h1>
+        <nav class="site-nav">
+            <ul class="nav">
+                
+                <li><a href="/archives">Archives</a></li>
+                
+                
+                <li><a href="/atom.xml" title="RSS Feed">rss</a></li>
+                
+                <li><a class="toggle-search" href="#search">search</a></li>
+            </ul>
+        </nav>
+        <div class="site-search" id="search">
+            <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://ymlog.cn"></form>
+        </div>
+        
+            <div class="site-header-background" style="background-image:url(http://reumia.github.io/hexo-theme-zzoman2015/images/background-zzoman2015.jpg)"></div>
+        
+    </header>
+    <div class="site-body">
+        <div class="global-width">
+    <article class="article" data-layout="post" data-slug="WebSocket">
+        <div class="article-content">
+            
+            
+            <header class="article-header">
+                <div class="article-meta">
+                    <a href="/2020/05/03/WebSocket/" class="article-date">
+  <time datetime="2020-05-03T11:28:35.000Z">2020-05-03</time>
+</a>
+                    
+  <div class="article-category categories">
+    <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+  </div>
+
+                    
+                </div>
+                
+    <h1 class="article-title" itemprop="name">
+      <a href="/2020/05/03/WebSocket/">WebSocket</a>
+    </h1>
+
+            </header>
+            
+            <div class="article-body">
+                <h1 id="WS介绍"><a href="#WS介绍" class="headerlink" title="WS介绍"></a>WS介绍</h1><p>HTTP</p>
+<p>超文本传输协议(HTTP,HypertextTransferProtocol)是互联网上应用最为广泛的一种网络协议。是用于从WWW服务器传输超文本到本地浏览器的传送协议。</p>
+<p>Web通讯</p>
+<p><img src="https://i.loli.net/2020/05/03/ToOBRW7IeUilqa9.png" alt="image-20200503143751258.png"></p>
+<p>WebSocket</p>
+<p>WebSocket Protocal是HTML5一种新的协议，它实现了浏览器与服务器全双工通信（full-duple），一开始握手需要借助http请求完成。</p>
+<p>HTTP请求是无状态的，每一次收发数据都需要建立连接。WebSocket不需要建立连接就可以收发数据。</p>
+<p><img src="https://i.loli.net/2020/05/03/2e13BGHfSyCtAqs.png" alt="image-20200503143949598.png"></p>
+<p>WebSocket对象提供一组API，用于创建和管理WebSocket连接，以及通过连接发送和接受数据。</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">创建WebSocket对象</span><br><span class="line">var ws = new WebSocket(url,[protocals]);</span><br><span class="line"></span><br><span class="line">url: 表示要连接的URL，这个URL应该为响应WebSocket的地址</span><br><span class="line">protocals:可以是单个的协议名字字符串或者包含多个协议名字字符串的数组</span><br></pre></td></tr></table></figure>
+
+
+
+<p>方法</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">close([code][,reason]) 关闭websocket连接或停止正在进行的连接请求</span><br><span class="line">code: 一个数字表示关闭连接的状态号，表示连接关闭的原因</span><br><span class="line">reason: 一个可读字符串，表示连接被关闭的原因</span><br><span class="line"></span><br><span class="line">send(data) 通过websocket连接，向服务器发送数据</span><br><span class="line">data: 一个数字值表示关闭连接的状态号，表示连接被关闭的原因</span><br></pre></td></tr></table></figure>
+
+
+
+<p>属性</p>
+<table>
+<thead>
+<tr>
+<th>名词</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>onclose</td>
+<td>用于监听连接关闭事件监听器。当WebSocket对象的ReadyState状态变为CLOSED时，会触发该事件。会接受一个close event对象</td>
+</tr>
+<tr>
+<td>onerror</td>
+<td>当错误发生时，用于监听error事件的事件监听器，会接受一个error event对象</td>
+</tr>
+<tr>
+<td>onmessage</td>
+<td>一个用于消息事件的事件监听器，这一事件当有消息到达的时候该事件会触发。会接受一个message event对象</td>
+</tr>
+<tr>
+<td>onopen</td>
+<td>一个用于连接打开事件的事件监听器，当readyState的值变为OPEN的时候会触发该事件，会接受一个open event对象</td>
+</tr>
+<tr>
+<td>readyState</td>
+<td>连接的当前状态 0 连接还没开启 1 连接已经开启并准备好进行通信 2 连接正在关闭的过程中 3 连接已经关闭，或者连接无法建立</td>
+</tr>
+</tbody></table>
+<h1 id="简易的WS"><a href="#简易的WS" class="headerlink" title="简易的WS"></a>简易的WS</h1><p>npm安装websocket</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">npm install websocket</span><br></pre></td></tr></table></figure>
+
+
+
+<p>后端页面</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">var</span> WebSocketServer = <span class="built_in">require</span>(<span class="string">'websocket'</span>).server;</span><br><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建服务器</span></span><br><span class="line"><span class="keyword">var</span> server = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log((<span class="keyword">new</span> <span class="built_in">Date</span>()) + <span class="string">' Received request for '</span> + request.url);</span><br><span class="line">    response.writeHead(<span class="number">404</span>);</span><br><span class="line">    response.end();</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 监听8080端口</span></span><br><span class="line">server.listen(<span class="number">3000</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log((<span class="keyword">new</span> <span class="built_in">Date</span>()) + <span class="string">' Server is listening on port 8080'</span>);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"><span class="comment">// 创建websocket服务器</span></span><br><span class="line">wsServer = <span class="keyword">new</span> WebSocketServer(&#123;</span><br><span class="line">    httpServer: server,</span><br><span class="line">    autoAcceptConnections: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//websocket建立连接</span></span><br><span class="line">wsServer.on(<span class="string">'request'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">request</span>) </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//当前的连接</span></span><br><span class="line">    <span class="keyword">var</span> connection = request.accept(<span class="literal">null</span>, request.origin);</span><br><span class="line">    <span class="built_in">console</span>.log((<span class="keyword">new</span> <span class="built_in">Date</span>()) + <span class="string">' Connection accepted.'</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//定时向客户端发送消息</span></span><br><span class="line">    setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        connection.sendUTF(<span class="string">"服务端发送新消息"</span>+(<span class="keyword">new</span> <span class="built_in">Date</span>()))</span><br><span class="line">    &#125;,<span class="number">1000</span>)</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 监听当前连接，发送message的时候</span></span><br><span class="line">    connection.on(<span class="string">'message'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">message</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (message.type === <span class="string">'utf8'</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'Received Message: '</span> + message.utf8Data);</span><br><span class="line">            connection.sendUTF(message.utf8Data);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (message.type === <span class="string">'binary'</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'Received Binary Message of '</span> + message.binaryData.length + <span class="string">' bytes'</span>);</span><br><span class="line">            connection.sendBytes(message.binaryData);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 监听当前连接，当close的时候出发事件</span></span><br><span class="line">    connection.on(<span class="string">'close'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">reasonCode, description</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log((<span class="keyword">new</span> <span class="built_in">Date</span>()) + <span class="string">' Peer '</span> + connection.remoteAddress + <span class="string">' disconnected.'</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>前端页面</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Websocket前端页面<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="comment">// 创建websocket对象</span></span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> ws = <span class="keyword">new</span> WebSocket(<span class="string">"ws://localhost:3000"</span>);</span></span><br><span class="line">        </span><br><span class="line"><span class="actionscript">        <span class="comment">// 监听建立连接</span></span></span><br><span class="line"><span class="actionscript">        ws.onopen = <span class="function"><span class="keyword">function</span><span class="params">(res)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">"连接成功！"</span>);</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(res);</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"><span class="actionscript">        <span class="comment">//监听有新消息</span></span></span><br><span class="line"><span class="actionscript">        ws.onmessage = <span class="function"><span class="keyword">function</span><span class="params">(res)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">"有新消息！"</span>);</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(res);</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>页面效果</p>
+<p><img src="https://i.loli.net/2020/05/03/4jEb27kvDXBKF8H.png" alt="image-20200503150850275.png"></p>
+<h1 id="多人通讯"><a href="#多人通讯" class="headerlink" title="多人通讯"></a>多人通讯</h1><p>后端</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">"http"</span>)</span><br><span class="line"><span class="comment">// 引入websocket模块</span></span><br><span class="line"><span class="keyword">var</span> WebSocketServer = <span class="built_in">require</span>(<span class="string">'websocket'</span>).server</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//存储所有终端连接</span></span><br><span class="line"><span class="keyword">var</span> clients  = [];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入http模块，搭建http服务器</span></span><br><span class="line"><span class="keyword">var</span> server = http.createServer()</span><br><span class="line"><span class="comment">// server.listen(3000, ()=&gt; &#123;</span></span><br><span class="line"><span class="comment">//     console.log("服务器搭建成功！,监听localhost:3000")</span></span><br><span class="line"><span class="comment">// &#125;)</span></span><br><span class="line">server.listen(<span class="number">3000</span>,<span class="string">"0.0.0.0"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"服务器创建成功"</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建websocket服务对象</span></span><br><span class="line"><span class="keyword">var</span> wsServer = <span class="keyword">new</span> WebSocketServer(&#123;<span class="attr">httpServer</span>:server&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听连接请求，建立连接</span></span><br><span class="line"><span class="comment">// webSocketRequest 当前连接建立的请求</span></span><br><span class="line">wsServer.on(<span class="string">'request'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">webSocketRequest</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"建立连接"</span>)</span><br><span class="line">    <span class="comment">// 当前连接 会话</span></span><br><span class="line">    <span class="keyword">var</span> connection = webSocketRequest.accept(<span class="literal">null</span>, <span class="string">'accepted-origin'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//把连接添加到终端</span></span><br><span class="line">    clients.push(connection)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当客户端发来信息的时候 ,判断信息的两种类型</span></span><br><span class="line">    <span class="comment">// For Text Frames:</span></span><br><span class="line">    <span class="comment">// &#123;</span></span><br><span class="line">    <span class="comment">//     type: "utf8",</span></span><br><span class="line">    <span class="comment">//     utf8Data: "A string containing the received message."</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// // For Binary Frames:</span></span><br><span class="line">    <span class="comment">// &#123;</span></span><br><span class="line">    <span class="comment">//     type: "binary",</span></span><br><span class="line">    <span class="comment">//     binaryData: binaryDataBuffer // a Buffer object containing the binary message payload</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    connection.on(<span class="string">"message"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</span><br><span class="line">        <span class="comment">// 如果是文本类型，则给每一个当前的连接都发送一遍</span></span><br><span class="line">        <span class="keyword">if</span>(msg.type == <span class="string">"utf8"</span>)&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">"遍历用户，发送数据...."</span>+msg.utf8Data)</span><br><span class="line">            <span class="comment">// 遍历连接数组，给每一个连接发送数据</span></span><br><span class="line">            clients.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">                <span class="comment">//发送数据</span></span><br><span class="line">                item.sendUTF(msg.utf8Data)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(msg)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 当连接断开的时候 , 触发事件</span></span><br><span class="line">    connection.on(<span class="string">"close"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">reasonCode,description</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"断开连接"</span>)</span><br><span class="line">        <span class="comment">// 获取当前索引，根据索引删除连接</span></span><br><span class="line">        <span class="keyword">var</span> index = clients.indexOf(connection)</span><br><span class="line">        <span class="comment">// 删除</span></span><br><span class="line">        clients.splice(index,<span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>前端</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>多终端通信<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">"content"</span>&gt;</span></span><br><span class="line">        </span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"msg"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"send()"</span>&gt;</span>SEND<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">var</span> ws = <span class="keyword">new</span> WebSocket(<span class="string">"ws://localhost:3000"</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> inputNode = <span class="built_in">document</span>.getElementById(<span class="string">"msg"</span>)</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> ulCon = <span class="built_in">document</span>.getElementById(<span class="string">"content"</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="actionscript">        <span class="function"><span class="keyword">function</span> <span class="title">send</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">// 将用户输入发送给服务端</span></span></span><br><span class="line">            ws.send(inputNode.value)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line"><span class="actionscript">        ws.onopen = <span class="function"><span class="keyword">function</span><span class="params">(res)</span></span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">"连接成功！"</span>);</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line"><span class="actionscript">        ws.onmessage=<span class="function"><span class="keyword">function</span><span class="params">(msg)</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">            <span class="comment">// 接受服务端传来的数据</span></span></span><br><span class="line"><span class="actionscript">            <span class="comment">// 这里不是msg.value，因为这里的msg是websocket的msg，不是id=msg的意思</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">"MSG.value:"</span>+msg.data)</span></span><br><span class="line"><span class="actionscript">            content.innerHTML+=<span class="string">'&lt;li&gt;'</span>+msg.data+<span class="string">'&lt;/li&gt;'</span></span></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        </div>
+    </article>
+
+    
+    
+<nav class="article-nav">
+  
+    <a href="/2020/06/04/KVM%E5%AE%9E%E4%BE%8B/" id="article-nav-newer" class="article-nav-link-wrap prev">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          KVM实例总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/29/NodeJS_1/" id="article-nav-older" class="article-nav-link-wrap next">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">NodeJS（一） 静态路由</div>
+    </a>
+  
+</nav>
+
+    
+
+    
+</div>
+    </div>
+    <footer class="site-footer">
+        <div class="global-width">
+            <ul class="site-widget">
+                
+                <li class="widget widget-tag">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-category">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-recent_posts">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2020/12/30/%E6%84%BF%E6%9C%89%E6%B6%93%E6%B6%93%E8%AF%97%E6%84%8F%E6%B8%85%E6%96%B0%E5%85%A5%E8%84%BE%EF%BC%8C%E4%BB%A5%E9%A3%A8%E5%BF%99%E7%A2%8C%E7%9A%84%E6%97%A5%E5%B8%B8/">愿有涓涓诗意清新入脾，以飨忙碌的日常</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Jetbrains%E5%BF%AB%E6%8D%B7%E9%94%AE/">Jetbrains快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Chrome%E5%BF%AB%E6%8D%B7%E9%94%AE/">Chrome快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/VsCode%E5%BF%AB%E6%8D%B7%E9%94%AE/">VSCode快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/KVM%E5%AE%9E%E4%BE%8B/">KVM实例总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+                </li>
+                
+            </ul>
+        </div>
+        <div class="site-info">
+            <address>
+                &copy; 2014 <a href="http://ymlog.cn">无心而为</a> All Right Reserved. <br/>
+                Powered by <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>. Theme by <a href="http://zzoman.com" target="_blank" rel="noopener">ZZOMAN</a>
+            </address>
+        </div>
+    </footer>
+    
+    <script src="/libs/jquery-1.11.3.min.js" type="text/javascript"></script>
+    
+    <script src="/libs/fancybox/jquery.fancybox.js" type="text/javascript"></script>
+    
+    <script src="/js/site_init.js" type="text/javascript"></script>
+    
+</body>
+</html>

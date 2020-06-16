@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    
+    <title>Redis | 无心而为</title>
+    
+    <link rel="alternative" href="/atom.xml" title="无心而为" type="application/atom+xml">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    <link rel="stylesheet" href="/libs/fancybox/jquery.fancybox.css" charset="utf-8">
+    
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="site">
+    <header class="site-header">
+        <h1 class="site-title"><a href="/">无心而为</a></h1>
+        <nav class="site-nav">
+            <ul class="nav">
+                
+                <li><a href="/archives">Archives</a></li>
+                
+                
+                <li><a href="/atom.xml" title="RSS Feed">rss</a></li>
+                
+                <li><a class="toggle-search" href="#search">search</a></li>
+            </ul>
+        </nav>
+        <div class="site-search" id="search">
+            <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://ymlog.cn"></form>
+        </div>
+        
+            <div class="site-header-background" style="background-image:url(http://reumia.github.io/hexo-theme-zzoman2015/images/background-zzoman2015.jpg)"></div>
+        
+    </header>
+    <div class="site-body">
+        <div class="global-width">
+    <article class="article" data-layout="post" data-slug="Redis">
+        <div class="article-content">
+            
+            
+            <header class="article-header">
+                <div class="article-meta">
+                    <a href="/2020/04/01/Redis/" class="article-date">
+  <time datetime="2020-04-01T07:03:22.000Z">2020-04-01</time>
+</a>
+                    
+  <div class="article-category categories">
+    <a class="category-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+  </div>
+
+                    
+                </div>
+                
+    <h1 class="article-title" itemprop="name">
+      <a href="/2020/04/01/Redis/">Redis</a>
+    </h1>
+
+            </header>
+            
+            <div class="article-body">
+                <h1 id="Redis简介"><a href="#Redis简介" class="headerlink" title="Redis简介"></a>Redis简介</h1><h2 id="Redis特点"><a href="#Redis特点" class="headerlink" title="Redis特点"></a>Redis特点</h2><ul>
+<li>K-V 数据库</li>
+<li>支持丰富的数据类型：String、Hash、List、Set、Zset（5大基础类型）</li>
+<li>和Memcache对比：数据都是存储在内存中的，但是Redis可以做持久化存储（数据可以存储在磁盘上）</li>
+<li>工作模型：单线程 | IO多路复用 | 内存 </li>
+<li>集群方案</li>
+<li>速度快</li>
+</ul>
+<h2 id="Redis为什么快？"><a href="#Redis为什么快？" class="headerlink" title="Redis为什么快？"></a>Redis为什么快？</h2><ul>
+<li>数据库存储在内存中</li>
+<li>一般采用单线程IO多路复用<ul>
+<li>单线程可以避免CPU竞争带来的开销（Redis属于CPU密集型，单独部署，避免和其他业务产生CPU竞争问题）</li>
+<li>单线程数据结构等开销较小</li>
+</ul>
+</li>
+</ul>
+<h2 id="常用场景"><a href="#常用场景" class="headerlink" title="常用场景"></a>常用场景</h2><p>1、<strong>缓存</strong></p>
+<p><img src="https://i.loli.net/2020/04/10/XZC6Hm2v4fSuGTy.png" alt="image-20200406090310175.png"></p>
+<p>2、<strong>计数</strong>，许多应用都会使用Redis作为计数的基础工具，它可以实现快速计数、查询缓存的功能，同时数据可以异步落地到其他数据源。例如笔者所在团队 的视频播放数系统就是使用Redis作为视频播放数计数的基础组件，用户每 播放一次视频，相应的视频播放数就会自增1：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">long incrVideoCounter(long id) &#123; </span><br><span class="line">	key = <span class="string">"video:playCount:"</span> + id; <span class="built_in">return</span> redis.incr(key);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>3、<strong>共享Session</strong></p>
+<p><img src="https://i.loli.net/2020/04/10/VbijvhSEKU3xA6l.png" alt="image-20200406090504714.png"></p>
+<p>4、<strong>限速</strong></p>
+<p>很多应用出于安全的考虑，会在每次进行登录时，让用户输入手机验证码，从而确定是否是用户本人。但是为了短信接口不被频繁访问，会限制用 户每分钟获取验证码的频率</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">phoneNum = <span class="string">"138xxxxxxxx"</span>; key = <span class="string">"shortMsg:limit:"</span> + phoneNum;</span><br><span class="line">// SET key value EX 60 NX </span><br><span class="line">isExists = redis.set(key,1,<span class="string">"EX 60"</span>,<span class="string">"NX"</span>); </span><br><span class="line"><span class="keyword">if</span>(isExists != null || redis.incr(key) &lt;=5)&#123;</span><br><span class="line">	// 通过</span><br><span class="line">&#125;<span class="keyword">else</span>&#123; </span><br><span class="line">	// 限速</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="初入Redis"><a href="#初入Redis" class="headerlink" title="初入Redis"></a>初入Redis</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># yum -y install redis</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@server yum.repos.d]<span class="comment"># rpm -ql redis</span></span><br><span class="line">/etc/logrotate.d/redis	<span class="comment"># 日志配置</span></span><br><span class="line">/etc/redis-sentinel.conf <span class="comment"># 哨兵配置</span></span><br><span class="line">/etc/redis.conf <span class="comment"># 主配置文件</span></span><br><span class="line">/usr/bin/redis-cli <span class="comment"># 客户端工具</span></span><br><span class="line">/usr/bin/redis-sentinel <span class="comment"># 哨兵配置工具</span></span><br><span class="line">/usr/bin/redis-server <span class="comment"># redis服务工具</span></span><br><span class="line">/usr/bin/redis-check-aof <span class="comment"># aof文件修复工具</span></span><br><span class="line">/usr/bin/redis-check-rdb <span class="comment"># rdb文件修复工具</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Redis服务的启动</span></span><br><span class="line">redis-server</span><br><span class="line"></span><br><span class="line"><span class="comment"># 连接Redis服务</span></span><br><span class="line">redis-cli</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># cat /etc/redis.conf | grep -Ev '^$|^#'</span></span><br><span class="line"><span class="built_in">bind</span> 127.0.0.1 <span class="comment"># 监听服务地址</span></span><br><span class="line">protected-mode yes </span><br><span class="line">port 6379 <span class="comment"># 端口</span></span><br><span class="line">tcp-backlog 511 <span class="comment"># tcp全连接数量</span></span><br><span class="line">timeout 0 <span class="comment"># 超时时间</span></span><br><span class="line">tcp-keepalive 300 <span class="comment"># tcp长连接数量</span></span><br><span class="line">daemonize no <span class="comment"># 是否在后台运行</span></span><br><span class="line">supervised no <span class="comment"># supervised管理是否打开</span></span><br><span class="line">pidfile /var/run/redis_6379.pid <span class="comment"># redis服务的pid文件位置</span></span><br><span class="line">loglevel notice <span class="comment"># 日志等级记录</span></span><br><span class="line">logfile /var/<span class="built_in">log</span>/redis/redis.log <span class="comment"># 日志存放位置</span></span><br><span class="line">databases 16 <span class="comment"># redis数据库实例的设置数量</span></span><br><span class="line">save 900 1 <span class="comment"># 出发rdb持久化存储的策略900s -&gt; 1条写入 ； </span></span><br><span class="line">save 300 10 <span class="comment"># 同上</span></span><br><span class="line">save 60 10000</span><br><span class="line">stop-writes-on-bgsave-error yes <span class="comment"># bgsave手动触发rdb持久化存储，命令失败停止写入</span></span><br><span class="line">rdbcompression yes  <span class="comment"># rdb文件压缩</span></span><br><span class="line">rdbchecksum yes <span class="comment"># rdb文件校验</span></span><br><span class="line">dbfilename dump.rdb <span class="comment"># rdb文件名称</span></span><br><span class="line">dir /var/lib/redis <span class="comment"># redis服务目录</span></span><br><span class="line">slave-serve-stale-data yes </span><br><span class="line">slave-read-only yes <span class="comment"># 当此结点作为slaver的时候，开启只读模式</span></span><br><span class="line"><span class="comment"># master-slaver之间的复制策略</span></span><br><span class="line">repl-diskless-sync no </span><br><span class="line">repl-diskless-sync-delay 5</span><br><span class="line">repl-disable-tcp-nodelay no</span><br><span class="line">slave-priority 100 <span class="comment"># slave优先级</span></span><br><span class="line">appendonly no <span class="comment"># 持久化aof存储</span></span><br><span class="line">appendfilename <span class="string">"appendonly.aof"</span> <span class="comment"># aof文件名称</span></span><br><span class="line">appendfsync everysec </span><br><span class="line">no-appendfsync-on-rewrite no</span><br><span class="line">auto-aof-rewrite-percentage 100</span><br><span class="line">auto-aof-rewrite-min-size 64mb</span><br><span class="line">aof-load-truncated yes</span><br><span class="line">lua-time-limit 5000</span><br><span class="line">slowlog-log-slower-than 10000 <span class="comment"># 慢日志设定时间，单位微秒</span></span><br><span class="line">slowlog-max-len 128 <span class="comment"># 慢日志长度，当慢查询日志处于其最大长度时，将最早插入的命令移出</span></span><br><span class="line">latency-monitor-threshold 0</span><br><span class="line">notify-keyspace-events <span class="string">""</span></span><br><span class="line"><span class="comment"># 数据类型底层编码的策略：相同的数据类型，底层的数据结构编码方式可能不同</span></span><br><span class="line"><span class="built_in">hash</span>-max-ziplist-entries 512</span><br><span class="line"><span class="built_in">hash</span>-max-ziplist-value 64</span><br><span class="line">list-max-ziplist-size -2</span><br><span class="line">list-compress-depth 0</span><br><span class="line"><span class="built_in">set</span>-max-intset-entries 512</span><br><span class="line">zset-max-ziplist-entries 128</span><br><span class="line">zset-max-ziplist-value 64</span><br><span class="line">hll-sparse-max-bytes 3000</span><br><span class="line">activerehashing yes</span><br><span class="line"><span class="comment"># 客户端输出缓冲区显示策略</span></span><br><span class="line">client-output-buffer-limit normal 0 0 0</span><br><span class="line">client-output-buffer-limit slave 256mb 64mb 60</span><br><span class="line">client-output-buffer-limit pubsub 32mb 8mb 60</span><br><span class="line">hz 10 <span class="comment"># 内存回收策略，定期删除过期任务每s运行次数</span></span><br><span class="line">aof-rewrite-incremental-fsync yes</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>慢查询</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">slowlog get <span class="comment"># 获取慢查询日志</span></span><br><span class="line">slowlog len <span class="comment"># 获取慢查询日志长度</span></span><br><span class="line">slowlog reset <span class="comment"># 重置慢查询日志</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>Redis小工具</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">redis-cli -r 100 -i 1 info | grep used_memory_human</span><br><span class="line"><span class="comment"># -r repeat</span></span><br><span class="line"><span class="comment"># -i interval</span></span><br><span class="line"><span class="comment"># -a auth</span></span><br><span class="line"><span class="comment"># -c Cluster</span></span><br><span class="line"><span class="comment"># -x 从标准输入(stdin)读取数据</span></span><br><span class="line"><span class="comment"># --slave 把客户端模拟成当前Redis节点的从节点</span></span><br><span class="line"><span class="comment"># --latency 测试客户端到目标Redis的延迟</span></span><br><span class="line"><span class="comment"># --stat 实时获取Redis统计信息</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">redis-server</span><br><span class="line"><span class="comment"># --test-memory 1024 检测操作系统能否稳定分配1G内存给Reids</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">redis-benchmark 基准性能测试</span><br><span class="line"><span class="comment"># -c clients 客户端并发数，默认50</span></span><br><span class="line"><span class="comment"># -n&lt;requests&gt; 客户端请求总量，默认100000</span></span><br><span class="line"><span class="comment"># -p pipeline 每个请求的pipeline数量，默认为1</span></span><br><span class="line"><span class="comment"># -k&lt;boolean&gt; 是否启用keepalive，1为使用</span></span><br><span class="line"><span class="comment"># -t&lt;get,set&gt; 使用指定命令进行基准测试</span></span><br><span class="line"><span class="comment"># --csv 结果以csv格式输出</span></span><br><span class="line"></span><br><span class="line">[root@hw ~]<span class="comment"># redis-benchmark -c 100 -n 2000</span></span><br><span class="line">.........</span><br><span class="line">24.50% &lt;= 1 milliseconds</span><br><span class="line">60.05% &lt;= 2 milliseconds</span><br><span class="line">66.15% &lt;= 3 milliseconds</span><br><span class="line">76.60% &lt;= 4 milliseconds</span><br><span class="line">87.05% &lt;= 5 milliseconds</span><br><span class="line">93.60% &lt;= 6 milliseconds</span><br><span class="line">95.90% &lt;= 7 milliseconds</span><br><span class="line">97.70% &lt;= 8 milliseconds</span><br><span class="line">98.65% &lt;= 13 milliseconds</span><br><span class="line">99.65% &lt;= 14 milliseconds</span><br><span class="line">100.00% &lt;= 14 milliseconds</span><br><span class="line">29850.75 requests per second</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 监视Redis正在执行的命令，可能会占用大量的内存</span></span><br><span class="line">127.0.0.1:6379&gt; monitor</span><br><span class="line">OK</span><br><span class="line">1586155547.048775 [0 121.36.70.55:34886] <span class="string">"auth"</span> <span class="string">"abc"</span></span><br><span class="line">1586155555.897676 [0 121.36.70.55:34886] <span class="string">"keys"</span> <span class="string">"*"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 客户端统计片段</span></span><br><span class="line">121.36.70.55:6379&gt; info clients</span><br><span class="line">connected_clients:2</span><br><span class="line">client_longest_output_list:0 <span class="comment"># 客户端缓冲区可能会造成内存陡增，尤其是对于主节点；内存陡增还可能是存在大量写入；或者是客户端在执行monitor命令</span></span><br><span class="line">解决办法：1、<span class="built_in">kill</span>这个连接 2、禁止monitor命令 3、限制输出缓冲区的大小</span><br><span class="line">client_biggest_input_buf:0</span><br><span class="line">blocked_clients:0</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<h1 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h1><p><a href="http://redisdoc.com/index.html" target="_blank" rel="noopener">http://redisdoc.com/index.html</a></p>
+<h2 id="String"><a href="#String" class="headerlink" title="String"></a>String</h2><p>1、设置获取键值</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">SET key value [EX seconds] [PX milliseconds] [NX|XX]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>EX seconds ： 将键的过期时间设置为 seconds 秒。</p>
+</li>
+<li><p>PX milliseconds ： 将键的过期时间设置为 milliseconds 毫秒。 </p>
+</li>
+<li><p>NX ： 只在键不存在时， 才对键进行设置操作。</p>
+</li>
+<li><p>XX ： 只在键已经存在时， 才对键进行设置操作。</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@server ~]<span class="comment"># redis-cli</span></span><br><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> k1 v1</span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6379&gt; get k1</span><br><span class="line"><span class="string">"v1"</span></span><br><span class="line">127.0.0.1:6379&gt; </span><br><span class="line"></span><br><span class="line">ttl  获取键值的生存时间</span><br><span class="line">incr 为键值进行加操作</span><br><span class="line">incrby</span><br><span class="line">decr 为键值进行减操作</span><br><span class="line">decrby</span><br></pre></td></tr></table></figure>
+
+
+
+<p>不想写了，都在这：</p>
+<p><a href="http://redisdoc.com/index.html" target="_blank" rel="noopener">http://redisdoc.com/index.html</a></p>
+<h2 id="list"><a href="#list" class="headerlink" title="list"></a>list</h2><p>lpush</p>
+<p>rpush</p>
+<p>lpop</p>
+<p>rpop</p>
+<p>lrange</p>
+<p>lset</p>
+<p>lindex</p>
+<h2 id="Hash"><a href="#Hash" class="headerlink" title="Hash"></a>Hash</h2><h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p>sadd </p>
+<p>scard</p>
+<p>sdiff</p>
+<p>sinter</p>
+<p>sunion</p>
+<p>smembers</p>
+<p>spop</p>
+<p>scre</p>
+<h2 id="zset"><a href="#zset" class="headerlink" title="zset"></a>zset</h2><p>zadd</p>
+<p>zcard</p>
+<p>zcount</p>
+<p>zrange</p>
+<h2 id="键"><a href="#键" class="headerlink" title="键"></a>键</h2><table>
+<thead>
+<tr>
+<th>操作</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>rename key newkey</td>
+<td>重命名key</td>
+</tr>
+<tr>
+<td>renamenx key newkey</td>
+<td>确保只有newKey不存在时候才被覆盖</td>
+</tr>
+<tr>
+<td>randomkey</td>
+<td>随机返回一个键</td>
+</tr>
+<tr>
+<td>expire key seconds</td>
+<td>键在seconds秒后过期</td>
+</tr>
+<tr>
+<td>ttl key</td>
+<td>观察它的过期剩余时间（单位：秒）</td>
+</tr>
+<tr>
+<td>pexpire key milliseconds</td>
+<td>键在milliseconds毫秒后过期</td>
+</tr>
+<tr>
+<td>persist key</td>
+<td>将键的过期时间清除</td>
+</tr>
+<tr>
+<td>keys pattern</td>
+<td>获取所有的键(key *)</td>
+</tr>
+<tr>
+<td>scan cursor [match pattern] [count number]</td>
+<td>扫描字典键，对其他数据类型，则是hscan、sscan、zscan。渐进式地遍历</td>
+</tr>
+</tbody></table>
+<p>键迁移</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">dump key restore key ttl value</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="https://i.loli.net/2020/04/10/9BR5TZ7LMKqthEu.png" alt="image-20200406092031687.png"></p>
+<h2 id="数据库管理"><a href="#数据库管理" class="headerlink" title="数据库管理"></a>数据库管理</h2><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>select dbIndex</td>
+<td>切换数据库</td>
+</tr>
+<tr>
+<td>databases 16</td>
+<td></td>
+</tr>
+<tr>
+<td>flushdb</td>
+<td>只清除当前数据库</td>
+</tr>
+<tr>
+<td>flushall</td>
+<td>清除所有数据库</td>
+</tr>
+<tr>
+<td>auth “youpassword”</td>
+<td>输入redis密码，即配置文件中requirepass</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<p><img src="https://i.loli.net/2020/04/10/VCEAbMqFojQu5JZ.png" alt="image-20200406093745003.png"></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">127.0.0.1:6379&gt; <span class="built_in">set</span> hello world OK</span><br><span class="line">127.0.0.1:6379&gt; get hello <span class="string">"world"</span> </span><br><span class="line">127.0.0.1:6379&gt; select 15</span><br><span class="line">OK 127.0.0.1:6379[15]&gt; get hello</span><br><span class="line">(nil)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+<h1 id="持久化存储"><a href="#持久化存储" class="headerlink" title="持久化存储"></a>持久化存储</h1><ul>
+<li>RDB持久化存储</li>
+<li>AOF持久化存储</li>
+</ul>
+<h2 id="RDB"><a href="#RDB" class="headerlink" title="RDB"></a>RDB</h2><p>RDB持久化存储：将内存中的数据存储快照写到磁盘中（快照方式）</p>
+<p>优点：</p>
+<ol>
+<li>应用场景：做全量备份；快照代表的一个时间的数据集状态</li>
+<li>RDB文件：a. 二进制文件 b. 压缩机制；所以对于AOF文件来说，体积更小</li>
+<li>生成RDB文件：redis主进程去fork()一个子进程去负责RDB文件生成工作，fork()这个操作肯定会有阻塞</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>没办法做到实时持久化</li>
+<li>RDB二进制格式随着Redis版本的得带，可能存在兼容性问题</li>
+<li>周期性执行一次性备份操作，如果Redis在此期间down掉，会存在数据丢失</li>
+<li>RDB压缩会消耗CPU资源</li>
+</ol>
+<p>触发方式：</p>
+<ol>
+<li>自动触发：主配置文件中的save字段</li>
+<li>手动触发：bgsave</li>
+</ol>
+<p>config get dir可以查看RDB文件的备份路径，</p>
+<p>服务启动时，热更新配置:</p>
+<blockquote>
+<p>config set dir /path </p>
+<p>config set dbfilename value</p>
+</blockquote>
+<p>redis服务启动时，会去dir下读取dbfilename文件</p>
+<p>停止RDB持久化：注释配置文件中的save关键字</p>
+<p>RDB工作流程：</p>
+<p><img src="https://i.loli.net/2020/04/10/XBoSTlAwpNzxYI8.png" alt="image-20200406164400714.png"></p>
+<p><img src="https://i.loli.net/2020/04/10/4IsF2NRdwtTbau7.png" alt="Clip_20200410_151059.png"></p>
+<ol>
+<li>bgsave命令发送给主进程</li>
+<li>redis父进程接收到bgsave命令之后，fork()创建一个子进程</li>
+<li>当子进程完成之后，继续去响应客户端请求</li>
+<li>子进程负责将内存中的数据打上快照并生成RDB文件存储在本地指定位置上</li>
+<li>子进程完成工作后发信号通知父进程</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">获取最近一个fork操作的耗 时，单位为微秒</span><br><span class="line">info stats</span><br><span class="line">...</span><br><span class="line">latest_fork_usec:133</span><br><span class="line"></span><br><span class="line">执行lastsave命令可以获取最后一次生成RDB的时间</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Redis默认采用LZF算法对生成的RDB文件做压缩处理，压缩后的文件远远小于内存大小，默认开启</p>
+<h2 id="AOF"><a href="#AOF" class="headerlink" title="AOF"></a>AOF</h2><p>Redis的持久化方式之一，RDB是通过保存数据库中的键值对来记录数据库的状态，而另一种持久化方式AOF则是通过保存Redis服务所执行的命令来记录数据库的状态</p>
+<p>优点：</p>
+<ol>
+<li>AOF持久化的方法提供了多种同步频率，即使使用默认同步频率每秒同步一次，redis最多也就丢失一秒的数据</li>
+<li>AOF文件使用Redis命令追加的形式来构造，因此，即使Redis只能向AOF文件写入命令的片段，使用redis-check-aof工具也很容易修正AOF文件</li>
+<li>AOF文件可读性较强，这也为使用者提供了更灵活的处理方式。如果我们不小心错用了FLUSHALL命令，在重写还没进行时，我们可以手工将最后FLUSHALL命令去掉，然后再使用AOF文件来恢复数据</li>
+</ol>
+<p>缺点：</p>
+<ol>
+<li>对于具有相同数据的Redis，AOF文件通常会比RDB文件体积更大</li>
+<li>虽然AOF提供了多种同步频率，默认情况下，每秒同步一次的频率也具有较高的性能。但是在Redis的负载较高时，RDB比AOF具有更好的性能保证</li>
+<li>RDB使用快照的形式来持久化整个Redis数据，而AOF只是将每次执行的命令追加到AOF文件中，因此从理论上来说RDB比AOF方式更健壮，官方文档也指出，AOF的确存在一些BUG。</li>
+</ol>
+<p>开启AOF</p>
+<ul>
+<li>将redis.conf的appendonly改为yes</li>
+<li>客户端内：config set appendonly yes，查看是否开启 config get appendonly</li>
+<li>手动备份：bgrewriteaof</li>
+</ul>
+<p>AOF工作流程</p>
+<p><img src="https://i.loli.net/2020/04/10/Oc6PBKsegD4IhAF.png" alt="20200316211130205.png"></p>
+<ol>
+<li>用户操作命令追加写入到AOF Buf</li>
+<li>AOF缓冲区会将操作命令根据指定的同步策略写入到AOF文件中</li>
+<li>进行重写操作（新的AOF文件替换就的AOF文件）</li>
+<li>服务启动时，可以去加载AOF文件达到的数据恢复的状态</li>
+</ol>
+<p>AOF同步策略：调用两个系统接口：write &amp; fsync</p>
+<ul>
+<li>always：保证文件存储到磁盘中才返回（write -&gt; buf -&gt; fsync -&gt; disk) 可靠性高阻塞长</li>
+<li>no ：只能保证文件存储到缓冲区（write -&gt; buf ；直接返回）缓冲区中的数据同步到磁盘上是由系统调度机制去完成的）阻塞相对较短，但是可靠性不高</li>
+<li>everysec：调用write操作将内存中的数据写入到缓冲区中，然后后天会有一个专门的fsync线程每s执行一次将缓冲区的内容写入到磁盘中。相对于always和no来说，可靠性和效率都有所保证。</li>
+</ul>
+<p>write操作：会触发延迟写机制，因为Linux在内核提供页缓冲区来提供磁盘IO性能，write操作在写入系统缓冲区后直接返回，同步到硬盘依赖于系统的调度机制。</p>
+<p>fsync操作：针对单个文件操作，做强制硬盘同步，fsync将阻塞直到写入硬盘完成后返回，保证了数据的持久化。</p>
+<p>AOF重写工作流程：</p>
+<p><img src="https://i.loli.net/2020/04/10/y4x7TgiWBVadqpQ.png" alt="20200316211148929.png"></p>
+<ol>
+<li>执行bgrewriteaof操作交由redis父进程</li>
+<li>父进程fork()创建一个子进程（完成AOF生成替换工作）</li>
+<li>父进程继续响应用户请求操作<ol>
+<li>写入到AOF_BUF中，追加到old aof文件中</li>
+<li>写入到AOF_rewrite_buf</li>
+</ol>
+</li>
+<li>子进程根据内存数据集完成AOF文件的工作</li>
+<li>还需要将AOF_rewrite_buf中的数据追加生成到AOF文件中（从而保证子进程创建AOF文件时，父进程继续相应用户请求数据</li>
+<li>新的AOF文件替换旧的AOF文件</li>
+</ol>
+<p>为什么要重写?</p>
+<p>比如操作：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span> k1 v1 </span><br><span class="line">del k1</span><br></pre></td></tr></table></figure>
+
+<p>这个操作最后没有任何数据产生，是没有意义的，所以AOF不需要写入。</p>
+<p>AOF和RDB文件同时存在的时候，优先加载AOF文件。</p>
+<h1 id="主从复制"><a href="#主从复制" class="headerlink" title="主从复制"></a>主从复制</h1><p>缺点：</p>
+<ol>
+<li>如果master服务器出现问题，则不能提供服务，需要人工修改配置，将slave提升为master</li>
+<li>主从复制，master服务器成为写操作瓶颈</li>
+<li>单机节点存储能力有限</li>
+</ol>
+<h2 id="复制原理"><a href="#复制原理" class="headerlink" title="复制原理"></a>复制原理</h2><p>从节点复制主结点数据，从节点只能响应读操作。</p>
+<ul>
+<li>全量复制：将主结点的所有数据复制到本地</li>
+<li>部分复制：主结点持续响应用户请求操作，然后同步到本地执行</li>
+</ul>
+<p><img src="https://i.loli.net/2020/04/10/BegVqnrPCiHXacU.png" alt="Clip_20200410_151307.png"></p>
+<ol>
+<li>从节点执行 slaveof 命令</li>
+<li>从节点只是保存了 slaveof 命令中主节点的信息，并没有立即发起复制</li>
+<li>从节点内部的定时任务发现有主节点的信息，开始使用 socket 连接主节点</li>
+<li>连接建立成功后，发送 ping 命令，希望得到 pong 命令响应，否则会进行重连</li>
+<li>如果主节点设置了权限，那么就需要进行权限验证；如果验证失败，复制终止。</li>
+<li>权限验证通过后，进行数据同步，这是耗时最长的操作，主节点将把所有的数据全部发送给从节点。</li>
+<li>当主节点把当前的数据同步给从节点后，便完成了复制的建立流程。接下来，主节点就会持续的把写命令发送给从节点，保证主从数据一致性。</li>
+</ol>
+<h2 id="全量复制"><a href="#全量复制" class="headerlink" title="全量复制"></a>全量复制</h2><p><img src="https://i.loli.net/2020/04/10/vexGapsdKLBjPyO.png" alt="1473308-20190627192702427-1600655856.png"></p>
+<h2 id="部分复制"><a href="#部分复制" class="headerlink" title="部分复制"></a>部分复制</h2><p><img src="https://i.loli.net/2020/04/10/CaWTuUyAD3jQLN5.png" alt="1473308-20190627193858733-1483050713.png"></p>
+<ul>
+<li>优点：备份；读写分离</li>
+<li>缺点：<ol>
+<li>如果主结点down了，我们需要人工切换slave节点的新主节信息（slaveof）</li>
+<li>单机存储容量受限（数据只会存储在master节点上），master节点读操作负载容易变高</li>
+</ol>
+</li>
+</ul>
+<h2 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">mkdir /tmp/redis/&#123;data,conf,<span class="built_in">log</span>&#125; -pv</span><br><span class="line"><span class="comment"># 主服务器</span></span><br><span class="line">cat &lt;&lt; EOF &gt;/tmp/redis/conf/redis_6380.conf</span><br><span class="line"><span class="built_in">bind</span> 127.0.0.1</span><br><span class="line">port 6380</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile /tmp/redis/redis_6380.pid</span><br><span class="line">loglevel notice</span><br><span class="line">logfile /tmp/redis/<span class="built_in">log</span>/redis_6380.log</span><br><span class="line">dir /tmp/redis/data/</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF &gt;/tmp/redis/conf/redis_6381.conf</span><br><span class="line"><span class="built_in">bind</span> 127.0.0.1</span><br><span class="line">port 6381</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile /tmp/redis/redis_6381.pid</span><br><span class="line">loglevel notice</span><br><span class="line">logfile /tmp/redis/<span class="built_in">log</span>/redis_6381.log</span><br><span class="line">dir /tmp/redis/data/</span><br><span class="line">slaveof 127.0.0.1 6380</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">cat &lt;&lt; EOF &gt;/tmp/redis/conf/redis_6382.conf</span><br><span class="line"><span class="built_in">bind</span> 127.0.0.1</span><br><span class="line">port 6382</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile /tmp/redis/redis_6382.pid</span><br><span class="line">loglevel notice</span><br><span class="line">logfile /tmp/redis/<span class="built_in">log</span>/redis_6382.log</span><br><span class="line">dir /tmp/redis/data/</span><br><span class="line">slaveof 127.0.0.1 6380</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">redis-server /tmp/redis/conf/redis_6380.conf</span><br><span class="line">redis-server /tmp/redis/conf/redis_6381.conf</span><br><span class="line">redis-server /tmp/redis/conf/redis_6382.conf</span><br></pre></td></tr></table></figure>
+
+
+
+<p>测试</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># redis-cli -p 6380</span></span><br><span class="line">127.0.0.1:6380&gt; info Replication</span><br><span class="line"><span class="comment"># Replication</span></span><br><span class="line">role:master</span><br><span class="line">connected_slaves:2</span><br><span class="line">slave0:ip=127.0.0.1,port=6381,state=online,offset=99,lag=0</span><br><span class="line">slave1:ip=127.0.0.1,port=6382,state=online,offset=99,lag=0</span><br><span class="line">master_repl_offset:99</span><br><span class="line">repl_backlog_active:1</span><br><span class="line">repl_backlog_size:1048576</span><br><span class="line">repl_backlog_first_byte_offset:2</span><br><span class="line">repl_backlog_histlen:98</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入一定的值</span></span><br><span class="line">127.0.0.1:6380&gt; <span class="built_in">set</span> k1 v1 </span><br><span class="line">OK</span><br><span class="line">127.0.0.1:6380&gt; get k1</span><br><span class="line"><span class="string">"v1"</span></span><br><span class="line">127.0.0.1:6380&gt; </span><br><span class="line">[root@node01 ~]<span class="comment"># redis-cli -p 6381</span></span><br><span class="line">127.0.0.1:6381&gt; keys *</span><br><span class="line">1) <span class="string">"k1"</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>master日志分析</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">10974:M 05 Apr 15:08:11.474 * Starting BGSAVE <span class="keyword">for</span> SYNC with target: disk</span><br><span class="line"><span class="comment"># bgsave执行过程</span></span><br><span class="line">10974:M 05 Apr 15:08:11.474 * Background saving started by pid 10982</span><br><span class="line"><span class="comment"># master接收到来自slave2的全量复制请求</span></span><br><span class="line">10974:M 05 Apr 15:08:11.483 * Slave 127.0.0.1:6382 asks <span class="keyword">for</span> synchronization</span><br><span class="line">10974:M 05 Apr 15:08:11.483 * Full resync requested by slave 127.0.0.1:6382</span><br><span class="line">10974:M 05 Apr 15:08:11.483 * Waiting <span class="keyword">for</span> end of BGSAVE <span class="keyword">for</span> SYNC</span><br><span class="line">10982:C 05 Apr 15:08:11.485 * DB saved on disk</span><br><span class="line">10982:C 05 Apr 15:08:11.485 * RDB: 0 MB of memory used by copy-on-write</span><br><span class="line"></span><br><span class="line">10974:M 05 Apr 15:08:11.567 * Background saving terminated with success</span><br><span class="line"><span class="comment"># 数据同步给slave1和2，增量复制</span></span><br><span class="line">10974:M 05 Apr 15:08:11.568 * Synchronization with slave 127.0.0.1:6381 succeeded</span><br><span class="line">10974:M 05 Apr 15:08:11.568 * Synchronization with slave 127.0.0.1:6382 succeeded</span><br></pre></td></tr></table></figure>
+
+
+
+<p>slaver日志分析</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 与master节点建立连接通信</span></span><br><span class="line">10978:S 05 Apr 15:08:11.473 * Connecting to MASTER 127.0.0.1:6380</span><br><span class="line"><span class="comment"># 全量复制同步开始前的准备阶段</span></span><br><span class="line">10978:S 05 Apr 15:08:11.473 * MASTER &lt;-&gt; SLAVE sync started</span><br><span class="line">10978:S 05 Apr 15:08:11.473 * Non blocking connect <span class="keyword">for</span> SYNC fired the event.</span><br><span class="line">10978:S 05 Apr 15:08:11.473 * Master replied to PING, replication can <span class="built_in">continue</span>...</span><br><span class="line">10978:S 05 Apr 15:08:11.474 * Partial resynchronization not possible (no cached master)</span><br><span class="line"><span class="comment"># 开始全量复制</span></span><br><span class="line">10978:S 05 Apr 15:08:11.474 * Full resync from master: 0ae1eafaf5a6804f35d3a3a5a5934a0f62d4f390:1</span><br><span class="line">10978:S 05 Apr 15:08:11.568 * MASTER &lt;-&gt; SLAVE sync: receiving 77 bytes from master</span><br><span class="line">10978:S 05 Apr 15:08:11.568 * MASTER &lt;-&gt; SLAVE sync: Flushing old data</span><br><span class="line">10978:S 05 Apr 15:08:11.568 * MASTER &lt;-&gt; SLAVE sync: Loading DB <span class="keyword">in</span> memory</span><br><span class="line">10978:S 05 Apr 15:08:11.568 * MASTER &lt;-&gt; SLAVE sync: Finished with success</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h1 id="哨兵架构"><a href="#哨兵架构" class="headerlink" title="哨兵架构"></a>哨兵架构</h1><p>Sentinel Mode</p>
+<ul>
+<li>优点：备份 ； 读写分离 ； 可以自动切换主节点</li>
+<li>缺点：<ol>
+<li>单机存储容量受限</li>
+<li>主结点写负载会很高</li>
+<li>扩展性较差</li>
+</ol>
+</li>
+</ul>
+<p>哨兵原理：</p>
+<ol>
+<li>每个哨兵会向其他哨兵、主服务器、从服务器定时发送消息，以确认对方是否活着。</li>
+<li>当主节点挂掉的时候，某个哨兵1通过检测机制发现了这样一个情况，主观的认为这个主节点挂掉了（暂时还不能确认），会将这个信息发送给其他的哨兵，其他哨兵如果都赞同哨兵1的确认信息，则主观认为这个节点挂掉了（主结点真正的被分为挂掉了）。</li>
+<li>发现master挂掉之后，从剩下的slave中重新选择新的master节点；每个哨兵都会监控slaver节点的状态信息，通过slave节点的状态信息进行投票选择，票数高的成为新的主结点，并且哨兵回去向其他节点告知新主节点的信息（IP_PORT) ，其他节点得到哨兵的通知消息后，自动执行slaveof去同步新的主节点信息。</li>
+</ol>
+<h2 id="哨兵实验"><a href="#哨兵实验" class="headerlink" title="哨兵实验"></a>哨兵实验</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#配置哨兵1，监听26378端口</span></span><br><span class="line">cat &lt;&lt; EOF &gt; /tmp/redis/conf/redis-sentinel-26378.conf</span><br><span class="line">port 26378</span><br><span class="line">daemonize yes</span><br><span class="line">dir <span class="string">'/tmp'</span></span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 1</span><br><span class="line">sentinel down-after-milliseconds mymaster 6000</span><br><span class="line">sentinel failover-timeout mymaster 18000</span><br><span class="line">logfile <span class="string">"/tmp/redis/log/sentine1.log"</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment">#配置哨兵2，监听26379端口</span></span><br><span class="line">cat &lt;&lt; EOF &gt; /tmp/redis/conf/redis-sentinel-26379.conf</span><br><span class="line">port 26379</span><br><span class="line">daemonize yes</span><br><span class="line">dir <span class="string">'/tmp'</span></span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 1</span><br><span class="line">sentinel down-after-milliseconds mymaster 6000</span><br><span class="line">sentinel failover-timeout mymaster 18000</span><br><span class="line">logfile <span class="string">"/tmp/redis/log/sentine2.log"</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment">#配置哨兵3，监听26380端口</span></span><br><span class="line">cat &lt;&lt; EOF &gt; /tmp/redis/conf/redis-sentinel-26380.conf</span><br><span class="line">port 26380</span><br><span class="line">daemonize yes</span><br><span class="line">dir <span class="string">'/tmp'</span></span><br><span class="line">sentinel monitor mymaster 127.0.0.1 6380 1</span><br><span class="line">sentinel down-after-milliseconds mymaster 6000</span><br><span class="line">sentinel failover-timeout mymaster 18000</span><br><span class="line">logfile <span class="string">"/tmp/redis/log/sentine3.log"</span></span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动哨兵</span></span><br><span class="line">redis-sentinel /tmp/redis/conf/redis-sentinel-26379.conf</span><br><span class="line">redis-sentinel /tmp/redis/conf/redis-sentinel-26378.conf</span><br><span class="line">redis-sentinel /tmp/redis/conf/redis-sentinel-26380.conf</span><br></pre></td></tr></table></figure>
+
+
+
+<p>测试：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@node01 ~]<span class="comment"># redis-cli -p 26379</span></span><br><span class="line">127.0.0.1:26379&gt; sentinel master mymaster</span><br><span class="line"> 1) <span class="string">"name"</span></span><br><span class="line"> 2) <span class="string">"mymaster"</span></span><br><span class="line"> 3) <span class="string">"ip"</span></span><br><span class="line"> 4) <span class="string">"127.0.0.1"</span></span><br><span class="line"> 5) <span class="string">"port"</span></span><br><span class="line"> 6) <span class="string">"6380"</span></span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sentinel master &lt;master-name&gt; ： 显示所有被监控主节点状态及统计信息</span><br><span class="line">sentinel slaves &lt;master-name&gt; ： 显示指定&lt;master-name&gt;的从节点状态及统计信息</span><br><span class="line">sentinel sentinels &lt;master-name&gt; ： 显示指定&lt;master-name&gt;的sentinel节点集合</span><br><span class="line">sentinel failover &lt;master-name&gt; ： 强制故障转移</span><br><span class="line">sentinel ckquorum &lt;master-name&gt; ： 检查当前可达Sentinel节点总数是否到&lt;quoro&gt;个数</span><br><span class="line">sentinel flushconfig ：将节点的配置强制刷到磁盘上</span><br><span class="line">sentinel remove &lt;master-name&gt; ： 取消当前Sentinel对指定&lt;master&gt;节点的监控</span><br><span class="line">sentinel <span class="built_in">set</span> &lt;master-name&gt;：动态修改Sentinel节点配置</span><br><span class="line">sentinel is-master-down-by-addr ：Sentinel节点之间用来交换对主节点是否下线的判断</span><br></pre></td></tr></table></figure>
+
+
+
+<p>模拟master挂掉</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@node01 ~]<span class="comment"># ps -ef | grep redis</span></span><br><span class="line">root      10974      1  0 15:08 ?        00:00:08 redis-server 127.0.0.1:6380</span><br><span class="line">root      10978      1  0 15:08 ?        00:00:07 redis-server 127.0.0.1:6381</span><br><span class="line">root      10983      1  0 15:08 ?        00:00:08 redis-server 127.0.0.1:6382</span><br><span class="line">root      11060      1  0 17:10 ?        00:00:01 redis-sentinel *:26379 [sentinel]</span><br><span class="line">root      11064      1  0 17:10 ?        00:00:01 redis-sentinel *:26378 [sentinel]</span><br><span class="line">root      11068      1  0 17:10 ?        00:00:01 redis-sentinel *:26380 [sentinel]</span><br><span class="line">root      11123  10907  0 17:19 pts/0    00:00:00 grep --color=auto redis</span><br><span class="line">[root@node01 ~]<span class="comment"># kill -9 10974</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 分析哨兵日志</span></span><br><span class="line">[root@node01 ~]<span class="comment"># tailf /tmp/redis/log/sentine1.log </span></span><br><span class="line">11068:X 05 Apr 17:10:26.924 <span class="comment"># Sentinel ID is 58bdbb66f27e1e87dea74caed765090bdcef84f2</span></span><br><span class="line">11068:X 05 Apr 17:10:26.924 <span class="comment"># +monitor master mymaster 127.0.0.1 6380 quorum 1</span></span><br><span class="line">11068:X 05 Apr 17:10:26.925 * +slave slave 127.0.0.1:6381 127.0.0.1 6381 @ mymaster 127.0.0.1 6380</span><br><span class="line">11068:X 05 Apr 17:10:26.927 * +slave slave 127.0.0.1:6382 127.0.0.1 6382 @ mymaster 127.0.0.1 6380</span><br><span class="line">11068:X 05 Apr 17:10:28.906 * +sentinel sentinel 3756a9cd418f17b20e29b51a71a100c221a37379 127.0.0.1 26379 @ mymaster 127.0.0.1 6380</span><br><span class="line">11068:X 05 Apr 17:10:28.932 * +sentinel sentinel 125c85846d42c32b15f364db43afab85c4858888 127.0.0.1 26378 @ mymaster 127.0.0.1 6380</span><br><span class="line">11068:X 05 Apr 17:20:17.292 <span class="comment"># +new-epoch 1</span></span><br><span class="line">11068:X 05 Apr 17:20:17.294 <span class="comment"># +vote-for-leader 125c85846d42c32b15f364db43afab85c4858888 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 主观下线</span></span><br><span class="line">11068:X 05 Apr 17:20:17.371 <span class="comment"># +sdown master mymaster 127.0.0.1 6380</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 客观下线</span></span><br><span class="line">11068:X 05 Apr 17:20:17.371 <span class="comment"># +odown master mymaster 127.0.0.1 6380 #quorum 1/1</span></span><br><span class="line">11068:X 05 Apr 17:20:17.371 <span class="comment"># Next failover delay: I will not start a failover before Sun Apr  5 17:20:54 2020</span></span><br><span class="line">11068:X 05 Apr 17:20:18.415 <span class="comment"># +config-update-from sentinel 125c85846d42c32b15f364db43afab85c4858888 127.0.0.1 26378 @ mymaster 127.0.0.1 6380</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># master切换</span></span><br><span class="line">11068:X 05 Apr 17:20:18.415 <span class="comment"># +switch-master mymaster 127.0.0.1 6380 127.0.0.1 6381</span></span><br><span class="line">11068:X 05 Apr 17:20:18.416 * +slave slave 127.0.0.1:6382 127.0.0.1 6382 @ mymaster 127.0.0.1 6381</span><br><span class="line">11068:X 05 Apr 17:20:18.416 * +slave slave 127.0.0.1:6380 127.0.0.1 6380 @ mymaster 127.0.0.1 6381</span><br><span class="line">11068:X 05 Apr 17:20:24.461 <span class="comment"># +sdown slave 127.0.0.1:6380 127.0.0.1 6380 @ mymaster 127.0.0.1 6381</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>重新启动6380后，6380将变成6381的slave节点</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@node01 ~]<span class="comment"># redis-server /tmp/redis/conf/redis_6380.conf</span></span><br><span class="line">127.0.0.1:6380&gt; info replication</span><br><span class="line"><span class="comment"># Replication</span></span><br><span class="line">role:slave</span><br><span class="line">master_host:127.0.0.1</span><br><span class="line">master_port:6381</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="集群架构"><a href="#集群架构" class="headerlink" title="集群架构"></a>集群架构</h1><p>是一种分布式解决方案</p>
+<ul>
+<li><p>优点 ：</p>
+<ol>
+<li>每个节点都可以存储数据，每个节点都可以响应读写操作</li>
+<li>更容易扩容</li>
+</ol>
+</li>
+<li><p>缺点：</p>
+<ol>
+<li>部署复杂</li>
+<li>redis部分cli命令受限，比如批量操作等</li>
+</ol>
+<p>每个节点如何存储数据？（虚拟槽）</p>
+</li>
+</ul>
+<ol>
+<li>对象保存到Redis之前先经过CRC16哈希到一个Node上</li>
+<li>每个Node被平均分配到一个Slot段，对应着0-16384，Slot不能重复也不能缺失，否则会导致对象重复存储或无法存储</li>
+<li>Node之间相互监听，一旦有Node退出或者加入，会按照Slot为单位做数据迁移。例如Node1掉线了，0-5640这些Slot将会平均分摊到Node2和Node3上，由于Node2和Node3本身维护的Slot还会再自己身上不会被重新分配，所以执行过程中不会影响到5641-16384Slot段的使用。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">计算CRC的过程，就是用一个特殊的“除法”，来得到余数，这个余数就是CRC。 它不是真正的算术上的除法！过程和算术除法过程一样，只是加减运算变成了XOR（异或）运算！</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="集群实验"><a href="#集群实验" class="headerlink" title="集群实验"></a>集群实验</h2><p>Redis5.0之后部署会简单一点</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">wget http://download.redis.io/releases/redis-5.0.8.tar.gz</span><br><span class="line">yum install -y wget gcc make tcl</span><br><span class="line">tar -xzf redis-5.0.8.tar.gz</span><br><span class="line"><span class="built_in">cd</span> redis-5.0.8/</span><br><span class="line">make <span class="comment"># 这里需要注意一下， 如果之前没有装gcc直接make，然后装了gcc再次make，会提示有个文件没有</span></span><br><span class="line"><span class="comment"># PATH=$PATH:/usr/local/redis/bin,如果安装的时候prefix指定了路径，可以修改环境变量</span></span><br><span class="line">mv redis-5.0.8/ redis</span><br><span class="line">mkdir -p /tmp/redis-cluster</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"><span class="comment">#=====================================================================</span></span><br><span class="line"><span class="comment">#搭建一个Redis集群</span></span><br><span class="line"><span class="comment">#=====================================================================</span></span><br><span class="line">mkdir /tmp/redis-cluster/redis&#123;7000..7005&#125; -pv</span><br><span class="line">touch /tmp/redis-cluster/redis&#123;7000..7005&#125;/redis.conf</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> &#123;7000..7005&#125;;</span><br><span class="line"><span class="keyword">do</span></span><br><span class="line">cat &lt;&lt; EOF &gt; /tmp/redis-cluster/redis<span class="variable">$i</span>/redis.conf</span><br><span class="line">daemonize yes</span><br><span class="line">port <span class="variable">$i</span></span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file /tmp/redis-cluster/redis<span class="variable">$i</span>/nodes-<span class="variable">$i</span>.conf</span><br><span class="line">cluster-node-timeout 5000</span><br><span class="line">appendonly yes</span><br><span class="line">EOF</span><br><span class="line">/root/redis/src/redis-server /tmp/redis-cluster/redis<span class="variable">$i</span>/redis.conf</span><br><span class="line"><span class="keyword">done</span></span><br></pre></td></tr></table></figure>
+
+<p>集群中有6个节点，设置3个master3个slaver</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@node01 ~]<span class="comment"># /root/redis/src/redis-cli --cluster create 127.0.0.1:7000 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 127.0.0.1:7004 127.0.0.1:7005 --cluster-replicas 1</span></span><br><span class="line">&gt;&gt;&gt; Performing <span class="built_in">hash</span> slots allocation on 6 nodes...</span><br><span class="line"><span class="comment"># 分配Slot槽</span></span><br><span class="line">Master[0] -&gt; Slots 0 - 5460</span><br><span class="line">Master[1] -&gt; Slots 5461 - 10922</span><br><span class="line">Master[2] -&gt; Slots 10923 - 16383</span><br><span class="line">Adding replica 127.0.0.1:7004 to 127.0.0.1:7000</span><br><span class="line">Adding replica 127.0.0.1:7005 to 127.0.0.1:7001</span><br><span class="line">Adding replica 127.0.0.1:7003 to 127.0.0.1:7002</span><br><span class="line">&gt;&gt;&gt; Trying to optimize slaves allocation <span class="keyword">for</span> anti-affinity</span><br><span class="line">[WARNING] Some slaves are <span class="keyword">in</span> the same host as their master</span><br><span class="line">M: 2518beb0563857adb5c1497fffb4c5eb3d682103 127.0.0.1:7000</span><br><span class="line">   slots:[0-5460] (5461 slots) master</span><br><span class="line">M: 1d39c766c5275ec08ae47f90b69d5e9c6c88eb8b 127.0.0.1:7001</span><br><span class="line">   slots:[5461-10922] (5462 slots) master</span><br><span class="line">M: 141382f53c59164a232329efcc9530daffc43a25 127.0.0.1:7002</span><br><span class="line">   slots:[10923-16383] (5461 slots) master</span><br><span class="line">S: 9269115a3ef21c7f378dcc68855a72059e943605 127.0.0.1:7003</span><br><span class="line">   replicates 2518beb0563857adb5c1497fffb4c5eb3d682103</span><br><span class="line">S: 6c33423da686f301f756dd624174bfd9f0487a67 127.0.0.1:7004</span><br><span class="line">   replicates 1d39c766c5275ec08ae47f90b69d5e9c6c88eb8b</span><br><span class="line">S: f8c74822b558a2e11ae36cf144b8a9388783bf95 127.0.0.1:7005</span><br><span class="line">   replicates 141382f53c59164a232329efcc9530daffc43a25</span><br><span class="line">Can I <span class="built_in">set</span> the above configuration? (<span class="built_in">type</span> <span class="string">'yes'</span> to accept): yes</span><br><span class="line">&gt;&gt;&gt; Nodes configuration updated</span><br><span class="line">&gt;&gt;&gt; Assign a different config epoch to each node</span><br><span class="line">&gt;&gt;&gt; Sending CLUSTER MEET messages to join the cluster</span><br><span class="line">Waiting <span class="keyword">for</span> the cluster to join</span><br><span class="line">...</span><br><span class="line">&gt;&gt;&gt; Performing Cluster Check (using node 127.0.0.1:7000)</span><br><span class="line">M: 2518beb0563857adb5c1497fffb4c5eb3d682103 127.0.0.1:7000</span><br><span class="line">   slots:[0-5460] (5461 slots) master</span><br><span class="line">   1 additional replica(s)</span><br><span class="line">S: 9269115a3ef21c7f378dcc68855a72059e943605 127.0.0.1:7003</span><br><span class="line">   slots: (0 slots) slave</span><br><span class="line">   replicates 2518beb0563857adb5c1497fffb4c5eb3d682103</span><br><span class="line">M: 1d39c766c5275ec08ae47f90b69d5e9c6c88eb8b 127.0.0.1:7001</span><br><span class="line">   slots:[5461-10922] (5462 slots) master</span><br><span class="line">   1 additional replica(s)</span><br><span class="line">S: f8c74822b558a2e11ae36cf144b8a9388783bf95 127.0.0.1:7005</span><br><span class="line">   slots: (0 slots) slave</span><br><span class="line">   replicates 141382f53c59164a232329efcc9530daffc43a25</span><br><span class="line">S: 6c33423da686f301f756dd624174bfd9f0487a67 127.0.0.1:7004</span><br><span class="line">   slots: (0 slots) slave</span><br><span class="line">   replicates 1d39c766c5275ec08ae47f90b69d5e9c6c88eb8b</span><br><span class="line">M: 141382f53c59164a232329efcc9530daffc43a25 127.0.0.1:7002</span><br><span class="line">   slots:[10923-16383] (5461 slots) master</span><br><span class="line">   1 additional replica(s)</span><br><span class="line">[OK] All nodes agree about slots configuration.</span><br><span class="line">&gt;&gt;&gt; Check <span class="keyword">for</span> open slots...</span><br><span class="line">&gt;&gt;&gt; Check slots coverage...</span><br><span class="line">[OK] All 16384 slots covered.</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>验证1：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@node01 ~]<span class="comment"># ps -ef | grep redis</span></span><br><span class="line">root      12733      1  0 21:02 ?        00:00:00 /root/redis/src/redis-server *:7000 [cluster]</span><br><span class="line">root      12736      1  0 21:02 ?        00:00:00 /root/redis/src/redis-server *:7001 [cluster]</span><br><span class="line">root      12742      1  0 21:02 ?        00:00:00 /root/redis/src/redis-server *:7002 [cluster]</span><br><span class="line">root      12751      1  0 21:02 ?        00:00:00 /root/redis/src/redis-server *:7003 [cluster]</span><br><span class="line">root      12757      1  0 21:02 ?        00:00:00 /root/redis/src/redis-server *:7004 [cluster]</span><br><span class="line">root      12764      1  0 21:02 ?        00:00:00 /root/redis/src/redis-server *:7005 [cluster]</span><br></pre></td></tr></table></figure>
+
+
+
+<p>验证2：登录集群查看信息</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@node01 ~]<span class="comment"># redis/src/redis-cli -c -p 7000</span></span><br><span class="line">127.0.0.1:7000&gt; info cluster</span><br><span class="line"><span class="comment"># Cluster</span></span><br><span class="line">cluster_enabled:1</span><br><span class="line">127.0.0.1:7000&gt; cluster info</span><br><span class="line">cluster_state:ok</span><br><span class="line">cluster_slots_assigned:16384</span><br><span class="line">cluster_slots_ok:16384</span><br><span class="line">cluster_slots_pfail:0</span><br><span class="line">cluster_slots_fail:0</span><br><span class="line">cluster_known_nodes:6</span><br><span class="line">cluster_size:3</span><br><span class="line">cluster_current_epoch:6</span><br><span class="line">cluster_my_epoch:1</span><br><span class="line">cluster_stats_messages_ping_sent:259</span><br><span class="line">cluster_stats_messages_pong_sent:267</span><br><span class="line">cluster_stats_messages_sent:526</span><br><span class="line">cluster_stats_messages_ping_received:262</span><br><span class="line">cluster_stats_messages_pong_received:259</span><br><span class="line">cluster_stats_messages_meet_received:5</span><br><span class="line">cluster_stats_messages_received:526</span><br><span class="line"></span><br><span class="line"><span class="comment"># slave节点后缀ID和Master的ID号对应</span></span><br><span class="line">2518beb0563857adb5c1497fffb4c5eb3d682103 127.0.0.1:7000@17000 myself,master - 0 1586092155000 1 connected 0-5460</span><br><span class="line">9269115a3ef21c7f378dcc68855a72059e943605 127.0.0.1:7003@17003 slave 2518beb0563857adb5c1497fffb4c5eb3d682103 0 1586092157502 4 connected</span><br><span class="line">1d39c766c5275ec08ae47f90b69d5e9c6c88eb8b 127.0.0.1:7001@17001 master - 0 1586092156896 2 connected 5461-10922</span><br><span class="line">f8c74822b558a2e11ae36cf144b8a9388783bf95 127.0.0.1:7005@17005 slave 141382f53c59164a232329efcc9530daffc43a25 0 1586092157502 6 connected</span><br><span class="line">6c33423da686f301f756dd624174bfd9f0487a67 127.0.0.1:7004@17004 slave 1d39c766c5275ec08ae47f90b69d5e9c6c88eb8b 0 1586092156391 5 connected</span><br><span class="line">141382f53c59164a232329efcc9530daffc43a25 127.0.0.1:7002@17002 master - 0 1586092157401 3 connected 10923-16383</span><br><span class="line"></span><br><span class="line"><span class="comment"># 写入值，重定向k1 v1 CRC16计算，--&gt; slot_12706，给7002号master</span></span><br><span class="line">127.0.0.1:7000&gt; <span class="built_in">set</span> k1 v1</span><br><span class="line">-&gt; Redirected to slot [12706] located at 127.0.0.1:7002</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+
+            </div>
+        </div>
+    </article>
+
+    
+    
+<nav class="article-nav">
+  
+    <a href="/2020/04/26/VueJS/" id="article-nav-newer" class="article-nav-link-wrap prev">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          VueJS 浅知
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/03/28/Django(%E4%BA%8C)%E4%B9%8BModels/" id="article-nav-older" class="article-nav-link-wrap next">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Django——Models</div>
+    </a>
+  
+</nav>
+
+    
+
+    
+</div>
+    </div>
+    <footer class="site-footer">
+        <div class="global-width">
+            <ul class="site-widget">
+                
+                <li class="widget widget-tag">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-category">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-recent_posts">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2020/12/30/%E6%84%BF%E6%9C%89%E6%B6%93%E6%B6%93%E8%AF%97%E6%84%8F%E6%B8%85%E6%96%B0%E5%85%A5%E8%84%BE%EF%BC%8C%E4%BB%A5%E9%A3%A8%E5%BF%99%E7%A2%8C%E7%9A%84%E6%97%A5%E5%B8%B8/">愿有涓涓诗意清新入脾，以飨忙碌的日常</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Jetbrains%E5%BF%AB%E6%8D%B7%E9%94%AE/">Jetbrains快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Chrome%E5%BF%AB%E6%8D%B7%E9%94%AE/">Chrome快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/VsCode%E5%BF%AB%E6%8D%B7%E9%94%AE/">VSCode快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/KVM%E5%AE%9E%E4%BE%8B/">KVM实例总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+                </li>
+                
+            </ul>
+        </div>
+        <div class="site-info">
+            <address>
+                &copy; 2014 <a href="http://ymlog.cn">无心而为</a> All Right Reserved. <br/>
+                Powered by <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>. Theme by <a href="http://zzoman.com" target="_blank" rel="noopener">ZZOMAN</a>
+            </address>
+        </div>
+    </footer>
+    
+    <script src="/libs/jquery-1.11.3.min.js" type="text/javascript"></script>
+    
+    <script src="/libs/fancybox/jquery.fancybox.js" type="text/javascript"></script>
+    
+    <script src="/js/site_init.js" type="text/javascript"></script>
+    
+</body>
+</html>

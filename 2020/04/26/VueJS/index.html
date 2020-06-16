@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    
+    <title>VueJS 浅知 | 无心而为</title>
+    
+    <link rel="alternative" href="/atom.xml" title="无心而为" type="application/atom+xml">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    <link rel="stylesheet" href="/libs/fancybox/jquery.fancybox.css" charset="utf-8">
+    
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="site">
+    <header class="site-header">
+        <h1 class="site-title"><a href="/">无心而为</a></h1>
+        <nav class="site-nav">
+            <ul class="nav">
+                
+                <li><a href="/archives">Archives</a></li>
+                
+                
+                <li><a href="/atom.xml" title="RSS Feed">rss</a></li>
+                
+                <li><a class="toggle-search" href="#search">search</a></li>
+            </ul>
+        </nav>
+        <div class="site-search" id="search">
+            <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://ymlog.cn"></form>
+        </div>
+        
+            <div class="site-header-background" style="background-image:url(http://reumia.github.io/hexo-theme-zzoman2015/images/background-zzoman2015.jpg)"></div>
+        
+    </header>
+    <div class="site-body">
+        <div class="global-width">
+    <article class="article" data-layout="post" data-slug="VueJS">
+        <div class="article-content">
+            
+            
+            <header class="article-header">
+                <div class="article-meta">
+                    <a href="/2020/04/26/VueJS/" class="article-date">
+  <time datetime="2020-04-26T05:43:51.000Z">2020-04-26</time>
+</a>
+                    
+  <div class="article-category categories">
+    <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+  </div>
+
+                    
+                </div>
+                
+    <h1 class="article-title" itemprop="name">
+      <a href="/2020/04/26/VueJS/">VueJS 浅知</a>
+    </h1>
+
+            </header>
+            
+            <div class="article-body">
+                <p>Vue 是Javascript的框架，用于简化DOM（domain obeject m）操作，响应式数据驱动。</p>
+<p>Vue两种导入方式：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- 开发环境版本，包含了有帮助的命令行警告 --&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- 生产环境版本，优化了尺寸和速度 --&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="初试Vue"><a href="#初试Vue" class="headerlink" title="初试Vue"></a>初试Vue</h1><p>1、 Hello World</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line"></span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;Vue基础&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line"></span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">        &#123;&#123; message &#125;&#125;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;!-- 开发环境版本，包含了有帮助的命令行警告 --&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app &#x3D; new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            message:&quot; Hello Vue !&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2、介绍</p>
+<ul>
+<li>el是用来设置Vue实例挂载的元素</li>
+<li>Vue会管理el选项命中的元素机器内部的后代</li>
+<li>可以使用其他选择器，但是建议使用ID选择器</li>
+<li>可以使用其他的双标签，不能使用HTML和Body标签</li>
+</ul>
+<p>3、data：数据对象</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &#123;&#123; message &#125;&#125;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">    el:&quot;#app&quot;,</span><br><span class="line">    data:&#123;</span><br><span class="line">        message:&quot; Hello Vue !&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>4、字符、字典、数组的表示</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    字符：&#123;&#123; message &#125;&#125; &lt;br&gt;</span><br><span class="line">    字典：&#123;&#123; contact.phone &#125;&#125; &lt;br&gt;</span><br><span class="line">    数组：&#123;&#123; hobby[0] &#125;&#125; &lt;br&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">    el:&quot;#app&quot;,</span><br><span class="line">    data:&#123;</span><br><span class="line">        message:&quot; Hello Vue !&quot;,</span><br><span class="line">        contact:&#123;</span><br><span class="line">            phone:&quot;18151908744&quot;,</span><br><span class="line">            email:&quot;2212585023@qq.com&quot;,</span><br><span class="line">        &#125;,</span><br><span class="line">        hobby:[&quot;Reading&quot;,&quot;Sleeping&quot;,&quot;JS&quot;,&quot;Watching&quot;],</span><br><span class="line">   &#125;,</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="Vue指令"><a href="#Vue指令" class="headerlink" title="Vue指令"></a>Vue指令</h1><p>vue指令指的是以v-开头的一组特殊语法</p>
+<ul>
+<li><p>内容绑定，事件绑定</p>
+<blockquote>
+<p> v-text</p>
+<p>v-html</p>
+<p>v-on</p>
+</blockquote>
+</li>
+<li><p>显示切换，属性绑定</p>
+<blockquote>
+<p>v-show</p>
+<p>v-if</p>
+<p>v-bind</p>
+</blockquote>
+</li>
+<li><p>列表循环，表单元素绑定</p>
+<blockquote>
+<p>v-for</p>
+<p>v-on补充</p>
+<p>v-model</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="内容绑定"><a href="#内容绑定" class="headerlink" title="内容绑定"></a>内容绑定</h2><h3 id="v-text"><a href="#v-text" class="headerlink" title="v-text"></a>v-text</h3><p>设置标签的文本值</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;h2 v-text&#x3D;&quot;message&quot;&gt;&lt;&#x2F;h2&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">    el:&quot;#app&quot;,</span><br><span class="line">    data:&#123;</span><br><span class="line">        message:&quot;Hello Vue!&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="v-html"><a href="#v-html" class="headerlink" title="v-html"></a>v-html</h3><p>设置html标签</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;!-- 如果是普通文本，这里的显示结果和v-text没有任何不同</span><br><span class="line">    如果是HTML文本，则会渲染 --&gt;</span><br><span class="line">    &lt;div v-html&#x3D;&quot;message&quot;&gt;&lt;&#x2F;div&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">   el:&quot;#app&quot;,</span><br><span class="line">   data:&#123;</span><br><span class="line">   message:&quot;&lt;a href&#x3D;&#39;http:&#x2F;&#x2F;www.baidu.com&#39;&gt;Hello Vue!&lt;&#x2F;a&gt;&quot;,</span><br><span class="line">   &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>v-html指令的作用是：设置元素的innerHTML</li>
+<li>内容中有HTML结构会被解析为标签</li>
+<li>v-text指令无论内容是什么，只会解析成文本</li>
+</ol>
+<h3 id="v-on"><a href="#v-on" class="headerlink" title="v-on"></a>v-on</h3><ol>
+<li>为元素绑定事件</li>
+<li>事件名不需要写on</li>
+<li>指令可以简写为@</li>
+<li>绑定的方法定义在methods属性中</li>
+</ol>
+<p>基本结构</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">   &lt;div&gt;</span><br><span class="line">       &lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;事件绑定&quot; v-on:事件名&#x3D;&quot;方法&quot;&gt;</span><br><span class="line">   &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">	var app &#x3D; new Vue(&#123;</span><br><span class="line">           el:&quot;#app&quot;,</span><br><span class="line">           methods:&#123;</span><br><span class="line">               方法名:function()&#123;</span><br><span class="line">                   &#x2F;&#x2F;逻辑</span><br><span class="line">               &#125;</span><br><span class="line">           &#125; </span><br><span class="line">       &#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>v-on 可以直接替换为 @ </p>
+<p>事件名有以下几种类型</p>
+<ul>
+<li>点击事件 click</li>
+<li>鼠标移入 monseenter (这两个好像不太行)</li>
+<li>双击dbclick</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;事件绑定&quot; v-on:click&#x3D;&quot;doit&quot;&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">var app &#x3D; new Vue(&#123;</span><br><span class="line">    el:&quot;#app&quot;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        doit:function()&#123;</span><br><span class="line">            alert(&quot;GGGGo!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Vue中不考虑更改DOM元素，只需要更改数据，数据更改之后，DOM元素会同步更新。</p>
+<p>this关键字，拿到定义的数据</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;h2 type&#x3D;&quot;text&quot; v-text&#x3D;&quot;food&quot; @click&#x3D;changeFood&gt; &lt;&#x2F;h2&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app &#x3D; new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            food:&quot;抹茶味冰淇淋&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            changeFood:function()&#123;</span><br><span class="line">                &#x2F;&#x2F; console.log(this.food);</span><br><span class="line">                this.food +&#x3D;&quot;卖完了！&quot;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="1、计数器"><a href="#1、计数器" class="headerlink" title="1、计数器"></a>1、计数器</h2><ul>
+<li><p>创建Vue示例时：el（挂载点）；data（数据），methods（方法）</p>
+</li>
+<li><p>v-on指令的作用就是绑定事件，简写为@</p>
+</li>
+<li><p>方法中通过this关键字获取data中的数据</p>
+</li>
+<li><p>v-text指令的作用是：设置元素的文本值，简写为</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;&#123; &#125;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;-&quot; @click&#x3D;sub&gt;</span><br><span class="line">        &lt;span&gt;&#123;&#123; Nbr &#125;&#125;&lt;&#x2F;span&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;+&quot; @click&#x3D;add&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">    &lt;!-- 开发环境版本，包含了有帮助的命令行警告 --&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app &#x3D; new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            Nbr:1,</span><br><span class="line">        &#125;,</span><br><span class="line">        methods: &#123;</span><br><span class="line">            add:function()&#123;</span><br><span class="line">                this.Nbr+&#x3D;1;</span><br><span class="line">            &#125;,</span><br><span class="line">            sub:function()&#123;</span><br><span class="line">                this.Nbr-&#x3D;1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<img src="https://i.loli.net/2020/04/26/M1s8mWFTKIH9CDB.png" alt="image-20200424220438863" style="zoom:33%;" />
+
+
+
+<h2 id="显示切换"><a href="#显示切换" class="headerlink" title="显示切换"></a>显示切换</h2><h3 id="v-show"><a href="#v-show" class="headerlink" title="v-show"></a>v-show</h3><ol>
+<li>根据表达式真假，切换元素的显示或隐藏。</li>
+<li>原理是修改元素的display属性，实现显示隐藏</li>
+<li>指令后面的内容，最后都会解析成布尔值</li>
+<li>如果为true显示元素，如果为false则隐藏</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">        &lt;img src&#x3D;&quot;.&#x2F;img&#x2F;orange.jpg&quot; alt&#x3D;&quot;ORANGEIMG&quot; v-show&#x3D;&quot;isShow&quot; height&#x3D;&quot;400px&quot;&gt;</span><br><span class="line">        &lt;!-- 当年龄大于18岁的时候，图片才会显示 --&gt;</span><br><span class="line">        &lt;img src&#x3D;&quot;.&#x2F;img&#x2F;orange.jpg&quot; alt&#x3D;&quot;ORANGEIMG&quot; v-show&#x3D;&quot;age&gt;18&quot; height&#x3D;&quot;400px&quot;&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app &#x3D; new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            isShow:true,</span><br><span class="line">            age:15,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="v-if"><a href="#v-if" class="headerlink" title="v-if"></a>v-if</h3><ol>
+<li>v-if指令的作用是：根据表达式的真假切换元素的显示状态</li>
+<li>本质是通过操纵DOM元素来实现显示状态</li>
+<li>表达式的值为true，元素存在于dom树中，为false，从dom树中移除。</li>
+<li>频繁的切换v-show，反之使用v-if，前者切换消耗小</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> &lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">        &lt;img src&#x3D;&quot;.&#x2F;img&#x2F;orange.jpg&quot; alt&#x3D;&quot;ORANGEIMG&quot; v-if&#x3D;&quot;age&lt;11&quot; height&#x3D;&quot;400px&quot;&gt;</span><br><span class="line">    &lt;&#x2F;div&gt;</span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app &#x3D; new Vue(&#123;</span><br><span class="line">        el:&quot;#app&quot;,</span><br><span class="line">        data:&#123;</span><br><span class="line">            isShow:true,</span><br><span class="line">            age:12,</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="v-bind"><a href="#v-bind" class="headerlink" title="v-bind"></a>v-bind</h3><ol>
+<li>v-bind指令的作用是：为元素绑定属性</li>
+<li>完整写法是：v-bind:属性名</li>
+<li>简写的话可以直接省略v-bind，只保留：属性名</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- </span><br><span class="line">    1、记得想要操纵的属性前面一定要加冒号，比如:src , :class </span><br><span class="line">    2、functional中想要取变量需要加this</span><br><span class="line">    3、显示隐藏class的语法是:class&#x3D;&#123;className,isActive&#125;</span><br><span class="line">     --&gt;</span><br><span class="line"></span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">        &lt;img v-bind:src&#x3D;&quot;imgSrc&quot; v-bind:alt&#x3D;&quot;imgAlt&quot; v-bind:title&#x3D;&quot;imgTitle&quot; height&#x3D;&quot;400px&quot; @click&#x3D;&quot;ToRed&quot; :class&#x3D;&quot;&#123;active:isActive&#125;&quot; &gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">    </span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">        var app &#x3D; new Vue(&#123;</span><br><span class="line">            el: &#39;#app&#39;,</span><br><span class="line">            data: &#123;</span><br><span class="line">                isActive: false,</span><br><span class="line">                imgSrc: &quot;&#x2F;img&#x2F;orange.jpg&quot;,</span><br><span class="line">                imgAlt: &#39;vue-logo&#39;,</span><br><span class="line">                imgTitle: &#39;这是你指定的title&#39;</span><br><span class="line">            &#125;,</span><br><span class="line">            methods: &#123;</span><br><span class="line">                ToRed:function()&#123;</span><br><span class="line">                    this.isActive&#x3D;!this.isActive;   </span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">        &#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<img src="https://i.loli.net/2020/04/26/bEMpBuDc4Szkv29.png" alt="image-20200425202402366" style="zoom:33%;" />
+
+
+
+
+
+<h2 id="2、图片切换"><a href="#2、图片切换" class="headerlink" title="2、图片切换"></a>2、图片切换</h2><ol>
+<li>图片列表使用数组保存</li>
+<li>v-bind指令可以设置元素的属性</li>
+<li>v-show和v-if都可以设置元素的显示状态，频繁切换使用v-show</li>
+</ol>
+<p><img src="https://i.loli.net/2020/04/26/SotjdsGHMUaWhrz.png" alt="image-20200425203317172"></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">        &lt;a href&#x3D;&quot;javascript:void(0)&quot; @click&#x3D;&quot;prev&quot; v-show&#x3D;&quot;index!&#x3D;0&quot;&gt;上一张&lt;&#x2F;a&gt;</span><br><span class="line">        &lt;img :src&#x3D;&quot;arrayImg[index]&quot; alt&#x3D;&quot;凉了&quot; height&#x3D;&quot;360px&quot; style&#x3D;&quot;align-items: center;&quot;&gt;</span><br><span class="line">        &lt;a href&#x3D;&quot;javascript:void(0)&quot; @click&#x3D;&quot;next&quot; v-show&#x3D;&quot;index&lt;arrayImg.length-1&quot;&gt;下一张&lt;&#x2F;a&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line">    </span><br><span class="line">&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    var app &#x3D; new Vue(&#123;</span><br><span class="line">        el: &#39;#app&#39;,</span><br><span class="line">        data: &#123;</span><br><span class="line">        arrayImg:[</span><br><span class="line">            &quot;.&#x2F;img&#x2F;1.jpg&quot;,</span><br><span class="line">            &quot;.&#x2F;img&#x2F;2.jpg&quot;,</span><br><span class="line">            &quot;.&#x2F;img&#x2F;4.jpg&quot;,</span><br><span class="line">            &quot;.&#x2F;img&#x2F;5.jpg&quot;,</span><br><span class="line">       ],</span><br><span class="line">        index:0,</span><br><span class="line">      &#125;,</span><br><span class="line">      methods: &#123;</span><br><span class="line">           prev:function()&#123;</span><br><span class="line">               this.index--;   </span><br><span class="line">           &#125;,</span><br><span class="line">          next:function()&#123;</span><br><span class="line">                this.index++;</span><br><span class="line">          &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">&#125;);</span><br><span class="line">&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<img src="https://i.loli.net/2020/04/26/3mlBWwS2jeYLO7D.png" alt="image-20200425204825246" style="zoom:67%;" />
+
+
+
+
+
+<h2 id="列表循环"><a href="#列表循环" class="headerlink" title="列表循环"></a>列表循环</h2><h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a>v-for</h3><ol>
+<li>根据数据生成列表结构</li>
+<li>数组经常和v-for结合使用</li>
+<li>语法是（item，index） in 数据</li>
+<li>item 和 index 可以结合其他指令一起使用</li>
+<li>数组长度的更新会同步到页面上，是响应式的</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">	&lt;li v-for&#x3D;&quot;(item,index) in arr&quot; :title&#x3D;&quot;item&quot;&gt;</span><br><span class="line">		&#123;&#123; index &#125;&#125; . &#123;&#123; item &#125;&#125;</span><br><span class="line">	&lt;&#x2F;li&gt;</span><br><span class="line">&lt;&#x2F;ul&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el: <span class="string">'#app'</span>,</span><br><span class="line">    data:&#123;</span><br><span class="line">        arr:[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>],</span><br><span class="line">        dict:&#123;</span><br><span class="line">                name:<span class="string">"ZEN"</span>,</span><br><span class="line">                school:<span class="string">"UJS"</span> </span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="v-on补充"><a href="#v-on补充" class="headerlink" title="v-on补充"></a>v-on补充</h3><ol>
+<li>事件绑定的方法写成函数调用的形式，可以传入自定义参数</li>
+<li>定义方法时需要定义形参来接受传入的实参</li>
+<li>事件的后面跟上<code>.修饰符</code>可有对事件进行限制</li>
+<li><code>.enter</code>可以限制出发的按键为回车</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- 点击Button在控制台打印参数</span><br><span class="line">在输入栏敲回车alert字符 --&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;button&quot; value&#x3D;&quot;Button&quot; @click&#x3D;&quot;doit(18151908742,&#39;ZEN&#39;)&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; @keyup.enter&#x3D;&quot;sayHi&quot;&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">el: <span class="string">'#app'</span>,</span><br><span class="line">data:&#123;</span><br><span class="line">    arr:[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>],</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">        doit:<span class="function"><span class="keyword">function</span>(<span class="params">p1,p2</span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(p1,p2);</span><br><span class="line">        &#125;,</span><br><span class="line">        sayHi:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            alert(<span class="string">"Hi Vue!"</span>);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h3><p>获取设置表单元素的值，双向绑定，修改任意一方，另外一个也会被修改</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- h2标签的值会随着输入框输入的而改变，由此可以得出，v-model的改变是双向的 --&gt;</span><br><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;message&quot;&gt;</span><br><span class="line">    &lt;h2&gt;&#123;&#123; message &#125;&#125; &lt;&#x2F;h2&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">el: <span class="string">'#app'</span>,</span><br><span class="line">data:&#123;</span><br><span class="line">    message:<span class="string">"Vue"</span>,</span><br><span class="line">&#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="3、记事本"><a href="#3、记事本" class="headerlink" title="3、记事本"></a>3、记事本</h2><ol>
+<li>列表结构可以通过v-for生成</li>
+<li>v-on结合事件修饰符可以对事件进行限制，比如.enter</li>
+<li>v-on在绑定事件的时候可以传入自定义参数</li>
+<li>通过v-model可以快速设置和获取表单元素的值</li>
+<li>VUE是基于数据的开发方式，JS是基于DOM的开发方式</li>
+</ol>
+<p>新增、删除、统计、清空、隐藏</p>
+<p>增加list条目</p>
+<ol>
+<li>v-mode把需要增加的信息双向绑定</li>
+<li>添加键盘敲击事件响应，回车调用add方法</li>
+<li>v-for遍历todo列表</li>
+<li>push把元素添加到数组</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div id&#x3D;&quot;app&quot;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;text&quot; v-model&#x3D;&quot;message&quot; @keyup.enter&#x3D;&quot;add&quot;&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;li v-for&#x3D;&quot;(item,index) in todoList&quot;&gt;</span><br><span class="line">            &#123;&#123; index+1 &#125;&#125;.&#123;&#123; item &#125;&#125;</span><br><span class="line">        &lt;&#x2F;li&gt;</span><br><span class="line">    &lt;&#x2F;ul&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el:<span class="string">"#app"</span>,</span><br><span class="line">    data:&#123;</span><br><span class="line">        todoList:[<span class="string">'起床'</span>,<span class="string">'吃饭'</span>,<span class="string">'睡觉'</span>],</span><br><span class="line">        message:<span class="string">'写代码'</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        add:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.todoList.push(<span class="keyword">this</span>.message);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<img src="https://i.loli.net/2020/04/26/PKOHCLvVtYqyelF.png" alt="image-20200426103003221" style="zoom:50%;" />
+
+
+
+<p>删除</p>
+<ol>
+<li>删除时传入下标</li>
+<li>splice参数</li>
+<li>v-for的即时响应</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"message"</span> @<span class="attr">keyup.enter</span>=<span class="string">"add"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item,index) in todoList"</span>&gt;</span></span><br><span class="line">            &#123;&#123; index+1 &#125;&#125;.&#123;&#123; item &#125;&#125;</span><br><span class="line">            <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"del(index)"</span>&gt;</span>x<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">del:<span class="function"><span class="keyword">function</span>(<span class="params">INDEX</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//第一个参数是从哪删</span></span><br><span class="line">    <span class="comment">///第二个参数是删除几个元素</span></span><br><span class="line">    <span class="keyword">this</span>.todoList.splice(INDEX,<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>统计</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h3</span> <span class="attr">v-text</span>=<span class="string">"'当前待执行的事件有 '+todoList.length+' 个'"</span>&gt;</span><span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">h3</span>&gt;</span>当前待执行的事件有 &#123;&#123; todoList.length &#125;&#125; 个<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>清空</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>当前待执行的事件有 &#123;&#123; todoList.length &#125;&#125; 个<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"clear"</span>&gt;</span>Clear<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">clear:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.todoList=[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>隐藏</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line">    <span class="comment">&lt;!-- 数组为空的时候隐藏计数和Clear按钮 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span> <span class="attr">v-show</span>=<span class="string">"todoList.length!=0"</span>&gt;</span>当前待执行的事件有 &#123;&#123; todoList.length &#125;&#125; 个<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"clear"</span> <span class="attr">v-show</span>=<span class="string">"todoList.length!=0"</span>&gt;</span>Clear<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>我就不写CSS</p>
+<img src="https://i.loli.net/2020/04/26/c9atRywnBOrAu6N.png" alt="image-20200426105839079" style="zoom:50%;" />
+
+
+
+<h1 id="网络应用"><a href="#网络应用" class="headerlink" title="网络应用"></a>网络应用</h1><p>Vue结合网络数据开发应用</p>
+<ol>
+<li>axios必须先导入才可以使用</li>
+<li>使用get或post方法可以发送对应的请求</li>
+<li>then方法中的回调函数可以在请求成功或失败时触发</li>
+<li>通过回调函数的形参可以获取响应内容，或错误信息</li>
+</ol>
+<h2 id="axios"><a href="#axios" class="headerlink" title="axios"></a>axios</h2><p>网络请求库</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;script src=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">axios.get(地址?key=value,key=value).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;&#125;)</span><br><span class="line">axios.post(地址,(key=value,key=value)).then(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;&#125;)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>axios的两种请求</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 官网提供的axios在线地址 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/axios/dist/axios.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line">        /*</span><br><span class="line">            接口1：随机笑话</span><br><span class="line"><span class="actionscript">            请求地址：https:<span class="comment">//autumnfish.cn/api/joke/list</span></span></span><br><span class="line"><span class="vbscript">            请求方法：<span class="keyword">Get</span></span></span><br><span class="line">            请求参数：num（笑话条数，数字）</span><br><span class="line">            相应内容：随机笑话</span><br><span class="line">        */</span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.querySelector(<span class="string">".get"</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="vbscript">            axios.<span class="keyword">get</span>(<span class="string">"https://autumnfish.cn/api/joke/list?num=3"</span>).<span class="keyword">then</span>(<span class="keyword">function</span> (<span class="built_in">response</span>)&#123;</span></span><br><span class="line"><span class="vbscript">                console.<span class="built_in">log</span>(<span class="built_in">response</span>);</span></span><br><span class="line"><span class="actionscript">            &#125;,<span class="function"><span class="keyword">function</span><span class="params">(err)</span></span>&#123;</span></span><br><span class="line"><span class="vbscript">                console.<span class="built_in">log</span>(<span class="built_in">err</span>);</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        /*</span><br><span class="line">            接口2：用户注册</span><br><span class="line"><span class="actionscript">            请求地址：https:<span class="comment">//autumnfish.cn/api/user/reg</span></span></span><br><span class="line">            请求方法：post</span><br><span class="line">            请求参数：username(用户名，字符串)</span><br><span class="line">            响应内容：注册成功或失败</span><br><span class="line">        */</span><br><span class="line"><span class="javascript">        <span class="built_in">document</span>.querySelector(<span class="string">".post"</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="actionscript">            axios.post(<span class="string">"https://autumnfish.cn/api/user/reg"</span>,&#123;username:<span class="string">"ZEN"</span>&#125;).then(<span class="function"><span class="keyword">function</span><span class="params">(response)</span></span>&#123;</span></span><br><span class="line"><span class="vbscript">                console.<span class="built_in">log</span>(<span class="built_in">response</span>);</span></span><br><span class="line"><span class="actionscript">            &#125;,<span class="function"><span class="keyword">function</span><span class="params">(err)</span></span>&#123;</span></span><br><span class="line"><span class="vbscript">                console.<span class="built_in">log</span>(<span class="built_in">err</span>);</span></span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/04/26/bcCtkLqJVaMUKnG.png" alt="image-20200426112053877"></p>
+<p>vue+axios</p>
+<ol>
+<li>使用axios获取API返回的数据</li>
+<li>this传递数据，交给界面显示</li>
+<li>axios回调函数中的this已经改变，无法访问data中的数据，可以先定义一个变量把this保存起来</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"Get请求"</span> <span class="attr">class</span>=<span class="string">"get"</span> @<span class="attr">click</span>=<span class="string">"getJoke"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item,index) in joke"</span>&gt;</span></span><br><span class="line">            &#123;&#123;item&#125;&#125; <span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">    el:<span class="string">"#app"</span>,</span><br><span class="line">    data:&#123;</span><br><span class="line">        joke:<span class="string">"一个笑话"</span>,</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        getJoke:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> that = <span class="keyword">this</span> </span><br><span class="line">            axios.get(<span class="string">"https://autumnfish.cn/api/joke/list?num=3"</span>).then(</span><br><span class="line">                <span class="function"><span class="keyword">function</span>(<span class="params">response</span>)</span>&#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(response.data);</span><br><span class="line">                    that.joke = response.datajokes;</span><br><span class="line">                &#125;,</span><br><span class="line">                <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">                    <span class="built_in">console</span>.log(err);</span><br><span class="line">                &#125;</span><br><span class="line">            )</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2020/04/26/ijwkU7topQcvsI2.png" alt="image-20200426124533624"></p>
+
+            </div>
+        </div>
+    </article>
+
+    
+    
+<nav class="article-nav">
+  
+    <a href="/2020/04/29/NodeJS_1/" id="article-nav-newer" class="article-nav-link-wrap prev">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          NodeJS（一） 静态路由
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/01/Redis/" id="article-nav-older" class="article-nav-link-wrap next">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Redis</div>
+    </a>
+  
+</nav>
+
+    
+
+    
+</div>
+    </div>
+    <footer class="site-footer">
+        <div class="global-width">
+            <ul class="site-widget">
+                
+                <li class="widget widget-tag">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-category">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-recent_posts">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2020/12/30/%E6%84%BF%E6%9C%89%E6%B6%93%E6%B6%93%E8%AF%97%E6%84%8F%E6%B8%85%E6%96%B0%E5%85%A5%E8%84%BE%EF%BC%8C%E4%BB%A5%E9%A3%A8%E5%BF%99%E7%A2%8C%E7%9A%84%E6%97%A5%E5%B8%B8/">愿有涓涓诗意清新入脾，以飨忙碌的日常</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Jetbrains%E5%BF%AB%E6%8D%B7%E9%94%AE/">Jetbrains快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Chrome%E5%BF%AB%E6%8D%B7%E9%94%AE/">Chrome快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/VsCode%E5%BF%AB%E6%8D%B7%E9%94%AE/">VSCode快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/KVM%E5%AE%9E%E4%BE%8B/">KVM实例总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+                </li>
+                
+            </ul>
+        </div>
+        <div class="site-info">
+            <address>
+                &copy; 2014 <a href="http://ymlog.cn">无心而为</a> All Right Reserved. <br/>
+                Powered by <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>. Theme by <a href="http://zzoman.com" target="_blank" rel="noopener">ZZOMAN</a>
+            </address>
+        </div>
+    </footer>
+    
+    <script src="/libs/jquery-1.11.3.min.js" type="text/javascript"></script>
+    
+    <script src="/libs/fancybox/jquery.fancybox.js" type="text/javascript"></script>
+    
+    <script src="/js/site_init.js" type="text/javascript"></script>
+    
+</body>
+</html>

