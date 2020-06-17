@@ -3,8 +3,8 @@
 <![endif]-->
 <link rel="stylesheet" href="../../../../css/iconfont.css">
 
-<link rel="stylesheet" href="../../../../css/index.css?v=202006172313.css">
-<link rel="stylesheet" href="../../../../css/info.css?v=202006172313.css">
+<link rel="stylesheet" href="../../../../css/index.css?v=202006172316.css">
+<link rel="stylesheet" href="../../../../css/info.css?v=202006172316.css">
 <link href="https://cdn.bootcss.com/highlight.js/9.15.9/styles/github.min.css" rel="stylesheet"><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="zen's blog" type="application/atom+xml">
 </head><body><header id="header" class="header-navigation"><nav><div class="logo"><a href="http://ymlog.cn">zen's blog</a></div><h2 id="mnavh"><span class="navicon"></span></h2><ul id="starlist"><li><a href="../../../../index.html">首页</a></li><li><a href="../../../../time.html">时间轴</a></li></ul><div class="searchbox"><div id="search_bar" class="search_bar"><input id="keyboard" placeholder="想搜点什么呢.." type="text" name="keyboard" autocomplete="off" class="input"><p class="search_ico"><span></span></p></div></div></nav></header><article><main><div class="con_warp"><div class="infosbox"><div class="newsview"><h3 class="news_title">记一次 ls / 卡死</h3><div class="bloginfo"><ul><li class="author">作者：<a href="/">ZEN</a></li><li class="lmname"><a href="/">故障</a></li><li class="timer">时间：2020-06-17 22:46:04</li><li class="view"><span id="busuanzi_value_page_pv">99</span><span>次访问</span></li></ul></div><div class="tags"></div><div class="news_con"><h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>只要涉及到根目录，使用ls和df命令就会出现卡死情况。</p>
 <p>[root@zen] pwd<br>/root<br>[root@zen] ls /<br>^C<br>[root@zen] df h<br>^C<br>[root@zen] ls /opt<br>containerd  google  jumpserver  mysql  prometheus</p>
@@ -20,6 +20,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/fstab</span><br><span class="line">cat /etc/mtab</span><br><span class="line">grep -v rootfs /proc/mounts <span class="comment"># 修复</span></span><br></pre></td></tr></table></figure>
 
 <p>/etc/fstab 中的挂载点是开机加载的<br>/etc/mtab  中的挂载点是内核动态实时更新的<br>简单来说就是一次修复挂载的问题，但是我做完这几部操作，依旧没有用</p>
+<blockquote>
+<p><a href="https://zhang.ge/5107.html" target="_blank" rel="noopener">https://zhang.ge/5107.html</a></p>
+</blockquote>
 <h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>其实和另一台服务器有关，我们暂时把它称之为O[other]，我们这台服务器为M[me],O上开启了NFS服务，Me服务器挂载了O上的磁盘。过了段时间，O服务器进行了重装，但是M服务器还在挂载O上的磁盘，此时other服务器没有开启NFS服务，但是Me服务器依旧挂载着O的磁盘。</p>
 <p>于是执行ls / 命令的时候，me服务器加载目录，加载前几个好好的，在strace中可以看到，但加载到/mount_point的时候，就会向O服务器发送请求，[应该是某个NFSBug，明明O上的NFS Down了，这个M服务器还是在一直等待响应]，于是看上去就像是me服务器卡死了，其实它是在等待NFS的响应。</p>
 <p>采取的解决措施：重启，有尝试过umount卸载挂载点，但会卡住。</p>
@@ -47,6 +50,6 @@ gitment.render('comment_container')</script></div></div></div></main><aside clas
 <script src="../../../../js/scrollreveal.js"></script>
 <script src="../../../../js/hc-sticky.js"></script>
 <script src="/js/canvas-nest.js" type="text/javascript" color="47,135,193" opacity="0.7" zIndex="-2" count="199"></script><script src="https://cdn.bootcss.com/highlight.js/9.15.9/highlight.min.js"></script><script src="https://cdn.bootcss.com/highlight.js/9.15.9/languages/java.min.js"></script><script src="https://cdn.bootcss.com/highlight.js/9.15.9/languages/javascript.min.js"></script><script type="text/javascript">hljs.initHighlightingOnLoad();</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<script src="../../../../js/common.js?v=202006172313.js"></script>
-<script src="../../../../js/index.js?v=202006172313.js"></script>
+<script src="../../../../js/common.js?v=202006172316.js"></script>
+<script src="../../../../js/index.js?v=202006172316.js"></script>
 </body></html>
