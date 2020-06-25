@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://localhost:4000/"/>
-  <updated>2020-06-25T10:42:22.942Z</updated>
+  <updated>2020-06-25T10:44:28.301Z</updated>
   <id>http://localhost:4000/</id>
   
   <author>
@@ -17,17 +17,17 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Click Where</title>
+    <title>观前提示</title>
     <link href="http://localhost:4000/2020/06/25/Click-Where/"/>
     <id>http://localhost:4000/2020/06/25/Click-Where/</id>
     <published>2020-06-25T10:39:08.000Z</published>
-    <updated>2020-06-25T10:42:22.942Z</updated>
+    <updated>2020-06-25T10:44:28.301Z</updated>
     
-    <content type="html"><![CDATA[<p>如果点击出现 <code>Cannot GET /http:/localhost:4000/2020/02/27/Switch/</code> 这样的标志，不要点击文字，点击图片即可！！！</p><a id="more"></a>]]></content>
+    <content type="html"><![CDATA[<p>如果点击出现 <code>Cannot GET /http:/localhost:4000/2020/02/27/Switch/</code> 这样的标志，不要点击文字，点击右侧图片打开即可！！！</p><a id="more"></a>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;如果点击出现 &lt;code&gt;Cannot GET /http:/localhost:4000/2020/02/27/Switch/&lt;/code&gt; 这样的标志，不要点击文字，点击图片即可！！！&lt;/p&gt;
+      &lt;p&gt;如果点击出现 &lt;code&gt;Cannot GET /http:/localhost:4000/2020/02/27/Switch/&lt;/code&gt; 这样的标志，不要点击文字，点击右侧图片打开即可！！！&lt;/p&gt;
     
     </summary>
     
