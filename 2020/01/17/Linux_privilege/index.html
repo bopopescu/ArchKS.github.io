@@ -1,0 +1,968 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>Linux权限 | zen&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="zen, 运维, 云计算" >
+    <meta name="description" content="杜振铨的博客小岛" >
+
+    
+    <link rel="alternative" href="/atom.xml" title="zen&#39;s blog" type="application/atom+xml" >
+    
+    
+    <link rel="shortcut icon" href="../../../../favicon.ico" >
+    
+    
+<link rel="stylesheet" href="../../../../css/style.css">
+
+    <!--[if lt IE 9]>
+    
+<script src="../../../../js/html5.js"></script>
+
+    <![endif]-->
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d5ebf515ab530cfbdda5f5c85093fb41";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/" target="_blank" rel="noopener">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="../../../../index.html">
+                <div class="cover">
+                    <span class="name">zen&#39;s blog</span>
+                    <span class="description"></span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="" class="item ">
+                <a href="../../../../index.html" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="" class="item ">
+                <a href="../../../../lab/" title="这是个BUG" class="icon-lab">&nbsp;这是个BUG</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/archks" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://pages.coding.me" target="_blank">Hosted by Coding Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://www.yuque.com/u174775" class="sinaweibo" target="_blank"><b>■</b> 语雀</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        博客
+                        <span class="popover">
+                            <img src="../../../../img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/jelon.jpg" alt="avatar" title="Jelon" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Linux权限</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        Jelon 发表于
+        <time datetime="2020-01-17T04:42:03.000Z">2020-01-17</time>
+    </p>
+    <div class="post-content">
+        <p>滚滚长江东逝水，浪花淘尽英雄。<br>是非成败转头空。<br>青山依旧在，几度夕阳红。<br>白发渔樵江渚上，惯看秋月春风。<br>一壶浊酒喜相逢。<br>古今多少事，都付笑谈中。</p>
+<a id="more"></a>
+
+<table>
+<thead>
+<tr>
+<th>常用命令类型</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用户</td>
+<td>who, whoami, su, useradd, userdel, passwd, usermod, /etc/passwd</td>
+</tr>
+<tr>
+<td>组</td>
+<td>groupadd, groupdel, groupmod, /etc/group</td>
+</tr>
+<tr>
+<td>文件</td>
+<td>chmod, chown, chgrp</td>
+</tr>
+<tr>
+<td>其他</td>
+<td>sudo、exit</td>
+</tr>
+</tbody></table>
+<h1 id="用户和组"><a href="#用户和组" class="headerlink" title="用户和组"></a>用户和组</h1><h2 id="用户和组的概念"><a href="#用户和组的概念" class="headerlink" title="用户和组的概念"></a>用户和组的概念</h2><p>在Linux中，用户分为管理员用户和普通用户，普通用户又分为系统用户和登录用户，每一个用户都有用户名和独一无二的用户id。管理员的用户id为0，普通用户中，系统用户的用户id为1~499，登录用户的用户id为500+。组也分为管理员组和普通用户组，不过又可以分为基本组（主组）和附加组（额外组）。基本组的组名与用户名相同，附加组是为了方便管理用户，一个用户可以有多个附加组。</p>
+<p>Linux安全上下文：</p>
+<blockquote>
+<p>运行中的程序我们称之为进程（process），进程能够访问其所有资源的权限，取决于进程发起者身份。</p>
+</blockquote>
+<h2 id="相关配置文件"><a href="#相关配置文件" class="headerlink" title="相关配置文件"></a>相关配置文件</h2><p>Linux中与用户和组相关的配置文件</p>
+<table>
+<thead>
+<tr>
+<th>目录</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/etc/passwd</td>
+<td>用户及其属性信息（名称、UID、基本组ID等）</td>
+</tr>
+<tr>
+<td>/etc/group</td>
+<td>组及其属性信息</td>
+</tr>
+<tr>
+<td>/etc/shadow</td>
+<td>用户密码及其相关属性</td>
+</tr>
+<tr>
+<td>/etc/gshadow</td>
+<td>组密码及其相关属性</td>
+</tr>
+</tbody></table>
+<p>为了方便管理属于同一组的用户，Linux 系统中还引入了用户组的概念。通过使用用户组号码（GID，Group IDentification），我们可以把多个用户加入到同一个组中，从而方便为组中的用户统一规划权限或指定任务。另外，在 Linux 系统中创建每个用户时，将自动创建一个与其同名的基本用户组，而且这个基本用户组只有该用户一个人。如果该用户以后被归纳入其他用户组，则这个其他用户组称之为扩展用户组。一个用户只有一个基本用户组，但是可以有多个扩展用户组，从而满足日常的工作需要。</p>
+<h3 id="1、-etc-passwd"><a href="#1、-etc-passwd" class="headerlink" title="1、/etc/passwd"></a>1、/etc/passwd</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;etc&#x2F;passwd存放用户信息，由6个冒号组成7个信息</span><br><span class="line">1.用户名</span><br><span class="line">2.密码（x表示加密密码）</span><br><span class="line">3.UID（用户标识）</span><br><span class="line">4.GID（组标识）</span><br><span class="line">5.用户全名或本地账号</span><br><span class="line">6.家目录</span><br><span class="line">7.登录之后使用的终端命令</span><br><span class="line"></span><br><span class="line">For example:</span><br><span class="line">nginx:x:997:993:Nginx web server:&#x2F;var&#x2F;lib&#x2F;nginx:&#x2F;sbin&#x2F;nologin</span><br><span class="line">  1   2  3   4         5               6             7</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、-etc-group"><a href="#2、-etc-group" class="headerlink" title="2、/etc/group"></a>2、/etc/group</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">用户组的所有信息都存放在&#x2F;etc&#x2F;group文件中。此文件的格式是由冒号(:)隔开若干个字段，具体如下：</span><br><span class="line"></span><br><span class="line">【组名】:【口令】:【组标识号】:【组内用户列表】</span><br><span class="line">组名：是用户组的名称，由字母或数字构成，不应重复。</span><br><span class="line">口令：存放的是用户组加密后的口令字。一般Linux系统的用户组都没有口令，即这个字段一般为空或者*。</span><br><span class="line">组标识号：与用户标识号类似，也是一个整数，被系统内部用来标识组。别称GID.</span><br><span class="line">组内用户列表：是属于这个组的所有用户的列表，不同用户之间用逗号(,)分隔。</span><br><span class="line"></span><br><span class="line">如：root:x:0:</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、-etc-shadow"><a href="#3、-etc-shadow" class="headerlink" title="3、/etc/shadow"></a>3、/etc/shadow</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">root:$6$iDHbyICea.JiS60r.c0::0:99999:7:::</span><br><span class="line"></span><br><span class="line">参数一： 用户名称</span><br><span class="line">参数二： 用户加密后的密码</span><br><span class="line">参数三： 用户密码最近一次修改时间，算法是今天的时间减去jan，1，1970得到的时间间隔</span><br><span class="line">参数四： 用户最少多少天后才能改密码的天数（默认为0，表示可以在任何时间修改）</span><br><span class="line">参数五： 用户最多多少天后一定要修改密码的天数，系统会强制用户修改密码（默认为99999，改为1 也能让密码改不了）</span><br><span class="line">参数六： 过期前多少天时间会被警告（改为-1 则永远不会提示）</span><br><span class="line">参数七： 过期后多少天内账号变为inactive状态，可登陆，但不能操作</span><br><span class="line">参数八： 多少天后账号会过期，无法登陆</span><br><span class="line">参数九： 保留参数</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、-etc-gshadow"><a href="#4、-etc-gshadow" class="headerlink" title="4、/etc/gshadow"></a>4、/etc/gshadow</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;etc&#x2F;gshadow 格式如下，每个用户组独占一行；</span><br><span class="line">groupname:password:admin,admin,…:member,member,…</span><br><span class="line">第一字段：用户组</span><br><span class="line">第二字段：用户组密码，这个段可以是空的或!，如果是空的或有!，表示没有密码；</span><br><span class="line">第三字段：用户组管理者，这个字段也可为空，如果有多个用户组管理者，用,号分割；</span><br><span class="line">第四字段：组成员，如果有多个成员，用,号分割；</span><br><span class="line"></span><br><span class="line">For example:</span><br><span class="line">						house1:!::</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="查看当前用户"><a href="#查看当前用户" class="headerlink" title="查看当前用户"></a>查看当前用户</h2><p>一般使用<code>who</code>命令可以查看当前用户：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 显示当前所有已登录的用户信息（包括 闲置时间, 用户状态, 各列标题）</span></span><br><span class="line">[root@experience ~]<span class="comment"># who -uTH</span></span><br><span class="line">NAME       LINE         TIME             IDLE          PID COMMENT</span><br><span class="line">root     + pts/0        2020-01-17 08:49   .          6883 (192.168.19.1)</span><br><span class="line">root     + pts/1        2020-01-17 10:36   .          7377 (192.168.19.1)</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="用户操作命令"><a href="#用户操作命令" class="headerlink" title="用户操作命令"></a>用户操作命令</h1><h2 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h2><h3 id="1、useradd-增"><a href="#1、useradd-增" class="headerlink" title="1、useradd 增"></a>1、useradd 增</h3><p>可以使用 useradd 命令创建用户账户。使用该命令创建用户账户时，默认的用户家目录会被存放在/home 目录中，默认的 Shell 解释器为/bin/bash，而且默认会创建一个与该用户同名的基本用户组</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-d</td>
+<td>指定用户的家目录（默认为/home/username）</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>账户的到期时间，格式为 YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>指定该用户的默认 UID</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>指定一个初始的用户基本组（必须已存在）</td>
+</tr>
+<tr>
+<td>-G</td>
+<td>指定一个或多个扩展用户组</td>
+</tr>
+<tr>
+<td>-N</td>
+<td>不创建与用户同名的基本用户组</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>指定该用户的默认 Shell 解释器</td>
+</tr>
+</tbody></table>
+<p>一旦用户的解释器被设置为-s nologin，则代表该用户不能登录到系统中,有哪些解释器可以再/etc/passwd中查看，详情请参见Linux的目录结构。</p>
+<p>查看当前用户的属组和属主</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">[root@DZQ etc]# id root</span><br><span class="line">uid&#x3D;0(root) gid&#x3D;0(root) groups&#x3D;0(root)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">For example:</span><br><span class="line">useradd -d /home/userx -g nginx user02</span><br><span class="line"><span class="meta">#</span><span class="bash">创建一个名为user02的用户，但是家文件的文件名为userx，且属主是user02，属组是nginx</span></span><br><span class="line">[root@nginxs ~]# ll -d /home/userx</span><br><span class="line">drwx------ 2 user02 nginx 62 Dec 20 00:11 /home/userx</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、userdel-删"><a href="#2、userdel-删" class="headerlink" title="2、userdel 删"></a>2、userdel 删</h3><p>删除用户时, 如果用户所属组是创建用户时自动创建的和用户名称同名的组, 并且该组内没有其他用户, 则该组也会被删掉。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">参数:</span><br><span class="line">    -f    强制删除用户, 即使用户当前已登录</span><br><span class="line">    -r    删除用户, 同时删除用户主目录。如果不加r，则在/home目录下，还会有用户目录</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="3、usermod-改"><a href="#3、usermod-改" class="headerlink" title="3、usermod 改"></a>3、usermod 改</h3><p>用户的信息保存在/etc/passwd 文件中，可以直接用文本编辑器来修改其中的用户参数项目，也可以用 usermod 命令修改已经创建的用户信息</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>填写用户账户的备注信息</td>
+</tr>
+<tr>
+<td>-d  -m</td>
+<td>参数-m 与参数-d 连用，可重新指定用户的家目录并自动把旧的数据转移过去</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>账户的到期时间，格式为 YYYY-MM-DD</td>
+</tr>
+<tr>
+<td>-g</td>
+<td>变更所属用户组</td>
+</tr>
+<tr>
+<td>-G</td>
+<td>变更扩展用户组</td>
+</tr>
+<tr>
+<td>-L</td>
+<td>锁定用户禁止其登录系统</td>
+</tr>
+<tr>
+<td>-U</td>
+<td>解锁用户，允许其登录系统</td>
+</tr>
+<tr>
+<td>-s</td>
+<td>变更默认终端</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>修改用户的 UID</td>
+</tr>
+</tbody></table>
+<h3 id="4、passwd"><a href="#4、passwd" class="headerlink" title="4、passwd"></a>4、passwd</h3><p>当创建完用户，需要给用户添加密码，比如：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">useradd dzq </span><br><span class="line">passwd dzq</span><br><span class="line">---输入你想要的密码---</span><br><span class="line">---之后以用户dzq的身份登录---</span><br><span class="line">su - dzq</span><br><span class="line">passwd</span><br><span class="line">---输入你刚刚用root身份创建的密码，就可以修改密码了---</span><br><span class="line">---之后再次登录到系统中，就可以使用：---</span><br><span class="line">---ssh dzq@192.168.255.10---</span><br><span class="line">---密码：passwd---</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="组"><a href="#组" class="headerlink" title="组"></a>组</h2><h3 id="1、groupadd"><a href="#1、groupadd" class="headerlink" title="1、groupadd"></a>1、groupadd</h3><p><strong>语法：</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">groupadd [-g gid [-o]] [-r] [-f] group</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数说明：</strong></p>
+<ul>
+<li>-g：指定新建工作组的 id；</li>
+<li>-r：创建系统工作组，系统工作组的组ID小于 500；</li>
+<li>-K：覆盖配置文件 “/ect/login.defs”；</li>
+<li>-o：允许添加组 ID 号不唯一的工作组。</li>
+<li>-f,–force: 如果指定的组已经存在，此选项将失明了仅以成功状态退出。当与 -g 一起使用，并且指定的GID_MIN已经存在时，选择另一个唯一的GID（即-g关闭）。</li>
+</ul>
+<p><strong>实例：</strong></p>
+<p>创建一个新的组，并添加组 ID。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">＃groupadd －g 344 runoob</span><br></pre></td></tr></table></figure>
+
+
+
+<hr>
+<h3 id="2、groupmod"><a href="#2、groupmod" class="headerlink" title="2、groupmod"></a>2、groupmod</h3><p><strong>语法</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">groupmod [-g &lt;群组识别码&gt; &lt;-o&gt;][-n &lt;新群组名称&gt;][群组名称]</span><br></pre></td></tr></table></figure>
+
+<p><strong>参数</strong>：</p>
+<ul>
+<li>-g &lt;群组识别码&gt; 　设置欲使用的群组识别码。</li>
+<li>-o 　重复使用群组识别码。</li>
+<li>-n &lt;新群组名称&gt; 　设置欲使用的群组名称。</li>
+</ul>
+<p><strong>实例</strong></p>
+<p>修改组名</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@runoob.com ~]<span class="comment"># groupadd linuxso </span></span><br><span class="line">[root@runoob.com ~]<span class="comment"># tail -1 /etc/group </span></span><br><span class="line">linuxso:x:500: </span><br><span class="line">[root@runoob.com ~]<span class="comment"># tail -1 /etc/group </span></span><br><span class="line">linuxso:x:500: </span><br><span class="line">[root@runoob.com ~]<span class="comment"># groupmod -n linux linuxso </span></span><br><span class="line">[root@runoob.com ~]<span class="comment"># tail -1 /etc/group </span></span><br><span class="line">linux:x:500:</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="3、groupdel"><a href="#3、groupdel" class="headerlink" title="3、groupdel"></a>3、groupdel</h3><p><strong>语法：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">groupdel [群组名称]</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>实例：</strong></p>
+<p>删除一个群组</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># groupdel hnuser</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="4、gpasswd"><a href="#4、gpasswd" class="headerlink" title="4、gpasswd"></a>4、gpasswd</h3><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>–add USER                 添加用户到组</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>–delete USER             移除组中用户</td>
+</tr>
+<tr>
+<td>-Q</td>
+<td>–root CHROOT_DIR     更改组的chroot目录</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>–delete-password         删除组密码</td>
+</tr>
+<tr>
+<td>-M</td>
+<td>–members USER,…        批量添加用户到组</td>
+</tr>
+<tr>
+<td>-A</td>
+<td>–administrators ADMIN,…设置组管理员</td>
+</tr>
+</tbody></table>
+<h1 id="执行管理员权限"><a href="#执行管理员权限" class="headerlink" title="执行管理员权限"></a>执行管理员权限</h1><p>这里把执行管理员权限分为三种方式，分别是：直接切换管理员账户、临时使用管理员权限、将管理员权限写入到配置文件。</p>
+<h2 id="1、su-切换用户"><a href="#1、su-切换用户" class="headerlink" title="1、su - 切换用户"></a>1、su - 切换用户</h2><p>使用<code>su</code>命令可以切换用户，在没有参数的情况下调用时，su默认以root的身份运行一个交互式的shell。对于向后兼容性，su默认不改变当前目录，只设置环境变量HOME和SHELL(如果目标不是root，则加上USER和LOGNAME)。</p>
+<p>这个版本的su使用PAM作为认证、账户和会话管理。在其他su实验中发现一些配置选项（例如：对轮组的支持）必须通过PAM进行配置</p>
+<p><code>su</code> 后面加上 “-” 表示完全切换到新用户，即把环境变量信息也变更为新用户相应信息。如果没有指明用户名，则切换到root，如：su</p>
+<h2 id="2、sudo-临时权限"><a href="#2、sudo-临时权限" class="headerlink" title="2、sudo - 临时权限"></a>2、sudo - 临时权限</h2><p>sudo 命令用于给普通用户提供额外的权限来完成原本 root 管理员才能完成的任务，格式为“sudo [参数] 命令名称”</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-h</td>
+<td>列出帮助信息</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>列出当前用户可执行的命令</td>
+</tr>
+<tr>
+<td>-u</td>
+<td>用户名或 UID 值 以指定的用户身份执行命令</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>清空密码的有效时间，下次执行 sudo 时需要再次进行密码验证</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>在后台执行指定的命令</td>
+</tr>
+<tr>
+<td>-p</td>
+<td>更改询问密码的提</td>
+</tr>
+</tbody></table>
+<h2 id="3、修改配置文件"><a href="#3、修改配置文件" class="headerlink" title="3、修改配置文件"></a>3、修改配置文件</h2><p>配置文件  /etc/sudoers ,只有root管理员才可以使用visudo命令编辑sudo服务配置文件。visudo禁止多个用户同时修改配置sudoers文件。进入普通用户时，还是需要sudo才可以执行相关权限。</p>
+<p>第一步：vim /etc/sudoers，将第99行左右的位置，添加想要赋予权限的用户</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># sed '99,102p' -n /etc/sudoers</span></span><br><span class="line"><span class="comment">## Allow root to run any commands anywhere </span></span><br><span class="line">root	ALL=(ALL) 	ALL</span><br><span class="line">NIKI    ALL=(ALL)   ALL</span><br><span class="line"><span class="comment">## Allows members of the 'sys' group to run networking, software,</span></span><br></pre></td></tr></table></figure>
+
+<p>第二步：登录普通用户</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># su - NIKI</span></span><br><span class="line">Last login: Mon Aug 12 01:26:04 EDT 2019 on pts/0</span><br></pre></td></tr></table></figure>
+
+<p>第三部：sudo -l，这里填的密码是NIKI用户自己的密码</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[NIKI@localhost ~]$ sudo -l</span><br><span class="line">[sudo] password <span class="keyword">for</span> NIKI: </span><br><span class="line">Sorry, try again.</span><br><span class="line">[sudo] password <span class="keyword">for</span> NIKI: </span><br><span class="line">----------------------</span><br><span class="line">User NIKI may run the following commands on localhost:</span><br><span class="line">    (ALL) ALL</span><br></pre></td></tr></table></figure>
+
+<p>第四步：显示</p>
+<ul>
+<li><p>不用sudo</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[NIKI@localhost ~]$ ls /root/</span><br><span class="line">ls: cannot open directory /root/: Permission denied</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>用sudo</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[NIKI@localhost ~]$ sudo ls /root</span><br><span class="line">1.txt  de  dem	demo  mou  nin.sh  rubbish  script.sh  test.py	w.sh  w.sh~</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<p>但是考虑到生产环境中不允许某个普通用户拥有整个系统中所有命令的最高执行权（这也不符合前文提到的权限赋予原则，即尽可能少地赋予权限），因此 ALL 参数(第99行）就有些不合适了。因此只能赋予普通用户具体的命令以满足工作需求，这也受到了必要的权限约束。如果需要让某个用户只能使用 root 管理员的身份执行指定的命令，切记一定要给出该命令的绝对路径，否则系统会识别不出来。我们可以先使用 whereis 命令找出命令所对应的保存路径，然后把配置文件第 99 行的用户权限参数修改成对应的路径即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[linuxprobe@linuxprobe ~]$ <span class="built_in">exit</span></span><br><span class="line"><span class="built_in">logout</span></span><br><span class="line">[root@linuxprobe ~]<span class="comment"># whereis cat</span></span><br><span class="line">cat: /usr/bin/cat /usr/share/man/man1/cat.1.gz /usr/share/man/man1p/cat.1p.gz</span><br><span class="line">[root@linuxprobe ~]<span class="comment"># visudo</span></span><br><span class="line">96 <span class="comment">##</span></span><br><span class="line">97 <span class="comment">## Allow root to run any commands anywhere</span></span><br><span class="line">98 root ALL=(ALL) ALL</span><br><span class="line">99 linuxprobe ALL=(ALL) /usr/bin/cat</span><br></pre></td></tr></table></figure>
+<p>此时，用户只能用sudo执行cat命令。</p>
+<p>这样虽然赋予了普通用户执行管理员命令的权限，但每次执行之前都要输入密码，可以通过以下配置，使得用户执行sudo时，不用密码验证。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@linuxprobe ~]<span class="comment"># visudo</span></span><br><span class="line">………………省略部分文件内容………………</span><br><span class="line">96 <span class="comment">##</span></span><br><span class="line">97 <span class="comment">## Allow root to run any commands anywhere</span></span><br><span class="line">98 root ALL=(ALL) ALL</span><br><span class="line">99 linuxprobe ALL=NOPASSWD: /usr/sbin/poweroff</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h1><p>linux一切皆文件，但文件类型和权限有所不同，用字符来区分。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="文件类型"><a href="#文件类型" class="headerlink" title="文件类型"></a>文件类型</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-：普通文件</span><br><span class="line">d：目录文件</span><br><span class="line">l：链接文件</span><br><span class="line">b：块设备文件</span><br><span class="line">c：字符设备文件</span><br><span class="line">p：管道文件</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><table>
+<thead>
+<tr>
+<th>r</th>
+<th>w</th>
+<th>x</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读</td>
+<td>写</td>
+<td>执行</td>
+</tr>
+<tr>
+<td>4</td>
+<td>2</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p><em>对于文件而言</em></p>
+<table>
+<thead>
+<tr>
+<th>r</th>
+<th>w</th>
+<th>x</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>可以读文件的内容</td>
+<td>可以编辑文件的内容</td>
+<td>可以执行这个文件</td>
+</tr>
+</tbody></table>
+<p><em>对于目录而言</em></p>
+<table>
+<thead>
+<tr>
+<th>r</th>
+<th>w</th>
+<th>x</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>读目录中的文件属性信息</td>
+<td>可以在目录中添加或删除文件数据信息</td>
+<td>是否可以进入到目录</td>
+</tr>
+</tbody></table>
+<h3 id="权限详解"><a href="#权限详解" class="headerlink" title="权限详解"></a>权限详解</h3><figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@nginxs qiandao]# ll </span><br><span class="line">total 8 </span><br><span class="line">-rw-r--r-- 1 root root 1424 Aug 15 06:05 Dockerfile </span><br><span class="line">-rw-r--r-- 1 root root 1413 Aug 15 06:05 README.md </span><br><span class="line">drwxr-xr-x 4 root root 28 Aug 15 06:05 root </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash">权限数字对应权限组说明： 总共分为4部分 </span></span><br><span class="line">【文件或文件夹】【owner权限】【group权限】【others权限】 </span><br><span class="line">【文件是-，文件夹是d】【r/w/x相加】【r/w/x相加】【r/w/x相加】</span><br><span class="line">Linux档案的基本权限就有九个，分别是owner/group/others三种身份各有自己的read/write/execute权限</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="特殊权限"><a href="#特殊权限" class="headerlink" title="特殊权限"></a>特殊权限</h2><p>可读可写可执行不能够满足我们对安全和灵活性的需求，因此便有了 SUID、SGID 与 SBIT 的特殊权限位</p>
+<h3 id="SUID"><a href="#SUID" class="headerlink" title="SUID"></a>SUID</h3><p>SUID 是一种对二进制程序进行设置的特殊权限，可以让二进制程序的执行者临时拥有属主的权限（仅对拥有执行权限的二进制程序有效）。</p>
+<blockquote>
+<p>例如，所有用户都可以执行 passwd 命令来修改自己的用户密码，而用户密码保存在/etc/shadow 文件中。仔细查看这个文件就会发现它的默认权限是 000，也就是说除了 root 管理员以外，所有用户都没有查看或编辑该文件的权限。但是，在使用 passwd 命令时如果加上 SUID 特殊权限位，就可让普通用户临时获得程序所有者的身份，把变更的密码信息写入到 shadow 文件中。这很像我们在古装剧中见到的手持尚方宝剑的钦差大臣，他手持的尚方宝剑代表的是皇上的权威，因此可以惩戒贪官，但这并不意味着他永久成为了皇上。因此这只是一种有条件的、临时的特殊权限授权方法。</p>
+</blockquote>
+<p>查看 passwd 命令属性时发现所有者的权限由 rwx 变成了 rws，其中 x 改变成 s 就意味着该文件被赋予了 SUID 权限。另外有读者会好奇，那么如果原本的权限是 rw-呢？如果原先权限位上没有 x 执行权限，那么被赋予特殊权限后将变成大写的 S。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@nginx ~]# ll /usr/bin/passwd </span><br><span class="line">-rwsr-xr-x. 1 root root 27856 Aug  8 21:39 /usr/bin/passwd</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chmod 4700 test.txt #添加suid权限</span><br><span class="line">-rws------ 1 root root 0 Dec 20 01:48 test.txt</span><br><span class="line"></span><br><span class="line">chmod 700 test.txt  #取消suid权限</span><br><span class="line">-rwx------ 1 root root 0 Dec 20 01:48 test.txt</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">对于当前位没有x执行权限，那么则显示大写的S</span><br><span class="line">chmod 4600 test.txt </span><br><span class="line">-rwS------ 1 root root 0 Dec 20 01:48 test.txt</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="SGID"><a href="#SGID" class="headerlink" title="SGID"></a>SGID</h3><p>SGID 主要实现如下两种功能：</p>
+<p>1、让执行者临时拥有属组的权限（对拥有执行权限的二进制程序进行设置）；</p>
+<p>2、在某个目录中创建的文件自动继承该目录的用户组（只可以对目录进行设置）。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@DZQ dev]<span class="comment"># ll mem </span></span><br><span class="line">crw-r----- 1 root kmem 1, 1 Aug  6 08:50 mem</span><br></pre></td></tr></table></figure>
+<p>1、在某个目录中创建的文件自动继承该目录的用户组<br />2、由于 ps 命令被增加了 SGID 特殊权限位，所以当用户执行该命令时，也就临时获取到了 system 用户组的权限，从而可以顺利地读取设备文件了</p>
+<h3 id="SBIT"><a href="#SBIT" class="headerlink" title="SBIT"></a>SBIT</h3><p>Sticky Bit ,SBIT 特殊权限位可确保用户只能删除自己的文件，而不能删除其他用户的文件。换句话说，当对某个目录设置了 SBIT 粘滞位权限后，那么该目录中的文件就只能被其所有者执行删除操作了与前面所讲的     SUID 和 SGID 权限显示方法不同，当目录被设置 SBIT 特殊权限位后，文件的其他人权限部分的 x 执行权限就会被替换成 t 或者 T，原本有 x 执行权限则会写成 t，原本没有 x 执行权限则会被写成 T。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[linuxprobe@linuxprobe tmp]$ ls -ald /tmp</span><br><span class="line">drwxrwxrwt. 17 root root 4096 Feb 11 13:03 /tmp</span><br></pre></td></tr></table></figure>
+
+<p>要是也想对其他目录来设置 SBIT 特殊权限位，用 chmod 命令就可以了。对应的参数 o+t 代表设置 SBIT 粘滞位权限</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@linuxprobe ~]<span class="comment"># chmod -R o+t linux/</span></span><br><span class="line">[root@linuxprobe ~]<span class="comment"># ls -ld linux/</span></span><br><span class="line">drwxr-xr-t. 2 root root 6 Feb 11 19:34 linux/</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="隐藏权限"><a href="#隐藏权限" class="headerlink" title="隐藏权限"></a>隐藏权限</h2><h3 id="chattr"><a href="#chattr" class="headerlink" title="chattr"></a>chattr</h3><p>chattr 命令用于设置文件的隐藏权限，格式为“chattr [参数] 文件”。如果想要把某个隐藏功能添加到文件上，则需要在命令后面追加“+参数”，如果想要把某个隐藏功能移出文件，则需要追加“-参数”。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>i</td>
+<td>无法对文件进行修改；若对目录设置了该参数，则仅能修改其中的而不能新建或删除文件</td>
+</tr>
+<tr>
+<td>a</td>
+<td>仅允许补充（追加）内容，无法覆盖/删除内容（Append Only）</td>
+</tr>
+<tr>
+<td>S</td>
+<td>文件内容在变更后立即同步到硬盘（sync）</td>
+</tr>
+<tr>
+<td>s</td>
+<td>彻底从硬盘中删除，不可恢复（用 0 填充原文件所在硬盘区域）</td>
+</tr>
+<tr>
+<td>A</td>
+<td>不再修改这个文件或目录的最后访问时间（atime）</td>
+</tr>
+<tr>
+<td>b</td>
+<td>不再修改文件或目录的存取时间</td>
+</tr>
+<tr>
+<td>D</td>
+<td>检查压缩文件中的错误</td>
+</tr>
+<tr>
+<td>d</td>
+<td>使用 dump 命令备份时忽略本文件/目录</td>
+</tr>
+<tr>
+<td>c</td>
+<td>默认将文件或目录进行压缩</td>
+</tr>
+<tr>
+<td>u</td>
+<td>当删除该文件后依然保留其在硬盘中的数据，方便日后恢复</td>
+</tr>
+<tr>
+<td>t</td>
+<td>让文件系统支持尾部合并（tail-merging）</td>
+</tr>
+<tr>
+<td>X</td>
+<td>可以直接访问压缩文件中的内容</td>
+</tr>
+</tbody></table>
+<h3 id="lsattr"><a href="#lsattr" class="headerlink" title="lsattr"></a>lsattr</h3><p>用chattr执行改变文件或目录的属性，可执行lsattr指令查询其属性。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-a</td>
+<td>显示所有文件和目录，包括以”.”为名称开头字符的额外内建，现行目录”.”与上层目录”..”</td>
+</tr>
+<tr>
+<td>-d</td>
+<td>显示，目录名称，而非其内容。</td>
+</tr>
+<tr>
+<td>-R</td>
+<td>递归处理，将指定目录下的所有文件及子目录一并处理</td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span> example</span><br><span class="line">使用隐藏权限，防止某个文件被串改。</span><br><span class="line"></span><br><span class="line">[root@nginx myhouse]<span class="comment"># chattr +i hello.md </span></span><br><span class="line">[root@nginx myhouse]<span class="comment"># lsattr </span></span><br><span class="line">----i----------- ./hello.md</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="文件操作命令"><a href="#文件操作命令" class="headerlink" title="文件操作命令"></a>文件操作命令</h1><h2 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h2><p>chmod 可以藉以控制文件如何被他人所调用。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">for example:</span><br><span class="line">  chmod 700 test.md</span><br><span class="line">  chmod wxr-rx-rx test.md</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-c</td>
+<td>显示更改的部分的信息</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>忽略错误信息</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>修复符号链接</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示详细的处理信息</td>
+</tr>
+<tr>
+<td>-R</td>
+<td>处理指定目录以及其子目录下的所有文件</td>
+</tr>
+</tbody></table>
+<h2 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h2><p>chown 将指定文件的拥有者改为指定的用户或组</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user</td>
+<td>新的文件拥有者的使用者 ID</td>
+</tr>
+<tr>
+<td>group</td>
+<td>新的文件拥有者的使用者组(group)</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>显示更改的部分的信息</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>忽略错误信息</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>修复符号链接</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>显示详细的处理信息</td>
+</tr>
+<tr>
+<td>-R</td>
+<td>处理指定目录以及其子目录下的所有文件</td>
+</tr>
+</tbody></table>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">For example:</span><br><span class="line">更改一个目录文件以及其下子文件或者子目录的属主和属组。</span><br><span class="line"></span><br><span class="line">mkdir myhouse</span><br><span class="line">cd myhouse/</span><br><span class="line">touch hello.md</span><br><span class="line"><span class="meta">#</span><span class="bash"> ll</span></span><br><span class="line"><span class="meta">#</span><span class="bash">-rw-r--r-- 1 root root 0 Dec 20 08:36 hello.md</span></span><br><span class="line">cd ..</span><br><span class="line"><span class="meta">#</span><span class="bash"> ll </span></span><br><span class="line"><span class="meta">#</span><span class="bash"> drwxr-xr-x 2 root root 22 Dec 20 08:36 myhouse</span></span><br><span class="line">chown -Rc dzq:nginx myhouse/</span><br><span class="line"><span class="meta">#</span><span class="bash">changed ownership of ‘myhouse/hello.md’ from root:root to dzq:nginx</span></span><br><span class="line"><span class="meta">#</span><span class="bash">changed ownership of ‘myhouse/’ from root:root to dzq:nginx</span></span><br><span class="line">ll</span><br><span class="line"><span class="meta">#</span><span class="bash">total 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash">drwxr-xr-x 2 dzq nginx 22 Dec 20 08:36 myhouse</span></span><br><span class="line">cd myhouse/</span><br><span class="line">ll</span><br><span class="line"><span class="meta">#</span><span class="bash">total 0</span></span><br><span class="line"><span class="meta">#</span><span class="bash">-rw-r--r-- 1 dzq nginx 0 Dec 20 08:38 hello.md</span></span><br><span class="line"></span><br><span class="line">----由此可见，myhouse所属的用户和组都已经被更改，且其子目录里的hello.md也被更改了。</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="chgrp"><a href="#chgrp" class="headerlink" title="chgrp"></a>chgrp</h2><p>变更文件或目录的所属群组。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">chgrp -v bin myhouse/</span><br><span class="line"><span class="meta">#</span><span class="bash">将myhouse属组更改为bin</span></span><br><span class="line"></span><br><span class="line">与chown的区别,chown是将文件或者目录的属主更改，而chgrp是更改属组</span><br><span class="line">chown root myhouse/</span><br><span class="line"></span><br><span class="line">当chown以chown root:nginx world2.md的形式更改时，即更改了属主又更改了属组</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@node ~]<span class="comment"># ll</span></span><br><span class="line">-rwxrwxrwx 1 root root 9 Jan 17 12:26 demo</span><br><span class="line"><span class="comment">#改变属主</span></span><br><span class="line">[root@node ~]<span class="comment"># chown NIKI demo</span></span><br><span class="line">[root@node ~]<span class="comment"># ll</span></span><br><span class="line">-rwxrwxrwx 1 NIKI root 9 Jan 17 12:26 demo</span><br><span class="line"></span><br><span class="line"><span class="comment">#改变属组</span></span><br><span class="line">[root@node ~]<span class="comment"># chgrp NIKI demo</span></span><br><span class="line">[root@node ~]<span class="comment"># ll</span></span><br><span class="line">-rwxrwxrwx 1 NIKI NIKI 9 Jan 17 12:26 demo</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="文件访问控制列表"><a href="#文件访问控制列表" class="headerlink" title="文件访问控制列表"></a>文件访问控制列表</h1><p>对指定的用户进行单独的权限控制，就需要用到文件访问控制列表（ACL，Access Control List）</p>
+<h2 id="setfacl"><a href="#setfacl" class="headerlink" title="setfacl"></a>setfacl</h2><p>Set File Acess Control List</p>
+<p>chmod命令可以把文件权限分为u,g,o三个组，而setfacl可以对每一个文件或目录设置更精确的文件权限。换句话说，setfacl可以更精确的控制权限的分配。比如：让某一个用户对某一个文件具有某种权限。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>-m</td>
+<td>更改当前文件的ACL</td>
+</tr>
+<tr>
+<td>-M, –modify-file=file</td>
+<td>从文件中读取访问列表条目ACL进行修改</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>根据访问控制列表移除条目</td>
+</tr>
+<tr>
+<td>-b</td>
+<td>删除所有扩展访问控制列表条目</td>
+</tr>
+<tr>
+<td>-k</td>
+<td>移除默认访问控制列表</td>
+</tr>
+<tr>
+<td>-n  –no-mask</td>
+<td>不重新计算有效权限掩码</td>
+</tr>
+<tr>
+<td>-d  –default</td>
+<td>应用到默认访问控制列表的操作</td>
+</tr>
+<tr>
+<td>-R</td>
+<td>递归操作子目录</td>
+</tr>
+<tr>
+<td>-L</td>
+<td>依照系统逻辑，跟随符号链接</td>
+</tr>
+<tr>
+<td>-P</td>
+<td>依照自然逻辑，不跟随符号链接</td>
+</tr>
+</tbody></table>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@localhost ~]<span class="comment"># setfacl -Rm u:root:rwx /root/dem</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="getfacl"><a href="#getfacl" class="headerlink" title="getfacl"></a>getfacl</h2><p>显示文件上的ACL信息</p>
+<p>常见用法</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@nginx ~]<span class="comment"># getfacl hello2.md </span></span><br><span class="line"><span class="comment"># file: hello2.md</span></span><br><span class="line"><span class="comment"># owner: root</span></span><br><span class="line"><span class="comment"># group: root</span></span><br><span class="line">user::rw-</span><br><span class="line">group::r--</span><br><span class="line">other::r--</span><br><span class="line"></span><br><span class="line">[root@nginx ~]<span class="comment"># setfacl -m u:dzq:rwx hello2.md </span></span><br><span class="line"></span><br><span class="line">[root@nginx ~]<span class="comment"># getfacl hello2.md </span></span><br><span class="line"><span class="comment"># file: hello2.md</span></span><br><span class="line"><span class="comment"># owner: root</span></span><br><span class="line"><span class="comment"># group: root</span></span><br><span class="line">user::rw-</span><br><span class="line">user:dzq:rwx</span><br><span class="line">group::r--</span><br><span class="line">mask::rwx</span><br><span class="line">other::r--</span><br></pre></td></tr></table></figure>
+
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="../../../../categories/Linux/">Linux</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="../../../02/12/RIP%20&%20EIGRP%20&%20ISIS/">
+            
+                RIP &amp; EIGRP &amp; ISIS
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="../../16/Linux_network_storage/">
+            
+                Linux网络存储
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章搜索</strong></h3>
+        <div class="search-form">
+  <form
+    id="searchForm"
+    method="GET"
+    action="https://www.baidu.com/s"
+    ectype="application/x-www-form-urlencoded"
+    target="_blank"
+    autocomplete="false"
+    onsubmit="javascript: return false;">
+    <input
+      id="searchKeyword"
+      type="text"
+      class="form-control"
+      placeholder="输入关键字搜索"
+      autocomplete="false"
+    />
+    <input id="searchKeywordHidden" type="hidden" name="wd" />
+    <input id="searchButton" class="btn" type="submit" value="搜索" />
+  </form>
+</div>
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="../../../../categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E7%BC%96%E7%A8%8B/">编程</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/Linux/">Linux</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E5%AE%B9%E5%99%A8/">容器</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E8%BF%90%E7%BB%B4/">运维</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E6%95%85%E9%9A%9C/">故障</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="../../../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键">快捷键 (6)</a>
+  
+    <a class="tag-item" href="../../../../tags/Ansible/" title="Ansible">Ansible (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Django/" title="Django">Django (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/history/" title="history">history (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Docker/" title="Docker">Docker (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/KVM/" title="KVM">KVM (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/LVS/" title="LVS">LVS (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Keepalived/" title="Keepalived">Keepalived (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Matplotlib/" title="Matplotlib">Matplotlib (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/NodeJS/" title="NodeJS">NodeJS (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/%E9%9A%8F%E7%AC%94/" title="随笔">随笔 (2)</a>
+  
+    <a class="tag-item" href="../../../../tags/OSPF%E5%8D%8F%E8%AE%AE/" title="OSPF协议">OSPF协议 (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/ARP%E5%8D%8F%E8%AE%AE/" title="ARP协议">ARP协议 (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/MySQL/" title="MySQL">MySQL (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Linux/" title="Linux">Linux (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/%E5%B0%8F%E5%9E%8B%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE/" title="小型路由协议">小型路由协议 (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/%E7%88%AC%E8%99%AB/" title="爬虫">爬虫 (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Redis/" title="Redis">Redis (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/VsCode/" title="VsCode">VsCode (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Switch/" title="Switch">Switch (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Vue/" title="Vue">Vue (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/WebSocket/" title="WebSocket">WebSocket (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/NFS/" title="NFS">NFS (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://www.ujslxw.com/" target="_blank" title="老刘的博客">老刘的博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2020
+    
+
+    <a href="../../../../index.html">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+
+<script src="../../../../js/main.js?v=1593081461659.js"></script>
+
+</body>
+</html>

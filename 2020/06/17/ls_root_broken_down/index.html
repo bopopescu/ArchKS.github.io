@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>ls根目录卡死 | zen&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="zen, 运维, 云计算" >
+    <meta name="description" content="杜振铨的博客小岛" >
+
+    
+    <link rel="alternative" href="/atom.xml" title="zen&#39;s blog" type="application/atom+xml" >
+    
+    
+    <link rel="shortcut icon" href="../../../../favicon.ico" >
+    
+    
+<link rel="stylesheet" href="../../../../css/style.css">
+
+    <!--[if lt IE 9]>
+    
+<script src="../../../../js/html5.js"></script>
+
+    <![endif]-->
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d5ebf515ab530cfbdda5f5c85093fb41";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/" target="_blank" rel="noopener">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="../../../../index.html">
+                <div class="cover">
+                    <span class="name">zen&#39;s blog</span>
+                    <span class="description"></span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="" class="item ">
+                <a href="../../../../index.html" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="" class="item ">
+                <a href="../../../../lab/" title="这是个BUG" class="icon-lab">&nbsp;这是个BUG</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/archks" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://pages.coding.me" target="_blank">Hosted by Coding Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://www.yuque.com/u174775" class="sinaweibo" target="_blank"><b>■</b> 语雀</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        博客
+                        <span class="popover">
+                            <img src="../../../../img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/jelon.jpg" alt="avatar" title="Jelon" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>ls根目录卡死</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        Jelon 发表于
+        <time datetime="2020-06-17T14:46:04.000Z">2020-06-17</time>
+    </p>
+    <div class="post-content">
+        <p>无善无恶心之体，有善有恶意之动<br>知善知恶是良知，为善去恶是格物</p>
+<a id="more"></a>
+
+<h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>只要涉及到根目录，使用ls和df命令就会出现卡死情况。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@zen] <span class="built_in">pwd</span></span><br><span class="line">/root</span><br><span class="line">[root@zen] ls /</span><br><span class="line">^C</span><br><span class="line">[root@zen] df h</span><br><span class="line">^C</span><br><span class="line">[root@zen] ls /opt</span><br><span class="line">containerd  google  jumpserver  mysql  prometheus</span><br></pre></td></tr></table></figure>
+
+<h1 id="踩坑"><a href="#踩坑" class="headerlink" title="踩坑"></a>踩坑</h1><p>1、起初在网上找了一些方法，大多是目录挂载的问题；里面叫你用strace定位问题，然后在lstate的时候会发现是目录没挂载上去，但是我用strace的时候，是正常退出的，因为流程过长，strace的log放在结尾了。</p>
+<p>类似于这样： </p>
+<blockquote>
+<p><a href="https://blog.51cto.com/chaichuan/2104093" target="_blank" rel="noopener">https://blog.51cto.com/chaichuan/2104093</a><br><a href="https://blog.csdn.net/u010801696/article/details/78490103" target="_blank" rel="noopener">https://blog.csdn.net/u010801696/article/details/78490103</a></p>
+</blockquote>
+<p>2、后来发现可能是日志文件过大，或者是文件细碎导致ls太慢，通常是/var/spool/postfix/这个目录下的maildrop太大，但是我看了一下我的，并没有太大。maildrop 爆满的问题一般是 crontab 未屏蔽错误造成的,可以将crontab里的条目指定到&amp;&gt;/dev/null</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@zen]<span class="comment"># ll /var/spool/postfix/</span></span><br><span class="line">total 56</span><br><span class="line">drwx------. 2 postfix root     4096 Oct 31  2018 active</span><br><span class="line">drwx------. 2 postfix root     4096 Oct 31  2018 bounce</span><br><span class="line">drwx------. 2 postfix root     4096 Oct 31  2018 flush</span><br><span class="line">drwx------. 2 postfix root     4096 Oct 31  2018 hold</span><br><span class="line">drwx------. 2 postfix root     4096 Oct 31  2018 incoming</span><br><span class="line">drwx-wx---. 2 postfix postdrop 4096 Oct 31  2018 maildrop</span><br></pre></td></tr></table></figure>
+
+<p>3、第三种可能是磁盘挂载的问题，根目录丢失之类的。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat /etc/fstab</span><br><span class="line">cat /etc/mtab</span><br><span class="line">grep -v rootfs /proc/mounts <span class="comment"># 修复</span></span><br></pre></td></tr></table></figure>
+
+<p>/etc/fstab 中的挂载点是开机加载的<br>/etc/mtab  中的挂载点是内核动态实时更新的<br>简单来说就是一次修复挂载的问题，但是我做完这几部操作，依旧没有用</p>
+<blockquote>
+<p><a href="https://zhang.ge/5107.html" target="_blank" rel="noopener">https://zhang.ge/5107.html</a></p>
+</blockquote>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>其实和另一台服务器有关，我们暂时把它称之为O[other]，我们这台服务器为M[me],O上开启了NFS服务，Me服务器挂载了O上的磁盘。过了段时间，O服务器进行了重装，但是M服务器还在挂载O上的磁盘，此时other服务器没有开启NFS服务，但是Me服务器依旧挂载着O的磁盘。</p>
+<p>于是执行ls / 命令的时候，me服务器加载目录，加载前几个好好的，在strace中可以看到，但加载到/mount_point的时候，就会向O服务器发送请求，[应该是某个NFSBug，明明O上的NFS Down了，这个M服务器还是在一直等待响应]，于是看上去就像是me服务器卡死了，其实它是在等待NFS的响应。</p>
+<p>采取的解决措施：重启，有尝试过umount卸载挂载点，但会卡住。</p>
+<hr>
+<p>2020/6/22 看鸟哥Linux私房菜发现也有这方面的情况：</p>
+<p>只要有用到文件系统， 那么整个目录树系统就会主动的去查询全部的挂载点。如果你的 NFS 服务器与客户端之间的联机因为网络问题， 或者是服务器端先关机了，却没有通知客户端，那么客户端只要动到文件系统的指令 (例如 df, ls, cp 等等) ，整个系统就会慢到爆！因为你必须要等到文件系统搜寻等待逾时后，系统才会饶了你！(鸟哥等过 df 指令 30 分钟过…)</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>参数功能</th>
+<th>预设参数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>fg，bg</td>
+<td>当执行挂载时，该挂载的行为会在前景 (fg) 还是在背景 (bg) 执行？ 若在前景执行时，则 mount 会持续尝试挂载，直到成功或 time out 为止，若为背景执行， 则 mount 会在背景持续多次进行 mount ，而不会影响到前景的程序操作。 如果你的网络联机有点不稳定，或是服务器常常需要开关机，那建议使用 bg 比较妥当。</td>
+<td>fg</td>
+</tr>
+<tr>
+<td>soft，hard</td>
+<td>如果是 hard 的情况，则当两者之间有任何一部主机脱机，则 RPC 会持续的呼叫，直到对方恢复联机为止。如果是 soft 的话，那 RPC 会在 time out 后『重复』呼叫，而非『持续』呼叫， 因此系统的延迟会比较不这么明显。同上，如果你的服务器可能开开关关，建议用 soft 喔！</td>
+<td>hard</td>
+</tr>
+<tr>
+<td>intr</td>
+<td>当你使用上头提到的 hard 方式挂载时，若加上 intr 这个参数， 则当 RPC 持续呼叫中，该次的呼叫是可以被中断的 (interrupted)。</td>
+<td>没有</td>
+</tr>
+<tr>
+<td>rsize，wsize</td>
+<td>读出(rsize)与写入(wsize)的区块大小 (block size)。 这个设定值可以影响客户端与服务器端传输数据的缓冲记忆容量。一般来说， 如果在局域网络内 (LAN) ，并且客户端与服务器端都具有足够的内存，那这个值可以设定大一点， 比如说 32768 (bytes) 等，提升缓冲记忆区块将可提升 NFS 文件系统的传输能力！ 但要注意设定的值也不要太大，最好是达到网络能够传输的最大值为限。</td>
+<td>rsize=1024 wsize=1024</td>
+</tr>
+</tbody></table>
+<p>for example:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ mount -t nfs -o nosuid,noexec,nodev,rw  192.168.1.1:/data /tmp</span><br></pre></td></tr></table></figure>
+
+
+<p>最后补充下NFS无法挂载的原因分析：</p>
+<ol>
+<li>客户端主机和IP网段不被允许使用, ‘mount to NFS x.x.x.x failed:system error connection refused’</li>
+<li>服务器或客户端服务未启动,’mount to NFS x.x.x.x failed:RPC Error : programe not registered’</li>
+<li>被防火墙拦截</li>
+</ol>
+<h1 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@zen]<span class="comment"># strace  ls / </span></span><br><span class="line">execve(<span class="string">"/usr/bin/ls"</span>, [<span class="string">"ls"</span>, <span class="string">"/"</span>], [/* 23 vars */]) = 0</span><br><span class="line">brk(NULL)                               = 0x169f000</span><br><span class="line">mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fd6d51a1000</span><br><span class="line">access(<span class="string">"/etc/ld.so.preload"</span>, R_OK)      = -1 ENOENT (No such file or directory)</span><br><span class="line">open(<span class="string">"/etc/ld.so.cache"</span>, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=52409, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 52409, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fd6d5194000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">open(<span class="string">"/lib64/libselinux.so.1"</span>, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line"><span class="built_in">read</span>(3, <span class="string">"\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\220j\0\0\0\0\0\0"</span>..., 832) = 832</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=155744, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 2255216, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fd6d4d5a000</span><br><span class="line">mprotect(0x7fd6d4d7e000, 2093056, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fd6d4f7d000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x23000) = 0x7fd6d4f7d000</span><br><span class="line">mmap(0x7fd6d4f7f000, 6512, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fd6d4f7f000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">open(<span class="string">"/lib64/libcap.so.2"</span>, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line"><span class="built_in">read</span>(3, <span class="string">"\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\20\26\0\0\0\0\0\0"</span>..., 832) = 832</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=20048, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 2114112, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fd6d4b55000</span><br><span class="line">mprotect(0x7fd6d4b59000, 2093056, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fd6d4d58000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3000) = 0x7fd6d4d58000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">open(<span class="string">"/lib64/libacl.so.1"</span>, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line"><span class="built_in">read</span>(3, <span class="string">"\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0p\37\0\0\0\0\0\0"</span>..., 832) = 832</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=37064, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fd6d5193000</span><br><span class="line">mmap(NULL, 2130560, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fd6d494c000</span><br><span class="line">mprotect(0x7fd6d4953000, 2097152, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fd6d4b53000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x7000) = 0x7fd6d4b53000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">open(<span class="string">"/lib64/libc.so.6"</span>, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line"><span class="built_in">read</span>(3, <span class="string">"\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0`&amp;\2\0\0\0\0\0"</span>..., 832) = 832</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=2156240, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 3985920, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fd6d457e000</span><br><span class="line">mprotect(0x7fd6d4741000, 2097152, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fd6d4941000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1c3000) = 0x7fd6d4941000</span><br><span class="line">mmap(0x7fd6d4947000, 16896, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fd6d4947000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">open(<span class="string">"/lib64/libpcre.so.1"</span>, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line"><span class="built_in">read</span>(3, <span class="string">"\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\360\25\0\0\0\0\0\0"</span>..., 832) = 832</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=402384, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 2494984, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fd6d431c000</span><br><span class="line">mprotect(0x7fd6d437c000, 2097152, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fd6d457c000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x60000) = 0x7fd6d457c000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">open(<span class="string">"/lib64/libdl.so.2"</span>, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line"><span class="built_in">read</span>(3, <span class="string">"\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0P\16\0\0\0\0\0\0"</span>..., 832) = 832</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=19248, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fd6d5192000</span><br><span class="line">mmap(NULL, 2109744, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fd6d4118000</span><br><span class="line">mprotect(0x7fd6d411a000, 2097152, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fd6d431a000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x2000) = 0x7fd6d431a000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">open(<span class="string">"/lib64/libattr.so.1"</span>, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line"><span class="built_in">read</span>(3, <span class="string">"\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\320\23\0\0\0\0\0\0"</span>..., 832) = 832</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=19896, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 2113904, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fd6d3f13000</span><br><span class="line">mprotect(0x7fd6d3f17000, 2093056, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fd6d4116000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3000) = 0x7fd6d4116000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">open(<span class="string">"/lib64/libpthread.so.0"</span>, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line"><span class="built_in">read</span>(3, <span class="string">"\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0&gt;\0\1\0\0\0\200m\0\0\0\0\0\0"</span>..., 832) = 832</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0755, st_size=142144, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 2208904, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fd6d3cf7000</span><br><span class="line">mprotect(0x7fd6d3d0e000, 2093056, PROT_NONE) = 0</span><br><span class="line">mmap(0x7fd6d3f0d000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x16000) = 0x7fd6d3f0d000</span><br><span class="line">mmap(0x7fd6d3f0f000, 13448, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fd6d3f0f000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fd6d5191000</span><br><span class="line">mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fd6d518f000</span><br><span class="line">arch_prctl(ARCH_SET_FS, 0x7fd6d518f840) = 0</span><br><span class="line">mprotect(0x7fd6d4941000, 16384, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fd6d3f0d000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fd6d4116000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fd6d431a000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fd6d457c000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fd6d4b53000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fd6d4d58000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x7fd6d4f7d000, 4096, PROT_READ) = 0</span><br><span class="line">mprotect(0x61a000, 4096, PROT_READ)     = 0</span><br><span class="line">mprotect(0x7fd6d51a2000, 4096, PROT_READ) = 0</span><br><span class="line">munmap(0x7fd6d5194000, 52409)           = 0</span><br><span class="line">set_tid_address(0x7fd6d518fb10)         = 23051</span><br><span class="line">set_robust_list(0x7fd6d518fb20, 24)     = 0</span><br><span class="line">rt_sigaction(SIGRTMIN, &#123;0x7fd6d3cfd860, [], SA_RESTORER|SA_SIGINFO, 0x7fd6d3d06630&#125;, NULL, 8) = 0</span><br><span class="line">rt_sigaction(SIGRT_1, &#123;0x7fd6d3cfd8f0, [], SA_RESTORER|SA_RESTART|SA_SIGINFO, 0x7fd6d3d06630&#125;, NULL, 8) = 0</span><br><span class="line">rt_sigprocmask(SIG_UNBLOCK, [RTMIN RT_1], NULL, 8) = 0</span><br><span class="line">getrlimit(RLIMIT_STACK, &#123;rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY&#125;) = 0</span><br><span class="line">statfs(<span class="string">"/sys/fs/selinux"</span>, 0x7ffca215e650) = -1 ENOENT (No such file or directory)</span><br><span class="line">statfs(<span class="string">"/selinux"</span>, 0x7ffca215e650)      = -1 ENOENT (No such file or directory)</span><br><span class="line">brk(NULL)                               = 0x169f000</span><br><span class="line">brk(0x16c0000)                          = 0x16c0000</span><br><span class="line">open(<span class="string">"/proc/filesystems"</span>, O_RDONLY)     = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0444, st_size=0, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fd6d51a0000</span><br><span class="line"><span class="built_in">read</span>(3, <span class="string">"nodev\tsysfs\nnodev\trootfs\nnodev\tr"</span>..., 1024) = 371</span><br><span class="line"><span class="built_in">stat</span>(<span class="string">"/etc/sysconfig/64bit_strstr_via_64bit_strstr_sse2_unaligned"</span>, 0x7ffca215dbb0) = -1 ENOENT (No such file or directory)</span><br><span class="line"><span class="built_in">read</span>(3, <span class="string">""</span>, 1024)                       = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">munmap(0x7fd6d51a0000, 4096)            = 0</span><br><span class="line">access(<span class="string">"/etc/selinux/config"</span>, F_OK)     = 0</span><br><span class="line">open(<span class="string">"/usr/lib/locale/locale-archive"</span>, O_RDONLY|O_CLOEXEC) = 3</span><br><span class="line">fstat(3, &#123;st_mode=S_IFREG|0644, st_size=106172832, ...&#125;) = 0</span><br><span class="line">mmap(NULL, 106172832, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fd6cd7b5000</span><br><span class="line">close(3)                                = 0</span><br><span class="line">ioctl(1, TCGETS, &#123;B38400 opost isig icanon <span class="built_in">echo</span> ...&#125;) = 0</span><br><span class="line">ioctl(1, TIOCGWINSZ, &#123;ws_row=39, ws_col=105, ws_xpixel=0, ws_ypixel=0&#125;) = 0</span><br><span class="line"><span class="built_in">stat</span>(<span class="string">"/"</span>, &#123;st_mode=S_IFDIR|0555, st_size=4096, ...&#125;) = 0</span><br><span class="line">openat(AT_FDCWD, <span class="string">"/"</span>, O_RDONLY|O_NONBLOCK|O_DIRECTORY|O_CLOEXEC) = 3</span><br><span class="line">getdents(3, /* 29 entries */, 32768)    = 800</span><br><span class="line">getdents(3, /* 0 entries */, 32768)     = 0</span><br><span class="line">close(3)                                = 0</span><br><span class="line">fstat(1, &#123;st_mode=S_IFCHR|0620, st_rdev=makedev(136, 0), ...&#125;) = 0</span><br><span class="line">mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fd6d51a0000</span><br><span class="line">write(1, <span class="string">"baiduds  CloudResetPwdAgentNew\t "</span>..., 76baiduds  CloudResetPwdAgentNew	   data  home	lost+found  opt   run	sys  usr</span><br><span class="line">) = 76</span><br><span class="line">write(1, <span class="string">"bin\t CloudResetPwdUpdateAgent  d"</span>..., 70bin	 CloudResetPwdUpdateAgent  dev	 lib	media	    proc  sbin	tmp  var</span><br><span class="line">) = 70</span><br><span class="line">write(1, <span class="string">"boot\t CloudrResetPwdAgent\t   etc"</span>..., 62boot	 CloudrResetPwdAgent	   etc	 lib64	mnt	    root  srv	tms</span><br><span class="line">) = 62</span><br><span class="line">close(1)                                = 0</span><br><span class="line">munmap(0x7fd6d51a0000, 4096)            = 0</span><br><span class="line">close(2)                                = 0</span><br><span class="line">exit_group(0)                           = ?</span><br><span class="line">+++ exited with 0 +++</span><br></pre></td></tr></table></figure>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="../../../../categories/%E6%95%85%E9%9A%9C/">故障</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="../../../../tags/NFS/" title="NFS">NFS</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="../../18/Win_ShotCut/">
+            
+                Win快捷键
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="../../16/Vimium_ShotCut/">
+            
+                Vimium快捷键
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章搜索</strong></h3>
+        <div class="search-form">
+  <form
+    id="searchForm"
+    method="GET"
+    action="https://www.baidu.com/s"
+    ectype="application/x-www-form-urlencoded"
+    target="_blank"
+    autocomplete="false"
+    onsubmit="javascript: return false;">
+    <input
+      id="searchKeyword"
+      type="text"
+      class="form-control"
+      placeholder="输入关键字搜索"
+      autocomplete="false"
+    />
+    <input id="searchKeywordHidden" type="hidden" name="wd" />
+    <input id="searchButton" class="btn" type="submit" value="搜索" />
+  </form>
+</div>
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="../../../../categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E7%BC%96%E7%A8%8B/">编程</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/Linux/">Linux</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E5%AE%B9%E5%99%A8/">容器</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E8%BF%90%E7%BB%B4/">运维</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E6%95%85%E9%9A%9C/">故障</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="../../../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键">快捷键 (6)</a>
+  
+    <a class="tag-item" href="../../../../tags/Ansible/" title="Ansible">Ansible (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Django/" title="Django">Django (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/history/" title="history">history (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Docker/" title="Docker">Docker (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/KVM/" title="KVM">KVM (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/LVS/" title="LVS">LVS (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Keepalived/" title="Keepalived">Keepalived (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Matplotlib/" title="Matplotlib">Matplotlib (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/NodeJS/" title="NodeJS">NodeJS (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/%E9%9A%8F%E7%AC%94/" title="随笔">随笔 (2)</a>
+  
+    <a class="tag-item" href="../../../../tags/OSPF%E5%8D%8F%E8%AE%AE/" title="OSPF协议">OSPF协议 (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/ARP%E5%8D%8F%E8%AE%AE/" title="ARP协议">ARP协议 (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/MySQL/" title="MySQL">MySQL (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Linux/" title="Linux">Linux (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/%E5%B0%8F%E5%9E%8B%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE/" title="小型路由协议">小型路由协议 (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/%E7%88%AC%E8%99%AB/" title="爬虫">爬虫 (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Redis/" title="Redis">Redis (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/VsCode/" title="VsCode">VsCode (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Switch/" title="Switch">Switch (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Vue/" title="Vue">Vue (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/WebSocket/" title="WebSocket">WebSocket (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/NFS/" title="NFS">NFS (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://www.ujslxw.com/" target="_blank" title="老刘的博客">老刘的博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2020
+    
+
+    <a href="../../../../index.html">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+
+<script src="../../../../js/main.js?v=1593081461599.js"></script>
+
+</body>
+</html>

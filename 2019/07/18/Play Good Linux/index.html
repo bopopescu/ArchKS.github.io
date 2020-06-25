@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>玩转Linux | zen&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="zen, 运维, 云计算" >
+    <meta name="description" content="杜振铨的博客小岛" >
+
+    
+    <link rel="alternative" href="/atom.xml" title="zen&#39;s blog" type="application/atom+xml" >
+    
+    
+    <link rel="shortcut icon" href="../../../../favicon.ico" >
+    
+    
+<link rel="stylesheet" href="../../../../css/style.css">
+
+    <!--[if lt IE 9]>
+    
+<script src="../../../../js/html5.js"></script>
+
+    <![endif]-->
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d5ebf515ab530cfbdda5f5c85093fb41";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/" target="_blank" rel="noopener">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="../../../../index.html">
+                <div class="cover">
+                    <span class="name">zen&#39;s blog</span>
+                    <span class="description"></span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="" class="item ">
+                <a href="../../../../index.html" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="" class="item ">
+                <a href="../../../../lab/" title="这是个BUG" class="icon-lab">&nbsp;这是个BUG</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/archks" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://pages.coding.me" target="_blank">Hosted by Coding Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="https://www.yuque.com/u174775" class="sinaweibo" target="_blank"><b>■</b> 语雀</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        博客
+                        <span class="popover">
+                            <img src="../../../../img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/jelon.jpg" alt="avatar" title="Jelon" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>玩转Linux</span></h3>
+    </header>
+    <p class="post-meta text-center">
+        Jelon 发表于
+        <time datetime="2019-07-18T04:53:27.000Z">2019-07-18</time>
+    </p>
+    <div class="post-content">
+        <p>天边金掌露成霜，云随雁字长。绿杯红袖趁重阳，人情似故乡。<br>兰佩紫，菊簪黄，殷勤理旧狂。欲将沉醉换悲凉，清歌莫断肠。</p>
+<a id="more"></a>
+
+<h1 id="数据库客户端"><a href="#数据库客户端" class="headerlink" title="数据库客户端"></a>数据库客户端</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install python3-pip</span><br><span class="line">pip3 install mycli</span><br><span class="line"></span><br><span class="line">mycli -uroot -pxxxxx</span><br><span class="line"><span class="comment"># tab键补齐</span></span><br><span class="line">mariadb root@localhost:(none)&gt; show databases; </span><br><span class="line">                                       databases         </span><br><span class="line">                                       create database   </span><br><span class="line">                                       procedure status</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="字符浏览器"><a href="#字符浏览器" class="headerlink" title="字符浏览器"></a>字符浏览器</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install lynx w3m links</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="Linux历史命令"><a href="#Linux历史命令" class="headerlink" title="Linux历史命令"></a>Linux历史命令</h1><p>一般使用history列出所有历史命令，也可以用Ctrl+r直接搜索</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 输入docker就可以搜索到之前打过有关docker的命令</span></span><br><span class="line">(reverse-i-search)`docker<span class="string">': systemctl enable docker</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="网络测速"><a href="#网络测速" class="headerlink" title="网络测速"></a>网络测速</h1><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">git clone https://github.com/sivel/speedtest-cli.git</span><br><span class="line">cd speed* &amp;&amp; python speedtest.py</span><br><span class="line"><span class="comment">#后接`--share`,可以生成分享链接</span></span><br><span class="line"><span class="comment">#测试服务器性能</span></span><br><span class="line">wget -qO- git.io/superbench.sh | bash</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="中文man手册"><a href="#中文man手册" class="headerlink" title="中文man手册"></a>中文man手册</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">wget  https://src.fedoraproject.org/repo/pkgs/man-pages-zh-CN/manpages-zh-1.5.1.tar.gz/13275fd039de8788b15151c896150bc4/manpages-zh-1.5.1.tar.gz</span><br><span class="line">tar xf manpages-zh-1.5.1.tar.gz</span><br><span class="line"><span class="built_in">cd</span> manpages-zh*</span><br><span class="line">./configure --<span class="built_in">disable</span>-zhtw  --prefix=/usr/<span class="built_in">local</span>/zhman</span><br><span class="line">make &amp;&amp; make install</span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"alias cman='man -M /usr/local/zhman/share/man/zh_CN' "</span> &gt;&gt;.bash_profile</span><br><span class="line"><span class="built_in">source</span> .bash_profile</span><br><span class="line"><span class="built_in">echo</span> <span class="string">"USE CMAN TO GET HELP"</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h1 id="xshell快捷键"><a href="#xshell快捷键" class="headerlink" title="xshell快捷键"></a>xshell快捷键</h1><pre><code>+--------------------------------------+
+|    alt+r       透明模式            
+|    alt+s       简单版模式            
+|    ctrl+alt+f  文件传输                
+|    ctrl+shift+alt+[/]：增大或减小字体   
++--------需要自定义---------------------+        
+|    ctrl + q：水平排列
+|    ctrl + w：垂直排列
+|    ctrl + e：合并所有
++--------------------------------------+</code></pre><h1 id="命令行改密码"><a href="#命令行改密码" class="headerlink" title="命令行改密码"></a>命令行改密码</h1><pre><code>echo &quot;password&quot; | passwd --stdin username</code></pre><h1 id="script-记录面板"><a href="#script-记录面板" class="headerlink" title="script 记录面板"></a>script 记录面板</h1><pre><code>script -a log.txt
+do...
+exit
+将程序执行结果和命令放入文件,需要exit退出</code></pre><h1 id="宝塔面板"><a href="#宝塔面板" class="headerlink" title="宝塔面板"></a>宝塔面板</h1><pre><code>CentOS7一键安装：
+yum install -y wget &amp;&amp; wget -O install.sh http://download.bt.cn/install/install_6.0.sh &amp;&amp; sh install.sh
+一键卸载：
+wget http://download.bt.cn/install/bt-uninstall.sh &amp;&amp; sh bt-uninstall.sh</code></pre><h1 id="虚拟机配置两张网卡"><a href="#虚拟机配置两张网卡" class="headerlink" title="虚拟机配置两张网卡"></a>虚拟机配置两张网卡</h1><pre><code>首先在虚拟机设置中，选择添加，再添加一个网络适配器，之后进入虚拟机
+执行ip a
+如果发现没有网卡，则在/etc/sysconfig/network-scripts/ 目录下，复制你已有的网卡，如果是DHCP模式，则不需要修改IP
+cp ifcfg-ens32 ifcfg-ens35
+删除ifcfg-ens35中的UUID
+#UUID只能是唯一编号
+systemctl restart network</code></pre><h1 id="Epel源"><a href="#Epel源" class="headerlink" title="Epel源"></a>Epel源</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum -y install mlocate vim zip unzip tree bash-completion htop lrzsz</span><br><span class="line"></span><br><span class="line">yum -y install wget</span><br><span class="line">wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo</span><br><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="关闭防火墙"><a href="#关闭防火墙" class="headerlink" title="关闭防火墙"></a>关闭防火墙</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld</span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">'s\SELINUX=enforcing\SELINUX=disabled\'</span> /etc/selinux/config</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h1 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h1><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#加速，可不下</span></span><br><span class="line">wget  https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh &amp;&amp; bash tcp.sh</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装</span></span><br><span class="line">wget https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; bash ssr.sh</span><br><span class="line"></span><br><span class="line"><span class="comment">#加速+安装 kcp协议</span></span><br><span class="line">wget --no-check-certificate -O kcptun_for_ss_ssr.sh https://git.io/fN2EO</span><br></pre></td></tr></table></figure>
+
+
+
+<p>centos8</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">alternatives --<span class="built_in">set</span> python /usr/bin/python3</span><br><span class="line">wget -N --no-check-certificate https://raw.githubusercontent.com/ToyoDAdoubi/doubi/master/ssr.sh &amp;&amp; chmod +x ssr.sh &amp;&amp; bash ssr.sh</span><br><span class="line">sysctl -w net.ipv4.tcp_congestion_control=bbr</span><br><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Kali连接ssh"><a href="#Kali连接ssh" class="headerlink" title="Kali连接ssh"></a>Kali连接ssh</h1><p>一、修改配置文件</p>
+<pre><code>vi /etc/ssh/sshd_config
+将#PasswordAuthentication no的注释去掉，并且将NO修改为YES //kali中默认是yes</code></pre><p><img src="https://i.loli.net/2019/09/01/52SKcLNejBylA8J.png" alt="Kali连接SSH.png"></p>
+<p>二、启动SSH服务<br>命令为：</p>
+<pre><code>/etc/init.d/ssh start
+查看SSH服务状态是否正常运行，命令为：
+/etc/init.d/ssh status</code></pre><p>三、设置系统自动启动SSH服务</p>
+<pre><code>update-rc.d ssh enable  //系统自动启动SSH服务
+update-rc.d ssh disabled // 关闭系统自动启动SSH服务</code></pre><h1 id="终端光标漂移键"><a href="#终端光标漂移键" class="headerlink" title="终端光标漂移键"></a>终端光标漂移键</h1><pre><code>CTRL + U -剪切光标前的内容
+
+CTRL + K -剪切光标至行末的内容
+
+CTRL + Y -粘贴
+
+CTRL + E -移动光标到行末
+
+CTRL + A -移动光标到行首</code></pre>
+    </div>
+    <p class="post-meta">
+        <span class="post-cat">分类：
+            <a class="cat-link" href="../../../../categories/Linux/">Linux</a>
+        </span>
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="../../../../tags/Linux/" title="Linux">Linux</a>
+    
+
+        </span>
+    </p>
+</article>
+<!-- 分享按钮 -->
+
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
+    </div>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="../../27/Python_ARP_SPoof/">
+            
+                Python实现ARP欺骗屏蔽局域网
+            
+        </a>
+    </span>
+    
+
+    
+    <span class="next fr">
+        下一篇<br >
+        <a href="../../../05/03/Matplotlib_Draw/">
+            
+                Matplotlib图标绘制摘要
+            
+        </a>
+    </span>
+    
+</div>
+
+<!-- 文章评论 -->
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章搜索</strong></h3>
+        <div class="search-form">
+  <form
+    id="searchForm"
+    method="GET"
+    action="https://www.baidu.com/s"
+    ectype="application/x-www-form-urlencoded"
+    target="_blank"
+    autocomplete="false"
+    onsubmit="javascript: return false;">
+    <input
+      id="searchKeyword"
+      type="text"
+      class="form-control"
+      placeholder="输入关键字搜索"
+      autocomplete="false"
+    />
+    <input id="searchKeywordHidden" type="hidden" name="wd" />
+    <input id="searchButton" class="btn" type="submit" value="搜索" />
+  </form>
+</div>
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="../../../../categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E7%BC%96%E7%A8%8B/">编程</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/Linux/">Linux</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E5%AE%B9%E5%99%A8/">容器</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E8%BF%90%E7%BB%B4/">运维</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="../../../../categories/%E6%95%85%E9%9A%9C/">故障</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="../../../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键">快捷键 (6)</a>
+  
+    <a class="tag-item" href="../../../../tags/Ansible/" title="Ansible">Ansible (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Django/" title="Django">Django (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/history/" title="history">history (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Docker/" title="Docker">Docker (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/KVM/" title="KVM">KVM (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/LVS/" title="LVS">LVS (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Keepalived/" title="Keepalived">Keepalived (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Matplotlib/" title="Matplotlib">Matplotlib (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/NodeJS/" title="NodeJS">NodeJS (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/%E9%9A%8F%E7%AC%94/" title="随笔">随笔 (2)</a>
+  
+    <a class="tag-item" href="../../../../tags/OSPF%E5%8D%8F%E8%AE%AE/" title="OSPF协议">OSPF协议 (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/ARP%E5%8D%8F%E8%AE%AE/" title="ARP协议">ARP协议 (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/MySQL/" title="MySQL">MySQL (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Linux/" title="Linux">Linux (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/%E5%B0%8F%E5%9E%8B%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE/" title="小型路由协议">小型路由协议 (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/%E7%88%AC%E8%99%AB/" title="爬虫">爬虫 (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Redis/" title="Redis">Redis (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/VsCode/" title="VsCode">VsCode (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Switch/" title="Switch">Switch (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/Vue/" title="Vue">Vue (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/WebSocket/" title="WebSocket">WebSocket (1)</a>
+  
+    <a class="tag-item" href="../../../../tags/NFS/" title="NFS">NFS (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://www.ujslxw.com/" target="_blank" title="老刘的博客">老刘的博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2020
+    
+
+    <a href="../../../../index.html">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+
+<script src="../../../../js/main.js?v=1593081461692.js"></script>
+
+</body>
+</html>
