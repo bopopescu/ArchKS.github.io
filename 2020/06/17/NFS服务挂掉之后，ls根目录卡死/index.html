@@ -130,8 +130,9 @@ var _hmt = _hmt || [];
         <time datetime="2020-06-17T14:46:04.000Z">2020-06-17</time>
     </p>
     <div class="post-content">
-        <p>[应该是某个NFSBug，明明O上的NFS Down了，这个M服务器还是在一直等待响应]，于是看上去就像是me服务器卡死了，其实它是在等待NFS的响应。</p>
+        <p>无善无恶心之体，有善有恶意之动<br>知善知恶是良知，为善去恶是格物</p>
 <a id="more"></a>
+
 <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>只要涉及到根目录，使用ls和df命令就会出现卡死情况。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@zen] <span class="built_in">pwd</span></span><br><span class="line">/root</span><br><span class="line">[root@zen] ls /</span><br><span class="line">^C</span><br><span class="line">[root@zen] df h</span><br><span class="line">^C</span><br><span class="line">[root@zen] ls /opt</span><br><span class="line">containerd  google  jumpserver  mysql  prometheus</span><br></pre></td></tr></table></figure>
 
@@ -319,7 +320,7 @@ var _hmt = _hmt || [];
   <script>
   JELON.Comment({
     container: 'comments',
-    label: 'ls_roor_broken' || '2020/06/17/ls_roor_broken/',
+    label: 'NFS服务挂掉之后，ls根目录卡死' || '2020/06/17/NFS服务挂掉之后，ls根目录卡死/',
     owner: 'jangdelong',
     repo: 'blog_comments',
     clientId: 'b08ed25e52c57993e69c',
@@ -457,7 +458,7 @@ var _hmt = _hmt || [];
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="../../../../js/main.js?v=1593076679230.js"></script>
+<script src="../../../../js/main.js?v=1593078002907.js"></script>
 
 </body>
 </html>

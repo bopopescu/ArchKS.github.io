@@ -130,8 +130,8 @@ var _hmt = _hmt || [];
         <time datetime="2020-02-27T12:34:14.000Z">2020-02-27</time>
     </p>
     <div class="post-content">
-        <div style="color:red">淦，实在不知道用什么封面了，网上关于Lay2 Lay3 Switch都巨丑，用自己正在打字的电脑做封面吧^_^??</div>
-<br>
+        <p>浮云一别后，流水十年间。</p>
+<a id="more"></a>
 
 <p>交换技术主要用于构建局域网，主要实现的局域网内的通信和隔离。交换机即插即用，因为所有的接口默认分配在vlan 1 中，且vlan 1为native vlan，不需要进行封装。为了实现局域网的隔离，可以将不同的接口或者MAC地址划分到不同的vlan，同一个vlan下的地址可以相互通信。</p>
 <p>交换机主要存在的问题和解决方法：</p>
@@ -151,7 +151,7 @@ var _hmt = _hmt || [];
 </ul>
 <h1 id="配置VLAN"><a href="#配置VLAN" class="headerlink" title="配置VLAN"></a>配置VLAN</h1><p>ps：vlan的隔离包括广播，即使是发ARP，也只会发在自己的vlan。</p>
 <p><img src="http://q5q3e2ctx.bkt.clouddn.com/switch_2.png" alt="http://q5q3e2ctx.bkt.clouddn.com/switch_2.png"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># SW7 创建vlan</span></span><br><span class="line">vlan 10,20</span><br><span class="line"></span><br><span class="line"><span class="comment"># SW7 将接口加入到vlan，e0/1,2 e1/0,1 都是这样配</span></span><br><span class="line">int e0/1</span><br><span class="line">switchport mode access							<span class="comment"># 将接口模式改为access</span></span><br><span class="line">switchport access vlan 10						<span class="comment"># 将接口加入到vlan 10 中</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SW7 串口配置，即和SW8连接的e0/3接口</span></span><br><span class="line">int e0/3</span><br><span class="line">switchport trunk encapsulation dot1q			<span class="comment"># 一律使用802.1Q封装</span></span><br><span class="line">switchport mode trunk							<span class="comment"># 改变接口的模式为trunk</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># SW7 创建vlan</span></span><br><span class="line">vlan 10,20</span><br><span class="line"></span><br><span class="line"><span class="comment"># SW7 将接口加入到vlan，e0/1,2 e1/0,1 都是这样配</span></span><br><span class="line">int e0/1</span><br><span class="line">switchport mode access							<span class="comment"># 将接口模式改为access</span></span><br><span class="line">switchport access vlan 10						<span class="comment"># 将接口加入到vlan 10 中</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># SW7 串口配置，即和SW8连接的e0/3接口</span></span><br><span class="line">int e0/3</span><br><span class="line">switchport trunk encapsulation dot1q			<span class="comment"># 一律使用802.1Q封装</span></span><br><span class="line">switchport mode trunk							<span class="comment"># 改变接口的模式为trunk</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -164,18 +164,18 @@ var _hmt = _hmt || [];
 <h1 id="VTP"><a href="#VTP" class="headerlink" title="VTP"></a>VTP</h1><p>VTP用于Vlan同步，分为三种模式：服务端(server)、客户端(client)、透传端(transparent)，客户端只可以查看不可以修改，服务端和透传端既可以查看又可以修改。</p>
 <p>VTP只会同步vlan和vlan的名字，vlan的接口信息不会被同步走。</p>
 <p>配置VTP</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 配置服务端</span></span><br><span class="line">vlan 10-20					<span class="comment"># 创建vlan</span></span><br><span class="line">vtp domain cisco			<span class="comment"># 更改域名， 可以改可以不改，用于让一个局域网有许多vtp</span></span><br><span class="line">vtp mode server 			<span class="comment"># 将本机vtp的模式改为server</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置透传端</span></span><br><span class="line">vtp domain cisco</span><br><span class="line">vtp mode transparent</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置客户端</span></span><br><span class="line">vtp domain cisco</span><br><span class="line">vtp mode client</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 配置服务端</span></span><br><span class="line">vlan 10-20					<span class="comment"># 创建vlan</span></span><br><span class="line">vtp domain cisco			<span class="comment"># 更改域名， 可以改可以不改，用于让一个局域网有许多vtp</span></span><br><span class="line">vtp mode server 			<span class="comment"># 将本机vtp的模式改为server</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置透传端</span></span><br><span class="line">vtp domain cisco</span><br><span class="line">vtp mode transparent</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置客户端</span></span><br><span class="line">vtp domain cisco</span><br><span class="line">vtp mode client</span><br></pre></td></tr></table></figure>
 
 
 
 <p>其他命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Switch<span class="comment">#sh vlan brief 			# 查看本机vlan摘要</span></span><br><span class="line">Switch<span class="comment">#sh vtp ? 				# 查看vtp相关</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">Switch<span class="comment">#sh vlan brief 			# 查看本机vlan摘要</span></span><br><span class="line">Switch<span class="comment">#sh vtp ? 				# 查看vtp相关</span></span><br></pre></td></tr></table></figure>
 
 
 
 <p>VTP修剪：一种优化vlan的方法</p>
 <center style="font-weight:bold;">A ----> B -----> C -----D(I'm a PC)</center>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vtp pruning			<span class="comment"># 开启vtp修剪</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vtp pruning			<span class="comment"># 开启vtp修剪</span></span><br></pre></td></tr></table></figure>
 
 <p>比如：A、B、C是交换机，D是PC。</p>
 <p>A的vlan：10，20，30，40</p>
@@ -272,7 +272,7 @@ var _hmt = _hmt || [];
 </tr>
 </tbody></table>
 <p>关于生成树，要配置的内容很少，都是现象，因为一切默认都已经配置好了，除非是改变生成树的种类。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">show spanning-tree		<span class="comment">#查看生成树的状态</span></span><br><span class="line">spanning-tree vlan 1 priority 4096			<span class="comment">#修改VLAN中spanning-tree的优先级。必须是4096的倍数</span></span><br><span class="line">VLAN0001											<span class="comment">#VLAN 1</span></span><br><span class="line">  Spanning tree enabled protocol ieee</span><br><span class="line">  Root ID    Priority    32769						<span class="comment">#32769=32768+VLAN.Nbr</span></span><br><span class="line">             Address     aabb.cc00.0100				<span class="comment">#MAC地址</span></span><br><span class="line">             Cost        100						<span class="comment">#这个VLAN的COST值</span></span><br><span class="line">             Port        2 (Ethernet0/1)			<span class="comment">#RootID所用的端口</span></span><br><span class="line">             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec</span><br><span class="line">             <span class="comment">#Hello报文2s，最大寿命20s，转发延迟15s</span></span><br><span class="line"></span><br><span class="line">  Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)	<span class="comment">#系统扩展ID就是VLAN 的序号</span></span><br><span class="line">             Address     aabb.cc00.0300							</span><br><span class="line">             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec</span><br><span class="line">             Aging Time  300 sec								<span class="comment">#网络拓扑变化时，会变成15s，快速刷新mac表</span></span><br><span class="line"></span><br><span class="line">Interface           Role  Sts     Cost      Prio.Nbr Type</span><br><span class="line">------------------- ---- --- --------- -------- --------------------------------</span><br><span class="line">Et0/0               Desg  FWD     100       128.1    Shr</span><br><span class="line">Et0/1               Root  FWD     100       128.2    Shr</span><br><span class="line">Et0/2               Altn  BLK     2         128.3    Shr</span><br><span class="line">Et0/3               Desg  FWD     100       128.4    Shr</span><br><span class="line">接口				   角色 端口状态  Cost值   优先级.序号 类型</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">show spanning-tree		<span class="comment">#查看生成树的状态</span></span><br><span class="line">spanning-tree vlan 1 priority 4096			<span class="comment">#修改VLAN中spanning-tree的优先级。必须是4096的倍数</span></span><br><span class="line">VLAN0001											<span class="comment">#VLAN 1</span></span><br><span class="line">  Spanning tree enabled protocol ieee</span><br><span class="line">  Root ID    Priority    32769						<span class="comment">#32769=32768+VLAN.Nbr</span></span><br><span class="line">             Address     aabb.cc00.0100				<span class="comment">#MAC地址</span></span><br><span class="line">             Cost        100						<span class="comment">#这个VLAN的COST值</span></span><br><span class="line">             Port        2 (Ethernet0/1)			<span class="comment">#RootID所用的端口</span></span><br><span class="line">             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec</span><br><span class="line">             <span class="comment">#Hello报文2s，最大寿命20s，转发延迟15s</span></span><br><span class="line"></span><br><span class="line">  Bridge ID  Priority    32769  (priority 32768 sys-id-ext 1)	<span class="comment">#系统扩展ID就是VLAN 的序号</span></span><br><span class="line">             Address     aabb.cc00.0300							</span><br><span class="line">             Hello Time   2 sec  Max Age 20 sec  Forward Delay 15 sec</span><br><span class="line">             Aging Time  300 sec								<span class="comment">#网络拓扑变化时，会变成15s，快速刷新mac表</span></span><br><span class="line"></span><br><span class="line">Interface           Role  Sts     Cost      Prio.Nbr Type</span><br><span class="line">------------------- ---- --- --------- -------- --------------------------------</span><br><span class="line">Et0/0               Desg  FWD     100       128.1    Shr</span><br><span class="line">Et0/1               Root  FWD     100       128.2    Shr</span><br><span class="line">Et0/2               Altn  BLK     2         128.3    Shr</span><br><span class="line">Et0/3               Desg  FWD     100       128.4    Shr</span><br><span class="line">接口				   角色 端口状态  Cost值   优先级.序号 类型</span><br></pre></td></tr></table></figure>
 
 
 
@@ -312,7 +312,7 @@ var _hmt = _hmt || [];
 
 
 <h2 id="实验现象"><a href="#实验现象" class="headerlink" title="实验现象"></a>实验现象</h2><p><img src="http://q5q3e2ctx.bkt.clouddn.com/switch_4.png" alt="image-20200209154918120"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">R6 ping R7</span><br><span class="line"></span><br><span class="line">原本sw4的e0/3没有连接sw1的e0/3，现在将他们连接起来。此时，链路会有30s的不通，这是spanning-tree协议工作：</span><br><span class="line">原本的路由是R6 -- SW4 -- SW3 -- SW2 --SW1 --R7</span><br><span class="line">现在SW4和SW1连通，造成了SW3的e0/2接口发生了阻断BLK。</span><br><span class="line">路由路线变为：R6 -- SW4 -- SW1 -- R7</span><br><span class="line">SW4的e0/3接口从LIS -- LRN -- FWD需要30s的时间，所以30sping不通。</span><br><span class="line"></span><br><span class="line">然后将sw4的e0/3 shutdown ,SW3发现没有BPDU出现了，进入Lost BPDU Max age=20s，20sBPDU不出现，然后进入Listening（15s）和Learning（15s），一共恢复需要30s。</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">R6 ping R7</span><br><span class="line"></span><br><span class="line">原本sw4的e0/3没有连接sw1的e0/3，现在将他们连接起来。此时，链路会有30s的不通，这是spanning-tree协议工作：</span><br><span class="line">原本的路由是R6 -- SW4 -- SW3 -- SW2 --SW1 --R7</span><br><span class="line">现在SW4和SW1连通，造成了SW3的e0/2接口发生了阻断BLK。</span><br><span class="line">路由路线变为：R6 -- SW4 -- SW1 -- R7</span><br><span class="line">SW4的e0/3接口从LIS -- LRN -- FWD需要30s的时间，所以30sping不通。</span><br><span class="line"></span><br><span class="line">然后将sw4的e0/3 shutdown ,SW3发现没有BPDU出现了，进入Lost BPDU Max age=20s，20sBPDU不出现，然后进入Listening（15s）和Learning（15s），一共恢复需要30s。</span><br></pre></td></tr></table></figure>
 
 
 
@@ -330,7 +330,7 @@ var _hmt = _hmt || [];
 <p>35s = age老化时间（20s） +  Learning（15s）[生成树的计算时间]</p>
 <h2 id="Portfast：快速端口"><a href="#Portfast：快速端口" class="headerlink" title="Portfast：快速端口"></a>Portfast：快速端口</h2><p>一个接口从开启到能正常运行会经历三个阶段，需要一定的时间。这是为了防止环路。如果不需要防环，可以使用Portfast来快速启动，这样已启动就变成FWD。</p>
 <p>配置命令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spanning-tree portfast</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">spanning-tree portfast</span><br></pre></td></tr></table></figure>
 
 
 
@@ -344,7 +344,7 @@ var _hmt = _hmt || [];
 <p>因此需要用到MAC地址缩减方案，这也是为什么优先级必须是4096倍数的原因。</p>
 <img src="http://q5q3e2ctx.bkt.clouddn.com/switch_7.png" alt="image-20200227162938052" style="zoom:33%;" />
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">show spanning-tree</span><br><span class="line"></span><br><span class="line">Priority 4097 (priority 4096 sys-id-ext 1)</span><br><span class="line"><span class="comment">#因为系统扩展ID是1，所以优先级要+1</span></span><br><span class="line"><span class="comment">#系统扩展ID=1是因为VLAN是1</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">show spanning-tree</span><br><span class="line"></span><br><span class="line">Priority 4097 (priority 4096 sys-id-ext 1)</span><br><span class="line"><span class="comment">#因为系统扩展ID是1，所以优先级要+1</span></span><br><span class="line"><span class="comment">#系统扩展ID=1是因为VLAN是1</span></span><br></pre></td></tr></table></figure>
 
 <p>实验：</p>
 <ul>
@@ -352,7 +352,7 @@ var _hmt = _hmt || [];
 <li>VLAN 30,40 SW2为Root</li>
 </ul>
 <p><img src="http://q5q3e2ctx.bkt.clouddn.com/switch_8.png" alt="image-20200209092821283"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">show spanning-tree										<span class="comment">#查看生成树的状态</span></span><br><span class="line">spanning-tree vlan 1 priority 4096						<span class="comment">#修改PVST+的优先级</span></span><br><span class="line">spanning-tree vlan 10,20 root primary 					<span class="comment">#将vlan10,20的优先级比当前环境下最小的优先级低两个档次</span></span><br><span class="line">spanning-tree vlan 10,20 root primary 					<span class="comment">#将vlan10,20的优先级比当前环境下最小的优先级低一个档次</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">show spanning-tree										<span class="comment">#查看生成树的状态</span></span><br><span class="line">spanning-tree vlan 1 priority 4096						<span class="comment">#修改PVST+的优先级</span></span><br><span class="line">spanning-tree vlan 10,20 root primary 					<span class="comment">#将vlan10,20的优先级比当前环境下最小的优先级低两个档次</span></span><br><span class="line">spanning-tree vlan 10,20 root primary 					<span class="comment">#将vlan10,20的优先级比当前环境下最小的优先级低一个档次</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -367,7 +367,7 @@ var _hmt = _hmt || [];
 <li>在Cisco Catalyst交换机上，PVST+是基于RSTP实现的perVLAN版本</li>
 </ul>
 <p>配置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spanning-tree mode rapid-pvst			<span class="comment">#BPDU的速度又多了快这个生成树就有多快</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">spanning-tree mode rapid-pvst			<span class="comment">#BPDU的速度又多了快这个生成树就有多快</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -376,7 +376,7 @@ var _hmt = _hmt || [];
 
 
 <h2 id="MSTP：Multiple-Spanning-Tree-Protocol"><a href="#MSTP：Multiple-Spanning-Tree-Protocol" class="headerlink" title="MSTP：Multiple Spanning Tree Protocol"></a>MSTP：Multiple Spanning Tree Protocol</h2><p>集成了RSTP的优点，每实例一个生成树，PVSTP是每个vlan一颗生成树。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">spanning-tree mst configuration</span><br><span class="line">instance 1 vlan 10,20		<span class="comment"># 创建实例，并把vlan10，20归入实例1</span></span><br><span class="line">instance 2 vlan 30,40</span><br><span class="line">show pending</span><br><span class="line"></span><br><span class="line"><span class="comment">#配置优先级，系统扩展id变为实力号Instance.Nbr</span></span><br><span class="line">SW1</span><br><span class="line">spanning-tree mst 1 root primary		</span><br><span class="line">spanning-tree mst 2 root secondary</span><br><span class="line"></span><br><span class="line">SW2</span><br><span class="line">spanning-tree mst 1 root secondary</span><br><span class="line">spanning-tree mst 2 root primary</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">spanning-tree mst configuration</span><br><span class="line">instance 1 vlan 10,20		<span class="comment"># 创建实例，并把vlan10，20归入实例1</span></span><br><span class="line">instance 2 vlan 30,40</span><br><span class="line">show pending</span><br><span class="line"></span><br><span class="line"><span class="comment">#配置优先级，系统扩展id变为实力号Instance.Nbr</span></span><br><span class="line">SW1</span><br><span class="line">spanning-tree mst 1 root primary		</span><br><span class="line">spanning-tree mst 2 root secondary</span><br><span class="line"></span><br><span class="line">SW2</span><br><span class="line">spanning-tree mst 1 root secondary</span><br><span class="line">spanning-tree mst 2 root primary</span><br></pre></td></tr></table></figure>
 
 
 
@@ -384,17 +384,17 @@ var _hmt = _hmt || [];
 
 <h1 id="生成树补丁"><a href="#生成树补丁" class="headerlink" title="生成树补丁"></a>生成树补丁</h1><p>Spanning-tree Patch，主要有六种生成树补丁，针对解决生成树反应慢、出差错、及故障检测。</p>
 <h2 id="1、BPDUGuard"><a href="#1、BPDUGuard" class="headerlink" title="1、BPDUGuard"></a>1、BPDUGuard</h2><p>该接口在手都BPDU报文后，会立即切换到err-disable状态,把接口down了，常搭配portfast特性在接口上一起使用，用于连接主机，可在接口模式上激活，也可在全局模式上配置，两者有所不同。</p>
- <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spanning-tree bpduguard <span class="built_in">enable</span> 							<span class="comment"># 接口</span></span><br><span class="line">spanning-tree portfast bpduguard default				<span class="comment"># 全局</span></span><br><span class="line">show err recov											<span class="comment"># 查看状态</span></span><br></pre></td></tr></table></figure>
+ <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">spanning-tree bpduguard <span class="built_in">enable</span> 							<span class="comment"># 接口</span></span><br><span class="line">spanning-tree portfast bpduguard default				<span class="comment"># 全局</span></span><br><span class="line">show err recov											<span class="comment"># 查看状态</span></span><br></pre></td></tr></table></figure>
 
 
 
 <h2 id="2、BPDUFilter"><a href="#2、BPDUFilter" class="headerlink" title="2、BPDUFilter"></a>2、BPDUFilter</h2><p>一旦收到BPDU，就把接口上的Portfast删除。相当于可以智能判断是PC还是Switch。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spanning-tree portfast bpdufilter default 				<span class="comment"># 全局</span></span><br><span class="line">spanning-tree bpdufilter <span class="built_in">enable</span>							<span class="comment"># 接口</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">spanning-tree portfast bpdufilter default 				<span class="comment"># 全局</span></span><br><span class="line">spanning-tree bpdufilter <span class="built_in">enable</span>							<span class="comment"># 接口</span></span><br></pre></td></tr></table></figure>
 
 
 
 <h2 id="3、UplinkFast"><a href="#3、UplinkFast" class="headerlink" title="3、UplinkFast"></a>3、UplinkFast</h2><p>当唯一的根端口Down，立刻切换到转发状态 ，跳过了LIS和LER的30s延时,但还有20s的max age 。所有配置了Uplink的交换机，都会把自己的优先级升高、COST值增加3000，防止自己成为ROOT。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spanning-tree  uplinkfast</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">spanning-tree  uplinkfast</span><br></pre></td></tr></table></figure>
 
 
 
@@ -406,14 +406,14 @@ var _hmt = _hmt || [];
 <p>SW3立刻老化掉存储在Fae0/3上的BPDU，端口Fa0/3进入Listening状态开始发送BPDU</p>
 <p>SW2从SW3收到BPDU，经过计算得出自己的Fa0/2为根端口</p>
 <p>相当于去掉了20s BLK状态</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spanning-tree backbonefast</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">spanning-tree backbonefast</span><br></pre></td></tr></table></figure>
 
 
 
 <h2 id="5、RootGuard"><a href="#5、RootGuard" class="headerlink" title="5、RootGuard"></a>5、RootGuard</h2><img src="http://q5q3e2ctx.bkt.clouddn.com/switch_11.png" alt="image-20200209185915776" style="zoom:67%;" />
 
 <p>只要Service-Provider Network端收到其他地方发来的更优质的BPDU，就将那个区域置为inconsistent。注意inconsistent跟err-disable的区别是，err-disable会disable整个接口，而inconsistentport是针对特定的vlan的。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">只会屏蔽当前VLAN(发给我更优的BPDU)</span><br><span class="line">spanning-tree guard root			<span class="comment"># 接口上配置root防护，这个端口就不可以成为根段偶</span></span><br><span class="line">show span inconsistentport 			<span class="comment"># 查看接口</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">只会屏蔽当前VLAN(发给我更优的BPDU)</span><br><span class="line">spanning-tree guard root			<span class="comment"># 接口上配置root防护，这个端口就不可以成为根段偶</span></span><br><span class="line">show span inconsistentport 			<span class="comment"># 查看接口</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -421,7 +421,7 @@ var _hmt = _hmt || [];
 
 <h2 id="6、LoopGuard"><a href="#6、LoopGuard" class="headerlink" title="6、LoopGuard"></a>6、LoopGuard</h2><img src="http://q5q3e2ctx.bkt.clouddn.com/switch_12.png" alt="image-20200209191229933" style="zoom: 67%;" />
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spanning-tree guard loop 	<span class="comment">#接口上配置loop防护，这个端口就可以检测单向通行故障</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">spanning-tree guard loop 	<span class="comment">#接口上配置loop防护，这个端口就可以检测单向通行故障</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -434,7 +434,7 @@ var _hmt = _hmt || [];
 </ol>
 <p>`</p>
 <p><img src="http://q5q3e2ctx.bkt.clouddn.com/switch_13.png" alt="image-20200209192447894"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">R1</span><br><span class="line">int e0/0</span><br><span class="line">no sh</span><br><span class="line">int e0/0.10</span><br><span class="line">encapsulation dot1Q 10</span><br><span class="line">ip add 192.168.10.254 255.255.255.0</span><br><span class="line">int e0/0.20</span><br><span class="line">encapsulation dot1Q 20</span><br><span class="line">ip add 192.168.20.254 255.255.255.0</span><br><span class="line">end</span><br><span class="line">sh int e0/0.10</span><br><span class="line"></span><br><span class="line"><span class="comment">#sw</span></span><br><span class="line">int e0/1</span><br><span class="line">sw tr en <span class="keyword">do</span> </span><br><span class="line">sw mo tr</span><br><span class="line">end</span><br><span class="line"><span class="comment">#交换机还要反应一会，从LIS-LRN-FWD</span></span><br><span class="line"></span><br><span class="line">此时，R2 Ping R3</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">R1</span><br><span class="line">int e0/0</span><br><span class="line">no sh</span><br><span class="line">int e0/0.10</span><br><span class="line">encapsulation dot1Q 10</span><br><span class="line">ip add 192.168.10.254 255.255.255.0</span><br><span class="line">int e0/0.20</span><br><span class="line">encapsulation dot1Q 20</span><br><span class="line">ip add 192.168.20.254 255.255.255.0</span><br><span class="line">end</span><br><span class="line">sh int e0/0.10</span><br><span class="line"></span><br><span class="line"><span class="comment">#sw</span></span><br><span class="line">int e0/1</span><br><span class="line">sw tr en <span class="keyword">do</span> </span><br><span class="line">sw mo tr</span><br><span class="line">end</span><br><span class="line"><span class="comment">#交换机还要反应一会，从LIS-LRN-FWD</span></span><br><span class="line"></span><br><span class="line">此时，R2 Ping R3</span><br></pre></td></tr></table></figure>
 
 
 
@@ -447,7 +447,7 @@ var _hmt = _hmt || [];
 <p>2、配置接口 vlan 20， 添加属于R3网段的IP地址</p>
 <p>3、在R2和R3上配置默认路由</p>
 <p>4、 然后就会发现，R2可以直接ping通R3了</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#SW</span></span><br><span class="line">int vlan 10						<span class="comment">#启用SVI接口，Lay3SW的交换机接口是虚拟的</span></span><br><span class="line">ip add 192.168.10.254 255.255.255.0</span><br><span class="line">no sh</span><br><span class="line">end</span><br><span class="line">sh ip int bri</span><br><span class="line"></span><br><span class="line">int vlan 20</span><br><span class="line">ip add 192.168.20.254 255.255.255.0</span><br><span class="line">no sh</span><br><span class="line">end</span><br><span class="line">sh ip int bri</span><br><span class="line"></span><br><span class="line"><span class="comment">#R，一定要记得配默认路由</span></span><br><span class="line">ip route 0.0.0.0 255.255.255.255 Ethernet0/0</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#SW</span></span><br><span class="line">int vlan 10						<span class="comment">#启用SVI接口，Lay3SW的交换机接口是虚拟的</span></span><br><span class="line">ip add 192.168.10.254 255.255.255.0</span><br><span class="line">no sh</span><br><span class="line">end</span><br><span class="line">sh ip int bri</span><br><span class="line"></span><br><span class="line">int vlan 20</span><br><span class="line">ip add 192.168.20.254 255.255.255.0</span><br><span class="line">no sh</span><br><span class="line">end</span><br><span class="line">sh ip int bri</span><br><span class="line"></span><br><span class="line"><span class="comment">#R，一定要记得配默认路由</span></span><br><span class="line">ip route 0.0.0.0 255.255.255.255 Ethernet0/0</span><br></pre></td></tr></table></figure>
 
 
 
@@ -465,23 +465,23 @@ var _hmt = _hmt || [];
 <p><img src="http://q5q3e2ctx.bkt.clouddn.com/switch_15.png" alt="image-20200210154539047"></p>
 <p>这四条消息全部都是广播。</p>
 <p>配置DHCP</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">(config-if)<span class="comment"># ip dhcp pool cisico</span></span><br><span class="line">(dhcp-config)<span class="comment"># network 192.168.1.0/24</span></span><br><span class="line">(dhcp-config)<span class="comment"># default-router 192.168.1.1		# 默认路由器</span></span><br><span class="line">(dhcp-config)<span class="comment"># dns-server 114.114.114.114 114.114.115.115	# DNS</span></span><br><span class="line">(dhcp-config)<span class="comment"># lease 1		-租约时间1天</span></span><br><span class="line">(config)<span class="comment"># ip dhcp excluded-address 192.168.1.1    # 排除掉我们用的地址</span></span><br><span class="line"></span><br><span class="line">还有一种写法：1~99不分配</span><br><span class="line">ip dhcp excluded-address 192.168.1.1 192.168.1.99</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#局域网的其他设备</span></span><br><span class="line">(config)<span class="comment"># ip add dhcp</span></span><br><span class="line">  </span><br><span class="line">sh ip dhcp bingding		<span class="comment">#查看DHCP的IP地址的绑定</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#绑定IP地址</span></span><br><span class="line">ip dhcp pool R1</span><br><span class="line">host 192.168.1.10</span><br><span class="line">client-identifier [client-id]</span><br><span class="line"><span class="comment">#如果client_id已被使用，则清楚</span></span><br><span class="line">clear ip dhcp <span class="built_in">bind</span> *</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(config-if)<span class="comment"># ip dhcp pool cisico</span></span><br><span class="line">(dhcp-config)<span class="comment"># network 192.168.1.0/24</span></span><br><span class="line">(dhcp-config)<span class="comment"># default-router 192.168.1.1		# 默认路由器</span></span><br><span class="line">(dhcp-config)<span class="comment"># dns-server 114.114.114.114 114.114.115.115	# DNS</span></span><br><span class="line">(dhcp-config)<span class="comment"># lease 1		-租约时间1天</span></span><br><span class="line">(config)<span class="comment"># ip dhcp excluded-address 192.168.1.1    # 排除掉我们用的地址</span></span><br><span class="line"></span><br><span class="line">还有一种写法：1~99不分配</span><br><span class="line">ip dhcp excluded-address 192.168.1.1 192.168.1.99</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#局域网的其他设备</span></span><br><span class="line">(config)<span class="comment"># ip add dhcp</span></span><br><span class="line">  </span><br><span class="line">sh ip dhcp bingding		<span class="comment">#查看DHCP的IP地址的绑定</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#绑定IP地址</span></span><br><span class="line">ip dhcp pool R1</span><br><span class="line">host 192.168.1.10</span><br><span class="line">client-identifier [client-id]</span><br><span class="line"><span class="comment">#如果client_id已被使用，则清楚</span></span><br><span class="line">clear ip dhcp <span class="built_in">bind</span> *</span><br></pre></td></tr></table></figure>
 
 
 
 <p><img src="http://q5q3e2ctx.bkt.clouddn.com/switch_16.png" alt="image-20200210160941108"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#跨越路由器的广播DHCP请求</span></span><br><span class="line">R4是DHCP服务器，R1想要请求DHCP的广播不能跨越R3，这是可以在R3上进行配置，如果收到请求DHCP的报文，则用单播的形式将消息发送给R4</span><br><span class="line">R3</span><br><span class="line">int e0/1</span><br><span class="line">ip helper-address 192.168.34.4</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#跨越路由器的广播DHCP请求</span></span><br><span class="line">R4是DHCP服务器，R1想要请求DHCP的广播不能跨越R3，这是可以在R3上进行配置，如果收到请求DHCP的报文，则用单播的形式将消息发送给R4</span><br><span class="line">R3</span><br><span class="line">int e0/1</span><br><span class="line">ip helper-address 192.168.34.4</span><br></pre></td></tr></table></figure>
 
 
 
 <h1 id="链路捆绑"><a href="#链路捆绑" class="headerlink" title="链路捆绑"></a>链路捆绑</h1><p>如果直接连接两个交换机，则会因为有spanning-tree，造成无论链接多少线，都只会有一根通，从而带宽得不到提高。链路捆绑最大支持8根线绑在一起，这里只介绍二层捆绑，三层捆绑要在接口上<code>no switchport</code>，然后再配置IP地址</p>
 <p>EC：需要对端交换机都配</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">int range e0/1 -2</span><br><span class="line">channel-group 1 mode on</span><br><span class="line"></span><br><span class="line">此时再看生成树，就会发现e0/1和e0/2都消失了，只留下了Po1，查看带宽，也变大了。</span><br><span class="line"></span><br><span class="line">配置Trunk</span><br><span class="line">int port-channel 1 </span><br><span class="line">sw tr en <span class="keyword">do</span> </span><br><span class="line">sw mo tr</span><br><span class="line"></span><br><span class="line">查看channel</span><br><span class="line">sh etherchannel [summary]</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">int range e0/1 -2</span><br><span class="line">channel-group 1 mode on</span><br><span class="line"></span><br><span class="line">此时再看生成树，就会发现e0/1和e0/2都消失了，只留下了Po1，查看带宽，也变大了。</span><br><span class="line"></span><br><span class="line">配置Trunk</span><br><span class="line">int port-channel 1 </span><br><span class="line">sw tr en <span class="keyword">do</span> </span><br><span class="line">sw mo tr</span><br><span class="line"></span><br><span class="line">查看channel</span><br><span class="line">sh etherchannel [summary]</span><br></pre></td></tr></table></figure>
 
 
 
 <p>修改负载均衡的方式</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">port-channel load-balance [] <span class="comment"># src-dst-mac</span></span><br><span class="line"><span class="comment">#二层不能用IP地址</span></span><br><span class="line">show etherchannel loadbalance</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">port-channel load-balance [] <span class="comment"># src-dst-mac</span></span><br><span class="line"><span class="comment">#二层不能用IP地址</span></span><br><span class="line">show etherchannel loadbalance</span><br></pre></td></tr></table></figure>
 
 
 
@@ -495,7 +495,7 @@ var _hmt = _hmt || [];
 </ol>
 <h2 id="HSRP"><a href="#HSRP" class="headerlink" title="HSRP"></a>HSRP</h2><p>其中以VRRP最常见，HSRP是Cisco私有的，GLBP有Bug。</p>
 <p><img src="http://q5q3e2ctx.bkt.clouddn.com/switch_17.png" alt="image-20200210170625634"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@不让R2和R3建立邻居</span><br><span class="line">R2<span class="comment"># passive-interface e0/1</span></span><br><span class="line">R3<span class="comment"># passive-interface e0/1 </span></span><br><span class="line"></span><br><span class="line">@配置网关,R4网关指向的地址不存在</span><br><span class="line">R4<span class="comment"># ip route 0.0.0.0 0.0.0.0 192.168.1.254</span></span><br><span class="line"></span><br><span class="line">@在R2,R3上配置standby ip 监听一个虚拟的IP</span><br><span class="line">int e0/1</span><br><span class="line">standby 1 ip 192.168.1.254</span><br><span class="line"></span><br><span class="line">sh standby brief 	<span class="comment">#查看standby的缩略信息</span></span><br><span class="line"></span><br><span class="line">- standby 会向组播地址发送信息</span><br><span class="line">- R2、R3会发现彼此，通过IP地址选出一个人来做网关</span><br><span class="line"></span><br><span class="line"><span class="comment">#上图是交换机，实际上交换机不行，需要换成集线器</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">@不让R2和R3建立邻居</span><br><span class="line">R2<span class="comment"># passive-interface e0/1</span></span><br><span class="line">R3<span class="comment"># passive-interface e0/1 </span></span><br><span class="line"></span><br><span class="line">@配置网关,R4网关指向的地址不存在</span><br><span class="line">R4<span class="comment"># ip route 0.0.0.0 0.0.0.0 192.168.1.254</span></span><br><span class="line"></span><br><span class="line">@在R2,R3上配置standby ip 监听一个虚拟的IP</span><br><span class="line">int e0/1</span><br><span class="line">standby 1 ip 192.168.1.254</span><br><span class="line"></span><br><span class="line">sh standby brief 	<span class="comment">#查看standby的缩略信息</span></span><br><span class="line"></span><br><span class="line">- standby 会向组播地址发送信息</span><br><span class="line">- R2、R3会发现彼此，通过IP地址选出一个人来做网关</span><br><span class="line"></span><br><span class="line"><span class="comment">#上图是交换机，实际上交换机不行，需要换成集线器</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -534,7 +534,7 @@ var _hmt = _hmt || [];
 <td>成为Active路由器，响应PC对于虚拟IP的ARP请求，同时周期性发送Hello消息，宣告自己的存货状态。</td>
 </tr>
 </tbody></table>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">(config-if)<span class="comment"># standby 1 preempt		#打开抢占</span></span><br><span class="line">(config-if)<span class="comment"># standby 1 priority 110	#调高优先级</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@有一种情形</span><br><span class="line">@R2的上游支路shutdown了，但是因为R2的优先级比R3大，R4发包还是选择R2，但是却不能ping通R4</span><br><span class="line">---</span><br><span class="line">@如果R2上面的接口shutdown，则把R2的优先级降低20，这样Standby就被R3抢走</span><br><span class="line">(config)<span class="comment"># track 1 interface e0/0 line-protocol		#在接口的协议上设置一个追踪 </span></span><br><span class="line">(config)<span class="comment"># int e0/1							</span></span><br><span class="line">(config-if)<span class="comment"># standby 1 track 1 decrement 20			#如果接口shutdown，则将优先级-20，会在show standby上显示详细条目</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">(config-if)<span class="comment"># standby 1 preempt		#打开抢占</span></span><br><span class="line">(config-if)<span class="comment"># standby 1 priority 110	#调高优先级</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@有一种情形</span><br><span class="line">@R2的上游支路shutdown了，但是因为R2的优先级比R3大，R4发包还是选择R2，但是却不能ping通R4</span><br><span class="line">---</span><br><span class="line">@如果R2上面的接口shutdown，则把R2的优先级降低20，这样Standby就被R3抢走</span><br><span class="line">(config)<span class="comment"># track 1 interface e0/0 line-protocol		#在接口的协议上设置一个追踪 </span></span><br><span class="line">(config)<span class="comment"># int e0/1							</span></span><br><span class="line">(config-if)<span class="comment"># standby 1 track 1 decrement 20			#如果接口shutdown，则将优先级-20，会在show standby上显示详细条目</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -815,7 +815,7 @@ var _hmt = _hmt || [];
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="../../../../js/main.js?v=1593076678942.js"></script>
+<script src="../../../../js/main.js?v=1593078002701.js"></script>
 
 </body>
 </html>
