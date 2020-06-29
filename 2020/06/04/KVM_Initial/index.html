@@ -124,9 +124,11 @@ var _hmt = _hmt || [];
 <a id="more"></a>
 
 <h1 id="大纲"><a href="#大纲" class="headerlink" title="大纲"></a>大纲</h1><p>kvm创建虚拟机的根本在于这样一条命令，<code>virsh define vm-template.xml</code>，这条命令的核心就是创建一个虚拟机，之后或者之前的内容都是围绕着这条命令和这个虚拟机的。</p>
-<p>- 更新vm-templatem模板是为了进行子机资源配置</p>
-<p>- 在更新模板之前检查时主机是为了防止给子机过量的资源导致母机不稳定</p>
-<p>- 桥接网卡是为了让子机连接局域网</p>
+<ul>
+<li>更新vm-templatem模板是为了进行子机资源配置</li>
+<li>在更新模板之前检查时主机是为了防止给子机过量的资源导致母机不稳定</li>
+<li>桥接网卡是为了让子机连接局域网</li>
+</ul>
 <p>所以，virsh define vm-template.xml 其本质是在安全可靠的前提下，将母机的资源通过kvm虚拟化的形式分配给子机。</p>
 <p>所以主要考虑方向有两个</p>
 <p>1、保障母机和子机的安全可靠，包括系统安全和网络安全</p>
@@ -352,7 +354,23 @@ var _hmt = _hmt || [];
 <ul class="widget-bd">
     
         <li>
-            <a href="https://www.ujslxw.com/" target="_blank" title="老刘的博客">老刘的博客</a>
+            <a href="https://coolshell.cn/" target="_blank" title="酷壳-COOLSHELL">酷壳-COOLSHELL</a>
+        </li>
+    
+        <li>
+            <a href="https://draveness.me/" target="_blank" title="面向信仰编程">面向信仰编程</a>
+        </li>
+    
+        <li>
+            <a href="https://yixiuer.me/" target="_blank" title="一休的哲学博客">一休的哲学博客</a>
+        </li>
+    
+        <li>
+            <a href="https://zhangge.net/" target="_blank" title="Jager的博客">Jager的博客</a>
+        </li>
+    
+        <li>
+            <a href="https://www.ujslxw.com/" target="_blank" title="刘希望的博客">刘希望的博客</a>
         </li>
     
 </ul>
@@ -376,7 +394,7 @@ var _hmt = _hmt || [];
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="../../../../js/main.js?v=1593085751813.js"></script>
+<script src="../../../../js/main.js?v=1593398986715.js"></script>
 
 </body>
 </html>
