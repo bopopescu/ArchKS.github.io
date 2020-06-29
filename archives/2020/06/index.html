@@ -157,10 +157,11 @@ var _hmt = _hmt || [];
 
 <h1 id="困难"><a href="#困难" class="headerlink" title="困难"></a>困难</h1><ul>
 <li><input checked="" disabled="" type="checkbox"> 容器启动流程</li>
-<li><input disabled="" type="checkbox"> Sed替换等命令</li>
+<li><input checked="" disabled="" type="checkbox"> Sed替换等命令</li>
 <li><input checked="" disabled="" type="checkbox"> CMD和EntryPoint的异同</li>
 <li><input checked="" disabled="" type="checkbox"> 动态指定全局、局部参数</li>
 <li><input checked="" disabled="" type="checkbox"> 优化哪些方面</li>
+<li><input disabled="" type="checkbox"> 脚本能够正确的读取参数，且正确的写入到配置文件!!!</li>
 </ul>
 <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>Docker镜像制作/容器运行<br>1、制作一个Nginx镜像，遵循镜像可迁移、可复制原则、镜像、层级、体积最小化原则<br>2、要求启动能支持指定Nginx进程的监听端口<br>3、首页输出一个hello world<br>4、容器支持开机启动、异常能自拉起<br>5、能够任意指定Nginx的公共参数，包括global、http等全局模块的参数；<br>6、通过启动指定Nginx优化参数，实现首页性能并发超2万（4核服务器）。</p>
 <h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><h2 id="1、制作Nginx容器？"><a href="#1、制作Nginx容器？" class="headerlink" title="1、制作Nginx容器？"></a>1、制作Nginx容器？</h2><p>一开始的时候，以为是要从CentOS7中一步一步用命令安装Nginx，后来发现这样不太合理[中间层不够精简]，就用了Nginx的官方镜像。</p>
@@ -331,6 +332,12 @@ var _hmt = _hmt || [];
 </ul>
 <p>参数指定如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat run.sh </span></span><br><span class="line">docker rm $(docker ps -a | grep -E '\&lt;x1\&gt;' | awk '&#123;print $1&#125;') -f</span><br><span class="line">docker rmi $(docker image ls | grep 'nginx/v1' |awk '&#123;print $3&#125;')  --force</span><br><span class="line">docker build -t nginx/v1 .</span><br><span class="line">docker run -itd --cpuset-cpus="0,1" \</span><br><span class="line">-e ngx_glo_worker_processes=4 \</span><br><span class="line">-e ngx_glo_worker_rlimit_nofile=65535 \</span><br><span class="line">-e ngx_evt_worker_connections=65535 \</span><br><span class="line">-e ngx_http_tcp_nopush=on \</span><br><span class="line">-e ngx_http_sendfile=on \</span><br><span class="line">-e ngx_http_proxy_cache_path="/tmp/cache levels=1:2 keys_zone=code_cache:10m max_size=10g inactive=60m use_temp_path=off" \</span><br><span class="line">-e ngx_ser_listen=8080 \</span><br><span class="line">-e ngx_loc_proxy_cache=code_cache \</span><br><span class="line">-e ngx_loc_proxy_cache_valid="any 30m" \</span><br><span class="line">--net=host --name --restart=always x1 nginx/v1</span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<br>
+<br>
+<br>
             
             <p class="more">
                 <a href="../../../http:/ymlog.cn/2020/06/29/Produce-the-docker-image-about-nginx/">阅读剩下更多</a>
@@ -960,7 +967,7 @@ var _hmt = _hmt || [];
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="../../../js/main.js?v=1593437762375.js"></script>
+<script src="../../../js/main.js?v=1593437913525.js"></script>
 
 </body>
 </html>
