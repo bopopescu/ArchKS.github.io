@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>文章归档: 2020/6 | zen&#39;s blog</title>
+    <title>Dockerfile制作Nginx容器 | zen&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="zen, 运维, 云计算" >
     <meta name="description" content="杜振铨的博客小岛" >
@@ -14,14 +14,14 @@
     <link rel="alternative" href="/atom.xml" title="zen&#39;s blog" type="application/atom+xml" >
     
     
-    <link rel="shortcut icon" href="../../../favicon.ico" >
+    <link rel="shortcut icon" href="../../../../favicon.ico" >
     
     
-<link rel="stylesheet" href="../../../css/style.css">
+<link rel="stylesheet" href="../../../../css/style.css">
 
     <!--[if lt IE 9]>
     
-<script src="../../../js/html5.js"></script>
+<script src="../../../../js/html5.js"></script>
 
     <![endif]-->
     
@@ -50,7 +50,7 @@ var _hmt = _hmt || [];
     <header class="header">
     <section class="container header-main">
         <div class="logo">
-            <a href="../../../index.html">
+            <a href="../../../../index.html">
                 <div class="cover">
                     <span class="name">zen&#39;s blog</span>
                     <span class="description"></span>
@@ -61,11 +61,11 @@ var _hmt = _hmt || [];
         <ul class="menu hidden" id="JELON__menu">
             
             <li rel="" class="item ">
-                <a href="../../../index.html" title="首页" class="icon-home">&nbsp;首页</a>
+                <a href="../../../../index.html" title="首页" class="icon-home">&nbsp;首页</a>
             </li>
             
             <li rel="" class="item ">
-                <a href="../../../lab/" title="这是个BUG" class="icon-lab">&nbsp;这是个BUG</a>
+                <a href="../../../../lab/" title="这是个BUG" class="icon-lab">&nbsp;这是个BUG</a>
             </li>
             
         </ul>
@@ -90,7 +90,7 @@ var _hmt = _hmt || [];
                         <b>■</b>
                         博客
                         <span class="popover">
-                            <img src="../../../img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
+                            <img src="../../../../img/wechat_mp.jpg" width="120" height="120" alt="我的微信订阅号">
                             <i class="arrow"></i>
                         </span>
                     </a>
@@ -109,51 +109,18 @@ var _hmt = _hmt || [];
     <div class="container body clearfix">
         <section class="content">
             <div class="content-main widget">
-                <!-- 文章归档 -->
-
-    <h3 class="widget-hd">
-        <strong>
-            
-                文章归档
-                <!-- 文章归档，可以根据日期分类 -->
-            
-        </strong>
-    </h3>
-    
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-        <a class="cat-link" href="../../../categories/%E5%AE%B9%E5%99%A8/">容器</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="../../../http:/ymlog.cn/2020/06/29/Produce-the-docker-image-about-nginx/">
-    		Dockerfile制作Nginx容器
-    	</a>
-    </h3>
-
+                <!-- 文章页 -->
+<!-- 文章 -->
+<article class="post article">
+    <header class="text-center">
+        <h3 class="post-title"><span>Dockerfile制作Nginx容器</span></h3>
     </header>
-    <p class="post-meta">
+    <p class="post-meta text-center">
         Jelon 发表于
         <time datetime="2020-06-29T02:59:50.000Z">2020-06-29</time>
-        &nbsp;&nbsp;
-        <span class="post-tags">
-            标签：
-            
-    
-        <a href="../../../tags/Docker/" title="Docker">Docker</a>
-    
-
-        </span>
     </p>
-
     <div class="post-content">
-        <div class="post-excerpt">
-            
-                <a id="more"></a>
+        <a id="more"></a>
 
 <h1 id="困难"><a href="#困难" class="headerlink" title="困难"></a>困难</h1><ul>
 <li><input checked="" disabled="" type="checkbox"> 容器启动流程</li>
@@ -331,448 +298,58 @@ var _hmt = _hmt || [];
 </ul>
 <p>参数指定如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat run.sh </span></span><br><span class="line">docker rm $(docker ps -a | grep -E '\&lt;x1\&gt;' | awk '&#123;print $1&#125;') -f</span><br><span class="line">docker rmi $(docker image ls | grep 'nginx/v1' |awk '&#123;print $3&#125;')  --force</span><br><span class="line">docker build -t nginx/v1 .</span><br><span class="line">docker run -itd --cpuset-cpus="0,1" \</span><br><span class="line">-e ngx_glo_worker_processes=4 \</span><br><span class="line">-e ngx_glo_worker_rlimit_nofile=65535 \</span><br><span class="line">-e ngx_evt_worker_connections=65535 \</span><br><span class="line">-e ngx_http_tcp_nopush=on \</span><br><span class="line">-e ngx_http_sendfile=on \</span><br><span class="line">-e ngx_http_proxy_cache_path="/tmp/cache levels=1:2 keys_zone=code_cache:10m max_size=10g inactive=60m use_temp_path=off" \</span><br><span class="line">-e ngx_ser_listen=8080 \</span><br><span class="line">-e ngx_loc_proxy_cache=code_cache \</span><br><span class="line">-e ngx_loc_proxy_cache_valid="any 30m" \</span><br><span class="line">--net=host --name --restart=always x1 nginx/v1</span><br></pre></td></tr></table></figure>
-            
-            <p class="more">
-                <a href="../../../http:/ymlog.cn/2020/06/29/Produce-the-docker-image-about-nginx/">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img="">
-            <a href="http://ymlog.cn/2020/06/29/Produce-the-docker-image-about-nginx/" title="Dockerfile制作Nginx容器">
-                
-                    <img class="thumbnail" src="../../../img/default.png" data-echo="../../../img/thumbnail/9.jpg" alt="默认配图" >
-                
-            </a>
-        </div>
     </div>
-</article>
-
-    
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-            <a href="javascript: void(0);" class="cat">未分类</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="../../../http:/ymlog.cn/2020/06/25/Click-Where/">
-    		观前提示
-    	</a>
-    </h3>
-
-    </header>
     <p class="post-meta">
-        Jelon 发表于
-        <time datetime="2020-06-25T10:39:08.000Z">2020-06-25</time>
-        &nbsp;&nbsp;
-        <span class="post-tags">
-            标签：
-            
+        <span class="post-cat">分类：
+            <a class="cat-link" href="../../../../categories/%E5%AE%B9%E5%99%A8/">容器</a>
         </span>
-    </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>如果点击出现 <code>Cannot GET /http://ymlog.cn/2020/02/27/Switch/</code> 这样的标志，不要点击文字，点击右侧图片打开即可！！！<br>因为文字链接指向<code>http://ymlog.cn/http:/ymlog.cn/2020/05/03/WebSocket/</code>,NodeJS模板语法错误！在URL前面又加了URL！</p>
-            
-            <p class="more">
-                <a href="../../../http:/ymlog.cn/2020/06/25/Click-Where/">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img="">
-            <a href="http://ymlog.cn/2020/06/25/Click-Where/" title="观前提示">
-                
-                    <!--
-                    <img src="../../../https:/s1.ax1x.com/2020/06/25/NBDIUI.png" class="thumbnail">
-                    -->
-                    <img class="thumbnail" src="../../../img/default.png" data-echo="https://s1.ax1x.com/2020/06/25/NBDIUI.png" alt="观前提示" >
-                
-            </a>
-        </div>
-    </div>
-</article>
-
-    
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-        <a class="cat-link" href="../../../categories/%E8%BF%90%E7%BB%B4/">运维</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="../../../http:/ymlog.cn/2020/06/18/VsCode_Remote_Config/">
-    		VsCode远程开发
-    	</a>
-    </h3>
-
-    </header>
-    <p class="post-meta">
-        Jelon 发表于
-        <time datetime="2020-06-18T02:50:36.000Z">2020-06-18</time>
-        &nbsp;&nbsp;
         <span class="post-tags">
             标签：
             
     
-        <a href="../../../tags/VsCode/" title="VsCode">VsCode</a>
+        <a href="../../../../tags/Docker/" title="Docker">Docker</a>
     
 
         </span>
     </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>草铺横野六七里，笛弄晚风三四声。<br>归来饱饭黄昏后，不脱蓑衣卧月明。</p>
-            
-            <p class="more">
-                <a href="../../../http:/ymlog.cn/2020/06/18/VsCode_Remote_Config/">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img="">
-            <a href="http://ymlog.cn/2020/06/18/VsCode_Remote_Config/" title="VsCode远程开发">
-                
-                    <!--
-                    <img src="../../../https:/s1.ax1x.com/2020/06/19/NuEK0O.png" class="thumbnail">
-                    -->
-                    <img class="thumbnail" src="../../../img/default.png" data-echo="https://s1.ax1x.com/2020/06/19/NuEK0O.png" alt="VsCode远程开发" >
-                
-            </a>
-        </div>
-    </div>
 </article>
+<!-- 分享按钮 -->
 
-    
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-            <a href="javascript: void(0);" class="cat">未分类</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="../../../http:/ymlog.cn/2020/06/18/Win_ShotCut/">
-    		Win快捷键
-    	</a>
-    </h3>
-
-    </header>
-    <p class="post-meta">
-        Jelon 发表于
-        <time datetime="2020-06-18T00:37:32.000Z">2020-06-18</time>
-        &nbsp;&nbsp;
-        <span class="post-tags">
-            标签：
-            
-    
-        <a href="../../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键">快捷键</a>
-    
-
-        </span>
-    </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>十年生死两茫茫，不思量，自难忘。<br>千里孤坟，无处话凄凉。<br>纵使相逢应不识，尘满面，鬓如霜。<br>夜来幽梦忽还乡，小轩窗，正梳妆。<br>相顾无言，惟有泪千行。<br>料得年年肠断处，明月夜，短松冈。</p>
-            
-            <p class="more">
-                <a href="../../../http:/ymlog.cn/2020/06/18/Win_ShotCut/">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img="">
-            <a href="http://ymlog.cn/2020/06/18/Win_ShotCut/" title="Win快捷键">
-                
-                    <!--
-                    <img src="../../../https:/s1.ax1x.com/2020/06/16/NkExXj.png" class="thumbnail">
-                    -->
-                    <img class="thumbnail" src="../../../img/default.png" data-echo="https://s1.ax1x.com/2020/06/16/NkExXj.png" alt="Win快捷键" >
-                
-            </a>
-        </div>
+  <div class="article-share clearfix text-center">
+    <div class="share-area">
+      <span class="share-txt">分享到：</span>
+      <a href="javascript: window.open('http://service.weibo.com/share/share.php?url=' + encodeURIComponent(location.href) + '&title=' + document.title + '&language=zh_cn');" class="share-icon weibo"></a>
+      <a href="javascript: alert('请复制链接到微信并发送');" class="share-icon wechat"></a>
+      <a href="javascript: window.open('http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + encodeURIComponent(location.href) + '&title=' + document.title);" class="share-icon qqzone"></a>
+      <a href="javascript: window.open('http://connect.qq.com/widget/shareqq/index.html?url=' + encodeURIComponent(location.href) + '&desc=Jelon个人博客&title=' + document.title + '&callback=' + encodeURIComponent(location.href));" class="share-icon qq"></a>
+      <a href="javascript: window.open('http://shuo.douban.com/!service/share?href=' + encodeURIComponent(location.href) + '&name=' + document.title + '&text=' + document.title);" class="share-icon douban"></a>
     </div>
-</article>
+  </div>
+
+
+<!-- 上一篇/下一篇 -->
+
+<div class="article-nav clearfix">
+    
+    <span class="prev fl">
+        上一篇<br >
+        <a href="javascript: void(0);">没有上一篇了</a>
+    </span>
+    
 
     
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-        <a class="cat-link" href="../../../categories/%E6%95%85%E9%9A%9C/">故障</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="../../../http:/ymlog.cn/2020/06/17/ls_root_broken_down/">
-    		ls根目录卡死
-    	</a>
-    </h3>
-
-    </header>
-    <p class="post-meta">
-        Jelon 发表于
-        <time datetime="2020-06-17T14:46:04.000Z">2020-06-17</time>
-        &nbsp;&nbsp;
-        <span class="post-tags">
-            标签：
+    <span class="next fr">
+        下一篇<br >
+        <a href="../../25/Click-Where/">
             
-    
-        <a href="../../../tags/NFS/" title="NFS">NFS</a>
-    
-
-        </span>
-    </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
+                观前提示
             
-                <p>无善无恶心之体，有善有恶意之动<br>知善知恶是良知，为善去恶是格物</p>
-            
-            <p class="more">
-                <a href="../../../http:/ymlog.cn/2020/06/17/ls_root_broken_down/">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img="">
-            <a href="http://ymlog.cn/2020/06/17/ls_root_broken_down/" title="ls根目录卡死">
-                
-                    <!--
-                    <img src="../../../https:/s1.ax1x.com/2020/06/17/NZ3TUK.png" class="thumbnail">
-                    -->
-                    <img class="thumbnail" src="../../../img/default.png" data-echo="https://s1.ax1x.com/2020/06/17/NZ3TUK.png" alt="ls根目录卡死" >
-                
-            </a>
-        </div>
-    </div>
-</article>
-
+        </a>
+    </span>
     
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-            <a href="javascript: void(0);" class="cat">未分类</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="../../../http:/ymlog.cn/2020/06/16/Vimium_ShotCut/">
-    		Vimium快捷键
-    	</a>
-    </h3>
+</div>
 
-    </header>
-    <p class="post-meta">
-        Jelon 发表于
-        <time datetime="2020-06-16T10:02:13.000Z">2020-06-16</time>
-        &nbsp;&nbsp;
-        <span class="post-tags">
-            标签：
-            
-    
-        <a href="../../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键">快捷键</a>
-    
-
-        </span>
-    </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>世味年來薄似紗，誰令騎馬客京華。<br>小樓一夜聽春雨，深巷明朝賣杏花。<br>矮紙斜行閒作草，晴窗細乳戲分茶。<br>素衣莫起風塵嘆，猶及清明可到家。</p>
-            
-            <p class="more">
-                <a href="../../../http:/ymlog.cn/2020/06/16/Vimium_ShotCut/">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img="">
-            <a href="http://ymlog.cn/2020/06/16/Vimium_ShotCut/" title="Vimium快捷键">
-                
-                    <!--
-                    <img src="../../../https:/s1.ax1x.com/2020/06/16/NkExXj.png" class="thumbnail">
-                    -->
-                    <img class="thumbnail" src="../../../img/default.png" data-echo="https://s1.ax1x.com/2020/06/16/NkExXj.png" alt="Vimium快捷键" >
-                
-            </a>
-        </div>
-    </div>
-</article>
-
-    
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-            <a href="javascript: void(0);" class="cat">未分类</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="../../../http:/ymlog.cn/2020/06/16/Jetbrains_ShutCut/">
-    		Jetbrains快捷键
-    	</a>
-    </h3>
-
-    </header>
-    <p class="post-meta">
-        Jelon 发表于
-        <time datetime="2020-06-16T03:23:57.000Z">2020-06-16</time>
-        &nbsp;&nbsp;
-        <span class="post-tags">
-            标签：
-            
-    
-        <a href="../../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键">快捷键</a>
-    
-
-        </span>
-    </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>高城鼓动兰釭灺。睡也还醒，醉也还醒：忽听孤鸿三两声。<br>人生只似风前絮。欢也零星，悲也零星，都作连江点点萍。</p>
-            
-            <p class="more">
-                <a href="../../../http:/ymlog.cn/2020/06/16/Jetbrains_ShutCut/">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img="">
-            <a href="http://ymlog.cn/2020/06/16/Jetbrains_ShutCut/" title="Jetbrains快捷键">
-                
-                    <!--
-                    <img src="../../../https:/s1.ax1x.com/2020/06/16/NkExXj.png" class="thumbnail">
-                    -->
-                    <img class="thumbnail" src="../../../img/default.png" data-echo="https://s1.ax1x.com/2020/06/16/NkExXj.png" alt="Jetbrains快捷键" >
-                
-            </a>
-        </div>
-    </div>
-</article>
-
-    
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-            <a href="javascript: void(0);" class="cat">未分类</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="../../../http:/ymlog.cn/2020/06/16/Chrome_ShutCut/">
-    		Chrome快捷键
-    	</a>
-    </h3>
-
-    </header>
-    <p class="post-meta">
-        Jelon 发表于
-        <time datetime="2020-06-16T03:23:27.000Z">2020-06-16</time>
-        &nbsp;&nbsp;
-        <span class="post-tags">
-            标签：
-            
-    
-        <a href="../../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键">快捷键</a>
-    
-
-        </span>
-    </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>春未老，风细柳斜斜。试上超然台上望，半壕春水一城花。烟雨暗千家。<br>寒食后，酒醒却咨嗟。休对故人思故国，且将新火试新茶。诗酒趁年华。</p>
-            
-            <p class="more">
-                <a href="../../../http:/ymlog.cn/2020/06/16/Chrome_ShutCut/">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img="">
-            <a href="http://ymlog.cn/2020/06/16/Chrome_ShutCut/" title="Chrome快捷键">
-                
-                    <!--
-                    <img src="../../../https:/s1.ax1x.com/2020/06/16/NkExXj.png" class="thumbnail">
-                    -->
-                    <img class="thumbnail" src="../../../img/default.png" data-echo="https://s1.ax1x.com/2020/06/16/NkExXj.png" alt="Chrome快捷键" >
-                
-            </a>
-        </div>
-    </div>
-</article>
-
-    
-        <!-- 文章列表 item -->
-<article class="post">
-    <header>
-        <!-- 标签这有且只能显示一个 -->
-        
-            <a href="javascript: void(0);" class="cat">未分类</a>
-        
-        <!-- 文章标题 -->
-        
-    <h3 class="post-title">
-    	<a href="../../../http:/ymlog.cn/2020/06/16/VsCode_ShotCut/">
-    		VSCode快捷键
-    	</a>
-    </h3>
-
-    </header>
-    <p class="post-meta">
-        Jelon 发表于
-        <time datetime="2020-06-16T02:51:59.000Z">2020-06-16</time>
-        &nbsp;&nbsp;
-        <span class="post-tags">
-            标签：
-            
-    
-        <a href="../../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键">快捷键</a>
-    
-
-        </span>
-    </p>
-
-    <div class="post-content">
-        <div class="post-excerpt">
-            
-                <p>醉漾轻舟，信bai流引到花深处。<br>尘缘du相误，无计花间住。<br>烟水茫茫，千里斜阳暮。<br>山无数，乱红如雨，不记来时路。</p>
-            
-            <p class="more">
-                <a href="../../../http:/ymlog.cn/2020/06/16/VsCode_ShotCut/">阅读剩下更多</a>
-            </p>
-        </div>
-        <div class="post-thumbnail" data-img="">
-            <a href="http://ymlog.cn/2020/06/16/VsCode_ShotCut/" title="VSCode快捷键">
-                
-                    <!--
-                    <img src="../../../https:/s1.ax1x.com/2020/06/16/NkExXj.png" class="thumbnail">
-                    -->
-                    <img class="thumbnail" src="../../../img/default.png" data-echo="https://s1.ax1x.com/2020/06/16/NkExXj.png" alt="VSCode快捷键" >
-                
-            </a>
-        </div>
-    </div>
-</article>
-
-    
-
-    
-    <nav class="page-navigator">
-        <span class="page-number current">1</span><a class="page-number" href="page/2/">2</a><a class="extend next" rel="next" href="page/2/">后一页</a>
-    </nav>
-    
+<!-- 文章评论 -->
 
 
             </div>
@@ -812,42 +389,42 @@ var _hmt = _hmt || [];
 <ul class="widget-bd">
     
     <li>
-        <a href="../../../categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
+        <a href="../../../../categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a>
         <span class="badge">(3)</span>
     </li>
     
     <li>
-        <a href="../../../categories/%E7%BC%96%E7%A8%8B/">编程</a>
+        <a href="../../../../categories/%E7%BC%96%E7%A8%8B/">编程</a>
         <span class="badge">(7)</span>
     </li>
     
     <li>
-        <a href="../../../categories/%E5%AE%B9%E5%99%A8/">容器</a>
+        <a href="../../../../categories/%E5%AE%B9%E5%99%A8/">容器</a>
         <span class="badge">(2)</span>
     </li>
     
     <li>
-        <a href="../../../categories/Linux/">Linux</a>
+        <a href="../../../../categories/Linux/">Linux</a>
         <span class="badge">(7)</span>
     </li>
     
     <li>
-        <a href="../../../categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a>
+        <a href="../../../../categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a>
         <span class="badge">(3)</span>
     </li>
     
     <li>
-        <a href="../../../categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
+        <a href="../../../../categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a>
         <span class="badge">(2)</span>
     </li>
     
     <li>
-        <a href="../../../categories/%E8%BF%90%E7%BB%B4/">运维</a>
+        <a href="../../../../categories/%E8%BF%90%E7%BB%B4/">运维</a>
         <span class="badge">(1)</span>
     </li>
     
     <li>
-        <a href="../../../categories/%E6%95%85%E9%9A%9C/">故障</a>
+        <a href="../../../../categories/%E6%95%85%E9%9A%9C/">故障</a>
         <span class="badge">(1)</span>
     </li>
     
@@ -860,51 +437,51 @@ var _hmt = _hmt || [];
         <!-- 文章标签 -->
 <div class="widget-bd tag-wrap">
   
-    <a class="tag-item" href="../../../tags/Ansible/" title="Ansible">Ansible (1)</a>
+    <a class="tag-item" href="../../../../tags/Ansible/" title="Ansible">Ansible (1)</a>
   
-    <a class="tag-item" href="../../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键">快捷键 (6)</a>
+    <a class="tag-item" href="../../../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键">快捷键 (6)</a>
   
-    <a class="tag-item" href="../../../tags/Django/" title="Django">Django (1)</a>
+    <a class="tag-item" href="../../../../tags/Django/" title="Django">Django (1)</a>
   
-    <a class="tag-item" href="../../../tags/Docker/" title="Docker">Docker (2)</a>
+    <a class="tag-item" href="../../../../tags/Docker/" title="Docker">Docker (2)</a>
   
-    <a class="tag-item" href="../../../tags/history/" title="history">history (1)</a>
+    <a class="tag-item" href="../../../../tags/history/" title="history">history (1)</a>
   
-    <a class="tag-item" href="../../../tags/KVM/" title="KVM">KVM (1)</a>
+    <a class="tag-item" href="../../../../tags/KVM/" title="KVM">KVM (1)</a>
   
-    <a class="tag-item" href="../../../tags/Keepalived/" title="Keepalived">Keepalived (1)</a>
+    <a class="tag-item" href="../../../../tags/Keepalived/" title="Keepalived">Keepalived (1)</a>
   
-    <a class="tag-item" href="../../../tags/LVS/" title="LVS">LVS (1)</a>
+    <a class="tag-item" href="../../../../tags/LVS/" title="LVS">LVS (1)</a>
   
-    <a class="tag-item" href="../../../tags/Matplotlib/" title="Matplotlib">Matplotlib (1)</a>
+    <a class="tag-item" href="../../../../tags/Matplotlib/" title="Matplotlib">Matplotlib (1)</a>
   
-    <a class="tag-item" href="../../../tags/NodeJS/" title="NodeJS">NodeJS (1)</a>
+    <a class="tag-item" href="../../../../tags/NodeJS/" title="NodeJS">NodeJS (1)</a>
   
-    <a class="tag-item" href="../../../tags/%E9%9A%8F%E7%AC%94/" title="随笔">随笔 (2)</a>
+    <a class="tag-item" href="../../../../tags/%E9%9A%8F%E7%AC%94/" title="随笔">随笔 (2)</a>
   
-    <a class="tag-item" href="../../../tags/OSPF%E5%8D%8F%E8%AE%AE/" title="OSPF协议">OSPF协议 (1)</a>
+    <a class="tag-item" href="../../../../tags/OSPF%E5%8D%8F%E8%AE%AE/" title="OSPF协议">OSPF协议 (1)</a>
   
-    <a class="tag-item" href="../../../tags/Linux/" title="Linux">Linux (1)</a>
+    <a class="tag-item" href="../../../../tags/Linux/" title="Linux">Linux (1)</a>
   
-    <a class="tag-item" href="../../../tags/ARP%E5%8D%8F%E8%AE%AE/" title="ARP协议">ARP协议 (1)</a>
+    <a class="tag-item" href="../../../../tags/ARP%E5%8D%8F%E8%AE%AE/" title="ARP协议">ARP协议 (1)</a>
   
-    <a class="tag-item" href="../../../tags/%E7%88%AC%E8%99%AB/" title="爬虫">爬虫 (1)</a>
+    <a class="tag-item" href="../../../../tags/%E7%88%AC%E8%99%AB/" title="爬虫">爬虫 (1)</a>
   
-    <a class="tag-item" href="../../../tags/Redis/" title="Redis">Redis (1)</a>
+    <a class="tag-item" href="../../../../tags/Redis/" title="Redis">Redis (1)</a>
   
-    <a class="tag-item" href="../../../tags/%E5%B0%8F%E5%9E%8B%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE/" title="小型路由协议">小型路由协议 (1)</a>
+    <a class="tag-item" href="../../../../tags/%E5%B0%8F%E5%9E%8B%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE/" title="小型路由协议">小型路由协议 (1)</a>
   
-    <a class="tag-item" href="../../../tags/MySQL/" title="MySQL">MySQL (1)</a>
+    <a class="tag-item" href="../../../../tags/MySQL/" title="MySQL">MySQL (1)</a>
   
-    <a class="tag-item" href="../../../tags/Switch/" title="Switch">Switch (1)</a>
+    <a class="tag-item" href="../../../../tags/Switch/" title="Switch">Switch (1)</a>
   
-    <a class="tag-item" href="../../../tags/VsCode/" title="VsCode">VsCode (1)</a>
+    <a class="tag-item" href="../../../../tags/VsCode/" title="VsCode">VsCode (1)</a>
   
-    <a class="tag-item" href="../../../tags/Vue/" title="Vue">Vue (1)</a>
+    <a class="tag-item" href="../../../../tags/Vue/" title="Vue">Vue (1)</a>
   
-    <a class="tag-item" href="../../../tags/WebSocket/" title="WebSocket">WebSocket (1)</a>
+    <a class="tag-item" href="../../../../tags/WebSocket/" title="WebSocket">WebSocket (1)</a>
   
-    <a class="tag-item" href="../../../tags/NFS/" title="NFS">NFS (1)</a>
+    <a class="tag-item" href="../../../../tags/NFS/" title="NFS">NFS (1)</a>
   
 </div>
     </section>
@@ -953,14 +530,14 @@ var _hmt = _hmt || [];
         2016-2020
     
 
-    <a href="../../../index.html">Jelon Loves You</a>
+    <a href="../../../../index.html">Jelon Loves You</a>
 </footer>
 <div class="back-to-top" id="JELON__backToTop" title="返回顶部">返回顶部</div>
 
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="../../../js/main.js?v=1593437762375.js"></script>
+<script src="../../../../js/main.js?v=1593437762481.js"></script>
 
 </body>
 </html>
