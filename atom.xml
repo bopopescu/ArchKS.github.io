@@ -45,13 +45,14 @@
     <link href="http://ymlog.cn/2020/06/25/Click-Where/"/>
     <id>http://ymlog.cn/2020/06/25/Click-Where/</id>
     <published>2020-06-25T10:39:08.000Z</published>
-    <updated>2020-06-25T11:45:55.623Z</updated>
+    <updated>2020-06-30T01:15:03.341Z</updated>
     
-    <content type="html"><![CDATA[<p>如果点击出现 <code>Cannot GET /http://ymlog.cn/2020/02/27/Switch/</code> 这样的标志，不要点击文字，点击右侧图片打开即可！！！<br>因为文字链接指向<code>http://ymlog.cn/http:/ymlog.cn/2020/05/03/WebSocket/</code>,NodeJS模板语法错误！在URL前面又加了URL！</p><a id="more"></a>]]></content>
+    <content type="html"><![CDATA[<hr><p>如果点击出现 <strong>404 Not Found</strong> 这样的标志，不要点击文字，点击右侧图片打开即可！！！</p><a id="more"></a><p><img src="https://s1.ax1x.com/2020/06/30/N4dQoV.png" alt="N4dQoV.png"></p><br><hr><br><p><img src="https://s1.ax1x.com/2020/06/30/N4dwo6.png" alt="N4dwo6.png"></p><hr><br><br><br><br>]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;如果点击出现 &lt;code&gt;Cannot GET /http://ymlog.cn/2020/02/27/Switch/&lt;/code&gt; 这样的标志，不要点击文字，点击右侧图片打开即可！！！&lt;br&gt;因为文字链接指向&lt;code&gt;http://ymlog.cn/http:/ymlog.cn/2020/05/03/WebSocket/&lt;/code&gt;,NodeJS模板语法错误！在URL前面又加了URL！&lt;/p&gt;
+      &lt;hr&gt;
+&lt;p&gt;如果点击出现 &lt;strong&gt;404 Not Found&lt;/strong&gt; 这样的标志，不要点击文字，点击右侧图片打开即可！！！&lt;/p&gt;
     
     </summary>
     
