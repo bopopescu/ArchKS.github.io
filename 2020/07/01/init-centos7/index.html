@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8" >
     <meta name="baidu-site-verification" content="dIcXMeY8Ya" />
     
-    <title>Vim快捷键 | zen&#39;s blog</title>
+    <title>init_centos7 | zen&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" >
     <meta name="keywords" content="zen, 运维, 云计算" >
     <meta name="description" content="杜振铨的博客小岛" >
@@ -114,82 +114,16 @@ var _hmt = _hmt || [];
 <!-- 文章 -->
 <article class="post article">
     <header class="text-center">
-        <h3 class="post-title"><span>Vim快捷键</span></h3>
+        <h3 class="post-title"><span>init_centos7</span></h3>
     </header>
     <p class="post-meta text-center">
         Jelon 发表于
-        <time datetime="2019-10-10T13:13:51.000Z">2019-10-10</time>
+        <time datetime="2020-07-01T05:06:13.000Z">2020-07-01</time>
     </p>
     <div class="post-content">
-        <p>林花谢了春红，太匆匆。<br>无奈朝来寒雨，晚来风。<br>胭脂泪，相留醉，几时重。<br>自是人生长恨，水长东。</p>
-<a id="more"></a>
+        <a id="more"></a>
 
-
-
-
-<ul>
-<li>j：向下滚动一点</li>
-<li>k：向上滚动一点</li>
-<li>gg：到页面最底部</li>
-<li>G：到页面最底部</li>
-<li>d：向下翻一屏</li>
-<li>u：向上翻一屏</li>
-</ul>
-<p>常用命令</p>
-<h1 id="1、批量加注释"><a href="#1、批量加注释" class="headerlink" title="1、批量加注释"></a>1、批量加注释</h1><pre><code>ctrl + v，进入可视块模式
-移动光标，选中的位置会有高亮显示
-shift + i，进入 insert 模式
-输入//
-esc</code></pre><h1 id="2、批量解注释"><a href="#2、批量解注释" class="headerlink" title="2、批量解注释"></a>2、批量解注释</h1><pre><code>解注释
-光标置于行首
-ctrl + v，进入可视块模式
-移动光标，选中的位置会有高亮显示
-按d</code></pre><h1 id="3、删除"><a href="#3、删除" class="headerlink" title="3、删除"></a>3、删除</h1><pre><code>命令行模式：:%d 删除所有内容
-末行模式：dG：删除光标下所有内容
-dw：删除一个单词</code></pre><h1 id="4、移动"><a href="#4、移动" class="headerlink" title="4、移动"></a>4、移动</h1><pre><code>gg：光标移到第一行
-G：光标移到最后一行
-9k  向上移动9次，同理num hjkl</code></pre><h1 id="5、退出"><a href="#5、退出" class="headerlink" title="5、退出"></a>5、退出</h1><pre><code>ZZ 保存并退出，行末模式</code></pre><h1 id="6、括号跳转"><a href="#6、括号跳转" class="headerlink" title="6、括号跳转"></a>6、括号跳转</h1><pre><code>%</code></pre><h1 id="7、滚屏"><a href="#7、滚屏" class="headerlink" title="7、滚屏"></a>7、滚屏</h1>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">CTRL-U：窗口向上滚动半屏</span><br><span class="line">CTRL-D：窗口向下滚动半屏</span><br><span class="line">CTRL-F：窗口向下滚动全屏</span><br><span class="line">CTRL-B：窗口向上滚动全屏</span><br><span class="line">zz    ：窗口正中</span><br><span class="line">zt    ：将最下面的窗口调到最上面</span><br><span class="line">zb    ：将最上面的窗口调到最下面</span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="8、查找"><a href="#8、查找" class="headerlink" title="8、查找"></a>8、查找</h1><pre><code>/string
-#查找后
-‘#’ ：往上查找
-‘*’：往下查找
-/the\&gt; 精确查找，确保以&apos;the&apos;结尾。&apos;\&lt;&apos;:开头，&apos;\&gt;&apos;：结尾</code></pre><h1 id="9、多屏编辑"><a href="#9、多屏编辑" class="headerlink" title="9、多屏编辑"></a>9、多屏编辑</h1><pre><code>vim a.sh b.sh -O #垂直
-
-Ctrl+w：跳转
-qall!:前置退出所有</code></pre><h1 id="10、替换"><a href="#10、替换" class="headerlink" title="10、替换"></a>10、替换</h1><pre><code>s/{word1}/{word2}/g : 将光标所在行的所有word1替换为word2
-%s/{word1}/{word2}/g : 将所有word1替换为word2
-g表示全局替换
-i表示大小写不敏感，I表示大小写敏感
-如：
-    %s/sudo/su/ig</code></pre><h1 id="行末模式"><a href="#行末模式" class="headerlink" title="行末模式"></a>行末模式</h1><pre><code>a    光标所在下一个位置插入
-A    光标所在行末尾插入
-i    光标所在位置插入
-I    光标所在行首插入
-o    光标所在下一行插入
-O    光标所在上一行插入
-
-y   复制
-p   粘贴
-dd  删除一行
-u   撤销</code></pre><h1 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h1><pre><code>#设置行号
-set nu   
-#取消行号                  
-set nonu 
-#下划线              
-set cursorline     
-#Tab=2个空格
-set ts=2
-#忽略大小写
-set ignorecase
-#不忽略大小写
-set noignorecase</code></pre><h1 id="输入模式"><a href="#输入模式" class="headerlink" title="输入模式"></a>输入模式</h1><h1 id="定制vim"><a href="#定制vim" class="headerlink" title="定制vim"></a>定制vim</h1><blockquote>
-<p>配置文件：全局有效<br>全局：/etc/vimrc<br>个人：~/.vimrc<br>行末：对当前进程有效</p>
-</blockquote>
-<p>相关配置</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">行号：</span><br><span class="line">  显示：<span class="built_in">set</span> nu</span><br><span class="line">  取消：<span class="built_in">set</span> nonu</span><br><span class="line">括号匹配：</span><br><span class="line">  匹配：<span class="built_in">set</span> showmatch</span><br><span class="line">  取消：<span class="built_in">set</span> unshowmatch</span><br><span class="line">自动缩进：</span><br><span class="line">  启动  <span class="built_in">set</span> ai</span><br><span class="line">  取消：  <span class="built_in">set</span> noai</span><br><span class="line">高亮搜索：</span><br><span class="line">  启动 <span class="built_in">set</span> hlsearch</span><br><span class="line">  取消 <span class="built_in">set</span> nohlsearch</span><br><span class="line">语法高亮</span><br><span class="line">  启动 syntax on</span><br><span class="line">  取消 syntax off</span><br><span class="line">忽略大小写</span><br><span class="line">  启动 <span class="built_in">set</span> ic</span><br><span class="line">  取消 <span class="built_in">set</span> noic</span><br><span class="line">获取帮助：</span><br><span class="line">  <span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+<p>CentOS7初始化脚本，实现配置防火墙，安装常用软件，配置静态IP，设置快捷命令</p>
 
     </div>
     <p class="post-meta">
@@ -200,7 +134,7 @@ set noignorecase</code></pre><h1 id="输入模式"><a href="#输入模式" class
             标签：
             
     
-        <a href="../../../../tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" title="快捷键">快捷键</a>
+        <a href="../../../../tags/%E8%84%9A%E6%9C%AC/" title="脚本">脚本</a>
     
 
         </span>
@@ -226,20 +160,16 @@ set noignorecase</code></pre><h1 id="输入模式"><a href="#输入模式" class
     
     <span class="prev fl">
         上一篇<br >
-        <a href="../../20/History%20Of%20Blog/">
-            
-                博客历史
-            
-        </a>
+        <a href="javascript: void(0);">没有上一篇了</a>
     </span>
     
 
     
     <span class="next fr">
         下一篇<br >
-        <a href="../../../08/22/Operation%20System/">
+        <a href="../../../06/29/Produce-the-docker-image-about-nginx/">
             
-                OS操作系统
+                Dockerfile制作Nginx容器
             
         </a>
     </span>
@@ -436,7 +366,7 @@ set noignorecase</code></pre><h1 id="输入模式"><a href="#输入模式" class
     <!--博客js脚本 -->
     <!-- 这里放网站js脚本 -->
 
-<script src="../../../../js/main.js?v=1593836048497.js"></script>
+<script src="../../../../js/main.js?v=1593836048452.js"></script>
 
 </body>
 </html>
