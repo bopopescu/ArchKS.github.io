@@ -1,223 +1,101 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-171617191-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>标签: NFS | zen's blog</title><meta name="description"><meta name="author" content="ZEN"><meta name="copyright" content="ZEN"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="../../img/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://www.google-analytics.com" crossorigin="crossorigin"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="标签: NFS"><meta name="twitter:description"><meta name="twitter:image" content="http://ymlog.cn/img/avatar.png"><meta property="og:type" content="website"><meta property="og:title" content="标签: NFS"><meta property="og:url" content="http://ymlog.cn/tags/NFS/"><meta property="og:site_name" content="zen's blog"><meta property="og:description"><meta property="og:image" content="http://ymlog.cn/img/avatar.png"><script src="../../https:/cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
 
-  gtag('config', 'UA-171617191-1');
-</script>
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
 
-  
-  <title>Tag: NFS | zen&#39;s blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zen&#39;s blog">
-<meta property="og:url" content="http://ymlog.cn/tags/NFS/index.html">
-<meta property="og:site_name" content="zen&#39;s blog">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="ZEN">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="../../atom.xml" title="zen&#39;s blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  
-<link rel="stylesheet" href="../../css/style.css">
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="../../css/index.css"><link rel="stylesheet" href="../../https:/cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="../../https:/cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://ymlog.cn/tags/NFS/"><script async="async" src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><script>(adsbygoogle = window.adsbygoogle || []).push({
+  google_ad_client: '',
+  enable_page_level_ads: 'true'
+});</script><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="../../index.html" id="logo">zen&#39;s blog</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="../../index.html">Home</a>
-        
-          <a class="main-nav-link" href="../../archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="../../atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ymlog.cn"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
+ga('create', 'UA-171617191-1', 'auto');
+ga('send', 'pageview');
+</script><link rel="stylesheet" href="../../https:/fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://ymlog.cn","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="../../archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="../../2020/06/17/ls_root_broken_down/" class="archive-article-date">
-  <time datetime="2020-06-17T14:46:04.000Z" itemprop="datePublished">6月 17</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="../../2020/06/17/ls_root_broken_down/">ls根目录卡死</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">分类</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="../../categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/">中间件</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E5%AE%B9%E5%99%A8/">容器</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E6%95%85%E9%9A%9C/">故障</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/">路由技术</a></li><li class="category-list-item"><a class="category-list-link" href="../../categories/%E8%BF%90%E7%BB%B4/">运维</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="../ARP%E5%8D%8F%E8%AE%AE/" rel="tag">ARP协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="../Ansible/" rel="tag">Ansible</a></li><li class="tag-list-item"><a class="tag-list-link" href="../Django/" rel="tag">Django</a></li><li class="tag-list-item"><a class="tag-list-link" href="../Docker/" rel="tag">Docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="../KVM/" rel="tag">KVM</a></li><li class="tag-list-item"><a class="tag-list-link" href="../Keepalived/" rel="tag">Keepalived</a></li><li class="tag-list-item"><a class="tag-list-link" href="../LVS/" rel="tag">LVS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../Linux/" rel="tag">Linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="../Matplotlib/" rel="tag">Matplotlib</a></li><li class="tag-list-item"><a class="tag-list-link" href="../MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="" rel="tag">NFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../NodeJS/" rel="tag">NodeJS</a></li><li class="tag-list-item"><a class="tag-list-link" href="../OSPF%E5%8D%8F%E8%AE%AE/" rel="tag">OSPF协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="../Redis/" rel="tag">Redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="../Switch/" rel="tag">Switch</a></li><li class="tag-list-item"><a class="tag-list-link" href="../VsCode/" rel="tag">VsCode</a></li><li class="tag-list-item"><a class="tag-list-link" href="../Vue/" rel="tag">Vue</a></li><li class="tag-list-item"><a class="tag-list-link" href="../WebSocket/" rel="tag">WebSocket</a></li><li class="tag-list-item"><a class="tag-list-link" href="../history/" rel="tag">history</a></li><li class="tag-list-item"><a class="tag-list-link" href="../%E5%B0%8F%E5%9E%8B%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE/" rel="tag">小型路由协议</a></li><li class="tag-list-item"><a class="tag-list-link" href="../%E5%BF%AB%E6%8D%B7%E9%94%AE/" rel="tag">快捷键</a></li><li class="tag-list-item"><a class="tag-list-link" href="../%E7%88%AC%E8%99%AB/" rel="tag">爬虫</a></li><li class="tag-list-item"><a class="tag-list-link" href="../%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">标签云</h3>
-    <div class="widget tagcloud">
-      <a href="../ARP%E5%8D%8F%E8%AE%AE/" style="font-size: 10px;">ARP协议</a> <a href="../Ansible/" style="font-size: 10px;">Ansible</a> <a href="../Django/" style="font-size: 10px;">Django</a> <a href="../Docker/" style="font-size: 15px;">Docker</a> <a href="../KVM/" style="font-size: 10px;">KVM</a> <a href="../Keepalived/" style="font-size: 10px;">Keepalived</a> <a href="../LVS/" style="font-size: 10px;">LVS</a> <a href="../Linux/" style="font-size: 10px;">Linux</a> <a href="../Matplotlib/" style="font-size: 10px;">Matplotlib</a> <a href="../MySQL/" style="font-size: 10px;">MySQL</a> <a href="" style="font-size: 10px;">NFS</a> <a href="../NodeJS/" style="font-size: 10px;">NodeJS</a> <a href="../OSPF%E5%8D%8F%E8%AE%AE/" style="font-size: 10px;">OSPF协议</a> <a href="../Redis/" style="font-size: 10px;">Redis</a> <a href="../Switch/" style="font-size: 10px;">Switch</a> <a href="../VsCode/" style="font-size: 10px;">VsCode</a> <a href="../Vue/" style="font-size: 10px;">Vue</a> <a href="../WebSocket/" style="font-size: 10px;">WebSocket</a> <a href="../history/" style="font-size: 10px;">history</a> <a href="../%E5%B0%8F%E5%9E%8B%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE/" style="font-size: 10px;">小型路由协议</a> <a href="../%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 20px;">快捷键</a> <a href="../%E7%88%AC%E8%99%AB/" style="font-size: 10px;">爬虫</a> <a href="../%E9%9A%8F%E7%AC%94/" style="font-size: 15px;">随笔</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/06/">六月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/05/">五月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/04/">四月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/03/">三月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/02/">二月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2020/01/">一月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/08/">八月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/07/">七月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="../../archives/2019/05/">五月 2019</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="../../2020/06/29/Produce-the-docker-image-about-nginx/">Dockerfile制作Nginx容器</a>
-          </li>
-        
-          <li>
-            <a href="../../2020/06/25/Click-Where/">观前提示</a>
-          </li>
-        
-          <li>
-            <a href="../../2020/06/18/VsCode_Remote_Config/">VsCode远程开发</a>
-          </li>
-        
-          <li>
-            <a href="../../2020/06/18/Win_ShotCut/">Win快捷键</a>
-          </li>
-        
-          <li>
-            <a href="../../2020/06/17/ls_root_broken_down/">ls根目录卡死</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2020 ZEN<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="../../index.html" class="mobile-nav-link">Home</a>
-  
-    <a href="../../archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
-<link rel="stylesheet" href="../../fancybox/jquery.fancybox.css">
-
-  
-<script src="../../fancybox/jquery.fancybox.pack.js"></script>
-
-
-
-
-<script src="../../js/script.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: false,
+  isSidebar: false  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="zen's blog" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="../img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="../archives/"><div class="headline">文章</div><div class="length_num">33</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/"><div class="headline">标签</div><div class="length_num">23</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="../categories/"><div class="headline">分类</div><div class="length_num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="../index.html"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="../archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="../tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="../categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="../link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="../about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="../music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="../movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div></div></div><div id="body-wrap"><div class="not-index-bg" id="nav" style="background-image: url(/img/index.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="../index.html">zen's blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="../index.html"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="../archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="../tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="../categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="../link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="../about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="../music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="../movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="page_site-info"><h1 id="site_title">NFS</h1></div></div><main class="layout_page" id="content-inner"><div id="tag"><div class="article-sort-title">标签 - NFS</div><div class="article-sort"><div class="article-sort-item year">2020</div><div class="article-sort-item no-article-cover"><div class="article-sort-post"><a class="article-sort-item__post" href="../../2020/06/17/ls_root_broken_down/"><i class="fa fa-clock-o" aria-hidden="true"></i><time class="article-sort-item__time" title="发表于 2020-06-17 22:46:04">2020-06-17</time><div class="article-sort-item__title">ls根目录卡死</div></a></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="../img/avatar.png" onerror="this.onerror=null;this.src='../img/friend_404.gif'" alt="avatar"/><div class="author-info__name">ZEN</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="../archives"><div class="headline">文章</div><div class="length_num">33</div></a></div><div class="card-info-data-item is-center">      <a href=""><div class="headline">标签</div><div class="length_num">23</div></a></div><div class="card-info-data-item is-center">     <a href="../categories"><div class="headline">分类</div><div class="length_num">8</div></a></div></div><div class="card-info-bookmark is-center"><a class="bookmark button--primary button--animated" id="bookmark-it" href="javascript:;" title="加入书签" target="_self"><i class="fa fa-bookmark" aria-hidden="true"></i><span>加入书签</span></a></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/archks" target="_blank" title="Github"><i class="fa fa-github" aria-hidden="true"></i></a><a class="social-icon" href="mailto:2212585023@qq.com" target="_blank" title="Email"><i class="fa fa-envelope" aria-hidden="true"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title="RSS"><i class="fa fa-rss" aria-hidden="true"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fa fa-bullhorn card-announcement-animation" aria-hidden="true"></i><span>公告</span></div><div class="announcement_content">感谢访问本站，Ctrl+D可领取大礼包 ^_^</div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fa fa-history" aria-hidden="true"></i><span>最新文章</span></div><div class="aside-recent-item"> <div class="aside-recent-post"><a href="../2020/06/29/Produce-the-docker-image-about-nginx/"><div class="aside-post-title no-aside-cover"><div class="aside-post_title" href="../2020/06/29/Produce-the-docker-image-about-nginx/" title="Dockerfile制作Nginx容器">Dockerfile制作Nginx容器</div><time class="aside-post_meta post-meta__date" title="发表于 2020-06-29 10:59:50">2020-06-29</time></div></a></div><div class="aside-recent-post"><a href="../2020/06/18/VsCode_Remote_Config/"><div class="aside-post-title no-aside-cover"><div class="aside-post_title" href="../2020/06/18/VsCode_Remote_Config/" title="VsCode远程开发">VsCode远程开发</div><time class="aside-post_meta post-meta__date" title="发表于 2020-06-18 10:50:36">2020-06-18</time></div></a></div><div class="aside-recent-post"><a href="../2020/06/18/Win_ShotCut/"><div class="aside-post-title no-aside-cover"><div class="aside-post_title" href="../2020/06/18/Win_ShotCut/" title="Win快捷键">Win快捷键</div><time class="aside-post_meta post-meta__date" title="发表于 2020-06-18 08:37:32">2020-06-18</time></div></a></div><div class="aside-recent-post"><a href="../2020/06/17/ls_root_broken_down/"><div class="aside-post-title no-aside-cover"><div class="aside-post_title" href="../2020/06/17/ls_root_broken_down/" title="ls根目录卡死">ls根目录卡死</div><time class="aside-post_meta post-meta__date" title="发表于 2020-06-17 22:46:04">2020-06-17</time></div></a></div><div class="aside-recent-post"><a href="../2020/06/16/Vimium_ShotCut/"><div class="aside-post-title no-aside-cover"><div class="aside-post_title" href="../2020/06/16/Vimium_ShotCut/" title="Vimium快捷键">Vimium快捷键</div><time class="aside-post_meta post-meta__date" title="发表于 2020-06-16 18:02:13">2020-06-16</time></div></a></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fa fa-folder-open" aria-hidden="true"></i><span>分类</span></div><ul class="aside-category-item">       <li class="aside-category-list"><a class="aside-category-list_link" href="../categories/Linux/"><span class="aside-category-list_name">Linux</span><span class="aside-category-list_length">7</span></a></li><li class="aside-category-list"><a class="aside-category-list_link" href="../categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"><span class="aside-category-list_name">中间件</span><span class="aside-category-list_length">3</span></a></li><li class="aside-category-list"><a class="aside-category-list_link" href="../categories/%E5%AE%B9%E5%99%A8/"><span class="aside-category-list_name">容器</span><span class="aside-category-list_length">2</span></a></li><li class="aside-category-list"><a class="aside-category-list_link" href="../categories/%E6%95%85%E9%9A%9C/"><span class="aside-category-list_name">故障</span><span class="aside-category-list_length">1</span></a></li><li class="aside-category-list"><a class="aside-category-list_link" href="../categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="aside-category-list_name">数据库</span><span class="aside-category-list_length">2</span></a></li><li class="aside-category-list"><a class="aside-category-list_link" href="../categories/%E7%BC%96%E7%A8%8B/"><span class="aside-category-list_name">编程</span><span class="aside-category-list_length">7</span></a></li><li class="aside-category-list"><a class="aside-category-list_link" href="../categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/"><span class="aside-category-list_name">路由技术</span><span class="aside-category-list_length">3</span></a></li><li class="aside-category-list"><a class="aside-category-list_link" href="../categories/%E8%BF%90%E7%BB%B4/"><span class="aside-category-list_name">运维</span><span class="aside-category-list_length">1</span></a></li></ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fa fa-tags" aria-hidden="true"></i><span>标签</span></div><div class="card-tag-cloud"><a href="ARP%E5%8D%8F%E8%AE%AE/" style="font-size: 16px; color: #999">ARP协议</a> <a href="Ansible/" style="font-size: 16px; color: #999">Ansible</a> <a href="Django/" style="font-size: 16px; color: #999">Django</a> <a href="Docker/" style="font-size: 20px; color: #99a1ac">Docker</a> <a href="KVM/" style="font-size: 16px; color: #999">KVM</a> <a href="Keepalived/" style="font-size: 16px; color: #999">Keepalived</a> <a href="LVS/" style="font-size: 16px; color: #999">LVS</a> <a href="Linux/" style="font-size: 16px; color: #999">Linux</a> <a href="Matplotlib/" style="font-size: 16px; color: #999">Matplotlib</a> <a href="MySQL/" style="font-size: 16px; color: #999">MySQL</a> <a href="NFS/" style="font-size: 16px; color: #999">NFS</a> <a href="NodeJS/" style="font-size: 16px; color: #999">NodeJS</a> <a href="OSPF%E5%8D%8F%E8%AE%AE/" style="font-size: 16px; color: #999">OSPF协议</a> <a href="Redis/" style="font-size: 16px; color: #999">Redis</a> <a href="Switch/" style="font-size: 16px; color: #999">Switch</a> <a href="VsCode/" style="font-size: 16px; color: #999">VsCode</a> <a href="Vue/" style="font-size: 16px; color: #999">Vue</a> <a href="WebSocket/" style="font-size: 16px; color: #999">WebSocket</a> <a href="history/" style="font-size: 16px; color: #999">history</a> <a href="%E5%B0%8F%E5%9E%8B%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE/" style="font-size: 16px; color: #999">小型路由协议</a> <a href="%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 24px; color: #99a9bf">快捷键</a> <a href="%E7%88%AC%E8%99%AB/" style="font-size: 16px; color: #999">爬虫</a> <a href="%E9%9A%8F%E7%AC%94/" style="font-size: 20px; color: #99a1ac">随笔</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fa fa-archive" aria-hidden="true"></i><span>归档</span></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/06/"><span class="archive-list-date">2020年06月</span><span class="archive-list-count">9</span></a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/05/"><span class="archive-list-date">2020年05月</span><span class="archive-list-count">1</span></a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/04/"><span class="archive-list-date">2020年04月</span><span class="archive-list-count">3</span></a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/03/"><span class="archive-list-date">2020年03月</span><span class="archive-list-count">2</span></a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/02/"><span class="archive-list-date">2020年02月</span><span class="archive-list-count">7</span></a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2020/01/"><span class="archive-list-date">2020年01月</span><span class="archive-list-count">2</span></a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/12/"><span class="archive-list-date">2019年12月</span><span class="archive-list-count">1</span></a></li><li class="archive-list-item"><a class="archive-list-link" href="../archives/2019/10/"><span class="archive-list-date">2019年10月</span><span class="archive-list-count">3</span></a></li><li class="archive-list-item is-center"><a class="archive-list-link-more" href="/archives" >查看更多</a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fa fa-line-chart" aria-hidden="true"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="webinfo-article-name">文章数目 :</div><div class="webinfo-article-count">33</div></div><div class="webinfo-item"><div class="webinfo-runtime-name">已运行时间 :</div><div class="webinfo-runtime-count" id="webinfo-runtime-count" start_date="6/5/2019 00:00:00">     </div></div></div></div></div></div></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By ZEN</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="../../https:/cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="../../js/utils.js"></script><script src="../../js/main.js"></script><script src="../../js/tw_cn.js"></script><script src="../../https:/cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="../../https:/cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="../../https:/cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script>if (document.getElementsByClassName('mermaid').length) {
+  loadScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js',function () {
+    mermaid.initialize({
+      theme: 'default',
+  })
+})
+}</script></body></html>
