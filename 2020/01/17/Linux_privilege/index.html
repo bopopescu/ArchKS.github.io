@@ -485,7 +485,7 @@ ga('send', 'pageview');
 <p>1、让执行者临时拥有属组的权限（对拥有执行权限的二进制程序进行设置）；</p>
 <p>2、在某个目录中创建的文件自动继承该目录的用户组（只可以对目录进行设置）。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[root@DZQ dev]<span class="comment"># ll mem </span></span><br><span class="line">crw-r----- 1 root kmem 1, 1 Aug  6 08:50 mem</span><br></pre></td></tr></table></figure>
-<p>1、在某个目录中创建的文件自动继承该目录的用户组<br />2、由于 ps 命令被增加了 SGID 特殊权限位，所以当用户执行该命令时，也就临时获取到了 system 用户组的权限，从而可以顺利地读取设备文件了</p>
+<p>1、在某个目录中创建的文件自动继承该目录的用户组<br>2、由于 ps 命令被增加了 SGID 特殊权限位，所以当用户执行该命令时，也就临时获取到了 system 用户组的权限，从而可以顺利地读取设备文件了</p>
 <h3 id="SBIT"><a href="#SBIT" class="headerlink" title="SBIT"></a>SBIT</h3><p>Sticky Bit ,SBIT 特殊权限位可确保用户只能删除自己的文件，而不能删除其他用户的文件。换句话说，当对某个目录设置了 SBIT 粘滞位权限后，那么该目录中的文件就只能被其所有者执行删除操作了与前面所讲的     SUID 和 SGID 权限显示方法不同，当目录被设置 SBIT 特殊权限位后，文件的其他人权限部分的 x 执行权限就会被替换成 t 或者 T，原本有 x 执行权限则会写成 t，原本没有 x 执行权限则会被写成 T。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">[linuxprobe@linuxprobe tmp]$ ls -ald /tmp</span><br><span class="line">drwxrwxrwt. 17 root root 4096 Feb 11 13:03 /tmp</span><br></pre></td></tr></table></figure>
 

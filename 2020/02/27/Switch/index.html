@@ -272,7 +272,7 @@ ga('send', 'pageview');
 </tr>
 </tbody></table>
 <p>状态转换：</p>
-<img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_3.png"  alt="image-20200227161444047" style="zoom:50%;" />
+<img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_3.png"  alt="image-20200227161444047" style="zoom:50%;">
 
 
 <h2 id="实验现象"><a href="#实验现象" class="headerlink" title="实验现象"></a>实验现象</h2><p><img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_4.png"  alt="image-20200209154918120"></p>
@@ -285,11 +285,11 @@ ga('send', 'pageview');
 
 
 <h2 id="生成树拓扑变化"><a href="#生成树拓扑变化" class="headerlink" title="生成树拓扑变化"></a>生成树拓扑变化</h2><p>也叫STP 拓扑变化。</p>
-<img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_5.png"  alt="image-20200209091346870" style="zoom:50%;" />
+<img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_5.png"  alt="image-20200209091346870" style="zoom:50%;">
 
 <p>Topology Change Notification Bridge Protocol Data Unit = TCN BPDU</p>
 <p>网络拓扑变更报文  网桥协议单元，即当下层交换机拓扑发生变化时，次级交换机向Root Bridge传递TCN BPDU报文，即BPDU字段中的Type改为80。沿着根端口就可以最终把报文传送给Root，Root接收到后，发送TC标志设置，内容为空，目的是为了泛洪。</p>
-<img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_6.png"  alt="image-20200209091358909" style="zoom:50%;" />
+<img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_6.png"  alt="image-20200209091358909" style="zoom:50%;">
 
 <p>35s = age老化时间（20s） +  Learning（15s）[生成树的计算时间]</p>
 <h2 id="Portfast：快速端口"><a href="#Portfast：快速端口" class="headerlink" title="Portfast：快速端口"></a>Portfast：快速端口</h2><p>一个接口从开启到能正常运行会经历三个阶段，需要一定的时间。这是为了防止环路。如果不需要防环，可以使用Portfast来快速启动，这样已启动就变成FWD。</p>
@@ -306,7 +306,7 @@ ga('send', 'pageview');
 <p><code>show run int | include bia</code>可以看到所有的MAC，其中第一个MAC将被生成树使用，也就是CPU的MAC，接下去就是每个以太网接口的MAC</p>
 <p>我们知道交换机能够支持的VLAN数据是很庞大的，如果开启PVST+，每个VLAN一棵生成树，而每棵生成树都要有一个独立的标识，都需要耗费MAC的话，那么MAC地址池肯定是无法承受的</p>
 <p>因此需要用到MAC地址缩减方案，这也是为什么优先级必须是4096倍数的原因。</p>
-<img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_7.png"  alt="image-20200227162938052" style="zoom:33%;" />
+<img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_7.png"  alt="image-20200227162938052" style="zoom:33%;">
 
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">show spanning-tree</span><br><span class="line"></span><br><span class="line">Priority 4097 (priority 4096 sys-id-ext 1)</span><br><span class="line"><span class="comment">#因为系统扩展ID是1，所以优先级要+1</span></span><br><span class="line"><span class="comment">#系统扩展ID=1是因为VLAN是1</span></span><br></pre></td></tr></table></figure>
 
@@ -335,7 +335,7 @@ ga('send', 'pageview');
 
 
 
-<img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_9.png"  alt="image-20200209162727580"  />
+<img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_9.png"  alt="image-20200209162727580">
 
 
 
@@ -374,7 +374,7 @@ ga('send', 'pageview');
 
 
 
-<h2 id="5、RootGuard"><a href="#5、RootGuard" class="headerlink" title="5、RootGuard"></a>5、RootGuard</h2><img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_11.png"  alt="image-20200209185915776" style="zoom:67%;" />
+<h2 id="5、RootGuard"><a href="#5、RootGuard" class="headerlink" title="5、RootGuard"></a>5、RootGuard</h2><img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_11.png"  alt="image-20200209185915776" style="zoom:67%;">
 
 <p>只要Service-Provider Network端收到其他地方发来的更优质的BPDU，就将那个区域置为inconsistent。注意inconsistent跟err-disable的区别是，err-disable会disable整个接口，而inconsistentport是针对特定的vlan的。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">只会屏蔽当前VLAN(发给我更优的BPDU)</span><br><span class="line">spanning-tree guard root			<span class="comment"># 接口上配置root防护，这个端口就不可以成为根段偶</span></span><br><span class="line">show span inconsistentport 			<span class="comment"># 查看接口</span></span><br></pre></td></tr></table></figure>
@@ -383,7 +383,7 @@ ga('send', 'pageview');
 
 
 
-<h2 id="6、LoopGuard"><a href="#6、LoopGuard" class="headerlink" title="6、LoopGuard"></a>6、LoopGuard</h2><img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_12.png"  alt="image-20200209191229933" style="zoom: 67%;" />
+<h2 id="6、LoopGuard"><a href="#6、LoopGuard" class="headerlink" title="6、LoopGuard"></a>6、LoopGuard</h2><img src="" class="lazyload" data-src="http://q5q3e2ctx.bkt.clouddn.com/switch_12.png"  alt="image-20200209191229933" style="zoom: 67%;">
 
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">spanning-tree guard loop 	<span class="comment">#接口上配置loop防护，这个端口就可以检测单向通行故障</span></span><br></pre></td></tr></table></figure>
 
