@@ -116,7 +116,7 @@ ga('send', 'pageview');
 
 
 
-<h1 id><a href="#" class="headerlink" title="[*]"></a>[*]</h1><p>expect合理用法</p>
+<h1 id=""><a href="#" class="headerlink" title="[*]"></a>[*]</h1><p>expect合理用法</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat  &lt;&lt; EOF &gt;  <span class="variable">$&#123;workdir&#125;</span>/login.sh</span><br><span class="line"><span class="comment">#!/usr/bin/expect</span></span><br><span class="line"><span class="keyword">if</span> &#123; \<span class="variable">$argc</span> &lt; 1&#125; &#123;</span><br><span class="line">puts <span class="string">"Usage:cmd &lt;host&gt;"</span></span><br><span class="line"><span class="built_in">exit</span> 1</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">set</span> timeout -1</span><br><span class="line"><span class="built_in">set</span> host [lindex \<span class="variable">$argv</span> 0]</span><br><span class="line">spawn virsh console \<span class="variable">$host</span></span><br><span class="line">expect <span class="string">"*Escape*"</span> &#123; send <span class="string">"\r"</span> &#125;</span><br><span class="line">expect <span class="string">"*login*"</span> &#123; send <span class="string">"root\r"</span> &#125;</span><br><span class="line">expect <span class="string">"*Password*"</span> &#123; send <span class="string">"xxxx\r"</span> &#125;</span><br><span class="line">interact</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
 
 

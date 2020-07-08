@@ -433,7 +433,7 @@ ga('send', 'pageview');
 <p>有五类LSA但没有四类的LSA一定是因为存在NSSA区域导致的。</p>
 <h1 id="路由汇总"><a href="#路由汇总" class="headerlink" title="路由汇总"></a>路由汇总</h1><p>由于OSPF不传递路由表信息，而是直接发送LSA信息，所以在一个区域内，所有路由器都有本区域的拓扑，所以在单个区域内无法完成路由汇总。</p>
 <p>在OSPF中，汇总只能发生在ABR和ASBR上，这两种路由器转发的路由表的LSA信息。而其他路由器是转发拓扑信息</p>
-<p><img src="" class="lazyload" data-src="https://i.loli.net/2020/03/22/iYBgL917R6kHUzy.png"  alt></p>
+<p><img src="" class="lazyload" data-src="https://i.loli.net/2020/03/22/iYBgL917R6kHUzy.png"  alt=""></p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">在R4添加</span><br><span class="line">int lo10</span><br><span class="line">ip add 172.16.1.1 255.255.255.0</span><br><span class="line">int lo20</span><br><span class="line">ip add 172.16.2.1 255.255.255.0</span><br><span class="line">int lo30</span><br><span class="line">ip add 172.16.3.1 255.255.255.0</span><br><span class="line">router ospf 1</span><br><span class="line">redistribute connected subnets </span><br><span class="line"><span class="comment"># 可以观察到R1、R3、R4等路由器都受到了路由条目明细，现在在ASBR上对路由做汇总</span></span><br><span class="line"><span class="comment"># 这里要注意，不能再ABR(R3)上对OSPF_as以外的路由进行汇总</span></span><br><span class="line">summary-address 172.16.0.0 255.255.0.0</span><br></pre></td></tr></table></figure>
 
 
