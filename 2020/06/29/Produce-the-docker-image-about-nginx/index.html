@@ -92,29 +92,31 @@ ga('send', 'pageview');
   opacity: 1
 }
 </style></noscript><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="atom.xml" title="zen's blog" type="application/atom+xml">
-</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="../img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="../archives/"><div class="headline">文章</div><div class="length_num">36</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="../tags/"><div class="headline">标签</div><div class="length_num">23</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="../categories/"><div class="headline">分类</div><div class="length_num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="../index.html"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="../archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="../tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="../categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="../link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#困难"><span class="toc-number">1.</span> <span class="toc-text">困难</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#需求"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思考"><span class="toc-number">3.</span> <span class="toc-text">思考</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、制作Nginx容器？"><span class="toc-number">3.1.</span> <span class="toc-text">1、制作Nginx容器？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、动态指定参数"><span class="toc-number">3.2.</span> <span class="toc-text">2、动态指定参数?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、Nginx优化？"><span class="toc-number">3.3.</span> <span class="toc-text">3、Nginx优化？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#维度1：网络"><span class="toc-number">3.3.1.</span> <span class="toc-text">维度1：网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#维度2：磁盘"><span class="toc-number">3.3.2.</span> <span class="toc-text">维度2：磁盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#维度3：CPU"><span class="toc-number">3.3.3.</span> <span class="toc-text">维度3：CPU</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实践"><span class="toc-number">4.</span> <span class="toc-text">实践</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/img/post.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="../index.html">zen's blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="../index.html"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="../archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="../tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="../categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="../link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Dockerfile制作Nginx容器</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-06-29 10:59:50"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-06-29</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-07-08 09:53:50"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-07-08</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="../../../../categories/%E5%AE%B9%E5%99%A8/">容器</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div id="article-container"><blockquote>
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="../img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="../archives/"><div class="headline">文章</div><div class="length_num">35</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="../tags/"><div class="headline">标签</div><div class="length_num">23</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="../categories/"><div class="headline">分类</div><div class="length_num">8</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="../index.html"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="../archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="../tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="../categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="../link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#困难"><span class="toc-number">1.</span> <span class="toc-text">困难</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#需求"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#思考"><span class="toc-number">3.</span> <span class="toc-text">思考</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、制作Nginx容器？"><span class="toc-number">3.1.</span> <span class="toc-text">1、制作Nginx容器？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、动态指定参数"><span class="toc-number">3.2.</span> <span class="toc-text">2、动态指定参数?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、Nginx优化？"><span class="toc-number">3.3.</span> <span class="toc-text">3、Nginx优化？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#维度1：网络"><span class="toc-number">3.3.1.</span> <span class="toc-text">维度1：网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#维度2：磁盘"><span class="toc-number">3.3.2.</span> <span class="toc-text">维度2：磁盘</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#维度3：CPU"><span class="toc-number">3.3.3.</span> <span class="toc-text">维度3：CPU</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实践"><span class="toc-number">4.</span> <span class="toc-text">实践</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/img/post.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="../index.html">zen's blog</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="../index.html"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="../archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="../tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="../categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="../link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Dockerfile制作Nginx容器</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="发表于 2020-06-29 10:59:50"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-06-29</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="更新于 2020-07-08 12:51:37"><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-07-08</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="../../../../categories/%E5%AE%B9%E5%99%A8/">容器</a></span></div><div class="meta-secondline"> </div><div class="meta-thirdline"><span class="post-meta-pv-cv"></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div id="article-container"><meta name="referrer" content="no-referrer"/>
+
+<blockquote>
 <p>念两句诗<br>飞絮飞花何处是，层冰积雪摧残，疏疏一树五更寒。爱他明月好，憔悴也相关。<br>最是繁丝摇落后，转教人忆春山。湔裙梦断续应难。西风多少恨，吹不散眉弯。</p>
 </blockquote>
 <a id="more"></a>
 
 <h1 id="困难"><a href="#困难" class="headerlink" title="困难"></a>困难</h1><ul>
-<li><input checked disabled type="checkbox"> 容器启动流程</li>
-<li><input checked disabled type="checkbox"> Sed替换等命令</li>
-<li><input checked disabled type="checkbox"> CMD和EntryPoint的异同</li>
-<li><input checked disabled type="checkbox"> 动态指定全局、局部参数</li>
-<li><input checked disabled type="checkbox"> 优化哪些方面</li>
-<li><input disabled type="checkbox"> 脚本能够正确的读取参数，且正确的写入到配置文件!!!</li>
+<li><input checked="" disabled="" type="checkbox"> 容器启动流程</li>
+<li><input checked="" disabled="" type="checkbox"> Sed替换等命令</li>
+<li><input checked="" disabled="" type="checkbox"> CMD和EntryPoint的异同</li>
+<li><input checked="" disabled="" type="checkbox"> 动态指定全局、局部参数</li>
+<li><input checked="" disabled="" type="checkbox"> 优化哪些方面</li>
+<li><input disabled="" type="checkbox"> 脚本能够正确的读取参数，且正确的写入到配置文件!!!</li>
 </ul>
 <h1 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h1><p>Docker镜像制作/容器运行<br>1、制作一个Nginx镜像，遵循镜像可迁移、可复制原则、镜像、层级、体积最小化原则<br>2、要求启动能支持指定Nginx进程的监听端口<br>3、首页输出一个hello world<br>4、容器支持开机启动、异常能自拉起<br>5、能够任意指定Nginx的公共参数，包括global、http等全局模块的参数；<br>6、通过启动指定Nginx优化参数，实现首页性能并发超2万（4核服务器）。</p>
 <h1 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h1><h2 id="1、制作Nginx容器？"><a href="#1、制作Nginx容器？" class="headerlink" title="1、制作Nginx容器？"></a>1、制作Nginx容器？</h2><p>一开始的时候，以为是要从CentOS7中一步一步用命令安装Nginx，后来发现这样不太合理[中间层不够精简]，就用了Nginx的官方镜像。</p>
 <h2 id="2、动态指定参数"><a href="#2、动态指定参数" class="headerlink" title="2、动态指定参数?"></a>2、动态指定参数?</h2><p>方法一：模板！<br>如果想要修改端口，那么就必须在Nginx服务起来之前改才有效(了解Docker容器启动流程对完成这一步很有帮助，下面会讲到Docker启动流程)。Nginx官方的template支持该端口，在宿主机编写nginx.conf.template模板，然后复制到容器的/etc/nginx/tempalte/目录，容器会自动把template模板语法填入变量，然后生成conf配置文件且放到容器的/etc/nginx/conf.d/</p>
 <p>方法二：脚本！<br>脚本必须是容器启动时执行的脚本，一般就是EntryPoint的执行脚本。通过在<code>docker run -e ENV=XXX</code>的时候指明环境变量，然后再脚本中调用环境变量，通过sed替换配置文件，然后启动nginx，来达到修改端口，这种方法也可以修改Nginx的其他参数。</p>
 <h2 id="3、Nginx优化？"><a href="#3、Nginx优化？" class="headerlink" title="3、Nginx优化？"></a>3、Nginx优化？</h2><h3 id="维度1：网络"><a href="#维度1：网络" class="headerlink" title="维度1：网络"></a>维度1：网络</h3><ul>
-<li><input checked disabled type="checkbox"> 提高连接数</li>
-<li><input checked disabled type="checkbox"> 选择响应模型</li>
-<li><input disabled type="checkbox"> Gzip</li>
-<li><input checked disabled type="checkbox"> sendfile</li>
-<li><input checked disabled type="checkbox"> tcp_nopush</li>
+<li><input checked="" disabled="" type="checkbox"> 提高连接数</li>
+<li><input checked="" disabled="" type="checkbox"> 选择响应模型</li>
+<li><input disabled="" type="checkbox"> Gzip</li>
+<li><input checked="" disabled="" type="checkbox"> sendfile</li>
+<li><input checked="" disabled="" type="checkbox"> tcp_nopush</li>
 </ul>
 <p><strong>（1）提高连接并发</strong></p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">worker_processes  # Nginx进程</span><br><span class="line">worker_connections # 每个进程的最大连接数</span><br></pre></td></tr></table></figure>
@@ -188,19 +190,19 @@ ga('send', 'pageview');
 
 
 <h1 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h1><ul>
-<li><input checked disabled type="checkbox"> Version 1 【镜像制作】</li>
-<li><input checked disabled type="checkbox"> Version 2 【指定参数，优化并发】</li>
-<li><input checked disabled type="checkbox"> Version 3 【指定参数，优化并发】</li>
-<li><input checked disabled type="checkbox"> Version 4 【任意参数指定，进一步提升并发】</li>
+<li><input checked="" disabled="" type="checkbox"> Version 1 【镜像制作】</li>
+<li><input checked="" disabled="" type="checkbox"> Version 2 【指定参数，优化并发】</li>
+<li><input checked="" disabled="" type="checkbox"> Version 3 【指定参数，优化并发】</li>
+<li><input checked="" disabled="" type="checkbox"> Version 4 【任意参数指定，进一步提升并发】</li>
 </ul>
 <hr>
 <p><strong>Version 1</strong></p>
 <ul>
-<li><input checked disabled type="checkbox"> 制作Nginx镜像</li>
-<li><input checked disabled type="checkbox"> 修改监听端口</li>
-<li><input checked disabled type="checkbox"> 能正常访问</li>
-<li><input disabled type="checkbox"> 指定任意参数</li>
-<li><input disabled type="checkbox"> Nginx优化</li>
+<li><input checked="" disabled="" type="checkbox"> 制作Nginx镜像</li>
+<li><input checked="" disabled="" type="checkbox"> 修改监听端口</li>
+<li><input checked="" disabled="" type="checkbox"> 能正常访问</li>
+<li><input disabled="" type="checkbox"> 指定任意参数</li>
+<li><input disabled="" type="checkbox"> Nginx优化</li>
 </ul>
 <p><img src="" class="lazyload" data-src="https://s1.ax1x.com/2020/06/29/NW6z9K.png"  alt="CentOS安装Nginx的Dockerfile"></p>
 <p>为什么一开始注释掉了<code>CMD [&quot;nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;]</code> ———— 因为不注释就会导致容器拉起异常！原因是因为容器开机会执行docker-entrypoint脚本，然而我的EntryPoint脚本中并没有写”exec $@”，就不会把Nginx放到前台执行，导致了容器执行完脚本直接退出。刚开始用的解决办法是把Nginx进程直接写到check.sh中，通过EntryPoint执行，这样也能保证前台有Nginx任务，docker容器不至于异常退出。</p>
@@ -220,9 +222,9 @@ ga('send', 'pageview');
 <hr>
 <p><strong>Version 2</strong></p>
 <ul>
-<li><input checked disabled type="checkbox"> 尝试在命令行着替换部分参数，用的是容器内部读取环境变量的方法</li>
-<li><input disabled type="checkbox"> 还是未能完成全部参数的动态指定</li>
-<li><input disabled type="checkbox"> 优化了Nginx并发</li>
+<li><input checked="" disabled="" type="checkbox"> 尝试在命令行着替换部分参数，用的是容器内部读取环境变量的方法</li>
+<li><input disabled="" type="checkbox"> 还是未能完成全部参数的动态指定</li>
+<li><input disabled="" type="checkbox"> 优化了Nginx并发</li>
 </ul>
 <p><img src="" class="lazyload" data-src="https://s1.ax1x.com/2020/06/29/NWfU0g.png"  alt="NWfU0g.png"></p>
 <br>
@@ -231,8 +233,8 @@ ga('send', 'pageview');
 <hr>
 <p><strong>Version 3</strong></p>
 <ul>
-<li><input disabled type="checkbox"> 未能实现全部配置可自定义</li>
-<li><input checked disabled type="checkbox"> 优化了Nginx并发</li>
+<li><input disabled="" type="checkbox"> 未能实现全部配置可自定义</li>
+<li><input checked="" disabled="" type="checkbox"> 优化了Nginx并发</li>
 </ul>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@nginx ~ ]#cat start.sh   # &lt;====这是个容器开机启动脚本</span><br><span class="line">append()&#123;</span><br><span class="line">    echo "$&#123;1&#125;" &gt;&gt; /etc/nginx/nginx.conf</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">rm /etc/nginx/nginx.conf -rf</span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> WORK_PROGRESSES=4</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> WORKER_CPU_AFFINITY=<span class="string">"0001 0010 0100 1000"</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> WORKER_RLIMIT_NOFILE=65535</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> WORKER_CONNECTIONS=65535</span></span><br><span class="line"></span><br><span class="line">append  "user  nginx;"</span><br><span class="line">append  "worker_processes $&#123;WORK_PROGRESSES&#125;;"</span><br><span class="line">append  "worker_cpu_affinity $&#123;WORKER_CPU_AFFINITY&#125;;"</span><br><span class="line">append  "worker_rlimit_nofile $&#123;WORKER_RLIMIT_NOFILE&#125;;"</span><br><span class="line">append  "pid /var/run/nginx.pid;"</span><br><span class="line">append  "events &#123; use epoll; worker_connections $&#123;WORKER_CONNECTIONS&#125;;&#125;"</span><br><span class="line">append  "http &#123;"</span><br><span class="line">append  "include       /etc/nginx/mime.types;"</span><br><span class="line">append  "default_type  application/octet-stream;"</span><br><span class="line">append  "open_file_cache max=65535 inactive=60s;"</span><br><span class="line">append  " sendfile       on;"</span><br><span class="line">append  " tcp_nopush     on;"</span><br><span class="line">append  " tcp_nodelay     on;"</span><br><span class="line">append  " keepalive_timeout $&#123;KEEPALIVE_TIMEOUT&#125;;"</span><br><span class="line">append  " include /etc/nginx/conf.d/*.conf;"</span><br><span class="line">append  "&#125;"</span><br><span class="line">sed -i '0,/listen.*;/s/listen.*;/listen '$&#123;LISTEN&#125;';/' /etc/nginx/conf.d/default.conf</span><br><span class="line">exec "$@"</span><br></pre></td></tr></table></figure>
 <p>直接把环境变量echo进nginx配置文件，这样写比sed简单，且能达到同样的效果。</p>
@@ -253,8 +255,8 @@ ga('send', 'pageview');
 <hr>
 <p><strong>Version 4</strong></p>
 <ul>
-<li><input checked disabled type="checkbox"> 任意参数指定</li>
-<li><input checked disabled type="checkbox"> 更高的并发</li>
+<li><input checked="" disabled="" type="checkbox"> 任意参数指定</li>
+<li><input checked="" disabled="" type="checkbox"> 更高的并发</li>
 </ul>
 <p>先看结果，还是原来的两核CPU，实现了57000左右的并发</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">[root@cmd ~]# for i in &#123;1..3&#125;;do ./hey -c 30000 -z 5s http://127.0.0.1:8080 | grep Requests;done</span><br><span class="line">  Requests/sec:	58493.2355</span><br><span class="line">  Requests/sec:	55574.4684</span><br><span class="line">  Requests/sec:	56862.8460</span><br></pre></td></tr></table></figure>
@@ -269,8 +271,8 @@ ga('send', 'pageview');
 
 
 <ul>
-<li><input checked disabled type="checkbox"> &nbsp;&nbsp;Sed各种匹配替换</li>
-<li><input checked disabled type="checkbox"> “${var}”所包含的是一个完整的变量，如果用${var}且变量为”x=1 y=2 z=3”,那么从环境变量里取出来的时候，往往只能取到x=1</li>
+<li><input checked="" disabled="" type="checkbox"> &nbsp;&nbsp;Sed各种匹配替换</li>
+<li><input checked="" disabled="" type="checkbox"> “${var}”所包含的是一个完整的变量，如果用${var}且变量为”x=1 y=2 z=3”,那么从环境变量里取出来的时候，往往只能取到x=1</li>
 </ul>
 <p>参数指定如下：</p>
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat run.sh </span></span><br><span class="line">docker rm $(docker ps -a | grep -E '\&lt;x1\&gt;' | awk '&#123;print $1&#125;') -f</span><br><span class="line">docker rmi $(docker image ls | grep 'nginx/v1' |awk '&#123;print $3&#125;')  --force</span><br><span class="line">docker build -t nginx/v1 .</span><br><span class="line">docker run -itd --cpuset-cpus="0,1" \</span><br><span class="line">-e ngx_glo_worker_processes=4 \</span><br><span class="line">-e ngx_glo_worker_rlimit_nofile=65535 \</span><br><span class="line">-e ngx_evt_worker_connections=65535 \</span><br><span class="line">-e ngx_http_tcp_nopush=on \</span><br><span class="line">-e ngx_http_sendfile=on \</span><br><span class="line">-e ngx_http_proxy_cache_path="/tmp/cache levels=1:2 keys_zone=code_cache:10m max_size=10g inactive=60m use_temp_path=off" \</span><br><span class="line">-e ngx_ser_listen=8080 \</span><br><span class="line">-e ngx_loc_proxy_cache=code_cache \</span><br><span class="line">-e ngx_loc_proxy_cache_valid="any 30m" \</span><br><span class="line">--net=host --name --restart=always x1 nginx/v1</span><br></pre></td></tr></table></figure>
