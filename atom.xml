@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://ymlog.cn/"/>
-  <updated>2020-07-08T02:30:46.942Z</updated>
+  <updated>2020-07-08T02:49:19.174Z</updated>
   <id>http://ymlog.cn/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://ymlog.cn/2020/07/08/Docker%E4%B8%ADDjango%E8%BF%81%E7%A7%BB%E6%97%A0%E6%95%88/"/>
     <id>http://ymlog.cn/2020/07/08/Docker%E4%B8%ADDjango%E8%BF%81%E7%A7%BB%E6%97%A0%E6%95%88/</id>
     <published>2020-07-08T02:12:54.000Z</published>
-    <updated>2020-07-08T02:30:46.942Z</updated>
+    <updated>2020-07-08T02:49:19.174Z</updated>
     
-    <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">django-admin startproject project</span><br><span class="line">cd project</span><br><span class="line">python manage.py startapp api</span><br></pre></td></tr></table></figure><p><img src="" class="lazyload" data-src="https://s1.ax1x.com/2020/07/08/UEBKyj.png"  alt="makemigrations.png"></p><p>可以看到，虽然执行了<code>python manage.py makemigrations</code>，但是models.py中定义的模型并没有迁移到数据库中，网上找了很久，发现是要再后面加上APP名，即<code>python manage.py makemigrations api</code></p><p>我的文件目录是这样的：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[root@ project]<span class="comment"># tree -L 2</span></span><br><span class="line">.</span><br><span class="line">├── api</span><br><span class="line">│   ├── admin.py</span><br><span class="line">│   ├── apps.py</span><br><span class="line">│   ├── __init__.py</span><br><span class="line">│   ├── migrations</span><br><span class="line">│   ├── models.py</span><br><span class="line">│   ├── __pycache__</span><br><span class="line">│   ├── tests.py</span><br><span class="line">│   ├── urls.py</span><br><span class="line">│   └── views.py</span><br><span class="line">├── manage.py</span><br><span class="line">└── project</span><br><span class="line">    ├── asgi.py</span><br><span class="line">    ├── __init__.py</span><br><span class="line">    ├── __pycache__</span><br><span class="line">    ├── settings.py</span><br><span class="line">    ├── urls.py</span><br><span class="line">    └── wsgi.p</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">django-admin startproject project</span><br><span class="line">cd project</span><br><span class="line">python manage.py startapp api</span><br></pre></td></tr></table></figure><p>可以看到，虽然执行了<code>python manage.py makemigrations</code>，但是models.py中定义的模型并没有迁移到数据库中，网上找了很久，发现是要再后面加上APP名，即<code>python manage.py makemigrations api</code></p><hr><p><img src="" class="lazyload" data-src="https://s1.ax1x.com/2020/07/08/UERPOO.png"  alt="UERPOO.png"></p><p><img src="" class="lazyload" data-src="https://s1.ax1x.com/2020/07/08/UE26Qf.png"  alt="UE26Qf.png"></p><p><img src="" class="lazyload" data-src="https://s1.ax1x.com/2020/07/08/UE2bOU.png"  alt="UE2bOU.png"></p><hr><p>我的文件目录是这样的：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">[root@ project]<span class="comment"># tree -L 2</span></span><br><span class="line">.</span><br><span class="line">├── api</span><br><span class="line">│   ├── admin.py</span><br><span class="line">│   ├── apps.py</span><br><span class="line">│   ├── __init__.py</span><br><span class="line">│   ├── migrations</span><br><span class="line">│   ├── models.py</span><br><span class="line">│   ├── __pycache__</span><br><span class="line">│   ├── tests.py</span><br><span class="line">│   ├── urls.py</span><br><span class="line">│   └── views.py</span><br><span class="line">├── manage.py</span><br><span class="line">└── project</span><br><span class="line">    ├── asgi.py</span><br><span class="line">    ├── __init__.py</span><br><span class="line">    ├── __pycache__</span><br><span class="line">    ├── settings.py</span><br><span class="line">    ├── urls.py</span><br><span class="line">    └── wsgi.p</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
