@@ -417,7 +417,7 @@ fetch('https://api.ooopn.com/ciba/api.php',)
 })
 .then(function (data) {
   if (subtitleEffect){
-    var sub = ''.length == 0  ? new Array() : ''.split(",");
+    var sub = '思接千载，视通万里。'.length == 0  ? new Array() : '思接千载，视通万里。'.split(",");
     var both = sub.unshift(data['ciba-en'],data.ciba)
     var typed = new Typed("#subtitle", {
       strings: sub,
