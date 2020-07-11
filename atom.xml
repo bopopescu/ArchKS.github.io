@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="ymlog.cn/"/>
+  <link href="http://ymlog.cn/"/>
   <updated>2020-07-11T04:04:40.703Z</updated>
-  <id>ymlog.cn/</id>
+  <id>http://ymlog.cn/</id>
   
   <author>
     <name>ZEN</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>【摘文】月亮与六便士</title>
-    <link href="ymlog.cn/2020/07/11/%E6%9C%88%E4%BA%AE%E4%B8%8E%E5%85%AD%E4%BE%BF%E5%A3%AB/"/>
-    <id>ymlog.cn/2020/07/11/%E6%9C%88%E4%BA%AE%E4%B8%8E%E5%85%AD%E4%BE%BF%E5%A3%AB/</id>
+    <link href="http://ymlog.cn/2020/07/11/%E6%9C%88%E4%BA%AE%E4%B8%8E%E5%85%AD%E4%BE%BF%E5%A3%AB/"/>
+    <id>http://ymlog.cn/2020/07/11/%E6%9C%88%E4%BA%AE%E4%B8%8E%E5%85%AD%E4%BE%BF%E5%A3%AB/</id>
     <published>2020-07-11T04:03:15.000Z</published>
     <updated>2020-07-11T04:04:40.703Z</updated>
     
@@ -35,15 +35,15 @@
     </summary>
     
     
-      <category term="摘录" scheme="ymlog.cn/categories/%E6%91%98%E5%BD%95/"/>
+      <category term="摘录" scheme="http://ymlog.cn/categories/%E6%91%98%E5%BD%95/"/>
     
     
   </entry>
   
   <entry>
     <title>【摘文】追风筝的人</title>
-    <link href="ymlog.cn/2020/07/11/%E8%BF%BD%E9%A3%8E%E7%AD%9D%E7%9A%84%E4%BA%BA/"/>
-    <id>ymlog.cn/2020/07/11/%E8%BF%BD%E9%A3%8E%E7%AD%9D%E7%9A%84%E4%BA%BA/</id>
+    <link href="http://ymlog.cn/2020/07/11/%E8%BF%BD%E9%A3%8E%E7%AD%9D%E7%9A%84%E4%BA%BA/"/>
+    <id>http://ymlog.cn/2020/07/11/%E8%BF%BD%E9%A3%8E%E7%AD%9D%E7%9A%84%E4%BA%BA/</id>
     <published>2020-07-11T04:01:49.000Z</published>
     <updated>2020-07-11T04:04:57.790Z</updated>
     
@@ -60,15 +60,15 @@
     </summary>
     
     
-      <category term="摘录" scheme="ymlog.cn/categories/%E6%91%98%E5%BD%95/"/>
+      <category term="摘录" scheme="http://ymlog.cn/categories/%E6%91%98%E5%BD%95/"/>
     
     
   </entry>
   
   <entry>
     <title>【摘文】人间失格</title>
-    <link href="ymlog.cn/2020/07/11/%E4%BA%BA%E9%97%B4%E5%A4%B1%E6%A0%BC/"/>
-    <id>ymlog.cn/2020/07/11/%E4%BA%BA%E9%97%B4%E5%A4%B1%E6%A0%BC/</id>
+    <link href="http://ymlog.cn/2020/07/11/%E4%BA%BA%E9%97%B4%E5%A4%B1%E6%A0%BC/"/>
+    <id>http://ymlog.cn/2020/07/11/%E4%BA%BA%E9%97%B4%E5%A4%B1%E6%A0%BC/</id>
     <published>2020-07-11T04:00:21.000Z</published>
     <updated>2020-07-11T04:04:02.949Z</updated>
     
@@ -84,15 +84,15 @@
     </summary>
     
     
-      <category term="摘录" scheme="ymlog.cn/categories/%E6%91%98%E5%BD%95/"/>
+      <category term="摘录" scheme="http://ymlog.cn/categories/%E6%91%98%E5%BD%95/"/>
     
     
   </entry>
   
   <entry>
     <title>解决Hexo+Github网络图片无法加载问题</title>
-    <link href="ymlog.cn/2020/07/08/%E8%A7%A3%E5%86%B3Hexo-Github%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E9%97%AE%E9%A2%98/"/>
-    <id>ymlog.cn/2020/07/08/%E8%A7%A3%E5%86%B3Hexo-Github%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E9%97%AE%E9%A2%98/</id>
+    <link href="http://ymlog.cn/2020/07/08/%E8%A7%A3%E5%86%B3Hexo-Github%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E9%97%AE%E9%A2%98/"/>
+    <id>http://ymlog.cn/2020/07/08/%E8%A7%A3%E5%86%B3Hexo-Github%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E9%97%AE%E9%A2%98/</id>
     <published>2020-07-08T05:03:47.000Z</published>
     <updated>2020-07-08T05:14:26.182Z</updated>
     
@@ -113,15 +113,15 @@
     </summary>
     
     
-      <category term="报错" scheme="ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
+      <category term="报错" scheme="http://ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
     
     
   </entry>
   
   <entry>
     <title>Docker中Django迁移无效</title>
-    <link href="ymlog.cn/2020/07/08/Docker%E4%B8%ADDjango%E8%BF%81%E7%A7%BB%E6%97%A0%E6%95%88/"/>
-    <id>ymlog.cn/2020/07/08/Docker%E4%B8%ADDjango%E8%BF%81%E7%A7%BB%E6%97%A0%E6%95%88/</id>
+    <link href="http://ymlog.cn/2020/07/08/Docker%E4%B8%ADDjango%E8%BF%81%E7%A7%BB%E6%97%A0%E6%95%88/"/>
+    <id>http://ymlog.cn/2020/07/08/Docker%E4%B8%ADDjango%E8%BF%81%E7%A7%BB%E6%97%A0%E6%95%88/</id>
     <published>2020-07-08T02:12:54.000Z</published>
     <updated>2020-07-08T05:02:21.498Z</updated>
     
@@ -139,15 +139,15 @@
     </summary>
     
     
-      <category term="报错" scheme="ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
+      <category term="报错" scheme="http://ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
     
     
   </entry>
   
   <entry>
     <title>SSH——用户密钥未在远程主机注册</title>
-    <link href="ymlog.cn/2020/07/06/SSH%E2%80%94%E7%94%A8%E6%88%B7%E5%AF%86%E9%92%A5%E6%9C%AA%E5%9C%A8%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BA%E6%B3%A8%E5%86%8C/"/>
-    <id>ymlog.cn/2020/07/06/SSH%E2%80%94%E7%94%A8%E6%88%B7%E5%AF%86%E9%92%A5%E6%9C%AA%E5%9C%A8%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BA%E6%B3%A8%E5%86%8C/</id>
+    <link href="http://ymlog.cn/2020/07/06/SSH%E2%80%94%E7%94%A8%E6%88%B7%E5%AF%86%E9%92%A5%E6%9C%AA%E5%9C%A8%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BA%E6%B3%A8%E5%86%8C/"/>
+    <id>http://ymlog.cn/2020/07/06/SSH%E2%80%94%E7%94%A8%E6%88%B7%E5%AF%86%E9%92%A5%E6%9C%AA%E5%9C%A8%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BA%E6%B3%A8%E5%86%8C/</id>
     <published>2020-07-06T03:43:16.000Z</published>
     <updated>2020-07-06T03:57:26.488Z</updated>
     
@@ -165,15 +165,15 @@
     </summary>
     
     
-      <category term="报错" scheme="ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
+      <category term="报错" scheme="http://ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
     
     
   </entry>
   
   <entry>
     <title>Dockerfile制作Nginx容器</title>
-    <link href="ymlog.cn/2020/06/29/Produce-the-docker-image-about-nginx/"/>
-    <id>ymlog.cn/2020/06/29/Produce-the-docker-image-about-nginx/</id>
+    <link href="http://ymlog.cn/2020/06/29/Produce-the-docker-image-about-nginx/"/>
+    <id>http://ymlog.cn/2020/06/29/Produce-the-docker-image-about-nginx/</id>
     <published>2020-06-29T02:59:50.000Z</published>
     <updated>2020-07-08T05:08:23.044Z</updated>
     
@@ -188,17 +188,17 @@
     </summary>
     
     
-      <category term="容器" scheme="ymlog.cn/categories/%E5%AE%B9%E5%99%A8/"/>
+      <category term="容器" scheme="http://ymlog.cn/categories/%E5%AE%B9%E5%99%A8/"/>
     
     
-      <category term="Docker" scheme="ymlog.cn/tags/Docker/"/>
+      <category term="Docker" scheme="http://ymlog.cn/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>VsCode远程开发</title>
-    <link href="ymlog.cn/2020/06/18/VsCode_Remote_Config/"/>
-    <id>ymlog.cn/2020/06/18/VsCode_Remote_Config/</id>
+    <link href="http://ymlog.cn/2020/06/18/VsCode_Remote_Config/"/>
+    <id>http://ymlog.cn/2020/06/18/VsCode_Remote_Config/</id>
     <published>2020-06-18T02:50:36.000Z</published>
     <updated>2020-07-04T17:18:01.461Z</updated>
     
@@ -213,17 +213,17 @@
     </summary>
     
     
-      <category term="运维" scheme="ymlog.cn/categories/%E8%BF%90%E7%BB%B4/"/>
+      <category term="运维" scheme="http://ymlog.cn/categories/%E8%BF%90%E7%BB%B4/"/>
     
     
-      <category term="VsCode" scheme="ymlog.cn/tags/VsCode/"/>
+      <category term="VsCode" scheme="http://ymlog.cn/tags/VsCode/"/>
     
   </entry>
   
   <entry>
     <title>Win快捷键</title>
-    <link href="ymlog.cn/2020/06/18/Win_ShotCut/"/>
-    <id>ymlog.cn/2020/06/18/Win_ShotCut/</id>
+    <link href="http://ymlog.cn/2020/06/18/Win_ShotCut/"/>
+    <id>http://ymlog.cn/2020/06/18/Win_ShotCut/</id>
     <published>2020-06-18T00:37:32.000Z</published>
     <updated>2020-07-04T17:17:42.906Z</updated>
     
@@ -239,14 +239,14 @@
     
     
     
-      <category term="快捷键" scheme="ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+      <category term="快捷键" scheme="http://ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
   </entry>
   
   <entry>
     <title>ls根目录卡死</title>
-    <link href="ymlog.cn/2020/06/17/ls_root_broken_down/"/>
-    <id>ymlog.cn/2020/06/17/ls_root_broken_down/</id>
+    <link href="http://ymlog.cn/2020/06/17/ls_root_broken_down/"/>
+    <id>http://ymlog.cn/2020/06/17/ls_root_broken_down/</id>
     <published>2020-06-17T14:46:04.000Z</published>
     <updated>2020-07-06T03:43:55.355Z</updated>
     
@@ -261,17 +261,17 @@
     </summary>
     
     
-      <category term="报错" scheme="ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
+      <category term="报错" scheme="http://ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
     
     
-      <category term="NFS" scheme="ymlog.cn/tags/NFS/"/>
+      <category term="NFS" scheme="http://ymlog.cn/tags/NFS/"/>
     
   </entry>
   
   <entry>
     <title>Vimium快捷键</title>
-    <link href="ymlog.cn/2020/06/16/Vimium_ShotCut/"/>
-    <id>ymlog.cn/2020/06/16/Vimium_ShotCut/</id>
+    <link href="http://ymlog.cn/2020/06/16/Vimium_ShotCut/"/>
+    <id>http://ymlog.cn/2020/06/16/Vimium_ShotCut/</id>
     <published>2020-06-16T10:02:13.000Z</published>
     <updated>2020-07-04T17:18:04.516Z</updated>
     
@@ -287,14 +287,14 @@
     
     
     
-      <category term="快捷键" scheme="ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+      <category term="快捷键" scheme="http://ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
   </entry>
   
   <entry>
     <title>Jetbrains快捷键</title>
-    <link href="ymlog.cn/2020/06/16/Jetbrains_ShutCut/"/>
-    <id>ymlog.cn/2020/06/16/Jetbrains_ShutCut/</id>
+    <link href="http://ymlog.cn/2020/06/16/Jetbrains_ShutCut/"/>
+    <id>http://ymlog.cn/2020/06/16/Jetbrains_ShutCut/</id>
     <published>2020-06-16T03:23:57.000Z</published>
     <updated>2020-07-04T17:19:27.331Z</updated>
     
@@ -310,14 +310,14 @@
     
     
     
-      <category term="快捷键" scheme="ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+      <category term="快捷键" scheme="http://ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
   </entry>
   
   <entry>
     <title>Chrome快捷键</title>
-    <link href="ymlog.cn/2020/06/16/Chrome_ShutCut/"/>
-    <id>ymlog.cn/2020/06/16/Chrome_ShutCut/</id>
+    <link href="http://ymlog.cn/2020/06/16/Chrome_ShutCut/"/>
+    <id>http://ymlog.cn/2020/06/16/Chrome_ShutCut/</id>
     <published>2020-06-16T03:23:27.000Z</published>
     <updated>2020-07-04T17:19:41.482Z</updated>
     
@@ -333,14 +333,14 @@
     
     
     
-      <category term="快捷键" scheme="ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+      <category term="快捷键" scheme="http://ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
   </entry>
   
   <entry>
     <title>VSCode快捷键</title>
-    <link href="ymlog.cn/2020/06/16/VsCode_ShotCut/"/>
-    <id>ymlog.cn/2020/06/16/VsCode_ShotCut/</id>
+    <link href="http://ymlog.cn/2020/06/16/VsCode_ShotCut/"/>
+    <id>http://ymlog.cn/2020/06/16/VsCode_ShotCut/</id>
     <published>2020-06-16T02:51:59.000Z</published>
     <updated>2020-07-04T17:17:58.456Z</updated>
     
@@ -356,14 +356,14 @@
     
     
     
-      <category term="快捷键" scheme="ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+      <category term="快捷键" scheme="http://ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
   </entry>
   
   <entry>
     <title>KVM实例总结</title>
-    <link href="ymlog.cn/2020/06/04/KVM_Initial/"/>
-    <id>ymlog.cn/2020/06/04/KVM_Initial/</id>
+    <link href="http://ymlog.cn/2020/06/04/KVM_Initial/"/>
+    <id>http://ymlog.cn/2020/06/04/KVM_Initial/</id>
     <published>2020-06-04T09:19:51.000Z</published>
     <updated>2020-07-04T17:19:21.421Z</updated>
     
@@ -378,17 +378,17 @@
     </summary>
     
     
-      <category term="Linux" scheme="ymlog.cn/categories/Linux/"/>
+      <category term="Linux" scheme="http://ymlog.cn/categories/Linux/"/>
     
     
-      <category term="KVM" scheme="ymlog.cn/tags/KVM/"/>
+      <category term="KVM" scheme="http://ymlog.cn/tags/KVM/"/>
     
   </entry>
   
   <entry>
     <title>WebSocket</title>
-    <link href="ymlog.cn/2020/05/03/WebSocket/"/>
-    <id>ymlog.cn/2020/05/03/WebSocket/</id>
+    <link href="http://ymlog.cn/2020/05/03/WebSocket/"/>
+    <id>http://ymlog.cn/2020/05/03/WebSocket/</id>
     <published>2020-05-03T11:28:35.000Z</published>
     <updated>2020-07-04T17:17:48.944Z</updated>
     
@@ -404,17 +404,17 @@
     </summary>
     
     
-      <category term="编程" scheme="ymlog.cn/categories/%E7%BC%96%E7%A8%8B/"/>
+      <category term="编程" scheme="http://ymlog.cn/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="WebSocket" scheme="ymlog.cn/tags/WebSocket/"/>
+      <category term="WebSocket" scheme="http://ymlog.cn/tags/WebSocket/"/>
     
   </entry>
   
   <entry>
     <title>NodeJS（一） 静态路由</title>
-    <link href="ymlog.cn/2020/04/29/NodeJS_1/"/>
-    <id>ymlog.cn/2020/04/29/NodeJS_1/</id>
+    <link href="http://ymlog.cn/2020/04/29/NodeJS_1/"/>
+    <id>http://ymlog.cn/2020/04/29/NodeJS_1/</id>
     <published>2020-04-29T11:57:22.000Z</published>
     <updated>2020-07-04T17:18:54.594Z</updated>
     
@@ -429,17 +429,17 @@
     </summary>
     
     
-      <category term="编程" scheme="ymlog.cn/categories/%E7%BC%96%E7%A8%8B/"/>
+      <category term="编程" scheme="http://ymlog.cn/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="NodeJS" scheme="ymlog.cn/tags/NodeJS/"/>
+      <category term="NodeJS" scheme="http://ymlog.cn/tags/NodeJS/"/>
     
   </entry>
   
   <entry>
     <title>VueJS 浅知</title>
-    <link href="ymlog.cn/2020/04/26/VueJS/"/>
-    <id>ymlog.cn/2020/04/26/VueJS/</id>
+    <link href="http://ymlog.cn/2020/04/26/VueJS/"/>
+    <id>http://ymlog.cn/2020/04/26/VueJS/</id>
     <published>2020-04-26T05:43:51.000Z</published>
     <updated>2020-07-04T17:17:54.221Z</updated>
     
@@ -454,17 +454,17 @@
     </summary>
     
     
-      <category term="编程" scheme="ymlog.cn/categories/%E7%BC%96%E7%A8%8B/"/>
+      <category term="编程" scheme="http://ymlog.cn/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="Vue" scheme="ymlog.cn/tags/Vue/"/>
+      <category term="Vue" scheme="http://ymlog.cn/tags/Vue/"/>
     
   </entry>
   
   <entry>
     <title>Redis</title>
-    <link href="ymlog.cn/2020/04/01/Redis/"/>
-    <id>ymlog.cn/2020/04/01/Redis/</id>
+    <link href="http://ymlog.cn/2020/04/01/Redis/"/>
+    <id>http://ymlog.cn/2020/04/01/Redis/</id>
     <published>2020-04-01T07:03:22.000Z</published>
     <updated>2020-07-04T17:18:21.526Z</updated>
     
@@ -479,17 +479,17 @@
     </summary>
     
     
-      <category term="数据库" scheme="ymlog.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+      <category term="数据库" scheme="http://ymlog.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-      <category term="Redis" scheme="ymlog.cn/tags/Redis/"/>
+      <category term="Redis" scheme="http://ymlog.cn/tags/Redis/"/>
     
   </entry>
   
   <entry>
     <title>Django——Models</title>
-    <link href="ymlog.cn/2020/03/28/Django_Models/"/>
-    <id>ymlog.cn/2020/03/28/Django_Models/</id>
+    <link href="http://ymlog.cn/2020/03/28/Django_Models/"/>
+    <id>http://ymlog.cn/2020/03/28/Django_Models/</id>
     <published>2020-03-28T06:42:14.000Z</published>
     <updated>2020-07-04T17:19:38.591Z</updated>
     
@@ -504,10 +504,10 @@
     </summary>
     
     
-      <category term="编程" scheme="ymlog.cn/categories/%E7%BC%96%E7%A8%8B/"/>
+      <category term="编程" scheme="http://ymlog.cn/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="Django" scheme="ymlog.cn/tags/Django/"/>
+      <category term="Django" scheme="http://ymlog.cn/tags/Django/"/>
     
   </entry>
   
