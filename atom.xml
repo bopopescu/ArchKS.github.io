@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://ymlog.cn/"/>
+  <link href="https://archks.github.io/"/>
   <updated>2020-07-12T14:24:29.653Z</updated>
-  <id>http://ymlog.cn/</id>
+  <id>https://archks.github.io/</id>
   
   <author>
     <name>ZEN</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>【摘文】人类简史</title>
-    <link href="http://ymlog.cn/2020/07/12/%E4%BA%BA%E7%B1%BB%E7%AE%80%E5%8F%B2/"/>
-    <id>http://ymlog.cn/2020/07/12/%E4%BA%BA%E7%B1%BB%E7%AE%80%E5%8F%B2/</id>
+    <link href="https://archks.github.io/2020/07/12/%E4%BA%BA%E7%B1%BB%E7%AE%80%E5%8F%B2/"/>
+    <id>https://archks.github.io/2020/07/12/%E4%BA%BA%E7%B1%BB%E7%AE%80%E5%8F%B2/</id>
     <published>2020-07-12T14:21:43.000Z</published>
     <updated>2020-07-12T14:24:29.653Z</updated>
     
@@ -35,17 +35,17 @@
     </summary>
     
     
-      <category term="摘录" scheme="http://ymlog.cn/categories/%E6%91%98%E5%BD%95/"/>
+      <category term="摘录" scheme="https://archks.github.io/categories/%E6%91%98%E5%BD%95/"/>
     
     
   </entry>
   
   <entry>
     <title>Minikube初体验</title>
-    <link href="http://ymlog.cn/2020/07/12/Minikube%E5%88%9D%E4%BD%93%E9%AA%8C/"/>
-    <id>http://ymlog.cn/2020/07/12/Minikube%E5%88%9D%E4%BD%93%E9%AA%8C/</id>
+    <link href="https://archks.github.io/2020/07/12/Minikube%E5%88%9D%E4%BD%93%E9%AA%8C/"/>
+    <id>https://archks.github.io/2020/07/12/Minikube%E5%88%9D%E4%BD%93%E9%AA%8C/</id>
     <published>2020-07-12T08:41:51.000Z</published>
-    <updated>2020-07-12T09:22:20.791Z</updated>
+    <updated>2020-07-12T14:26:21.107Z</updated>
     
     <content type="html"><![CDATA[<p>先吐槽一下K8S的官网，一个搞技术的，非得被逼成这样，这tm都是什么氛围！</p><p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="https://s1.ax1x.com/2020/07/12/U3bY9g.png" alt="https://kubernetes.io/docs/setup/learning-environment/minikube/"></p><br><blockquote><p>依照官网配置，始终不能启动minikube，官网并没有写太多细节，类似ipv4转发，Linux版本这些官网并没有提到，但是这些因素也决定minikube能否安装成功，我根据官网流程和部署，整理绝大部分安装时涉及到的点，如果环境相同，是能配置成功的。</p></blockquote><h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>先介绍一下运行环境：</p><table><thead><tr><th>类型</th><th>配置</th></tr></thead><tbody><tr><td>系统</td><td>系统 Vmware14 + CentOS7 + Linux4.4</td></tr><tr><td>网络</td><td>Proxy代理，所有socks5代理带本地Windows，Windows可以直接连接Google，所有没有配置国内的源</td></tr></tbody></table><p><strong>需要注意的点：</strong></p><ul><li>宿主机参数调整： <ul><li>关闭防火墙 &amp; Selinux </li><li>关闭交换分区</li><li>配置至少2CPU，这次安装配置为2核4G</li><li>内核版本4.10，3.10的版本安装不了</li><li>开启ipv4、bridge内核转发</li><li>确保各项服务自启没问题</li></ul></li><li>docker配置<ul><li>docker的driver要和k8s一样，这里设置的是systemd，有时候也会设置cgroup</li></ul></li></ul><br><p>1、升级内核—-不要在Linux3.10的内核上安装，会有很多bug，建议升级到4.14</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">rpm -Uvh https://www.elrepo.org/elrepo-release-7.0-3.el7.elrepo.noarch.rpm</span><br><span class="line">yum list available --disablerepo=<span class="string">'*'</span> --enablerepo=elrepo-kernel</span><br><span class="line">yum --enablerepo=elrepo-kernel install kernel-ml</span><br><span class="line">vim /etc/default/grub    【 Change GRUB_DEFAULT=X ===&gt; GRUB_DEFAULT=0 】</span><br><span class="line">grub2-mkconfig -o /boot/grub2/grub.cfg  【 recreate the kernel configuration 】</span><br></pre></td></tr></table></figure><p>2、设置本地代理，Windows上跑的Vmware，Windows可以直连外网，具体可以google，这里不方便展示</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">export</span> ALL_PROXY=socks5://windowsIp:port</span><br><span class="line"></span><br><span class="line">取消代理</span><br><span class="line"><span class="built_in">unset</span> ALL_PROXY</span><br></pre></td></tr></table></figure><p>3、关闭交换分区</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">swapoff -a                         暂时关闭</span><br><span class="line">sed -i <span class="string">'s/.*swap/#&amp;/'</span> /etc/fstab   永久关闭</span><br></pre></td></tr></table></figure><p>4、禁用防火墙和Selinux</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">systemctl stop firewalld</span><br><span class="line">systemctl <span class="built_in">disable</span> firewalld </span><br><span class="line">setenforce 0</span><br><span class="line">sed -i <span class="string">'s\SELINUX=enforcing\SELINUX=disabled\'</span> /etc/selinux/config</span><br></pre></td></tr></table></figure><p>5、调整内核参数</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward</span><br><span class="line"><span class="built_in">echo</span> 1 &gt; /proc/sys/net/bridge/bridge-nf-call-iptables</span><br></pre></td></tr></table></figure><p>6、安装依赖包和docker</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">yum install -y yum-utils device-mapper-persistent-data lvm2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加docker仓库</span></span><br><span class="line">yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启用夜间测试库</span></span><br><span class="line">yum-config-manager --<span class="built_in">enable</span> docker-ce-nightly</span><br><span class="line">yum-config-manager --<span class="built_in">enable</span> docker-ce-test</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装最新版的docker</span></span><br><span class="line">yum install docker-ce docker-ce-cli containerd.io conntrack -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动docker并允许自启动（这一步在minikube运行的时候是必须的）</span></span><br><span class="line">systemctl start docker</span><br><span class="line">systemctl <span class="built_in">enable</span> docker</span><br></pre></td></tr></table></figure><p>7、修改docker和kubelte的Cgroup driver</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">cat &gt; /etc/docker/daemon.json &lt;&lt; EOF</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">"exec-opts"</span>: [<span class="string">"native.cgroupdriver=systemd"</span>]</span><br><span class="line">  <span class="comment"># "exec-opts": ["native.cgroupdriver=cgroupfs"] 有时候cgroupfs就有用，不知道抽的什么风，应该是要和kubeadm匹配</span></span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br><span class="line"></span><br><span class="line">最后检查一下</span><br><span class="line">docker info | grep -i cgroup</span><br><span class="line">- Cgroup Driver: systemd</span><br></pre></td></tr></table></figure><p>8、安装kubectl、kubeadm、minikube</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 添加Google源</span></span><br><span class="line">cat &lt;&lt;EOF &gt; /etc/yum.repos.d/kubernetes.repo</span><br><span class="line">[kubernetes]</span><br><span class="line">name=Kubernetes</span><br><span class="line">baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">repo_gpgcheck=1</span><br><span class="line">gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg</span><br><span class="line">EOF</span><br><span class="line">yum install -y kubectl kubeadm</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># vim /etc/systemd/system/kubelet.service.d/10-kubeadm.conf</span></span><br><span class="line"><span class="comment"># - 增加 --cgroup-driver=cgroupfs</span></span><br><span class="line"><span class="comment"># Environment="KUBELET_KUBECONFIG_ARGS=--bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.conf --kubeconfig=/etc/kubernetes/kubelet.conf --cgroup-driver=cgroupfs"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置自启</span></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br><span class="line">systemctl restart kubelet</span><br><span class="line">systemctl <span class="built_in">enable</span> kubelet.service</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装minikube，并添加到环境变量</span></span><br><span class="line">curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64</span><br><span class="line">chmod +x minikube &amp;&amp; sudo mkdir -p /usr/<span class="built_in">local</span>/bin/ &amp;&amp; sudo install minikube /usr/<span class="built_in">local</span>/bin/</span><br></pre></td></tr></table></figure><p>9、完成安装</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ minikube status</span><br><span class="line">- minikube</span><br><span class="line">- <span class="built_in">type</span>: Control Plane</span><br><span class="line">- host: Running</span><br><span class="line">- kubelet: Running</span><br><span class="line">- apiserver: Running</span><br><span class="line">- kubeconfig: Configured</span><br></pre></td></tr></table></figure><h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p><strong>运行一个简单的HTTP Server</strong></p><p>拉取镜像</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl create deployment hello-minikube --image=k8s.gcr.io/echoserver:1.10</span><br><span class="line">deployment.apps/hello-minikube created</span><br></pre></td></tr></table></figure><p>部署服务</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl expose deployment hello-minikube --<span class="built_in">type</span>=NodePort --port=8080</span><br><span class="line">service/hello-minikube exposed</span><br></pre></td></tr></table></figure><p>查看状态</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl get pod</span><br><span class="line">NAME                              READY   STATUS    RESTARTS   AGE</span><br><span class="line">hello-minikube-64b64df8c9-rcrfl   1/1     Running   0          98s</span><br></pre></td></tr></table></figure><p>得到这个服务的URL</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ minikube service hello-minikube --url</span><br><span class="line">http://192.168.134.129:32056</span><br></pre></td></tr></table></figure><p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="https://s1.ax1x.com/2020/07/12/U3Tepj.png" alt="第一个K8S服务"></p><p>删除这个Service</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl delete services hello-minikube</span><br><span class="line">service <span class="string">"hello-minikube"</span> deleted</span><br></pre></td></tr></table></figure><p>删除这个Deployment</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ kubectl delete deployment hello-minikube</span><br><span class="line">deployment.apps <span class="string">"hello-minikube"</span> deleted</span><br></pre></td></tr></table></figure><p>停止minikube集群</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ minikube stop</span><br><span class="line">* Stopping <span class="string">"minikube"</span> <span class="keyword">in</span> none ...</span><br><span class="line">* Node <span class="string">"minikube"</span> stopped.</span><br></pre></td></tr></table></figure><p>删除本地minikube集群</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ minikube delete</span><br><span class="line">* Uninstalling Kubernetes v1.18.3 using kubeadm ...</span><br><span class="line">* Deleting <span class="string">"minikube"</span> <span class="keyword">in</span> none ...</span><br><span class="line">* Removed all traces of the <span class="string">"minikube"</span> cluster.</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -60,13 +60,15 @@
     </summary>
     
     
+      <category term="容器" scheme="https://archks.github.io/categories/%E5%AE%B9%E5%99%A8/"/>
+    
     
   </entry>
   
   <entry>
     <title>宿主机设置操作容器的定时任务无效</title>
-    <link href="http://ymlog.cn/2020/07/11/Docker-Err1/"/>
-    <id>http://ymlog.cn/2020/07/11/Docker-Err1/</id>
+    <link href="https://archks.github.io/2020/07/11/Docker-Err1/"/>
+    <id>https://archks.github.io/2020/07/11/Docker-Err1/</id>
     <published>2020-07-11T08:26:21.000Z</published>
     <updated>2020-07-11T08:34:01.719Z</updated>
     
@@ -82,15 +84,15 @@
     </summary>
     
     
-      <category term="报错" scheme="http://ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
+      <category term="报错" scheme="https://archks.github.io/categories/%E6%8A%A5%E9%94%99/"/>
     
     
   </entry>
   
   <entry>
     <title>Django3.0.8访问url报错Forbidden(CSRF Cookie not set)</title>
-    <link href="http://ymlog.cn/2020/07/11/Django-Err2/"/>
-    <id>http://ymlog.cn/2020/07/11/Django-Err2/</id>
+    <link href="https://archks.github.io/2020/07/11/Django-Err2/"/>
+    <id>https://archks.github.io/2020/07/11/Django-Err2/</id>
     <published>2020-07-11T08:13:50.000Z</published>
     <updated>2020-07-11T08:24:26.621Z</updated>
     
@@ -107,15 +109,15 @@
     </summary>
     
     
-      <category term="报错" scheme="http://ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
+      <category term="报错" scheme="https://archks.github.io/categories/%E6%8A%A5%E9%94%99/"/>
     
     
   </entry>
   
   <entry>
     <title>【摘文】月亮与六便士</title>
-    <link href="http://ymlog.cn/2020/07/11/%E6%9C%88%E4%BA%AE%E4%B8%8E%E5%85%AD%E4%BE%BF%E5%A3%AB/"/>
-    <id>http://ymlog.cn/2020/07/11/%E6%9C%88%E4%BA%AE%E4%B8%8E%E5%85%AD%E4%BE%BF%E5%A3%AB/</id>
+    <link href="https://archks.github.io/2020/07/11/%E6%9C%88%E4%BA%AE%E4%B8%8E%E5%85%AD%E4%BE%BF%E5%A3%AB/"/>
+    <id>https://archks.github.io/2020/07/11/%E6%9C%88%E4%BA%AE%E4%B8%8E%E5%85%AD%E4%BE%BF%E5%A3%AB/</id>
     <published>2020-07-11T04:03:15.000Z</published>
     <updated>2020-07-11T04:04:40.703Z</updated>
     
@@ -131,15 +133,15 @@
     </summary>
     
     
-      <category term="摘录" scheme="http://ymlog.cn/categories/%E6%91%98%E5%BD%95/"/>
+      <category term="摘录" scheme="https://archks.github.io/categories/%E6%91%98%E5%BD%95/"/>
     
     
   </entry>
   
   <entry>
     <title>【摘文】追风筝的人</title>
-    <link href="http://ymlog.cn/2020/07/11/%E8%BF%BD%E9%A3%8E%E7%AD%9D%E7%9A%84%E4%BA%BA/"/>
-    <id>http://ymlog.cn/2020/07/11/%E8%BF%BD%E9%A3%8E%E7%AD%9D%E7%9A%84%E4%BA%BA/</id>
+    <link href="https://archks.github.io/2020/07/11/%E8%BF%BD%E9%A3%8E%E7%AD%9D%E7%9A%84%E4%BA%BA/"/>
+    <id>https://archks.github.io/2020/07/11/%E8%BF%BD%E9%A3%8E%E7%AD%9D%E7%9A%84%E4%BA%BA/</id>
     <published>2020-07-11T04:01:49.000Z</published>
     <updated>2020-07-11T04:04:57.790Z</updated>
     
@@ -156,15 +158,15 @@
     </summary>
     
     
-      <category term="摘录" scheme="http://ymlog.cn/categories/%E6%91%98%E5%BD%95/"/>
+      <category term="摘录" scheme="https://archks.github.io/categories/%E6%91%98%E5%BD%95/"/>
     
     
   </entry>
   
   <entry>
     <title>【摘文】人间失格</title>
-    <link href="http://ymlog.cn/2020/07/11/%E4%BA%BA%E9%97%B4%E5%A4%B1%E6%A0%BC/"/>
-    <id>http://ymlog.cn/2020/07/11/%E4%BA%BA%E9%97%B4%E5%A4%B1%E6%A0%BC/</id>
+    <link href="https://archks.github.io/2020/07/11/%E4%BA%BA%E9%97%B4%E5%A4%B1%E6%A0%BC/"/>
+    <id>https://archks.github.io/2020/07/11/%E4%BA%BA%E9%97%B4%E5%A4%B1%E6%A0%BC/</id>
     <published>2020-07-11T04:00:21.000Z</published>
     <updated>2020-07-11T04:04:02.949Z</updated>
     
@@ -180,15 +182,15 @@
     </summary>
     
     
-      <category term="摘录" scheme="http://ymlog.cn/categories/%E6%91%98%E5%BD%95/"/>
+      <category term="摘录" scheme="https://archks.github.io/categories/%E6%91%98%E5%BD%95/"/>
     
     
   </entry>
   
   <entry>
     <title>解决Hexo+Github网络图片无法加载问题</title>
-    <link href="http://ymlog.cn/2020/07/08/%E8%A7%A3%E5%86%B3Hexo-Github%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E9%97%AE%E9%A2%98/"/>
-    <id>http://ymlog.cn/2020/07/08/%E8%A7%A3%E5%86%B3Hexo-Github%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E9%97%AE%E9%A2%98/</id>
+    <link href="https://archks.github.io/2020/07/08/%E8%A7%A3%E5%86%B3Hexo-Github%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E9%97%AE%E9%A2%98/"/>
+    <id>https://archks.github.io/2020/07/08/%E8%A7%A3%E5%86%B3Hexo-Github%E7%BD%91%E7%BB%9C%E5%9B%BE%E7%89%87%E6%97%A0%E6%B3%95%E5%8A%A0%E8%BD%BD%E9%97%AE%E9%A2%98/</id>
     <published>2020-07-08T05:03:47.000Z</published>
     <updated>2020-07-08T05:14:26.182Z</updated>
     
@@ -209,15 +211,15 @@
     </summary>
     
     
-      <category term="报错" scheme="http://ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
+      <category term="报错" scheme="https://archks.github.io/categories/%E6%8A%A5%E9%94%99/"/>
     
     
   </entry>
   
   <entry>
     <title>Docker中Django迁移无效</title>
-    <link href="http://ymlog.cn/2020/07/08/Django-Err1/"/>
-    <id>http://ymlog.cn/2020/07/08/Django-Err1/</id>
+    <link href="https://archks.github.io/2020/07/08/Django-Err1/"/>
+    <id>https://archks.github.io/2020/07/08/Django-Err1/</id>
     <published>2020-07-08T02:12:54.000Z</published>
     <updated>2020-07-08T05:02:21.498Z</updated>
     
@@ -235,15 +237,15 @@
     </summary>
     
     
-      <category term="报错" scheme="http://ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
+      <category term="报错" scheme="https://archks.github.io/categories/%E6%8A%A5%E9%94%99/"/>
     
     
   </entry>
   
   <entry>
     <title>SSH——用户密钥未在远程主机注册</title>
-    <link href="http://ymlog.cn/2020/07/06/SSH%E2%80%94%E7%94%A8%E6%88%B7%E5%AF%86%E9%92%A5%E6%9C%AA%E5%9C%A8%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BA%E6%B3%A8%E5%86%8C/"/>
-    <id>http://ymlog.cn/2020/07/06/SSH%E2%80%94%E7%94%A8%E6%88%B7%E5%AF%86%E9%92%A5%E6%9C%AA%E5%9C%A8%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BA%E6%B3%A8%E5%86%8C/</id>
+    <link href="https://archks.github.io/2020/07/06/SSH%E2%80%94%E7%94%A8%E6%88%B7%E5%AF%86%E9%92%A5%E6%9C%AA%E5%9C%A8%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BA%E6%B3%A8%E5%86%8C/"/>
+    <id>https://archks.github.io/2020/07/06/SSH%E2%80%94%E7%94%A8%E6%88%B7%E5%AF%86%E9%92%A5%E6%9C%AA%E5%9C%A8%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BA%E6%B3%A8%E5%86%8C/</id>
     <published>2020-07-06T03:43:16.000Z</published>
     <updated>2020-07-06T03:57:26.488Z</updated>
     
@@ -261,15 +263,15 @@
     </summary>
     
     
-      <category term="报错" scheme="http://ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
+      <category term="报错" scheme="https://archks.github.io/categories/%E6%8A%A5%E9%94%99/"/>
     
     
   </entry>
   
   <entry>
     <title>Dockerfile制作Nginx容器</title>
-    <link href="http://ymlog.cn/2020/06/29/Produce-the-docker-image-about-nginx/"/>
-    <id>http://ymlog.cn/2020/06/29/Produce-the-docker-image-about-nginx/</id>
+    <link href="https://archks.github.io/2020/06/29/Produce-the-docker-image-about-nginx/"/>
+    <id>https://archks.github.io/2020/06/29/Produce-the-docker-image-about-nginx/</id>
     <published>2020-06-29T02:59:50.000Z</published>
     <updated>2020-07-08T05:08:23.044Z</updated>
     
@@ -284,17 +286,17 @@
     </summary>
     
     
-      <category term="容器" scheme="http://ymlog.cn/categories/%E5%AE%B9%E5%99%A8/"/>
+      <category term="容器" scheme="https://archks.github.io/categories/%E5%AE%B9%E5%99%A8/"/>
     
     
-      <category term="Docker" scheme="http://ymlog.cn/tags/Docker/"/>
+      <category term="Docker" scheme="https://archks.github.io/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>VsCode远程开发</title>
-    <link href="http://ymlog.cn/2020/06/18/VsCode_Remote_Config/"/>
-    <id>http://ymlog.cn/2020/06/18/VsCode_Remote_Config/</id>
+    <link href="https://archks.github.io/2020/06/18/VsCode_Remote_Config/"/>
+    <id>https://archks.github.io/2020/06/18/VsCode_Remote_Config/</id>
     <published>2020-06-18T02:50:36.000Z</published>
     <updated>2020-07-04T17:18:01.461Z</updated>
     
@@ -309,17 +311,17 @@
     </summary>
     
     
-      <category term="运维" scheme="http://ymlog.cn/categories/%E8%BF%90%E7%BB%B4/"/>
+      <category term="运维" scheme="https://archks.github.io/categories/%E8%BF%90%E7%BB%B4/"/>
     
     
-      <category term="VsCode" scheme="http://ymlog.cn/tags/VsCode/"/>
+      <category term="VsCode" scheme="https://archks.github.io/tags/VsCode/"/>
     
   </entry>
   
   <entry>
     <title>Win快捷键</title>
-    <link href="http://ymlog.cn/2020/06/18/Win_ShotCut/"/>
-    <id>http://ymlog.cn/2020/06/18/Win_ShotCut/</id>
+    <link href="https://archks.github.io/2020/06/18/Win_ShotCut/"/>
+    <id>https://archks.github.io/2020/06/18/Win_ShotCut/</id>
     <published>2020-06-18T00:37:32.000Z</published>
     <updated>2020-07-04T17:17:42.906Z</updated>
     
@@ -335,14 +337,14 @@
     
     
     
-      <category term="快捷键" scheme="http://ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+      <category term="快捷键" scheme="https://archks.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
   </entry>
   
   <entry>
     <title>ls根目录卡死</title>
-    <link href="http://ymlog.cn/2020/06/17/ls_root_broken_down/"/>
-    <id>http://ymlog.cn/2020/06/17/ls_root_broken_down/</id>
+    <link href="https://archks.github.io/2020/06/17/ls_root_broken_down/"/>
+    <id>https://archks.github.io/2020/06/17/ls_root_broken_down/</id>
     <published>2020-06-17T14:46:04.000Z</published>
     <updated>2020-07-06T03:43:55.355Z</updated>
     
@@ -357,17 +359,17 @@
     </summary>
     
     
-      <category term="报错" scheme="http://ymlog.cn/categories/%E6%8A%A5%E9%94%99/"/>
+      <category term="报错" scheme="https://archks.github.io/categories/%E6%8A%A5%E9%94%99/"/>
     
     
-      <category term="NFS" scheme="http://ymlog.cn/tags/NFS/"/>
+      <category term="NFS" scheme="https://archks.github.io/tags/NFS/"/>
     
   </entry>
   
   <entry>
     <title>Vimium快捷键</title>
-    <link href="http://ymlog.cn/2020/06/16/Vimium_ShotCut/"/>
-    <id>http://ymlog.cn/2020/06/16/Vimium_ShotCut/</id>
+    <link href="https://archks.github.io/2020/06/16/Vimium_ShotCut/"/>
+    <id>https://archks.github.io/2020/06/16/Vimium_ShotCut/</id>
     <published>2020-06-16T10:02:13.000Z</published>
     <updated>2020-07-04T17:18:04.516Z</updated>
     
@@ -383,14 +385,14 @@
     
     
     
-      <category term="快捷键" scheme="http://ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+      <category term="快捷键" scheme="https://archks.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
   </entry>
   
   <entry>
     <title>Jetbrains快捷键</title>
-    <link href="http://ymlog.cn/2020/06/16/Jetbrains_ShutCut/"/>
-    <id>http://ymlog.cn/2020/06/16/Jetbrains_ShutCut/</id>
+    <link href="https://archks.github.io/2020/06/16/Jetbrains_ShutCut/"/>
+    <id>https://archks.github.io/2020/06/16/Jetbrains_ShutCut/</id>
     <published>2020-06-16T03:23:57.000Z</published>
     <updated>2020-07-04T17:19:27.331Z</updated>
     
@@ -406,14 +408,14 @@
     
     
     
-      <category term="快捷键" scheme="http://ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+      <category term="快捷键" scheme="https://archks.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
   </entry>
   
   <entry>
     <title>Chrome快捷键</title>
-    <link href="http://ymlog.cn/2020/06/16/Chrome_ShutCut/"/>
-    <id>http://ymlog.cn/2020/06/16/Chrome_ShutCut/</id>
+    <link href="https://archks.github.io/2020/06/16/Chrome_ShutCut/"/>
+    <id>https://archks.github.io/2020/06/16/Chrome_ShutCut/</id>
     <published>2020-06-16T03:23:27.000Z</published>
     <updated>2020-07-04T17:19:41.482Z</updated>
     
@@ -429,14 +431,14 @@
     
     
     
-      <category term="快捷键" scheme="http://ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+      <category term="快捷键" scheme="https://archks.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
   </entry>
   
   <entry>
     <title>VSCode快捷键</title>
-    <link href="http://ymlog.cn/2020/06/16/VsCode_ShotCut/"/>
-    <id>http://ymlog.cn/2020/06/16/VsCode_ShotCut/</id>
+    <link href="https://archks.github.io/2020/06/16/VsCode_ShotCut/"/>
+    <id>https://archks.github.io/2020/06/16/VsCode_ShotCut/</id>
     <published>2020-06-16T02:51:59.000Z</published>
     <updated>2020-07-04T17:17:58.456Z</updated>
     
@@ -452,14 +454,14 @@
     
     
     
-      <category term="快捷键" scheme="http://ymlog.cn/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
+      <category term="快捷键" scheme="https://archks.github.io/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/"/>
     
   </entry>
   
   <entry>
     <title>KVM实例总结</title>
-    <link href="http://ymlog.cn/2020/06/04/KVM_Initial/"/>
-    <id>http://ymlog.cn/2020/06/04/KVM_Initial/</id>
+    <link href="https://archks.github.io/2020/06/04/KVM_Initial/"/>
+    <id>https://archks.github.io/2020/06/04/KVM_Initial/</id>
     <published>2020-06-04T09:19:51.000Z</published>
     <updated>2020-07-04T17:19:21.421Z</updated>
     
@@ -474,17 +476,17 @@
     </summary>
     
     
-      <category term="Linux" scheme="http://ymlog.cn/categories/Linux/"/>
+      <category term="Linux" scheme="https://archks.github.io/categories/Linux/"/>
     
     
-      <category term="KVM" scheme="http://ymlog.cn/tags/KVM/"/>
+      <category term="KVM" scheme="https://archks.github.io/tags/KVM/"/>
     
   </entry>
   
   <entry>
     <title>WebSocket</title>
-    <link href="http://ymlog.cn/2020/05/03/WebSocket/"/>
-    <id>http://ymlog.cn/2020/05/03/WebSocket/</id>
+    <link href="https://archks.github.io/2020/05/03/WebSocket/"/>
+    <id>https://archks.github.io/2020/05/03/WebSocket/</id>
     <published>2020-05-03T11:28:35.000Z</published>
     <updated>2020-07-04T17:17:48.944Z</updated>
     
@@ -500,10 +502,10 @@
     </summary>
     
     
-      <category term="编程" scheme="http://ymlog.cn/categories/%E7%BC%96%E7%A8%8B/"/>
+      <category term="编程" scheme="https://archks.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
     
     
-      <category term="WebSocket" scheme="http://ymlog.cn/tags/WebSocket/"/>
+      <category term="WebSocket" scheme="https://archks.github.io/tags/WebSocket/"/>
     
   </entry>
   
