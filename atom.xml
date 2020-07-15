@@ -195,7 +195,7 @@
   </entry>
   
   <entry>
-    <title>Django3.0.8访问url报错Forbidden(CSRF Cookie not set)</title>
+    <title>Django3.0.8访问url报错Forbidden(CSRF Cookie Not Set)</title>
     <link href="https://archks.github.io/2020/07/11/Django-Err2/"/>
     <id>https://archks.github.io/2020/07/11/Django-Err2/</id>
     <published>2020-07-11T08:13:50.000Z</published>
@@ -447,7 +447,7 @@
   </entry>
   
   <entry>
-    <title>ls根目录卡死</title>
+    <title>Ls根目录卡死</title>
     <link href="https://archks.github.io/2020/06/17/ls_root_broken_down/"/>
     <id>https://archks.github.io/2020/06/17/ls_root_broken_down/</id>
     <published>2020-06-17T14:46:04.000Z</published>
