@@ -1,0 +1,429 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>zen's blog</title><meta name="description"><meta name="author" content="杜振铨"><meta name="copyright" content="杜振铨"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://yoursite.com/page/3/"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin="crossorigin"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta property="og:type" content="website"><meta property="og:title" content="zen's blog"><meta property="og:url" content="http://yoursite.com/page/3/"><meta property="og:site_name" content="zen's blog"><meta property="og:description"><meta property="og:image" content="http://yoursite.com/img/avatar.png"><meta property="article:published_time" content="2020-07-16T02:50:56.109Z"><meta property="article:modified_time" content="2020-07-16T02:50:56.109Z"><meta name="twitter:card" content="summary"><script>var activateDarkMode = function () {
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000')
+  }
+}
+var activateLightMode = function () {
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null) {
+    document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fff')
+  }
+}
+
+var getCookies = function (name) {
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop().split(';').shift()
+}
+
+var autoChangeMode = 'false'
+var t = getCookies('theme')
+if (autoChangeMode === '1') {
+  var isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+  var isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+  var isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined) {
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport) {
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour <= 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+    }
+    window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+      if (Cookies.get('theme') === undefined) {
+        e.matches ? activateDarkMode() : activateLightMode()
+      }
+    })
+  } else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else if (autoChangeMode === '2') {
+  now = new Date()
+  hour = now.getHours()
+  isNight = hour <= 6 || hour >= 18
+  if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode()
+} else {
+  if (t === 'dark') activateDarkMode()
+  else if (t === 'light') activateLightMode()
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web&amp;display=swap"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: false,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false    
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isSidebar: false,
+  postUpdate: '2020-07-16 10:50:56'
+}</script><noscript><style>
+#nav {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.1"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">48</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">23</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">9</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div></div></div></div><div id="body-wrap"><header class="full_page" id="page-header" style="background-image: url(https://s1.ax1x.com/2020/07/15/UwzF7q.png)"><nav id="nav"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">zen's blog</a></span><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="site-info"><h1 id="site_title">zen's blog</h1><div id="site_subtitle"><span id="subtitle"></span></div><div id="site_social_icons"><a class="social-icon" href="https://github.com/archks" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2212585023@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll_down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout_page" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/06/16/Jetbrains_ShutCut/" title="Jetbrains快捷键">Jetbrains快捷键</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-06-16 11:23:57"><i class="far fa-calendar-alt"></i>2020-06-16</time></div><div class="content">
+念两句诗高城鼓动兰釭灺。睡也还醒，醉也还醒：忽听孤鸿三两声。人生只似风前絮。欢也零星，悲也零星，都作连江点点萍。
+
+
+
+转自： https://segmentfault.com/a/1190000007206543
+编辑
+
+
+
+快捷键组合
+说明
+
+
+
+Ctrl + Space
+代码自动完成提示（选择）
+
+
+Alt + Enter
+显示意图动作和快速修复
+
+
+Ctrl + P
+参数信息（在调用方法参数忘记的时候，提示）
+
+
+Ctrl + Q
+快速查找文件，可以查找当前类定义的文件等
+
+
+Ctrl + 鼠标滑过
+基本信息
+
+
+Alt + Insert
+生成代码…(细节需要多次操作会发现很有意思)
+
+
+Ctrl + O
+重写方法（在PHPStorm中是重写父类方法，会有选择框）
+
+
+Ctrl + I
+实现方法（一般是指实现接口类或抽象类方法）
+
+
+Ctrl + Alt + T
+环绕代码块 (if..else, try..catch, for, 等)
+
+
+Ctrl + /
+单行注释(//)
+
+
+Ctrl + Shift + /
+块注释 (/**/)
+
+
+Ctrl + W
+选择依次递增的代码块 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/06/16/Chrome_ShutCut/" title="Chrome快捷键">Chrome快捷键</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-06-16 11:23:27"><i class="far fa-calendar-alt"></i>2020-06-16</time></div><div class="content">
+念两句诗春未老，风细柳斜斜。试上超然台上望，半壕春水一城花。烟雨暗千家。寒食后，酒醒却咨嗟。休对故人思故国，且将新火试新茶。诗酒趁年华。
+
+
+
+
+转自：https://www.runoob.com/w3cnote/google-chrome-shortcuts.html
+Windows 和 Linux版本的chrome标签页和窗口快捷键
+
+
+操作
+快捷键
+
+
+
+打开新窗口
+Ctrl + n
+
+
+在隐身模式下打开新窗口
+Ctrl + Shift + n
+
+
+打开新的标签页，并跳转到该标签页
+Ctrl + t
+
+
+重新打开最后关闭的标签页，并跳转到该标签页
+Ctrl + Shift + t
+
+
+跳转到下一个打开的标签页
+Ctrl + Tab 或 Ctrl + PgDn
+
+
+跳转到上一个打开的标签页
+Ctrl + Shift + Tab 或 Ctrl + PgUp
+
+
+跳转到特定标签页
+Ctrl + 1 到 Ctrl + 8
+
+
+跳转到最后一个标签页
+Ctrl + 9
+
+
+在当前标签页中打开主页
+Alt + Home
+
+
+关闭当前标签页
+Ctrl + w 或 Ctrl + F4
+
+
+关闭所 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/06/16/VsCode_ShotCut/" title="VSCode快捷键">VSCode快捷键</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-06-16 10:51:59"><i class="far fa-calendar-alt"></i>2020-06-16</time></div><div class="content">
+念两句诗醉漾轻舟，信bai流引到花深处。尘缘du相误，无计花间住。烟水茫茫，千里斜阳暮。山无数，乱红如雨，不记来时路。
+
+
+
+
+
+
+常用的几个
+
+
+
+shortcut
+info
+
+
+
+Ctrl+Shift+K
+删除当前行
+
+
+Ctrl+L
+选中当前行
+
+
+Ctrl+letf, Ctrl+Right
+逐个单词跳转
+
+
+Ctrl+B
+打开左侧页面
+
+
+Ctrl+J
+打开终端
+
+
+Ctrl+F
+搜索
+
+
+Ctrl+D
+查找当下字符，可以跳转
+
+
+Fn+Up , Fn+Down
+翻半页
+
+
+Ctrl+Backspace
+删除一个单词
+
+
+Shift + Alt +Down
+复制一行
+
+
+Ctrl+],Ctrl+[
+缩进tab和退缩进
+
+
+Ctrl+Shift+W
+关闭编辑器
+
+
+Ctrl+W
+关闭当前编辑文本
+
+
+Ctrl + Enter
+在当前行下插入新的一行
+
+
+Ctrl+Shift+|
+匹配括号跳转
+
+
+Ctrl + up/down
+行视图上下偏移
+
+
+Ctrl + P
+跳转文件
+
+
+Alt + Click
+插入光标-支持多个
+
+
+Ctrl + =/-
+放大 / 缩小
+
+
+Ctrl + ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/06/04/KVM_Initial/" title="KVM实例总结">KVM实例总结</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-06-04 17:19:51"><i class="far fa-calendar-alt"></i>2020-06-04</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">
+念两句诗大雨落幽燕，白浪滔天，秦皇岛外打鱼船，一片汪洋都不见。知向谁边？往事越千年，魏武挥鞭，东临碣石有遗篇。萧瑟秋风今又是，换了人间。
+
+
+
+大纲kvm创建虚拟机的根本在于这样一条命令，virsh define vm-template.xml，这条命令的核心就是创建一个虚拟机，之后或者之前的内容都是围绕着这条命令和这个虚拟机的。
+
+更新vm-templatem模板是为了进行子机资源配置
+在更新模板之前检查时主机是为了防止给子机过量的资源导致母机不稳定
+桥接网卡是为了让子机连接局域网
+
+所以，virsh define vm-template.xml 其本质是在安全可靠的前提下，将母机的资源通过kvm虚拟化的形式分配给子机。
+所以主要考虑方向有两个
+1、保障母机和子机的安全可靠，包括系统安全和网络安全
+2、进行资源分配，包括网络资源、存储资源、计算资源等
+该脚本考虑了母机分配资源不会超过母机承受范围的资源安全，其他系统层面和网络层面的安全问题还需考虑
+命令1234567891011121314151617181920212223242526272829- 1、sed   - 替换注释  ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/05/03/WebSocket/" title="WebSocket">WebSocket</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-05-03 19:28:35"><i class="far fa-calendar-alt"></i>2020-05-03</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="content">
+念两句诗忆昔午桥桥上饮，坐中多是豪英。长沟流月去无声，杏花疏影里，吹笛到天明。
+二十馀年成一梦，此身虽在堪惊。闲登小阁看新晴，古今多少事，渔唱起三更。
+
+
+
+
+WS介绍HTTP
+超文本传输协议(HTTP,HypertextTransferProtocol)是互联网上应用最为广泛的一种网络协议。是用于从WWW服务器传输超文本到本地浏览器的传送协议。
+Web通讯
+
+WebSocket
+WebSocket Protocal是HTML5一种新的协议，它实现了浏览器与服务器全双工通信（full-duple），一开始握手需要借助http请求完成。
+HTTP请求是无状态的，每一次收发数据都需要建立连接。WebSocket不需要建立连接就可以收发数据。
+
+WebSocket对象提供一组API，用于创建和管理WebSocket连接，以及通过连接发送和接受数据。
+12345创建WebSocket对象var ws = new WebSocket(url,[protocals]);url: 表示要连接的URL，这个URL应该为响应WebSocket的地址protocals:可以是单个的协议名字字符串或者包含 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/04/29/NodeJS_1/" title="NodeJS（一） 静态路由">NodeJS（一） 静态路由</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-04-29 19:57:22"><i class="far fa-calendar-alt"></i>2020-04-29</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="content">
+念两句诗黄金榜上，偶失龙头望。明代暂遗贤，如何向。未遂风云便，争不恣游狂荡。何须论得丧？才子词人，自是白衣卿相。
+
+
+
+Nodejs简介​    V8引擎本身是用于Chrome浏览器的JS解释部分，但是Ryan Dahl将其搬到了服务器上，用于做服务器。
+​    浏览器和服务器类似，浏览器是发送HTTP请求，接受HTTP响应，服务器也是接受HTTP请求，发送HTTP响应。都已HTML的方式实现。
+​    Nodejs是一个让Javascript运行在服务器端的开发平台，它让Javascript的触角伸到了服务器端，可以和PHP、JSP、Python、Ruby平起平坐。
+不同之处：
+
+Nodejs不是一种独立的语言，与PHP、JSP、Python的“既是语言，也是平台不同，Nodejs的使用Javascript进行编程，运行在Javascript引擎上（V8）
+与PHP、JSP相比，Nodejs跳过了Apache、Nginx、IIS等HTTP服务器，自己不用建设在任何服务器软件之上。
+
+Nodejs特点
+
+单线程
+非阻塞IO
+事件驱动
+
+1、单线程
+在java、php等服务器端语言 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/04/26/VueJS/" title="VueJS 浅知">VueJS 浅知</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-04-26 13:43:51"><i class="far fa-calendar-alt"></i>2020-04-26</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="content">
+念两句诗东城渐觉风光好，縠(hú)皱波纹迎客棹。绿杨烟外晓寒轻，红杏枝头春意闹。浮生长恨欢娱少， 肯爱千金轻一笑。 为君持酒劝斜阳，且向花间留晚照。
+
+
+
+
+正文Vue 是Javascript的框架，用于简化DOM（domain obeject m）操作，响应式数据驱动。
+Vue两种导入方式：
+12&lt;!-- 开发环境版本，包含了有帮助的命令行警告 --&gt;&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&#x2F;dist&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;
+
+12&lt;!-- 生产环境版本，优化了尺寸和速度 --&gt;&lt;script src&#x3D;&quot;https:&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;npm&#x2F;vue&quot;&gt;&lt;&#x2F;script&gt;
+
+
+
+初试Vue1、 Hello World
+1234567891011121314 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/04/01/Redis/" title="Redis">Redis</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-04-01 15:03:22"><i class="far fa-calendar-alt"></i>2020-04-01</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span></div><div class="content">
+念两句诗芦叶满汀洲，寒沙带浅流。二十年重过南楼。柳下系船犹未稳，能几日，又中秋。黄鹤断矶头，故人曾到否？旧江山浑是新愁。欲买桂花同载酒，终不似，少年游。
+
+
+
+Redis简介Redis特点
+K-V 数据库
+支持丰富的数据类型：String、Hash、List、Set、Zset（5大基础类型）
+和Memcache对比：数据都是存储在内存中的，但是Redis可以做持久化存储（数据可以存储在磁盘上）
+工作模型：单线程 | IO多路复用 | 内存 
+集群方案
+速度快
+
+Redis为什么快？
+数据库存储在内存中
+一般采用单线程IO多路复用
+单线程可以避免CPU竞争带来的开销（Redis属于CPU密集型，单独部署，避免和其他业务产生CPU竞争问题）
+单线程数据结构等开销较小
+
+
+
+常用场景1、缓存
+
+2、计数，许多应用都会使用Redis作为计数的基础工具，它可以实现快速计数、查询缓存的功能，同时数据可以异步落地到其他数据源。例如笔者所在团队 的视频播放数系统就是使用Redis作为视频播放数计数的基础组件，用户每 播放一次视频，相应的视频播放数就会自增1：
+123long incrVideoCou ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/03/28/Django_Models/" title="Django——Models">Django——Models</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-03-28 14:42:14"><i class="far fa-calendar-alt"></i>2020-03-28</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="content">
+念两句诗笙管本无律，清风顾盼闲。哀哀稚子意，眷眷亲人怜。岁月悲华发，流光爱少年。山中有历日，年尽不言寒。幼小便失亲，山深自本真。几行逝水泪，一片朝霞洇。或有野村梦，岂无花蕾心？春夏秋冬后，情仇过眼云。
+
+
+
+
+
+前期准备0、首先创建一个Django项目：
+12345678910111213141516171819202122232425262728django-admin startproject DoModelcd DoModeldjango-admin startapp App项目框架：-------------------------------G:\Django\django1.11\DoModel&gt;tree /FFolder PATH listing for volume tmpVolume serial number is 1030-3F09G:.│   manage.py│├───App	# 我们主要写代码的地方│   │   admin.py│   │   apps.py│   │   models.py # 和数据库交互的地方│   │   tests.py│ ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2020/03/02/SQL/" title="Mysql常用语句">Mysql常用语句</a><div class="article-meta-wrap"><time class="post-meta__date" title="发表于 2020-03-02 12:55:14"><i class="far fa-calendar-alt"></i>2020-03-02</time><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></span></div><div class="content">
+念两句诗世味年来薄似纱，谁令骑马客京华。小楼一夜听春雨，深巷明朝卖杏花。矮纸斜行闲作草，晴窗细乳戏分茶。素衣莫起风尘叹，犹及清明可到家。
+
+
+
+Init初始安装和创建授权用户
+1234567891011121314151617181920212223242526272829303132# 查看是否已经安装rpm -qa mariadb# 安装mysql和服务端yum -y install mariadb-server mariadb# 开启mysql进程systemctl start mariadb# 初始化mysql，主要是创建root用户的密码，如果没有这步，root密码为空mysql_secure_installation# 创建用户create user 'username'@'localhost' IDENTIFIED BY 'userpasswd';# 授权用户grant all privileges on *.* to 'username'@'localhost';# 创建用户并授权,并授权指定数据库下所有表,而非所有数据库grant all on dbname.* t ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/2/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">杜振铨</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives"><div class="headline">文章</div><div class="length_num">48</div></a></div><div class="card-info-data-item is-center">      <a href="/tags"><div class="headline">标签</div><div class="length_num">23</div></a></div><div class="card-info-data-item is-center">     <a href="/categories"><div class="headline">分类</div><div class="length_num">9</div></a></div></div><div class="card-info-bookmark is-center"><button class="button--animated" id="bookmark-it" type="button" title="加入书签"><i class="fas fa-bookmark"></i><span>加入书签</span></button></div><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/archks" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:2212585023@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-recent-item"><div class="aside-recent-post"><a href="/2020/07/16/hello-world/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" title="Hello World" alt="Hello World"/></div><div class="aside-post-title"><div class="aside-post_title" href="/2020/07/16/hello-world/" title="Hello World">Hello World</div><time class="aside-post_meta post-meta__date" title="发表于 2020-07-16 10:32:28">2020-07-16</time></div></a></div><div class="aside-recent-post"><a href="/2020/07/15/Typora-Gitee%E5%9B%BE%E5%BA%8A/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" title="Typora+Gitee图床" alt="Typora+Gitee图床"/></div><div class="aside-post-title"><div class="aside-post_title" href="/2020/07/15/Typora-Gitee%E5%9B%BE%E5%BA%8A/" title="Typora+Gitee图床">Typora+Gitee图床</div><time class="aside-post_meta post-meta__date" title="发表于 2020-07-15 16:26:33">2020-07-15</time></div></a></div><div class="aside-recent-post"><a href="/2020/07/15/SHELL/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" title="SHELL" alt="SHELL"/></div><div class="aside-post-title"><div class="aside-post_title" href="/2020/07/15/SHELL/" title="SHELL">SHELL</div><time class="aside-post_meta post-meta__date" title="发表于 2020-07-15 11:11:57">2020-07-15</time></div></a></div><div class="aside-recent-post"><a href="/2020/07/14/Kubeadm%E5%AE%89%E8%A3%85K8S/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" title="Kubeadm安装K8S" alt="Kubeadm安装K8S"/></div><div class="aside-post-title"><div class="aside-post_title" href="/2020/07/14/Kubeadm%E5%AE%89%E8%A3%85K8S/" title="Kubeadm安装K8S">Kubeadm安装K8S</div><time class="aside-post_meta post-meta__date" title="发表于 2020-07-14 11:59:01">2020-07-14</time></div></a></div><div class="aside-recent-post"><a href="/2020/07/12/Web%E7%BB%88%E7%AB%AFGateOne/"><div class="aside-post-cover"><img class="aside-post-bg" data-src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" title="Web终端GateOne" alt="Web终端GateOne"/></div><div class="aside-post-title"><div class="aside-post_title" href="/2020/07/12/Web%E7%BB%88%E7%AB%AFGateOne/" title="Web终端GateOne">Web终端GateOne</div><time class="aside-post_meta post-meta__date" title="发表于 2020-07-12 22:58:59">2020-07-12</time></div></a></div></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>分类</span></div><ul class="card-category-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"><span class="card-category-list-name">中间件</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E5%AE%B9%E5%99%A8/"><span class="card-category-list-name">容器</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%A5%E9%94%99/"><span class="card-category-list-name">报错</span><span class="card-category-list-count">6</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%91%98%E5%BD%95/"><span class="card-category-list-name">摘录</span><span class="card-category-list-count">5</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="card-category-list-name">数据库</span><span class="card-category-list-count">2</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/"><span class="card-category-list-name">编程</span><span class="card-category-list-count">7</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E8%B7%AF%E7%94%B1%E6%8A%80%E6%9C%AF/"><span class="card-category-list-name">路由技术</span><span class="card-category-list-count">3</span></a></li>
+            <li class="card-category-list-item more is-center"><a class="card-category-list-link-more" href="/categories">
+                <span>查看更多</span><i class="fas fa-angle-right"></i></a></li>           
+            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/ARP%E5%8D%8F%E8%AE%AE/" style="font-size: 16px; color: #999">ARP协议</a> <a href="/tags/Ansible/" style="font-size: 16px; color: #999">Ansible</a> <a href="/tags/Django/" style="font-size: 16px; color: #999">Django</a> <a href="/tags/Docker/" style="font-size: 19px; color: #99a1ac">Docker</a> <a href="/tags/KVM/" style="font-size: 16px; color: #999">KVM</a> <a href="/tags/Keepalived/" style="font-size: 16px; color: #999">Keepalived</a> <a href="/tags/LVS/" style="font-size: 16px; color: #999">LVS</a> <a href="/tags/Matplotlib/" style="font-size: 16px; color: #999">Matplotlib</a> <a href="/tags/MySQL/" style="font-size: 16px; color: #999">MySQL</a> <a href="/tags/NFS/" style="font-size: 16px; color: #999">NFS</a> <a href="/tags/NodeJS/" style="font-size: 16px; color: #999">NodeJS</a> <a href="/tags/OSPF%E5%8D%8F%E8%AE%AE/" style="font-size: 16px; color: #999">OSPF协议</a> <a href="/tags/Redis/" style="font-size: 16px; color: #999">Redis</a> <a href="/tags/Switch/" style="font-size: 16px; color: #999">Switch</a> <a href="/tags/VsCode/" style="font-size: 16px; color: #999">VsCode</a> <a href="/tags/Vue/" style="font-size: 16px; color: #999">Vue</a> <a href="/tags/WebSocket/" style="font-size: 16px; color: #999">WebSocket</a> <a href="/tags/history/" style="font-size: 16px; color: #999">history</a> <a href="/tags/%E5%9B%BE%E5%BA%8A/" style="font-size: 16px; color: #999">图床</a> <a href="/tags/%E5%B0%8F%E5%9E%8B%E8%B7%AF%E7%94%B1%E5%8D%8F%E8%AE%AE/" style="font-size: 16px; color: #999">小型路由协议</a> <a href="/tags/%E5%BF%AB%E6%8D%B7%E9%94%AE/" style="font-size: 22px; color: #99a9bf">快捷键</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 16px; color: #999">爬虫</a> <a href="/tags/%E9%9A%8F%E7%AC%94/" style="font-size: 19px; color: #99a1ac">随笔</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">七月 2020</span><span class="card-archive-list-count">15</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">六月 2020</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/05/"><span class="card-archive-list-date">五月 2020</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/04/"><span class="card-archive-list-date">四月 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/03/"><span class="card-archive-list-date">三月 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/02/"><span class="card-archive-list-date">二月 2020</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/01/"><span class="card-archive-list-date">一月 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2019/12/"><span class="card-archive-list-date">十二月 2019</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/archives">
+              <span>查看更多</span><i class="fas fa-angle-right"  ></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="webinfo-article-name">文章数目 :</div><div class="webinfo-article-count">48</div></div><div class="webinfo-item">      <div class="webinfo-site-uv-name">本站访客数 :</div><div class="webinfo-site-uv-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="webinfo-site-name">本站总访问量 :</div><div class="webinfo-site-pv-count" id="busuanzi_value_site_pv"></div></div></div></div></div></div></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2018 - 2020 By 杜振铨</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module" defer></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js" async></script><script src="https://cdn.jsdelivr.net/npm/typed.js"></script><script>var subtitleEffect = true
+if (subtitleEffect) { 
+  var typed = new Typed("#subtitle", {
+    strings: "".split(","),
+    startDelay: 300,
+    typeSpeed: 150,
+    loop: true,
+    backSpeed: 50
+  })
+} else {
+  document.getElementById("subtitle").innerHTML = ''
+}</script></body></html>
