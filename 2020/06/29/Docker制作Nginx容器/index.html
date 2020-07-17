@@ -201,7 +201,7 @@ ga('send', 'pageview');
 
 <hr>
 <p><strong>总结</strong>：如果不加缓存，磁盘会成为瓶颈，加了缓存，CPU会成为瓶颈。</p>
-<img no-lazy src= "/img/loading.gif" data-src="https://gitee.com/archks/img/raw/master/2020-img/NflGTA.png" alt="宿主机资源占用"  />
+<img no-lazy src= "/img/loading.gif" data-src="https://gitee.com/archks/img/raw/oligarch/2020-img/NflGTA.png" alt="宿主机资源占用"  />
 
 <center>[1,2 分别是两颗CPU]</center>
 
@@ -221,7 +221,7 @@ ga('send', 'pageview');
 <li><input disabled="" type="checkbox"> 指定任意参数</li>
 <li><input disabled="" type="checkbox"> Nginx优化</li>
 </ul>
-<p><img src= "/img/loading.gif" data-src="https://gitee.com/archks/img/raw/master/2020-img/NW6z9K.png" alt="CentOS安装Nginx的Dockerfile"></p>
+<p><img src= "/img/loading.gif" data-src="https://gitee.com/archks/img/raw/oligarch/2020-img/NW6z9K.png" alt="CentOS安装Nginx的Dockerfile"></p>
 <p>为什么一开始注释掉了<code>CMD [&quot;nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;]</code> ———— 因为不注释就会导致容器拉起异常！原因是因为容器开机会执行docker-entrypoint脚本，然而我的EntryPoint脚本中并没有写”exec $@”，就不会把Nginx放到前台执行，导致了容器执行完脚本直接退出。刚开始用的解决办法是把Nginx进程直接写到check.sh中，通过EntryPoint执行，这样也能保证前台有Nginx任务，docker容器不至于异常退出。</p>
 <blockquote>
 <p>Docker容器进程需要放在前台执行，如果那么脚本执行完前台没有任务，那么容器会自动退出。<br>容器启动时会加载CMD命令，如果有EntryPoint，那么就加载EntryPoint，CMD作为参数传给EntryPoint。</p>
@@ -229,7 +229,7 @@ ga('send', 'pageview');
 <br>
 <br>
 
-<p><img src= "/img/loading.gif" data-src="https://gitee.com/archks/img/raw/master/2020-img/NWcwDJ.png" alt="容器中的健康检查脚本"></p>
+<p><img src= "/img/loading.gif" data-src="https://gitee.com/archks/img/raw/oligarch/2020-img/NWcwDJ.png" alt="容器中的健康检查脚本"></p>
 <p>这个健康检查脚本应该没什么用，如果一号进程退出了，容器就挂了，给自己的健康检查也就做不了了，后来换成了再docker run的时候加上–restart=always参数，并且保证docker daemon能够开机自启。</p>
 <br>
 
@@ -242,7 +242,7 @@ ga('send', 'pageview');
 <li><input disabled="" type="checkbox"> 还是未能完成全部参数的动态指定</li>
 <li><input disabled="" type="checkbox"> 优化了Nginx并发</li>
 </ul>
-<p><img src= "/img/loading.gif" data-src="https://gitee.com/archks/img/raw/master/2020-img/NWfU0g.png" alt="NWfU0g.png"></p>
+<p><img src= "/img/loading.gif" data-src="https://gitee.com/archks/img/raw/oligarch/2020-img/NWfU0g.png" alt="NWfU0g.png"></p>
 <br>
 <br>
 
@@ -295,7 +295,7 @@ ga('send', 'pageview');
 <hr>
 <br>
 <br>
-<br></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Docker/">Docker</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/archks/img/raw/master/2020-img/20200304004520.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/06/SSH%E2%80%94%E7%94%A8%E6%88%B7%E5%AF%86%E9%92%A5%E6%9C%AA%E5%9C%A8%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BA%E6%B3%A8%E5%86%8C/"><img class="prev-cover" data-src="https://gitee.com/archks/img/raw/master/2020-img/ERR_SEO_800x500.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SSH——用户密钥未在远程主机注册</div></div></a></div><div class="next-post pull-right"><a href="/2020/06/18/VsCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/"><img class="next-cover" data-src="https://s1.ax1x.com/2020/06/19/NuEK0O.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">VsCode远程开发</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/02/17/Docker制作Haproxy反向代理/" title="Docker环境下构建HaProxy"><img class="relatedPosts_cover" data-src="https://i.loli.net/2020/03/22/QrxX54FP9ALnszI.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-17</div><div class="relatedPosts_title">Docker环境下构建HaProxy</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div class="comments-items-1" data-name="Valine"><div class="vcomment" id="vcomment"></div><script>function loadvaline () {  
+<br></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Docker/">Docker</a></div><div class="post_share"><div class="social-share" data-image="https://gitee.com/archks/img/raw/oligarch/2020-img/20200304004520.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/06/SSH%E2%80%94%E7%94%A8%E6%88%B7%E5%AF%86%E9%92%A5%E6%9C%AA%E5%9C%A8%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BA%E6%B3%A8%E5%86%8C/"><img class="prev-cover" data-src="https://gitee.com/archks/img/raw/oligarch/2020-img/ERR_SEO_800x500.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SSH——用户密钥未在远程主机注册</div></div></a></div><div class="next-post pull-right"><a href="/2020/06/18/VsCode%E8%BF%9C%E7%A8%8B%E5%BC%80%E5%8F%91/"><img class="next-cover" data-src="https://s1.ax1x.com/2020/06/19/NuEK0O.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">VsCode远程开发</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/02/17/Docker制作Haproxy反向代理/" title="Docker环境下构建HaProxy"><img class="relatedPosts_cover" data-src="https://i.loli.net/2020/03/22/QrxX54FP9ALnszI.png"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="far fa-calendar-alt fa-fw"></i> 2020-02-17</div><div class="relatedPosts_title">Docker环境下构建HaProxy</div></div></a></div></div></div><hr><div id="post-comment"><div class="comment-head"><div class="comment-headling"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div class="comments-items-1" data-name="Valine"><div class="vcomment" id="vcomment"></div><script>function loadvaline () {  
   var requestSetting = function (from,set) {
     var from = from
     var setting = set.split(',').filter(function(item){
